@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types';
 
 const Button = ({ type, onClick, children }) => {
+
   return (
     <button
       type={type}
@@ -12,15 +13,16 @@ const Button = ({ type, onClick, children }) => {
   );
 }
 
+// Declare Proptypes
 Button.propTypes = {
   type: PropTypes.oneOf(['button', 'submit', 'reset']),
-  onClick: PropTypes.func,
-  content: PropTypes.string.isRequired
+  onClick: PropTypes.func.isRequired,
+  children: PropTypes.string.isRequired
 }
 
+// Declare Default
 Button.defaultProps = {
   type: 'button',
-  onClick: () => {},
 }
 
 export default Button;

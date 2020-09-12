@@ -18,6 +18,7 @@ import { Button } from 'react-bootstrap'
 
 
 const Header = () => {
+  const functionOnClick = () => console.log('Click');
   return (
     <div css={wrapperStyles}>
       <div css={navbar1}>
