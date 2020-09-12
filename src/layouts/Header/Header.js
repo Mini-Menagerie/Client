@@ -9,6 +9,7 @@ import {
 } from './Header.styles';
 
 const Header = () => {
+  const functionOnClick = () => console.log('Click');
   return (
     <div css={wrapperStyles}>
       <div>
@@ -19,8 +20,8 @@ const Header = () => {
         <div>Shop</div>
       </div>
       <div>
-        <Button>Sign Up</Button>
-        <Button>Sign In</Button>
+        <Button onClick={functionOnClick}>Sign Up</Button>
+        <Button onClick={functionOnClick}>Sign In</Button>
       </div>
     </div>
   );
