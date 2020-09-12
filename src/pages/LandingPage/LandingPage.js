@@ -1,9 +1,12 @@
-import React from 'react';
+/** @jsx jsx */
+import { jsx } from '@emotion/core'
+
 
 const LandingPage = () => {
+
   return (
     <div>
-      PAGE CONTENT
+      content
     </div>
   );
 }

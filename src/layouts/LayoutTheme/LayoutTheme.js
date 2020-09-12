@@ -4,7 +4,7 @@ import { jsx } from '@emotion/core';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import {
-  wrapperStyles
+  wrapperStyles,
 } from './LayoutTheme.styles';
 
 const LayoutTheme = ({ children }) => {
