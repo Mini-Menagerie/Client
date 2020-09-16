@@ -1,13 +1,16 @@
-import React from 'react';
+/** @jsx jsx */
+import { jsx, Global } from '@emotion/core';
 
 import Router from './routes/Router';
 import LayoutTheme from './layouts/LayoutTheme/LayoutTheme';
+import globalStyles from './styles/Global';
 
 const App = () => {
   return (
-    <LayoutTheme>
-      <Router />
-    </LayoutTheme>
+      <LayoutTheme>
+        <Global styles={globalStyles} />
+        <Router />
+      </LayoutTheme>
   );
 }
 

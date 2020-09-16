@@ -17,6 +17,10 @@ const Router = () => (
         path={routes.HOME}
         component={LandingPage}
       />
+      <Route 
+        path={routes.ALLPETS}
+        component={LandingPage}
+      />
     </Switch>
   </BrowserRouter>
 );
