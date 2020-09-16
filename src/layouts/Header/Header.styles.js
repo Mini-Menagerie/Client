@@ -8,8 +8,10 @@ export const wrapperStyles = css`
 `;
 
 export const imageStyles = css`
-  width: 150px;
+  width: 120px;
   margin-right: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 `;
 
 export const breedsShop = css `
@@ -37,7 +39,19 @@ margin-left: 30px;`
 
 export const searchText = css `
 border: none;
-width: 250px;`
+width: 570px;
+padding-left: 10px`
 
 export const searchButton = css `
-background-color: transparent`
+background: none;
+border: none;
+border-right: 1px solid #878787;
+padding-right: 30px;
+color: #878787;
+`
+
+export const cart = css `
+color:#878787;
+background: none;
+border: none;
+padding-left: 30px;`

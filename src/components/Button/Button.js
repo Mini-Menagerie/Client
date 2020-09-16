@@ -1,15 +1,18 @@
-import React from 'react'
+/** @jsx jsx */
+import { jsx } from '@emotion/core'
 import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap'
 
-const Button = ({ type, onClick, children }) => {
+import { searchButton } from './Button.styles'
+const PrimaryButton = ({ type, onClick, children }) => {
 
   return (
-    <button
+    <Button css={searchButton}
       type={type}
       onClick={onClick}
     >
       {children}
-    </button>
+    </Button>
   );
 }
 
@@ -25,4 +28,4 @@ Button.defaultProps = {
   type: 'button',
 }
 
-export default Button;
+export default PrimaryButton;

@@ -12,13 +12,13 @@ import {
   breedsButton,
   formSearch,
   searchText,
-  searchButton
+  searchButton,
+  cart
 } from './Header.styles';
 import { Button } from 'react-bootstrap'
 
 
 const Header = () => {
-  const functionOnClick = () => console.log('Click');
   return (
     <div css={wrapperStyles}>
       <div css={navbar1}>
@@ -39,6 +39,7 @@ const Header = () => {
         <form css={formSearch}>
           <input type="text" css={searchText} placeholder="Search your future best friend"></input>
           <button type="submit" css={searchButton}><i class="fas fa-search"></i></button>
+          <button type="submit" css={cart}><i class="fas fa-shopping-cart"></i></button>
        </form>
       </div>
       </div>
