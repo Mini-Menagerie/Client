@@ -25,13 +25,26 @@ export const buttoncard = css `
     justify-content: space-around;
     margin-top: 9px;
 `
-export const buttoncardd = css `
+export const widthButton = css `
     width:100%;
-    margin: 0px 5px;
+`
+export const marginbutton = css `
+    width:100%;
+    margin-right: 5px;
 `
 export const collections = css `
-    justify-content:center;
+    padding: 80px 25px;
+    justify-content: center;
 `
 export const centertext = css `
     text-align:center;
+`
+export const filter = css `
+    padding: 80px 25px;
+    background: rgb(2,0,36);
+    background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 0%, rgba(215,212,212,1) 0%, rgba(250,250,250,1) 0%, rgba(255,255,255,1) 0%, rgba(62,231,133,1) 63%, rgba(0,255,182,1) 100%);
+`
+export const buttonGroup = css `
+    justify-content: center;
+    margin: 30px 0px;
 `
