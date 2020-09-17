@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
-import { Dropdown } from 'react-bootstrap';
+import { useState } from 'react';
+import { Dropdown, Modal } from 'react-bootstrap';
 
 import Logo from '../../assets/logo-mini-menagerie.png';
 import {
@@ -13,12 +14,17 @@ import {
   formSearch,
   searchText,
   searchButton,
-  cart
+  cart,
+  modalBodyStyles,
 } from './Header.styles';
 import { Button } from 'react-bootstrap'
 
 
 const Header = () => {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <div css={wrapperStyles}>
       <div css={navbar1}>
@@ -44,9 +50,18 @@ const Header = () => {
       </div>
       </div>
       <div>
-        <Button variant="light">Sign Up</Button>
+        <Button variant="light" onClick={handleShow}>Sign Up</Button>
         <Button variant="light">Log In</Button>
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title></Modal.Title>
+        </Modal.Header>
+        <Modal.Body css={modalBodyStyles}>
+          <h2>Sign Up</h2>
+          <h3>Create an Account</h3>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

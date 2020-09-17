@@ -55,3 +55,7 @@ color:#878787;
 background: none;
 border: none;
 padding-left: 30px;`
+
+export const modalBodyStyles = css`
+  text-align: center;
+`;

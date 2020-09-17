@@ -38,7 +38,7 @@ const LandingPage = () => {
               </Dropdown.Toggle>
               <Dropdown.Menu css={dropdownMenu}>
                 <Dropdown.Item href="#/action-1">
-                  <img src="https://img.icons8.com/metro/26/000000/running-rabbit.png"/>
+                  <img src="https://img.icons8.com/metro/26/000000/running-rabbit.png" alt="rabbit"/>
                   rabbit
               </Dropdown.Item>
                 <Dropdown.Item href="#/action-2">Cat Breeds</Dropdown.Item>
