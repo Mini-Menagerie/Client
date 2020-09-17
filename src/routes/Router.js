@@ -15,15 +15,15 @@ const Router = () => (
     />
     <Switch>
       <Route 
-        path={routes.HOME}
+        exact path={routes.HOME}
         component={LandingPage}
       />
       <Route 
-        path={routes.ALLPETS}
+        exact path={routes.ALLPETS}
         component={LandingPage}
       />
       <Route 
-        path={routes.ALLBREEDS}
+        exact path={routes.ALLBREEDS}
         component={FindBreeds}
       />
     </Switch>
