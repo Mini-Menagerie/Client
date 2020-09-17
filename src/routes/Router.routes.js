@@ -1,4 +1,5 @@
 export default {
   HOME: '/',
-  ALLPETS: '/all-pets'
+  ALLPETS: '/all-pets',
+  ALLBREEDS: '/all-breeds'
 }
