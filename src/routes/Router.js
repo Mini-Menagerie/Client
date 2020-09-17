@@ -7,6 +7,7 @@ import {
 import routes from './Router.routes';
 import LandingPage from '../pages/LandingPage/LandingPage';
 import globalStyles from '../styles/Global';
+import FindBreeds from '../pages/FindBreeds/FindBreeds';
 
 const Router = () => (
   <BrowserRouter>
@@ -20,6 +21,10 @@ const Router = () => (
       <Route 
         path={routes.ALLPETS}
         component={LandingPage}
+      />
+      <Route 
+        path={routes.ALLBREEDS}
+        component={FindBreeds}
       />
     </Switch>
   </BrowserRouter>
