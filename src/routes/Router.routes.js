@@ -1,5 +1,7 @@
 export default {
   HOME: '/',
   ALLPETS: '/all-pets',
-  ALLBREEDS: '/all-breeds'
+  ALLBREEDS: '/all-breeds',
+  PETSDETAIL: '/pets-detail',
+  ADOPTIONFORM: '/adoption-form'
 }
