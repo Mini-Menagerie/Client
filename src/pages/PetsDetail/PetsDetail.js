@@ -101,7 +101,7 @@ const PetsDetail = () => {
                     <Col xs={4}>
                         <Card style={{ width: '200px', padding: '20px', height: "295px", justifyContent: "center" }}>
                             <Card.Img variant="top" src={logo} />
-                            <Card.Text style={{ fontSize: '12px', textAlign: 'center' }}>400 more pet available on Mini Menagerie </Card.Text>
+                            <Card.Text style={{ fontSize: '12px', textAlign: 'center' }}>400 more pets available on Mini Menagerie </Card.Text>
                         </Card>
                     </Col>
                 </Row>

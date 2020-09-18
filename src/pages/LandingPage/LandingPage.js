@@ -59,9 +59,10 @@ const LandingPage = () => {
   const [error, setError] = useState (false);
   const [errorMessage, setErrorMessage] = useState ();
   const [product, setProduct] = useState([]);
+  const [productImage, setProductImage] = useState([]);
 
   useEffect (() => {
-    const url='https://mini-menagerie-dev.herokuapp.com/categoryPet';
+    const url='https://mini-menagerie-dev.herokuapp.com/pet';
     axios.get(url)
     .then(function(response) {
       console.log(response.data.result)
@@ -93,6 +94,21 @@ const LandingPage = () => {
     });
   },[]);
 
+  useEffect (() => {
+    const url='https://mini-menagerie-dev.herokuapp.com/productImage/:id';
+    axios.get(url)
+    .then(function(response) {
+      console.log(response)
+     setProductImage(response.data.result);
+      setLoading(false)
+    })
+    .catch(function(error) {
+      setError(true);
+      console.log(error.messsage)
+      setErrorMessage(error.message)
+      setLoading(false);
+    });
+  },[]);
 
   return (
     <div>
@@ -159,7 +175,7 @@ const LandingPage = () => {
                     <Card style={{ width: '18rem' }}>
                     <Card.Img variant="top" src="holder.js/100px180" />
                     <Card.Body>
-                      <Card.Title css={title}>{item.categoryName}</Card.Title>
+                      <Card.Title css={title}>{item.petName}</Card.Title>
                       <Card.Text>
                         Some quick example text to build on the card title and make up the bulk of
                         the card's content.
