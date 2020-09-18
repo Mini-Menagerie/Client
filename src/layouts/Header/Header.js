@@ -2,6 +2,7 @@
 import { jsx } from '@emotion/core';
 import { useState } from 'react';
 import { Dropdown, Modal } from 'react-bootstrap';
+import GoogleLogin from 'react-google-login';
 
 import Logo from '../../assets/logo-mini-menagerie.png';
 import {
@@ -60,6 +61,13 @@ const Header = () => {
         <Modal.Body css={modalBodyStyles}>
           <h2>Sign Up</h2>
           <h3>Create an Account</h3>
+          <GoogleLogin
+            clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
+            buttonText="Login"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={'single_host_origin'}
+          />
         </Modal.Body>
       </Modal>
     </div>
