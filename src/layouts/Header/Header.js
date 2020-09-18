@@ -13,7 +13,7 @@ import {
   formSearch,
   searchText,
   searchButton,
-  cart
+  cart,
 } from './Header.styles';
 import { Button } from 'react-bootstrap'
 
