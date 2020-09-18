@@ -59,6 +59,7 @@ const LandingPage = () => {
   const [error, setError] = useState (false);
   const [errorMessage, setErrorMessage] = useState ();
   const [product, setProduct] = useState([]);
+  const [productImage, setProductImage] = useState([]);
 
   useEffect (() => {
     const url='https://mini-menagerie-dev.herokuapp.com/categoryPet';
@@ -93,6 +94,21 @@ const LandingPage = () => {
     });
   },[]);
 
+  useEffect (() => {
+    const url='https://mini-menagerie-dev.herokuapp.com/productImage/:id';
+    axios.get(url)
+    .then(function(response) {
+      console.log(response)
+     setProductImage(response.data.result);
+      setLoading(false)
+    })
+    .catch(function(error) {
+      setError(true);
+      console.log(error.messsage)
+      setErrorMessage(error.message)
+      setLoading(false);
+    });
+  },[]);
 
   return (
     <div>
