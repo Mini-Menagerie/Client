@@ -94,6 +94,9 @@ export const petsAvailable = css `
 display: flex;
 justify-content: center;
 margin-bottom: 200px;
+justify-content: space-between;
+margin-left: 200px;
+margin-right: 200px;
 `
 
 export const howToAdopt = css `
@@ -158,8 +161,11 @@ margin-top: 220px;
 
 export const shop = css `
 display: flex;
-justify-content: center;
+justify-content: space-between;
 margin-top: 100px;
+margin-left: 200px;
+margin-right: 200px;
+
 `
 
 export const shopText = css `
@@ -206,8 +212,8 @@ font-size: 12px;
 export const goToShop = css `
 text-align: right;
 margin-right: 110px;
-`
+`;
 
 export const colStyles = css`
   padding: 0;
-`
+`;
