@@ -70,3 +70,6 @@ font-weight: 600;
 export const formSpacing = css `
 margin-bottom: 50px;
 `
+export const buttonPlacement = css `
+justify-content: center;
+`

@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 import { Col, Form, Button, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom'
 
 import PrimaryButton from '../../components/Button/Button'
 import {
@@ -15,7 +14,8 @@ import {
     formInput,
     personalData,
     tellUs,
-    formSpacing
+    formSpacing,
+    buttonPlacement
 } from './AdoptionForm.styles'
 import rabbit from '../../assets/rabbitCover.png'
 import dog from '../../assets/dogCover.png'
@@ -235,13 +235,16 @@ const AdoptionForm = () => {
                             </Col>
                             </Form.Group>
 
-                            <Form.Group controlId="exampleForm.ControlTextarea1">
+                            <Form.Group controlId="exampleForm.ControlTextarea1" css={formSpacing}>
                                 <Form.Label>7. Finally, Tell Us Why You'd Like To Adopt this Pet!</Form.Label>
                                 <Form.Control as="textarea" rows="3" placeholder="I'd Like To Adopt This Pet Because..."/>
                             </Form.Group>
+
+                            <div css={buttonPlacement}>
+                                 <PrimaryButton css={buttonPlacement}>Submit Form</PrimaryButton>
+                            </div>
                         </fieldset>
                     </Form>
-                    
                     </div>
                 </div>
             </div>
