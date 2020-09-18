@@ -135,7 +135,7 @@ const FindBreeds = () => {
                         ))}
                     </ButtonGroup>
                 </div>
-                <p css={centertext}>Fins By Alphabetical Order</p>
+                <p css={centertext}>Find By Alphabetical Order</p>
                 <div css={buttonGroup}>
                     <ButtonGroup toggle css={widthButton}>
                         {radiosss.map((radio, idx) => (

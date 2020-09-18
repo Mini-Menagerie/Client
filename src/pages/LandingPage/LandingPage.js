@@ -3,6 +3,7 @@ import { jsx } from '@emotion/core'
 import { useEffect, useState } from 'react';
 import { Dropdown, Card, Jumbotron } from 'react-bootstrap';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 
 import PrimaryButton from '../../components/Button/Button'
 import {
@@ -50,7 +51,7 @@ import letter from '../../assets/letter.png'
 import arrow from '../../assets/arrow.png'
 import dogfood from '../../assets/dogfood.png'
 
-import { Link } from 'react-router-dom'
+
 
 
 const LandingPage = () => {
@@ -61,12 +62,20 @@ const LandingPage = () => {
   const [product, setProduct] = useState([]);
   const [productImage, setProductImage] = useState([]);
 
+
+
+  function handleClick(id) {
+    window.location.replace(`/pets-detail/${id}`)
+
+    console.log(`${id} clicked`);
+  }
+
   useEffect (() => {
     const url='http://localhost:8000/pet';
     axios.get(url)
     .then(function(response) {
-      console.log(response.data.result)
-     setCategoryPet(response.data.result);
+      const limit = response.data.result.slice(0, 4) //limit item display
+     setCategoryPet(limit)
       setLoading(false)
     })
     .catch(function(error) {
@@ -82,8 +91,8 @@ const LandingPage = () => {
     const url='http://localhost:8000/product';
     axios.get(url)
     .then(function(response) {
-      console.log(response)
-     setProduct(response.data.result);
+      const limit = response.data.result.slice(0, 4)
+     setProduct(limit);
       setLoading(false)
     })
     .catch(function(error) {
@@ -156,7 +165,7 @@ const LandingPage = () => {
                 <div>{errorMessage}</div>
               ) : (
                   categoryPet.map((item) => (
-                    <Card style={{ width: '18rem' }}>
+                    <Card style={{ width: '18rem' }}  onClick={() => handleClick(item._id)}>
                     <Card.Img variant="top" src="holder.js/100px180" />
                     <Card.Body>
                       <Card.Title css={title}>{item.petName}</Card.Title>
