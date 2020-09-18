@@ -4,7 +4,6 @@ import { jsx, Global } from '@emotion/core';
 import Router from './routes/Router';
 import LayoutTheme from './layouts/LayoutTheme/LayoutTheme';
 import globalStyles from './styles/Global';
-import FindBreeds from './pages/FindBreeds/FindBreeds';
 
 const App = () => {
   return (
