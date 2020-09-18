@@ -8,6 +8,7 @@ import routes from './Router.routes';
 import LandingPage from '../pages/LandingPage/LandingPage';
 import globalStyles from '../styles/Global';
 import FindBreeds from '../pages/FindBreeds/FindBreeds';
+import PetsDetail from '../pages/PetsDetail/PetsDetail';
 
 const Router = () => (
   <BrowserRouter>
@@ -25,6 +26,10 @@ const Router = () => (
       <Route 
         exact path={routes.ALLBREEDS}
         component={FindBreeds}
+      />
+            <Route 
+        exact path={routes.PETSDETAIL}
+        component={PetsDetail}
       />
     </Switch>
   </BrowserRouter>
