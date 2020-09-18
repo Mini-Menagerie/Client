@@ -8,6 +8,7 @@ import routes from './Router.routes';
 import LandingPage from '../pages/LandingPage/LandingPage';
 import globalStyles from '../styles/Global';
 import FindBreeds from '../pages/FindBreeds/FindBreeds';
+import AllPets from '../pages/AllPets/AllPets';
 import PetsDetail from '../pages/PetsDetail/PetsDetail';
 import PetShop from '../pages/PetShop/PetShop';
 import AdoptionForm from '../pages/AdoptionForm/AdoptionForm'
@@ -23,7 +24,7 @@ const Router = () => (
       />
       <Route
         exact path={routes.ALLPETS}
-        component={LandingPage}
+        component={AllPets}
       />
       <Route 
         exact path={routes.ADOPTIONFORM}
