@@ -43,9 +43,7 @@ outline: none;
 export const underCoverSearch = css `
 margin-top: 30px;
 color: #FFFFFF;
-display: flex;
 font-size: 12px;
-justify-content: center;
 `
 
 export const dogCatButton = css `
@@ -53,10 +51,11 @@ color: #FFFFFF;
 background-color: #22B216;
 padding: 20px 40px;
 border: none;
-&:hover {
-    outline: none;
-    background-color: #22891A;
-    box-shadow: none;
+    &:hover {
+        outline: none;
+        background-color: #22891A;
+        box-shadow: none;
+    }
 `
 
 export const otherPets = css `
@@ -72,7 +71,8 @@ outline: none;
     outline: none;
     background-color: #22891A;
     box-shadow: none;
-`
+}
+`;
 
 export const dropdownMenu = css `
 background-color: #22891A;
@@ -212,5 +212,8 @@ font-size: 12px;
 export const goToShop = css `
 text-align: right;
 margin-right: 110px;
-`
+`;
 
+export const colStyles = css`
+  padding: 0;
+`;

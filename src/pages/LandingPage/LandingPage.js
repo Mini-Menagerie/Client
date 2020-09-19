@@ -1,9 +1,10 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 import { useEffect, useState } from 'react';
-import { Dropdown, Card, Jumbotron } from 'react-bootstrap';
+import { Container, Row, Col, Dropdown, Card, Jumbotron, Form } from 'react-bootstrap';
 import axios from 'axios';
 import { Link } from 'react-router-dom'
+import ReactFilestack from 'filestack-react';
 
 import PrimaryButton from '../../components/Button/Button'
 import {
@@ -35,7 +36,8 @@ import {
   profits,
   title,
   choices,
-  goToShop
+  goToShop,
+  colStyles,
 } from './LandingPage.styles'
 
 import fish from '../../assets/fish.png'
@@ -51,7 +53,7 @@ import letter from '../../assets/letter.png'
 import arrow from '../../assets/arrow.png'
 import dogfood from '../../assets/dogfood.png'
 
-
+import CardPet from '../../components/CardPet/CardPet'
 
 
 const LandingPage = () => {
@@ -70,8 +72,8 @@ const LandingPage = () => {
     console.log(`${id} clicked`);
   }
 
-  useEffect (() => {
-    const url='http://localhost:8000/pet';
+  const fetchPet = () => {
+    const url ='http://localhost:8000/pet';
     axios.get(url)
     .then(function(response) {
       const limit = response.data.result.slice(0, 4) //limit item display
@@ -84,10 +86,9 @@ const LandingPage = () => {
       setErrorMessage(error.message)
       setLoading(false);
     });
-  },[]);
+  }
 
-
-  useEffect (() => {
+  const fetchProduct = () => {
     const url='http://localhost:8000/product';
     axios.get(url)
     .then(function(response) {
@@ -100,58 +101,91 @@ const LandingPage = () => {
       console.log(error.messsage)
       setErrorMessage(error.message)
       setLoading(false);
-    });
+    }); 
+  }
+
+  useEffect (() => {
+    fetchPet();
+    fetchProduct();
   },[]);
 
+  
   return (
     <div>
       <div css={wrapperCover}>
         <h2 css={h2}>Provide For Those Who Needs It.</h2>
         <p css = {p}>Save A Live Today</p>
         <Link to="/" css={linkTo}><PrimaryButton type="submit">Start Searching</PrimaryButton></Link>
+        <Form>
+          <Form.Group>
+            <ReactFilestack
+              apikey="Ad90N7pPARhugRUUdTP3oz"
+              customRender={({ onPick }) => (
+                  <div>
+                      <button
+                          className="btn btn-primary btn-block"
+                          onClick={onPick}
+                      >
+                          Upload Image
+                      </button>
+                  </div>
+              )}
+              onSuccess={(res) =>
+                  console.log(res)
+              }
+              onError = {(err) =>
+                console.log(err)
+              }
+            />
+          </Form.Group>
+        </Form>
       </div>
-        <div css={underCoverSearch}>
-            <input type="text" css={enterLocation} placeholder="Enter Province or State"></input>
-            <button css={dogCatButton}><i class="fas fa-bone"></i>&nbsp;&nbsp;&nbsp;Find Dog Breed</button>
-            <button css={dogCatButton}><i class="fas fa-paw"></i>&nbsp;&nbsp;&nbsp;Find Cat Breed</button>
-            <Dropdown>
-              <Dropdown.Toggle css={otherPets}>
-                Find Other Pets
-              </Dropdown.Toggle>
-              <Dropdown.Menu css={dropdownMenu}>
-                <Dropdown.Item href="#/action-1" css={breedsLogo}>
-                  <img src={rabbit} css={breedsLogo}/>
-                  &nbsp;
-                  Rabbit
-              </Dropdown.Item>
+        <Container css={underCoverSearch}>
+          <Row>
+            <Col md={3} css={colStyles}><input type="text" css={enterLocation} placeholder="Enter Province or State"></input></Col>
+            <Col md={3} css={colStyles}><button css={dogCatButton}><i class="fas fa-bone"></i>&nbsp;&nbsp;&nbsp;Find Dog Breed</button></Col>
+            <Col md={3} css={colStyles}><button css={dogCatButton}><i class="fas fa-paw"></i>&nbsp;&nbsp;&nbsp;Find Cat Breed</button></Col>
+            <Col md={3} css={colStyles}>
+              <Dropdown>
+                <Dropdown.Toggle css={otherPets}>
+                  Find Other Pet
+                </Dropdown.Toggle>
+                <Dropdown.Menu css={dropdownMenu}>
+                  <Dropdown.Item href="#/action-1" css={breedsLogo}>
+                    <img src={rabbit} css={breedsLogo} alt="Pet" />
+                    &nbsp;
+                    Rabbit
+                </Dropdown.Item>
+                  <Dropdown.Item href="#/action-2" css={breedsLogo}>
+                    <img src={hamster} css={breedsLogo}></img>
+                    &nbsp;
+                    Small & Furry
+                </Dropdown.Item>
                 <Dropdown.Item href="#/action-2" css={breedsLogo}>
-                  <img src={hamster} css={breedsLogo}></img>
-                  &nbsp;
-                  Small & Furry
-              </Dropdown.Item>
-              <Dropdown.Item href="#/action-2" css={breedsLogo}>
-                  <img src={bird} css={breedsLogo}></img>
-                  &nbsp;
-                  Birds
-              </Dropdown.Item>
-              <Dropdown.Item href="#/action-2" css={breedsLogo}>
-                  <img src={fish} css={breedsLogo}></img>
-                  &nbsp;
-                  Scales & Fins
-              </Dropdown.Item>
-              <Dropdown.Item href="#/action-2" css={breedsLogo}>
-                  <img src={horse} css={breedsLogo}></img>
-                  &nbsp;
-                  Horse
-              </Dropdown.Item>
-              <Dropdown.Item href="#/action-2" css={breedsLogo}>
-                  <img src={sheep} css={breedsLogo}></img>
-                  &nbsp;
-                  Barnyard
-              </Dropdown.Item>
-              </Dropdown.Menu>
-        </Dropdown>
-      </div>
+                    <img src={bird} css={breedsLogo} alt="pet"></img>
+                    &nbsp;
+                    Birds
+                </Dropdown.Item>
+                <Dropdown.Item href="#/action-2" css={breedsLogo}>
+                    <img src={fish} css={breedsLogo} alt="pet"></img>
+                    &nbsp;
+                    Scales & Fins
+                </Dropdown.Item>
+                <Dropdown.Item href="#/action-2" css={breedsLogo}>
+                    <img src={horse} css={breedsLogo} alt="pet"></img>
+                    &nbsp;
+                    Horse
+                </Dropdown.Item>
+                <Dropdown.Item href="#/action-2" css={breedsLogo}>
+                    <img src={sheep} css={breedsLogo} alt="pet"></img>
+                    &nbsp;
+                    Barnyard
+                </Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
+            </Col>
+          </Row>
+        </Container>
         <div css={petsAvailableText}>
           <h2>
             Pets Available for Adoption Near You
@@ -189,7 +223,7 @@ const LandingPage = () => {
         <div className="HowToAdopt">
           <h2 css={howToAdopt}>How To Adopt
           &nbsp;
-          <img src={letter} css={letterIcon}></img>
+          <img src={letter} css={letterIcon} alt="cover"></img>
           </h2>
         </div>
           <div className="icons" css={iconContainer}>
