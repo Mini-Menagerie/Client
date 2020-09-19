@@ -7,6 +7,10 @@ import {
 import routes from './Router.routes';
 import LandingPage from '../pages/LandingPage/LandingPage';
 import globalStyles from '../styles/Global';
+import FindBreeds from '../pages/FindBreeds/FindBreeds';
+import AllPets from '../pages/AllPets/AllPets';
+import PetsDetail from '../pages/PetsDetail/PetsDetail';
+import AdoptionForm from '../pages/AdoptionForm/AdoptionForm'
 
 const Router = () => (
   <BrowserRouter>
@@ -14,12 +18,24 @@ const Router = () => (
     />
     <Switch>
       <Route 
-        path={routes.HOME}
+        exact path={routes.HOME}
         component={LandingPage}
       />
       <Route 
-        path={routes.ALLPETS}
-        component={LandingPage}
+        exact path={routes.ALLPETS}
+        component={AllPets}
+      />
+      <Route 
+        exact path={routes.ADOPTIONFORM}
+        component={AdoptionForm}
+      />
+      <Route 
+        exact path={routes.ALLBREEDS}
+        component={FindBreeds}
+      />
+            <Route 
+        exact path={routes.PETSDETAIL}
+        component={PetsDetail}
       />
     </Switch>
   </BrowserRouter>

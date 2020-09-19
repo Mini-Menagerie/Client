@@ -5,7 +5,7 @@ export const wrapperCover = css `
 background-image: url(${cover});
 background-size: cover;
 object-fit: contain;
-height: 300px;
+height: 400px;
 width: 100%;
 `
 
@@ -33,38 +33,30 @@ padding: 20px 40px;
 width: 270px;
 border: none;
 border-radius: 10px 0px 0px 10px;
-
+outline: none;
 
 ::placeholder {
     color: #fff;
 }
-
-// enterLocation:after {
-//     position: absolute;
-//     display: block;
-//     top: 0;
-//     right: 100%;
-//     border-left: 20px solid #22891A;
-//     border-right: 20px solid #fff transparent;
-//     border-top: 20px solid #fff transparent;
-//     border-bottom: 20px solid #fff transparent;
-
-// }
 `
 
 export const underCoverSearch = css `
 margin-top: 30px;
 color: #FFFFFF;
-display: flex;
 font-size: 12px;
-justify-content: center;
 `
 
 export const dogCatButton = css `
 color: #FFFFFF;
 background-color: #22B216;
 padding: 20px 40px;
-border: none;`
+border: none;
+    &:hover {
+        outline: none;
+        background-color: #22891A;
+        box-shadow: none;
+    }
+`
 
 export const otherPets = css `
 color: #FFFFFF;
@@ -79,8 +71,149 @@ outline: none;
     outline: none;
     background-color: #22891A;
     box-shadow: none;
-`
+}
+`;
 
 export const dropdownMenu = css `
 background-color: #22891A;
 font-size: 15px;`
+
+export const breedsLogo = css `
+width: 30px;
+filter: brightness(0) invert(1);
+font-size: 12px;`
+
+export const petsAvailableText = css `
+text-align: center;
+margin-top: 100px;
+margin-bottom: 80px;
+color: #464646;
+`
+
+export const petsAvailable = css `
+display: flex;
+justify-content: center;
+margin-bottom: 200px;
+justify-content: space-between;
+margin-left: 200px;
+margin-right: 200px;
+`
+
+export const howToAdopt = css `
+color: white;
+background-color: #22B216;
+padding: 15px 30px;
+margin-top: 100px;
+text-align: center;
+margin-left: 300px;
+margin-right: 300px;
+border-radius: 50px;
+`
+
+export const letterIcon = css `
+width: 70px;
+filter: brightness(0) invert(1);
+`
+
+export const informationIcons = css `
+filter: invert(48%) sepia(61%) saturate(2034%) hue-rotate(81deg) brightness(97%) contrast(86%);
+height: 200px;
+width: auto;
+margin-top: 50px;
+margin-left: 100px;
+margin-right: 100px;
+text-align: center;
+display: flex;
+`
+
+export const jumbotron = css `
+background-color: transparent;
+color: #464646;
+`
+
+export const iconText = css `
+color:#22B216;
+padding-top: 80px;
+color: #464646;
+`
+
+export const iconContainer = css `
+border: dashed 6px #22B216;
+border-radius: 70px;
+display: flex;
+justify-content: center;
+align-content: center;
+text-align: center;
+margin-top: -60px;
+`
+
+export const howToAdoptContainer = css `
+margin-left: 200px;
+margin-right: 200px;
+`
+
+export const arrowIcon = css `
+filter: invert(48%) sepia(61%) saturate(2034%) hue-rotate(81deg) brightness(97%) contrast(86%);
+width: 50px;
+height: 50px;
+margin-top: 220px;
+`
+
+export const shop = css `
+display: flex;
+justify-content: space-between;
+margin-top: 100px;
+margin-left: 200px;
+margin-right: 200px;
+
+`
+
+export const shopText = css `
+text-align: center;
+margin-top: 200px;
+color: #464646;
+margin-left: 100px;
+margin-right: 100px;
+`
+
+export const dogfood1 = css `
+transform: rotate(-20deg);
+width: 80px;
+filter: brightness(0) invert(1);
+`
+
+export const dogfood2 = css `
+transform: rotate(20deg);
+width: 80px;
+filter: brightness(0) invert(1);
+;`
+
+export const buyNecessities = css `
+background-color: #2E8116;
+padding-top: 30px;
+padding-bottom: 30px;
+color: #FFF;
+border-radius: 20px;
+`
+
+export const profits = css `
+margin-top: 20px;
+font-weight:600;
+`
+
+export const title = css `
+font-weight: 600;
+`
+
+export const choices = css `
+font-size: 12px;
+`
+
+export const goToShop = css `
+text-align: right;
+margin-right: 110px;
+`;
+
+export const colStyles = css`
+  padding: 0;
+`;
