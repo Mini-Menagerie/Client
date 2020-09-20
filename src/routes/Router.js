@@ -12,6 +12,9 @@ import AllPets from '../pages/AllPets/AllPets';
 import PetsDetail from '../pages/PetsDetail/PetsDetail';
 import AdoptionForm from '../pages/AdoptionForm/AdoptionForm'
 
+
+import Checkout from '../pages/Checkout/Checkout';
+
 const Router = () => (
   <BrowserRouter>
   <Global styles={globalStyles}
@@ -37,6 +40,11 @@ const Router = () => (
         exact path={routes.PETSDETAIL}
         component={PetsDetail}
       />
+    <Route 
+        exact path={routes.CHECKOUT}
+        component={Checkout}
+      />
+
     </Switch>
   </BrowserRouter>
 );
