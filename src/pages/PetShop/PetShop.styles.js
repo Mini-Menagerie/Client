@@ -1,7 +1,7 @@
 import { css } from '@emotion/core';
 
 export const container = css`
-margin-bottom: 50px;
+margin-bottom: 20px;
 `
 
 export const head_bg = css`
@@ -17,9 +17,4 @@ display: flex;
 justify-content: space-between; 
 align-items: center;
 padding: 0px; 
-`
-
-export const row_pagination = css`
-display: flex;
-justify-content: center;
 `

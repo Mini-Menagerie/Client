@@ -1,86 +1,97 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
 import { useEffect, useState } from 'react';
-import { Container, Row, Col, Form, Pagination } from 'react-bootstrap';
+import { Container, Row, Col, Form } from 'react-bootstrap';
 import axios from 'axios'
 
-import ProductListCard from '../../components/ProductListCard/ProductListCard';
+import Pagination from '../../components/Pagination'
+import ProductCard from '../../components/ProductCard/ProductCard';
 import {
-    container, head_bg, caption_filter, row_pagination
+    container, head_bg, caption_filter
 } from './PetShop.styles'
 import head_bg_img from '../../assets/bg-shop.jpg'
 
 const PetShop = () => {
-    const [product, setProduct] = useState([])
-    const [isLoaded, setIsLoaded] = useState(false);
-    const [error, setError] = useState(null);
+    const [products, setProducts] = useState([])
+    const [loading, setLoading] = useState(false);
+    const [currentProduct, setCurrentPage] = useState(1);
+    const [productsPerPage] = useState(8);
 
     useEffect(() => {
         let url = 'http://localhost:8000/product'
-        axios.get(url)
-            .then(
-                (response) => {
-                    console.log(response.data.result);
-                    setIsLoaded(true);
-                    setProduct(response.data.result);
-                },
-                (error) => {
-                    setIsLoaded(true);
-                    setError(error);
-                }
-            );
+        // axios.get(url)
+        //     .then(
+        //         (response) => {
+        //             console.log(response.data.result);
+        //             setIsLoaded(true);
+        //             setProducts(response.data.result);
+        //         },
+        //         (error) => {
+        //             setIsLoaded(true);
+        //             setError(error);
+        //         }
+        //     );
+        const getProducts = async () => {
+            setLoading(true);
+            const response = await axios.get(url)
+            console.log(response.data.result);
+            setProducts(response.data.result)
+            setLoading(false);
+        }
+
+        getProducts();
     }, [])
 
-return (
-    <div>
-        {/* Head Background */}
-        <Container fluid css={container}>
-            <Row>
-                <img css={head_bg} src={head_bg_img} alt="banner" />
-            </Row>
-        </Container>
-        {/* End of Head Background */}
+    //get current products
+    const indexOfLastProduct = currentProduct * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
 
-        {/* Product List */}
-        <Container>
-            <Row>
-                <Col xs={10} css={caption_filter}>
-                    <p>(1-9 of {product.length} results)</p>
-                    <p>Sort by</p>
-                </Col>
-                <Col>
-                    <Form.Group as={Col} controlId="formGridFilter">
-                        <Form.Control as="select" defaultValue="Newest">
-                            <option>Newest</option>
-                            <option>Price (High to Low)</option>
-                            <option>Price (Low to High)</option>
-                            <option>Best Selling</option>
-                        </Form.Control>
-                    </Form.Group>
-                </Col>
-            </Row>
+    //change page
+    const paginate = pageNumber => setCurrentPage(pageNumber)
+
+    return (
+        <div>
+            {/* Head Background */}
+            <Container fluid css={container}>
+                <Row>
+                    <img css={head_bg} src={head_bg_img} alt="banner" />
+                </Row>
+            </Container>
+            {/* End of Head Background */}
+
+            {/* Product List */}
+            <Container css={container}>
+                <Row>
+                    <Col xs={10} css={caption_filter}>
+                        <p>(1-9 of {products.length} results)</p>
+                        <p>Sort by</p>
+                    </Col>
+                    <Col>
+                        <Form.Group as={Col} controlId="formGridFilter">
+                            <Form.Control as="select" defaultValue="Newest">
+                                <option>Newest</option>
+                                <option>Price (High to Low)</option>
+                                <option>Price (Low to High)</option>
+                                <option>Best Selling</option>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                </Row>
+            </Container>
+
+            <Container css={container}>
+                <Row>
+                    <ProductCard products={currentProducts} loading={loading} />
+                </Row>
+            </Container>
 
             <div>
-                <ProductListCard data={product} />
+                <Pagination productsPerPage={productsPerPage} totalProducts={products.length} paginate={paginate} />
             </div>
-
-            <Row css={row_pagination}>
-                <Pagination>
-                    <Pagination.First />
-                    <Pagination.Prev />
-                    <Pagination.Item>{1}</Pagination.Item>
-                    <Pagination.Item>{2}</Pagination.Item>
-                    <Pagination.Item>{3}</Pagination.Item>
-                    <Pagination.Item>{4}</Pagination.Item>
-                    <Pagination.Item>{5}</Pagination.Item>
-                    <Pagination.Next />
-                    <Pagination.Last />
-                </Pagination>
-            </Row>
-        </Container>
-        {/* End of Product List */}
-    </div>
-);
+            {/* End of Product List */}
+        </div>
+    );
 
 }
 

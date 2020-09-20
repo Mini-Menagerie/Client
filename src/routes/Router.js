@@ -12,7 +12,6 @@ import AllPets from '../pages/AllPets/AllPets';
 import PetsDetail from '../pages/PetsDetail/PetsDetail';
 import PetShop from '../pages/PetShop/PetShop';
 import AdoptionForm from '../pages/AdoptionForm/AdoptionForm'
-import PaginationCard from '../components/PaginationCard/PaginationCard'
 
 const Router = () => (
   <BrowserRouter>
@@ -42,10 +41,6 @@ const Router = () => (
       <Route
         exact path={routes.PETSHOP}
         component={PetShop}
-      />
-      <Route
-        exact path={routes.PAGINATION}
-        component={PaginationCard}
       />
     </Switch>
   </BrowserRouter>

@@ -5,5 +5,4 @@ export default {
   PETSDETAIL: '/pets-detail',
   PETSHOP: '/pet-shop',
   ADOPTIONFORM: '/adoption-form',
-  PAGINATION: '/pagination'
 }

@@ -5,7 +5,7 @@ import { Container, Row, Col, Card } from 'react-bootstrap';
 
 import CarouselSection from './CarouselSection/CarouselSection';
 import DetailSection from './DetailSection/DetailSection';
-import ProductListCard from '../../components/ProductListCard/ProductListCard';
+import ProductCard from '../../components/ProductCard/ProductCard';
 import AnimalListCard from '../../components/AnimalListCard/AnimalListCard';
 
 import {
@@ -87,7 +87,7 @@ const PetsDetail = () => {
 
             {/* Product List Section */}
             <Container css={container}>
-                <ProductListCard data={product_data} />
+                <ProductCard data={product_data} />
             </Container>
             {/* End of Product List Section */}
 
