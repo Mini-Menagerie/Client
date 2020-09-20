@@ -16,7 +16,9 @@ const ProductCard = ({ products, loading }) => {
                     return (
                         <Card key={value._id} style={{ width: '15rem', marginBottom: '15px' }}>
                             <div style={{ padding: '10px' }}>
-                                <Card.Img css={card_img} variant="top" src={value.image[0].image} />
+                                <a href={`/product/${value._id}`}>
+                                    <Card.Img css={card_img} variant="top" src={value.image[0].image} />
+                                </a>
                             </div>
                             <Card.Body>
                                 <p css={product_name}>{value.productName}</p>
