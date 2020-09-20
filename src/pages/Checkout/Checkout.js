@@ -13,16 +13,25 @@ const Checkout = () => {
         detailAdress: 'Citayam',
         noHandphone: '087882252815'
     })
-    const [cart, setCart] = useState([{
-        image: "https://img-a.udemycdn.com/course/750x422/147028_d030_9.jpg",
-        productName: "ROYAL CANIN KITTEN",
-        quantity: 2,
-        price: 100000
-    }])
+    const [cart, setCart] = useState([
+        {
+            image: "https://img-a.udemycdn.com/course/750x422/147028_d030_9.jpg",
+            productName: "ROYAL CANIN KITTEN",
+            quantity: 2,
+            price: 100000
+        },
+        {
+            image: "https://img-a.udemycdn.com/course/750x422/147028_d030_9.jpg",
+            productName: "ROYAL CANIN ADULT",
+            quantity: 3,
+            price: 100000
+        },
+
+    ])
     let initialValue=0;
 
-    const totalPrice = cart.map(item => {
-        return item.quantity * item.price
+    const price = cart.map(item => {
+        return item.price * item.quantity
     })
     const hitung = (accumulator, item) => {
         return accumulator + item;
@@ -30,7 +39,10 @@ const Checkout = () => {
     const getQty = cart.map(item => {
         return item.quantity
     })
+    const pr = price.reduce(hitung, initialValue)
     const qty = getQty.reduce(hitung, initialValue)
+    let t = price.reduce((a,b) => a+b)
+    
     return(
         <Container>
             <div css={topLeft}>
@@ -65,7 +77,7 @@ const Checkout = () => {
                 <div css={itemRight}>
                     <div css={detailRight}>
                         <h5>Chekout Display</h5>
-                        <h6>{`Subtotal (${qty} items): Rp.${totalPrice}`}</h6>
+                        <h6>{`Subtotal (${qty} items): Rp.${t}`}</h6>
                         <h6>Shipping Fee : Rp.12.000</h6>
 
                         <Button variant="primary">Pick Payment Methods</Button>{' '}                        
