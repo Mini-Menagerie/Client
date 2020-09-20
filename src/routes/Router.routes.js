@@ -4,5 +4,5 @@ export default {
   ALLBREEDS: '/all-breeds',
   PETSDETAIL: '/pets-detail',
   ADOPTIONFORM: '/adoption-form',
-  PRODUCTDETAIL: '/product-detail'
+  PRODUCTDETAIL: '/product-detail/:id'
 }
