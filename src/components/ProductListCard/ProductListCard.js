@@ -2,20 +2,22 @@
 import { jsx } from '@emotion/core'
 import { Card, Button } from 'react-bootstrap'
 
-import { product_list } from './ProductListCard.styles'
+import { product_list, card, card_img, product_name } from './ProductListCard.styles'
 
 const ProductListCard = ({ data }) => {
     return (
         <div css={product_list}>
             {
-                data.map(value => {
+                data.map((value) => {
                     return (
-                        <Card style={{ width: '18rem', marginBottom: '10px' }}>
-                            <Card.Img variant="top" src={value.image} />
+                        <Card style={{ width: '15rem', marginBottom: '15px' }}>
+                            <div style={{padding: '10px'}}>
+                                <Card.Img css={card_img} variant="top" src={value.image[0].image} />
+                            </div>
                             <Card.Body>
-                                <Card.Title>{value.title}</Card.Title>
-                                <Card.Text>{value.about}</Card.Text>
-                                <Card.Text>Rp. {value.price}</Card.Text>
+                                <p css={product_name}>{value.productName}</p>
+                                <Card.Text>Rp {value.price}</Card.Text>
+                                <Card.Text>{value.stock} Pcs</Card.Text>
                                 <Button variant="primary">Add to Cart</Button>
                             </Card.Body>
                         </Card>
