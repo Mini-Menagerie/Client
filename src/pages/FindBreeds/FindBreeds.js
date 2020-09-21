@@ -26,7 +26,7 @@ const FindBreeds = () => {
     const radioss = [
         { name: 'Low', value: '5' },
         { name: 'Moderate', value: '6' },
-        { name: 'Hight', value: '7' },
+        { name: 'Height', value: '7' },
     ];
     const radiosss = [
         { name: 'Ascending Order', value: '7' },
@@ -135,7 +135,7 @@ const FindBreeds = () => {
                         ))}
                     </ButtonGroup>
                 </div>
-                <p css={centertext}>Fins By Alphabetical Order</p>
+                <p css={centertext}>Find By Alphabetical Order</p>
                 <div css={buttonGroup}>
                     <ButtonGroup toggle css={widthButton}>
                         {radiosss.map((radio, idx) => (

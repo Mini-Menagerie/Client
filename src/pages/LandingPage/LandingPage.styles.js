@@ -91,17 +91,12 @@ color: #464646;
 `
 
 export const petsAvailable = css `
-display: flex;
-justify-content: center;
-margin-bottom: 200px;
-justify-content: space-between;
-margin-left: 200px;
-margin-right: 200px;
+margin: 100px;
 `
 
 export const howToAdopt = css `
 color: white;
-background-color: #22B216;
+background-color: #22891A;
 padding: 15px 30px;
 margin-top: 100px;
 text-align: center;
@@ -116,7 +111,7 @@ filter: brightness(0) invert(1);
 `
 
 export const informationIcons = css `
-filter: invert(48%) sepia(61%) saturate(2034%) hue-rotate(81deg) brightness(97%) contrast(86%);
+filter: invert(43%) sepia(13%) saturate(2731%) hue-rotate(68deg) brightness(95%) contrast(98%);
 height: 200px;
 width: auto;
 margin-top: 50px;
@@ -138,7 +133,7 @@ color: #464646;
 `
 
 export const iconContainer = css `
-border: dashed 6px #22B216;
+border: solid 2px #22891A;
 border-radius: 70px;
 display: flex;
 justify-content: center;

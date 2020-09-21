@@ -14,7 +14,7 @@ const ProductCard = ({ products, loading }) => {
             {
                 products.map((value) => {
                     return (
-                        <Card key={value._id} style={{ width: '15rem', marginBottom: '15px' }}>
+                        <Card key={value._id} style={{ width: '16rem', marginBottom: '15px' }}>
                             <div style={{ padding: '10px' }}>
                                 <a href={`/product/${value._id}`}>
                                     <Card.Img css={card_img} variant="top" src={value.image[0].image} />
@@ -36,4 +36,4 @@ const ProductCard = ({ products, loading }) => {
     );
 }
 
-export default ProductCard; 
+export default ProductCard;

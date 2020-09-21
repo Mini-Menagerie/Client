@@ -6,11 +6,10 @@ import axios from 'axios'
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
 import { container, row_quantity, button, info_col, description_col, info_row, info_name, info_quantity } from './ProductDetail.styles'
-import ProductCard from '../../components/ProductCard/ProductCard';
+import RecommendedProducts from '../../components/RecommendedProducts/RecommendedProducts'
 
 const ProductDetail = props => {
     let { id } = useParams()
-    const [products, setProducts] = useState([])
     const [product, setProduct] = useState([])
     const [productImage, setProductImage] = useState([])
     const [currentProduct, setCurrentProduct] = useState(1);
@@ -26,15 +25,6 @@ const ProductDetail = props => {
         }
 
         getProduct();
-
-
-        const getProducts = async () => {
-            // setLoading(true);
-            const response = await axios.get(`http://localhost:8000/product`)
-            setProducts(response.data.result)
-            // setLoading(false);
-        }
-        getProducts();
     }, [])
 
     //g
@@ -84,10 +74,7 @@ const ProductDetail = props => {
                     </Col>
                 </Row>
             </Container>
-            <Container>
-                <h1>Also Get</h1>
-                <ProductCard products={products} />
-            </Container>
+            <RecommendedProducts />
         </div>
     )
 }

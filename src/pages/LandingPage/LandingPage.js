@@ -3,6 +3,7 @@ import { jsx } from '@emotion/core'
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Dropdown, Card, Jumbotron, Form } from 'react-bootstrap';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 import ReactFilestack from 'filestack-react';
 
 import PrimaryButton from '../../components/Button/Button'
@@ -52,7 +53,7 @@ import letter from '../../assets/letter.png'
 import arrow from '../../assets/arrow.png'
 import dogfood from '../../assets/dogfood.png'
 
-import { Link } from 'react-router-dom'
+import CardPet from '../../components/CardPet/CardPet'
 
 
 const LandingPage = () => {
@@ -61,14 +62,21 @@ const LandingPage = () => {
   const [error, setError] = useState (false);
   const [errorMessage, setErrorMessage] = useState ();
   const [product, setProduct] = useState([]);
-  const [productImage, setProductImage] = useState([]);
+  const [petCards, setPetCards] = useState([])
 
-  useEffect (() => {
-    const url='http://localhost:8000/pet';
+
+  function handleClick(id) {
+    window.location.replace(`/pets-detail/${id}`)
+
+    console.log(`${id} clicked`);
+  }
+
+  const fetchPet = () => {
+    const url ='http://localhost:8000/pet';
     axios.get(url)
     .then(function(response) {
-      console.log(response.data.result)
-     setCategoryPet(response.data.result);
+      const limit = response.data.result.slice(0, 4) //limit item display
+     setCategoryPet(limit)
       setLoading(false)
     })
     .catch(function(error) {
@@ -77,15 +85,14 @@ const LandingPage = () => {
       setErrorMessage(error.message)
       setLoading(false);
     });
-  },[]);
+  }
 
-
-  useEffect (() => {
+  const fetchProduct = () => {
     const url='http://localhost:8000/product';
     axios.get(url)
     .then(function(response) {
-      console.log(response)
-     setProduct(response.data.result);
+      const limit = response.data.result.slice(0, 4)
+     setProduct(limit);
       setLoading(false)
     })
     .catch(function(error) {
@@ -93,16 +100,40 @@ const LandingPage = () => {
       console.log(error.messsage)
       setErrorMessage(error.message)
       setLoading(false);
-    });
+    }); 
+  }
+
+  const url = () => {
+    const url='http://localhost:8000/pet';
+    axios.get(url)
+    .then(function(response) {
+      const limit = response.data.result.slice(0, 4)
+     setPetCards(limit);
+      setLoading(false)
+    })
+    .catch(function(error) {
+      setError(true);
+      console.log(error.messsage)
+      setErrorMessage(error.message)
+      setLoading(false);
+    }); 
+  }
+
+  useEffect (() => {
+    fetchPet();
+    fetchProduct();
+    url();
   },[]);
 
+
+  
   return (
     <div>
       <div css={wrapperCover}>
         <h2 css={h2}>Provide For Those Who Needs It.</h2>
         <p css = {p}>Save A Live Today</p>
         <Link to="/" css={linkTo}><PrimaryButton type="submit">Start Searching</PrimaryButton></Link>
-        <Form>
+        {/* <Form>
           <Form.Group>
             <ReactFilestack
               apikey="Ad90N7pPARhugRUUdTP3oz"
@@ -124,7 +155,7 @@ const LandingPage = () => {
               }
             />
           </Form.Group>
-        </Form>
+        </Form> */}
       </div>
         <Container css={underCoverSearch}>
           <Row>
@@ -178,14 +209,15 @@ const LandingPage = () => {
           </h2>
         </div>
       <div css={petsAvailable}>
-          {loading ? (
+      <CardPet petCards={petCards}/>
+          {/* {loading ? (
             <div className="lds-circle"><div></div></div>
           ) : (
               error ? (
                 <div>{errorMessage}</div>
               ) : (
                   categoryPet.map((item) => (
-                    <Card style={{ width: '18rem' }}>
+                    <Card style={{ width: '18rem' }}  onClick={() => handleClick(item._id)}>
                     <Card.Img variant="top" src="holder.js/100px180" />
                     <Card.Body>
                       <Card.Title css={title}>{item.petName}</Card.Title>
@@ -202,8 +234,8 @@ const LandingPage = () => {
                   </Card>
                 ))
               )
-          )
-          }
+          ) */}
+          
       </div>
       <div css={howToAdoptContainer}>
         <div className="HowToAdopt">
