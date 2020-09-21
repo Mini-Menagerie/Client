@@ -9,15 +9,34 @@ import ReactFilestack from 'filestack-react';
 import { Card, FormControl, Row, Col, Dropdown} from 'react-bootstrap';
 
 import {
-  wrapperCover, 
-  whitecolor, card, margin, search, sortby,
-  widthButton, collections, centertext, result,
+  wrapperCover, img, 
+  whitecolor, card, margin, search, sortby, title,
+  widthButton,  result, petsAvailable, displaying,
 } from './searchPage.styles'
 
-import CardPet from '../../components/CardPet/CardPet'
+
 
 const SearchPage = () => {
-  
+  const [searchPet, setSearchPet] = useState([]);
+  const [loading, setLoading] = useState (true);
+  const [error, setError] = useState (false);
+  const [errorMessage, setErrorMessage] = useState ();
+
+  useEffect (() => {
+    const url='http://localhost:8000/pet';
+    axios.get(url)
+    .then(function(response) {
+      console.log(response.data.result)
+     setSearchPet(response.data.result);
+      setLoading(false)
+    })
+    .catch(function(error) {
+      setError(true);
+      console.log(error.messsage)
+      setErrorMessage(error.message)
+      setLoading(false);
+    });
+  },[]);
 
 
   const responsive = {
@@ -79,12 +98,37 @@ const SearchPage = () => {
              </Card>
             </div>
            <Card css={result}>
-                <h5 style={{fontWeight: "700"}, {fontSize: "30px"}}>Displaying 9 out of 120 results </h5>
-                <div css={collections}>                            
-                        <Carousel responsive={responsive}> 
-                              <CardPet />
-                          </Carousel>
-                </div>
+                <h5 css={displaying}>Displaying 9 out of 120 results </h5>
+                                           
+                <div css={petsAvailable}>
+                      {loading ? (
+                        <div className="lds-circle"><div></div></div>
+                      ) : (
+                          error ? (
+                            <div>{errorMessage}</div>
+                          ) : (
+                              searchPet.map((item) => (
+                                <Card style={{ width: '18rem' }}>
+                                <Card.Img css={img} variant="top" src={item.image}/>
+                                <Card.Body>
+                                  <Card.Title css={title}>{item.petName}</Card.Title>
+                                  <Card.Text>
+                                  {item.gender}, {item.age} Years Old
+                                  </Card.Text>
+                                  <Card.Text>
+                                  {item.about}
+                                  </Card.Text>
+                                  <Card.Text>
+                                  {item.location}
+                                  </Card.Text>
+                                </Card.Body>
+                              </Card>
+                            ))
+                          )
+                      )
+                      }
+                  </div>
+                
                       <Row className="justify-content-md-center">
                           <Dropdown.Toggle variant="light" id="dropdown-basic" css={widthButton}>
                               Show More Result
