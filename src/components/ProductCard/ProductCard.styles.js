@@ -1,4 +1,7 @@
+<<<<<<< HEAD
+=======
 
+>>>>>>> b262d1468bfa57167fb5a4cc139526547b9eca07
 import { css } from '@emotion/core';
 
 export const product_name = css`

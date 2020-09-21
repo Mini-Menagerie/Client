@@ -50,8 +50,18 @@ const Router = () => (
      <Route
         exact path={routes.PETSHOP}
         component={PetShop}
+<<<<<<< HEAD
+<<<<<<< HEAD
       />
       <Route
+=======
+       />
+       <Route
+>>>>>>> b262d1468bfa57167fb5a4cc139526547b9eca07
+=======
+      />
+      <Route
+>>>>>>> 074a2048db7f1dafbeeb704d1cd69fbd593a8892
         exact path={routes.PRODUCTDETAIL}
         component={ProductDetail}
       />

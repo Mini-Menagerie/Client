@@ -36,6 +36,4 @@ const ProductCard = ({ products, loading }) => {
     );
 }
 
-
-export default ProductCard; 
-
+export default ProductCard;

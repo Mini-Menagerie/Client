@@ -19,18 +19,6 @@ const PetShop = () => {
 
     useEffect(() => {
         let url = 'http://localhost:8000/product'
-        // axios.get(url)
-        //     .then(
-        //         (response) => {
-        //             console.log(response.data.result);
-        //             setIsLoaded(true);
-        //             setProducts(response.data.result);
-        //         },
-        //         (error) => {
-        //             setIsLoaded(true);
-        //             setError(error);
-        //         }
-        //     );
         const getProducts = async () => {
             setLoading(true);
             const response = await axios.get(url)
