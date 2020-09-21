@@ -12,8 +12,6 @@ const ProductDetail = props => {
     let { id } = useParams()
     const [product, setProduct] = useState([])
     const [productImage, setProductImage] = useState([])
-    const [currentProduct, setCurrentProduct] = useState(1);
-    const [productsPerPage] = useState(4);
 
     useEffect(() => {
         const getProduct = async () => {
@@ -26,11 +24,6 @@ const ProductDetail = props => {
 
         getProduct();
     }, [])
-
-    //g
-    const indexOfLastProduct = currentProduct * productsPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
 
     return (
         <div>
