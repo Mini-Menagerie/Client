@@ -26,7 +26,7 @@ const FindBreeds = () => {
     const radioss = [
         { name: 'Low', value: '5' },
         { name: 'Moderate', value: '6' },
-        { name: 'Hight', value: '7' },
+        { name: 'Height', value: '7' },
     ];
     const radiosss = [
         { name: 'Ascending Order', value: '7' },
