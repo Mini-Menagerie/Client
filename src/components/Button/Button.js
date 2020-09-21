@@ -6,7 +6,6 @@ import { Button } from "react-bootstrap";
 import { searchButton } from "./Button.styles";
 
 const PrimaryButton = ({ type, onClick, children, ...props }) => {
-    console.log(props);
     return (
         <Button css={searchButton} type={type} onClick={onClick} {...props}>
             {children}
