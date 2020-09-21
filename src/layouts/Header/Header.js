@@ -45,7 +45,7 @@ const Header = () => {
             <Dropdown.Item href="#/action-2">Cat Breeds</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-        <div css={shopButton}>Shop</div>
+        <div css={shopButton}><a href='/shop'>Shop</a></div>
       </div>
       </div>
       <div>
