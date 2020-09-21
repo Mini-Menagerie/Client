@@ -4,7 +4,7 @@ import { Row, Col, Card } from 'react-bootstrap'
 
 import {
     dataPet, margin
-} from './CarPet.styles'
+} from './CardPet.styles'
 
 const CardPet = () => {
 
