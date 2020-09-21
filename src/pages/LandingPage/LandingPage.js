@@ -62,8 +62,7 @@ const LandingPage = () => {
   const [error, setError] = useState (false);
   const [errorMessage, setErrorMessage] = useState ();
   const [product, setProduct] = useState([]);
-  const [productImage, setProductImage] = useState([]);
-
+  const [petCards, setPetCards] = useState([])
 
 
   function handleClick(id) {
@@ -104,10 +103,28 @@ const LandingPage = () => {
     }); 
   }
 
+  const url = () => {
+    const url='http://localhost:8000/pet';
+    axios.get(url)
+    .then(function(response) {
+      const limit = response.data.result.slice(0, 4)
+     setPetCards(limit);
+      setLoading(false)
+    })
+    .catch(function(error) {
+      setError(true);
+      console.log(error.messsage)
+      setErrorMessage(error.message)
+      setLoading(false);
+    }); 
+  }
+
   useEffect (() => {
     fetchPet();
     fetchProduct();
+    url();
   },[]);
+
 
   
   return (
@@ -116,7 +133,7 @@ const LandingPage = () => {
         <h2 css={h2}>Provide For Those Who Needs It.</h2>
         <p css = {p}>Save A Live Today</p>
         <Link to="/" css={linkTo}><PrimaryButton type="submit">Start Searching</PrimaryButton></Link>
-        <Form>
+        {/* <Form>
           <Form.Group>
             <ReactFilestack
               apikey="Ad90N7pPARhugRUUdTP3oz"
@@ -138,7 +155,7 @@ const LandingPage = () => {
               }
             />
           </Form.Group>
-        </Form>
+        </Form> */}
       </div>
         <Container css={underCoverSearch}>
           <Row>
@@ -192,7 +209,8 @@ const LandingPage = () => {
           </h2>
         </div>
       <div css={petsAvailable}>
-          {loading ? (
+      <CardPet petCards={petCards}/>
+          {/* {loading ? (
             <div className="lds-circle"><div></div></div>
           ) : (
               error ? (
@@ -216,8 +234,8 @@ const LandingPage = () => {
                   </Card>
                 ))
               )
-          )
-          }
+          ) */}
+          
       </div>
       <div css={howToAdoptContainer}>
         <div className="HowToAdopt">

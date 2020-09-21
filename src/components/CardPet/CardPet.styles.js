@@ -6,3 +6,9 @@ export const dataPet = css `
 export const margin = css `
     margin-bottom: 25px;
 `
+
+export const petImage = css `
+width: 380px;
+height: 300px;
+object-fit: cover;
+`
