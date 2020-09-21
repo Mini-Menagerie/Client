@@ -91,7 +91,7 @@ color: #464646;
 `
 
 export const petsAvailable = css `
-margin: 100px;
+margin: 95px;
 `
 
 export const howToAdopt = css `

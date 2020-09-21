@@ -71,21 +71,21 @@ const LandingPage = () => {
     console.log(`${id} clicked`);
   }
 
-  const fetchPet = () => {
-    const url ='http://localhost:8000/pet';
-    axios.get(url)
-    .then(function(response) {
-      const limit = response.data.result.slice(0, 4) //limit item display
-     setCategoryPet(limit)
-      setLoading(false)
-    })
-    .catch(function(error) {
-      setError(true);
-      console.log(error.messsage)
-      setErrorMessage(error.message)
-      setLoading(false);
-    });
-  }
+  // const fetchPet = () => {
+  //   const url ='http://localhost:8000/pet';
+  //   axios.get(url)
+  //   .then(function(response) {
+  //     const limit = response.data.result.slice(0, 4) //limit item display
+  //    setCategoryPet(limit)
+  //     setLoading(false)
+  //   })
+  //   .catch(function(error) {
+  //     setError(true);
+  //     console.log(error.messsage)
+  //     setErrorMessage(error.message)
+  //     setLoading(false);
+  //   });
+  // }
 
   const fetchProduct = () => {
     const url='http://localhost:8000/product';
@@ -120,7 +120,7 @@ const LandingPage = () => {
   }
 
   useEffect (() => {
-    fetchPet();
+    // fetchPet();
     fetchProduct();
     url();
   },[]);
@@ -132,30 +132,7 @@ const LandingPage = () => {
       <div css={wrapperCover}>
         <h2 css={h2}>Provide For Those Who Needs It.</h2>
         <p css = {p}>Save A Live Today</p>
-        <Link to="/" css={linkTo}><PrimaryButton type="submit">Start Searching</PrimaryButton></Link>
-        {/* <Form>
-          <Form.Group>
-            <ReactFilestack
-              apikey="Ad90N7pPARhugRUUdTP3oz"
-              customRender={({ onPick }) => (
-                  <div>
-                      <button
-                          className="btn btn-primary btn-block"
-                          onClick={onPick}
-                      >
-                          Upload Image
-                      </button>
-                  </div>
-              )}
-              onSuccess={(res) =>
-                  console.log(res)
-              }
-              onError = {(err) =>
-                console.log(err)
-              }
-            />
-          </Form.Group>
-        </Form> */}
+        <Link to="/all-pets" css={linkTo}><PrimaryButton type="submit">Start Searching</PrimaryButton></Link>
       </div>
         <Container css={underCoverSearch}>
           <Row>
@@ -209,7 +186,7 @@ const LandingPage = () => {
           </h2>
         </div>
       <div css={petsAvailable}>
-      <CardPet petCards={petCards}/>
+      <CardPet petCards={petCards} onClick={() => handleClick(url._id)}/>
           {/* {loading ? (
             <div className="lds-circle"><div></div></div>
           ) : (
@@ -279,7 +256,8 @@ const LandingPage = () => {
           </p>
       </div>
       <div css={goToShop}>
-        <h5>Go To Shop &#62;</h5>
+      <Link to="/shop">Go To Shop &#62;</Link>
+
       </div>
       <div css={shop} className="shop">
           {loading ? (
