@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { Dropdown } from "react-bootstrap";
+import { Button, Navbar, Nav, Dropdown } from "react-bootstrap";
 
 import Logo from "../../assets/logo-mini-menagerie.png";
 import {
@@ -13,7 +13,6 @@ import {
     cart,
     shopButton,
 } from "./Header.styles";
-import { Button, Navbar, Nav } from "react-bootstrap";
 
 const Header = () => {
     return (
@@ -54,10 +53,10 @@ const Header = () => {
                                 placeholder="Search your future best friend"
                             ></input>
                             <button type="submit" css={searchButton}>
-                                <i class="fas fa-search"></i>
+                                <i className="fas fa-search"></i>
                             </button>
                             <button type="submit" css={cart}>
-                                <i class="fas fa-shopping-cart"></i>
+                                <i className="fas fa-shopping-cart"></i>
                             </button>
                         </form>
                     </div>

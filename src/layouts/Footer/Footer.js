@@ -96,11 +96,11 @@ const Footer = () => {
                         </p>
                     </Col>
                     <Col md={{ offset: 1 }} xs={{ offset: 3 }}>
-                        <i class="fab fa-facebook-square fa-2x"></i>
-                        <i class="fab fa-twitter-square fa-2x"></i>
-                        <i class="fab fa-instagram-square fa-2x"></i>
-                        <i class="fab fa-linkedin fa-2x"></i>
-                        <i class="fab fa-pinterest-square fa-2x"></i>
+                        <i className="fab fa-facebook-square fa-2x"></i>
+                        <i className="fab fa-twitter-square fa-2x"></i>
+                        <i className="fab fa-instagram-square fa-2x"></i>
+                        <i className="fab fa-linkedin fa-2x"></i>
+                        <i className="fab fa-pinterest-square fa-2x"></i>
                     </Col>
                 </Row>
             </div>
