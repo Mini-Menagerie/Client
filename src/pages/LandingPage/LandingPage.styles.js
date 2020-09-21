@@ -47,7 +47,7 @@ font-size: 12px;
 `
 
 export const dogCatButton = css `
-color: #FFFFFF;
+color: #FFF;
 background-color: #22B216;
 padding: 20px 40px;
 border: none;
@@ -91,7 +91,7 @@ color: #464646;
 `
 
 export const petsAvailable = css `
-margin: 95px;
+margin: 110px;
 `
 
 export const howToAdopt = css `

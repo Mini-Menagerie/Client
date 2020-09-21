@@ -5,12 +5,11 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import { Container, Row, Col, Button } from 'react-bootstrap';
 
-import { container, row_quantity, button, info_col, description_col, info_row, info_name, info_quantity } from './ProductDetail.styles'
-import ProductCard from '../../components/ProductCard/ProductCard';
+import { container, row_quantity, button, info_col, description_col, info_row, info_name, info_quantity, alsoGet } from './ProductDetail.styles'
+import RecommendedProducts from '../../components/RecommendedProducts/RecommendedProducts'
 
 const ProductDetail = props => {
     let { id } = useParams()
-    const [products, setProducts] = useState([])
     const [product, setProduct] = useState([])
     const [productImage, setProductImage] = useState([])
 
@@ -24,15 +23,6 @@ const ProductDetail = props => {
         }
 
         getProduct();
-
-
-        const getProducts = async () => {
-            // setLoading(true);
-            const response = await axios.get(`http://localhost:8000/product`)
-            setProducts(response.data.result)
-            // setLoading(false);
-        }
-        getProducts();
     }, [])
 
     return (
@@ -78,8 +68,8 @@ const ProductDetail = props => {
                 </Row>
             </Container>
             <Container>
-                <h1>Also Get</h1>
-                <ProductCard products={products} />
+                <h1 css={alsoGet}>Also Get</h1>
+                <RecommendedProducts />
             </Container>
         </div>
     )

@@ -3,16 +3,17 @@ import { jsx } from '@emotion/core'
 import { useEffect, useState } from 'react'
 import { Row, Col, Card } from 'react-bootstrap'
 import axios from 'axios'
-
+import {useHistory} from 'react-router-dom';
 import {
-    margin, petImage
+    margin, petImage, cards
 } from './CardPet.styles'
 
 const CardPet = ({petCards}) => {
     console.log(petCards);
+    const history = useHistory()
 
     function handleClick(id) {
-        window.location.replace(`/pet/${id}`)
+        history.push(`/pets-detail/${id}`)
     
         console.log(`${id} clicked`);
       }
@@ -21,7 +22,7 @@ const CardPet = ({petCards}) => {
         <Row>
             {petCards.map((e) => (
                 <Col md={3} css={margin}>
-                    <Card onClick={() => handleClick(e._id)}>
+                    <Card css={cards} onClick={() => handleClick(e._id)}>
                         <Card.Img css={petImage} variant="top" src={e.image} />
                         <Card.Body>
                         <Card.Title><h4><b>{e.petName}</b></h4></Card.Title>

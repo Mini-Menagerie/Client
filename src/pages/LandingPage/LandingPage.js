@@ -28,17 +28,15 @@ import {
   iconContainer,
   howToAdoptContainer,
   arrowIcon,
-  shop,
   shopText,
   dogfood1,
   dogfood2,
   buyNecessities,
   profits,
-  title,
-  choices,
   goToShop,
   colStyles,
-} from './LandingPage.styles'
+} from './LandingPage.styles';
+import {useHistory} from 'react-router-dom'
 
 import fish from '../../assets/fish.png'
 import hamster from '../../assets/hamster.png'
@@ -54,19 +52,20 @@ import arrow from '../../assets/arrow.png'
 import dogfood from '../../assets/dogfood.png'
 
 import CardPet from '../../components/CardPet/CardPet'
+import RecommendedProducts from '../../components/RecommendedProducts/RecommendedProducts'
 
 
 const LandingPage = () => {
-  const [categoryPet, setCategoryPet] = useState ([]);
   const [loading, setLoading] = useState (true);
   const [error, setError] = useState (false);
   const [errorMessage, setErrorMessage] = useState ();
   const [product, setProduct] = useState([]);
   const [petCards, setPetCards] = useState([])
+  const history = useHistory()
 
 
   function handleClick(id) {
-    window.location.replace(`/pets-detail/${id}`)
+    history.push(`/pets-detail/${id}`)
 
     console.log(`${id} clicked`);
   }
@@ -186,7 +185,7 @@ const LandingPage = () => {
           </h2>
         </div>
       <div css={petsAvailable}>
-      <CardPet petCards={petCards} onClick={() => handleClick(url._id)}/>
+      <CardPet petCards={petCards} onClick={()=> handleClick(url._id)}/>
           {/* {loading ? (
             <div className="lds-circle"><div></div></div>
           ) : (
@@ -259,8 +258,9 @@ const LandingPage = () => {
       <Link to="/shop">Go To Shop &#62;</Link>
 
       </div>
-      <div css={shop} className="shop">
-          {loading ? (
+      
+        <RecommendedProducts/>
+          {/* {loading ? (
             <div className="lds-circle"><div></div></div>
           ) : (
               error ? (
@@ -283,8 +283,8 @@ const LandingPage = () => {
                 ))
               )
           )
-          }
-      </div>
+          } */}
+  
     </div>
   );
 }

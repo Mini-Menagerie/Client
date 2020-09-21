@@ -13,7 +13,8 @@ import {
   wrapperStyles,
   mini,
   icons,
-  icon
+  icon,
+  subsText
 } 
 from './Footer.styles'
 import subLogo from '../../assets/signUp.png'
@@ -57,7 +58,7 @@ const Footer = () => {
       </div>
       <div css={subscription}>
         <img src={subLogo} css={subsLogo}></img>
-        <p>
+        <p css={subsText}>
         Sign up for our newsletter<br></br>
         to get the latest update on pet<br></br>
         adoption & rescues!

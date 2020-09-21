@@ -56,3 +56,7 @@ margin-right: 50px;`
 export const icon = css `
 margin-left: 15px;
 `
+
+export const subsText = css `
+color: #FFF;
+`

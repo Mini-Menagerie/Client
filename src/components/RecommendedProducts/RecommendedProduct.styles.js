@@ -60,6 +60,5 @@ input {
 }
 ` 
 
-export const alsoGet = css `
-padding-left: 20px;
-padding-bottom: 20px;`
+export const margin = css `
+margin-top: 80px;`
