@@ -56,13 +56,30 @@ export const widthButton = css `
     padding:10px;
     
 `
+export const title = css `
+font-weight: 600;
+`
+export const petsAvailable = css `
+display: flex;
+justify-content: center;
+margin-bottom: 200px;
+justify-content: space-between;
+margin-left: 200px;
+margin-right: 200px;
+`
+export const img = css `
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+`
 export const marginbutton = css `
     width:100%;
     margin-right: 5px;
 `
-export const collections = css `
-    padding: 80px 25px;
-    justify-content: center;
+export const displaying = css `
+    font-weight: 700;
+    font-size: 30px;
+    margin-bottom: 50px;
 `
 export const centertext = css `
     text-align:center;
