@@ -67,9 +67,7 @@ const ProductDetail = props => {
                     </Col>
                 </Row>
             </Container>
-            <Container>
-                <RecommendedProducts />
-            </Container>
+            <RecommendedProducts />
         </div>
     )
 }
