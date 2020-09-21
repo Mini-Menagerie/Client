@@ -27,7 +27,6 @@ display: flex;
 align-items: center;
 `
 
-
 export const breedsButton = css`
 border: none;
 color: #272626;
