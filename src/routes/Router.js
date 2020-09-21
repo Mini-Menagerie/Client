@@ -17,6 +17,8 @@ import AdoptedHistory from '../pages/AdoptedHistory/AdoptedHistory';
 import ProductDetail from '../pages/ProductDetail/ProductDetail';
 import Checkout from '../pages/Checkout/Checkout';
 
+import AdoptionForm from '../pages/AdoptionForm/AdoptionForm';
+import SearchPage from '../pages/searchPage/searchPage';
 
 const Router = () => (
   <BrowserRouter>
@@ -39,7 +41,11 @@ const Router = () => (
         exact path={routes.ALLBREEDS}
         component={FindBreeds}
       />
-      <Route
+      <Route 
+        exact path={routes.SEARCHPAGE}
+        component={SearchPage}
+      />
+      <Route 
         exact path={routes.PETSDETAIL}
         component={PetsDetail}
       />
