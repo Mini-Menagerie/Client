@@ -11,6 +11,8 @@ import FindBreeds from '../pages/FindBreeds/FindBreeds';
 import AllPets from '../pages/AllPets/AllPets';
 import PetsDetail from '../pages/PetsDetail/PetsDetail';
 import AdoptionForm from '../pages/AdoptionForm/AdoptionForm'
+import StatusRequest from '../pages/StatusRequest/StatusRequest';
+import AdoptedHistory from '../pages/AdoptedHistory/AdoptedHistory';
 
 const Router = () => (
   <BrowserRouter>
@@ -36,6 +38,14 @@ const Router = () => (
             <Route 
         exact path={routes.PETSDETAIL}
         component={PetsDetail}
+      />
+      <Route 
+        exact path={routes.STATUSREQUEST}
+        component={StatusRequest}
+      />
+      <Route 
+        exact path={routes.ADOPTEDHISTORY}
+        component={AdoptedHistory}
       />
     </Switch>
   </BrowserRouter>
