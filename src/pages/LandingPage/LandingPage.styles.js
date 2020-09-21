@@ -91,12 +91,7 @@ color: #464646;
 `
 
 export const petsAvailable = css `
-display: flex;
-justify-content: center;
-margin-bottom: 200px;
-justify-content: space-between;
-margin-left: 200px;
-margin-right: 200px;
+margin: 100px;
 `
 
 export const howToAdopt = css `
