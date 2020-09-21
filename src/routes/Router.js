@@ -14,6 +14,9 @@ import PetShop from '../pages/PetShop/PetShop';
 import AdoptionForm from '../pages/AdoptionForm/AdoptionForm'
 import ProductDetail from '../pages/ProductDetail/ProductDetail';
 
+
+import Checkout from '../pages/Checkout/Checkout';
+
 const Router = () => (
   <BrowserRouter>
     <Global styles={globalStyles}
@@ -39,9 +42,15 @@ const Router = () => (
         exact path={routes.PETSDETAIL}
         component={PetsDetail}
       />
-      <Route
+
+    <Route 
+        exact path={routes.CHECKOUT}
+        component={Checkout}
+      />
+     <Route
         exact path={routes.PETSHOP}
         component={PetShop}
+<<<<<<< HEAD
 <<<<<<< HEAD
       />
       <Route
@@ -49,6 +58,10 @@ const Router = () => (
        />
        <Route
 >>>>>>> b262d1468bfa57167fb5a4cc139526547b9eca07
+=======
+      />
+      <Route
+>>>>>>> 074a2048db7f1dafbeeb704d1cd69fbd593a8892
         exact path={routes.PRODUCTDETAIL}
         component={ProductDetail}
       />
