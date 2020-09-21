@@ -1,18 +1,25 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
-import {useState} from 'react';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import ReactFilestack from 'filestack-react';
 
-import { Card, Button, FormControl, Row, Col, ToggleButton, ButtonGroup, Dropdown} from 'react-bootstrap';
+import { Card, FormControl, Row, Col, Dropdown} from 'react-bootstrap';
 
 import {
-  wrapperCover,
-  whitecolor, card, margin, buttoncard, marginbutton, search, sortby,
-  widthButton, collections, centertext, filter, buttonGroup, result,
+  wrapperCover, 
+  whitecolor, card, margin, search, sortby,
+  widthButton, collections, centertext, result,
 } from './searchPage.styles'
 
+import CardPet from '../../components/CardPet/CardPet'
+
 const SearchPage = () => {
+  
+
+
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -73,32 +80,16 @@ const SearchPage = () => {
             </div>
            <Card css={result}>
                 <h5 style={{fontWeight: "700"}, {fontSize: "30px"}}>Displaying 9 out of 120 results </h5>
-                <div css={collections}>
-                <Card>
-                    <Carousel responsive={responsive}>                    
-                            <Card>
-                                <Card.Img variant="top" src="https://images.unsplash.com/photo-1565560681175-99ae21e26ce1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />                            
-                            </Card>                                     
-                            <Card>
-                                <Card.Img variant="top" src="https://images.unsplash.com/photo-1565560681175-99ae21e26ce1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />                            
-                            </Card>
-                            <Card>
-                                <Card.Img variant="top" src="https://images.unsplash.com/photo-1565560681175-99ae21e26ce1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-                            </Card>                    
-                            <Card>
-                                <Card.Img variant="top" src="https://images.unsplash.com/photo-1565560681175-99ae21e26ce1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-                            </Card>                    
-                    </Carousel>
-                    <Card.Title css={centertext}>Small Cat</Card.Title>
-                    <Card.Title css={centertext}>Small Cat</Card.Title>
-                    <Card.Title css={centertext}>Small Cat</Card.Title>
-                </Card>
+                <div css={collections}>                            
+                        <Carousel responsive={responsive}> 
+                              <CardPet />
+                          </Carousel>
+                </div>
                       <Row className="justify-content-md-center">
                           <Dropdown.Toggle variant="light" id="dropdown-basic" css={widthButton}>
                               Show More Result
                           </Dropdown.Toggle>
-                      </Row>
-                  </div>
+                      </Row>                 
            </Card>
             
            

@@ -4,5 +4,5 @@ export default {
   ALLBREEDS: '/all-breeds',
   PETSDETAIL: '/pets-detail',
   ADOPTIONFORM: '/adoption-form',
-  SEARCHPAGE: '/search-page'
+  SEARCHPAGE: '/search-page',
 }

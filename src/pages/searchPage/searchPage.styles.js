@@ -56,6 +56,7 @@ export const widthButton = css `
     padding:10px;
     
 `
+
 export const marginbutton = css `
     width:100%;
     margin-right: 5px;
