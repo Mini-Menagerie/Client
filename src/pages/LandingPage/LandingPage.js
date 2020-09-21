@@ -3,6 +3,7 @@ import { jsx } from '@emotion/core'
 import { useEffect, useState } from 'react';
 import { Container, Row, Col, Dropdown, Card, Jumbotron, Form } from 'react-bootstrap';
 import axios from 'axios';
+import { Link } from 'react-router-dom'
 import ReactFilestack from 'filestack-react';
 
 import PrimaryButton from '../../components/Button/Button'
@@ -52,7 +53,7 @@ import letter from '../../assets/letter.png'
 import arrow from '../../assets/arrow.png'
 import dogfood from '../../assets/dogfood.png'
 
-import { Link } from 'react-router-dom'
+import CardPet from '../../components/CardPet/CardPet'
 
 
 const LandingPage = () => {
@@ -63,12 +64,20 @@ const LandingPage = () => {
   const [product, setProduct] = useState([]);
   const [productImage, setProductImage] = useState([]);
 
-  useEffect (() => {
-    const url='http://localhost:8000/pet';
+
+
+  function handleClick(id) {
+    window.location.replace(`/pets-detail/${id}`)
+
+    console.log(`${id} clicked`);
+  }
+
+  const fetchPet = () => {
+    const url ='http://localhost:8000/pet';
     axios.get(url)
     .then(function(response) {
-      console.log(response.data.result)
-     setCategoryPet(response.data.result);
+      const limit = response.data.result.slice(0, 4) //limit item display
+     setCategoryPet(limit)
       setLoading(false)
     })
     .catch(function(error) {
@@ -77,15 +86,14 @@ const LandingPage = () => {
       setErrorMessage(error.message)
       setLoading(false);
     });
-  },[]);
+  }
 
-
-  useEffect (() => {
+  const fetchProduct = () => {
     const url='http://localhost:8000/product';
     axios.get(url)
     .then(function(response) {
-      console.log(response)
-     setProduct(response.data.result);
+      const limit = response.data.result.slice(0, 4)
+     setProduct(limit);
       setLoading(false)
     })
     .catch(function(error) {
@@ -93,9 +101,15 @@ const LandingPage = () => {
       console.log(error.messsage)
       setErrorMessage(error.message)
       setLoading(false);
-    });
+    }); 
+  }
+
+  useEffect (() => {
+    fetchPet();
+    fetchProduct();
   },[]);
 
+  
   return (
     <div>
       <div css={wrapperCover}>
@@ -185,7 +199,7 @@ const LandingPage = () => {
                 <div>{errorMessage}</div>
               ) : (
                   categoryPet.map((item) => (
-                    <Card style={{ width: '18rem' }}>
+                    <Card style={{ width: '18rem' }}  onClick={() => handleClick(item._id)}>
                     <Card.Img variant="top" src="holder.js/100px180" />
                     <Card.Body>
                       <Card.Title css={title}>{item.petName}</Card.Title>
