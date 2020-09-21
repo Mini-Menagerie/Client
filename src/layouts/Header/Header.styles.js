@@ -59,3 +59,7 @@ padding-left: 30px;`
 export const modalBodyStyles = css`
   text-align: center;
 `;
+
+export const bodyTitleStyles = css`
+  font-weight: 700;
+`;

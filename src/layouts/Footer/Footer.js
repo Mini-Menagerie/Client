@@ -74,19 +74,19 @@ const Footer = () => {
      </div>
      <div css={icons}>
        <div css={icon}>
-        <i class="fab fa-facebook-square fa-2x"></i>
+        <i className="fab fa-facebook-square fa-2x"></i>
       </div>
       <div css={icon}>
-        <i class="fab fa-twitter-square fa-2x"></i>
+        <i className="fab fa-twitter-square fa-2x"></i>
       </div>
       <div css={icon}>
-        <i class="fab fa-instagram-square fa-2x"></i>
+        <i className="fab fa-instagram-square fa-2x"></i>
       </div>
       <div css={icon}>
-       <i class="fab fa-linkedin fa-2x"></i>
+       <i className="fab fa-linkedin fa-2x"></i>
       </div>
       <div css={icon}>
-      <i class="fab fa-pinterest-square fa-2x"></i>
+      <i className="fab fa-pinterest-square fa-2x"></i>
       </div>
      </div>
     </div>

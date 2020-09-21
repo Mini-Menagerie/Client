@@ -249,24 +249,6 @@ const LandingPage = () => {
       <div css={goToShop}>
         <h5>Go To Shop &#62;</h5>
       </div>
-<<<<<<< HEAD
-        <div css={underCoverSearch}>
-            <input type="text" css={enterLocation} placeholder="Enter Province or State"></input>
-            <button css={dogCatButton}><i class="fas fa-bone"></i>&nbsp;&nbsp;&nbsp;Find Dog Breed</button>
-            <button css={dogCatButton}><i class="fas fa-paw"></i>&nbsp;&nbsp;&nbsp;Find Cat Breed</button>
-            <Dropdown>
-              <Dropdown.Toggle css={otherPets}>
-                Find Other Pets
-              </Dropdown.Toggle>
-              <Dropdown.Menu css={dropdownMenu}>
-                <Dropdown.Item href="#/action-1">
-                  <img src="https://img.icons8.com/metro/26/000000/running-rabbit.png" alt="rabbit"/>
-                  rabbit
-              </Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Cat Breeds</Dropdown.Item>
-              </Dropdown.Menu>
-        </Dropdown>
-=======
       <div css={shop} className="shop">
           {loading ? (
             <div className="lds-circle"><div></div></div>
@@ -292,7 +274,6 @@ const LandingPage = () => {
               )
           )
           }
->>>>>>> 95850e616811c476c6e2917c1679d66136e1eb1c
       </div>
     </div>
   );

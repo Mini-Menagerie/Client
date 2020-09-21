@@ -1,8 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core';
 import { useState } from 'react';
-import { Dropdown, Modal } from 'react-bootstrap';
-import GoogleLogin from 'react-google-login';
+import { Dropdown, Modal, Button } from 'react-bootstrap';
 
 import Logo from '../../assets/logo-mini-menagerie.png';
 import {
@@ -17,8 +16,8 @@ import {
   searchButton,
   cart,
   modalBodyStyles,
+  bodyTitleStyles,
 } from './Header.styles';
-import { Button } from 'react-bootstrap'
 
 
 const Header = () => {
@@ -26,6 +25,12 @@ const Header = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const handleGoogleLogin = () => {
+    const urlGoogleLogin = "http://localhost:8000/auth/google";
+    window.location.replace(urlGoogleLogin)
+  }
+
   return (
     <div css={wrapperStyles}>
       <div css={navbar1}>
@@ -46,8 +51,8 @@ const Header = () => {
       <div>
         <form css={formSearch}>
           <input type="text" css={searchText} placeholder="Search your future best friend"></input>
-          <button type="submit" css={searchButton}><i class="fas fa-search"></i></button>
-          <button type="submit" css={cart}><i class="fas fa-shopping-cart"></i></button>
+          <button type="submit" css={searchButton}><i className="fas fa-search"></i></button>
+          <button type="submit" css={cart}><i className="fas fa-shopping-cart"></i></button>
        </form>
       </div>
       <div>
@@ -59,15 +64,9 @@ const Header = () => {
           <Modal.Title></Modal.Title>
         </Modal.Header>
         <Modal.Body css={modalBodyStyles}>
-          <h2>Sign Up</h2>
-          <h3>Create an Account</h3>
-          <GoogleLogin
-            clientId="658977310896-knrl3gka66fldh83dao2rhgbblmd4un9.apps.googleusercontent.com"
-            buttonText="Login"
-            onSuccess={responseGoogle}
-            onFailure={responseGoogle}
-            cookiePolicy={'single_host_origin'}
-          />
+          <h2 css={bodyTitleStyles}>Sign Up</h2>
+          <p>Create an Account</p>
+          <button onClick={handleGoogleLogin}>Login with Google</button>
         </Modal.Body>
       </Modal>
     </div>
