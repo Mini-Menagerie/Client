@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx, Global } from '@emotion/core';
 
+import './App.css'
 import Router from './routes/Router';
 import LayoutTheme from './layouts/LayoutTheme/LayoutTheme';
 import globalStyles from './styles/Global';
