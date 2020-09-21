@@ -4,7 +4,7 @@ export default {
   ALLBREEDS: '/all-breeds',
   PETSDETAIL: '/pets-detail',
   CHECKOUT: '/checkout',
-  PETSHOP: '/pet-shop',
+  PETSHOP: '/shop',
   ADOPTIONFORM: '/adoption-form',
   PRODUCTDETAIL: '/product/:id'
 }
