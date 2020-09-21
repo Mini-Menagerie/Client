@@ -12,10 +12,11 @@ import AllPets from '../pages/AllPets/AllPets';
 import PetsDetail from '../pages/PetsDetail/PetsDetail';
 import PetShop from '../pages/PetShop/PetShop';
 import AdoptionForm from '../pages/AdoptionForm/AdoptionForm'
+import StatusRequest from '../pages/StatusRequest/StatusRequest';
+import AdoptedHistory from '../pages/AdoptedHistory/AdoptedHistory';
 import ProductDetail from '../pages/ProductDetail/ProductDetail';
-
-
 import Checkout from '../pages/Checkout/Checkout';
+
 
 const Router = () => (
   <BrowserRouter>
@@ -42,7 +43,14 @@ const Router = () => (
         exact path={routes.PETSDETAIL}
         component={PetsDetail}
       />
-
+      <Route 
+        exact path={routes.STATUSREQUEST}
+        component={StatusRequest}
+      />
+      <Route 
+        exact path={routes.ADOPTEDHISTORY}
+        component={AdoptedHistory}
+      />
     <Route 
         exact path={routes.CHECKOUT}
         component={Checkout}
