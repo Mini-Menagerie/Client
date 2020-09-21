@@ -20,13 +20,26 @@ display: flex;
 
 export const shopButton = css `
 margin-left: 30px;
-margin-top: 5px`
+margin-top: 5px;
+color: #272626;
+a {
+  text-decoration: none;
+  color: inherit;
+  margin: 1em;
+  padding: 6px 12px;
+  border-radius: 0.25rem;
+  &:hover {
+    background-color: #22891A;
+    color: #FEFAE0;
+    box-shadow: none;
+  }
+}
+`
 
 export const navbar1 = css `
 display: flex;
 align-items: center;
 `
-
 
 export const breedsButton = css`
 border: none;
