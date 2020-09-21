@@ -5,9 +5,8 @@ export default {
   PETSDETAIL: '/pets-detail',
   ADOPTIONFORM: '/adoption-form',
   STATUSREQUEST: '/adoption-request',
-  ADOPTEDHISTORY: '/adopted-history'
+  ADOPTEDHISTORY: '/adopted-history',
   CHECKOUT: '/checkout',
   PETSHOP: '/shop',
-  ADOPTIONFORM: '/adoption-form',
   PRODUCTDETAIL: '/product/:id'
 }
