@@ -42,8 +42,13 @@ const Router = () => (
       <Route
         exact path={routes.PETSHOP}
         component={PetShop}
+<<<<<<< HEAD
       />
       <Route
+=======
+       />
+       <Route
+>>>>>>> b262d1468bfa57167fb5a4cc139526547b9eca07
         exact path={routes.PRODUCTDETAIL}
         component={ProductDetail}
       />
