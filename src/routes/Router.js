@@ -10,7 +10,8 @@ import globalStyles from '../styles/Global';
 import FindBreeds from '../pages/FindBreeds/FindBreeds';
 import AllPets from '../pages/AllPets/AllPets';
 import PetsDetail from '../pages/PetsDetail/PetsDetail';
-import AdoptionForm from '../pages/AdoptionForm/AdoptionForm'
+import AdoptionForm from '../pages/AdoptionForm/AdoptionForm';
+import SearchPage from '../pages/searchPage/searchPage';
 
 const Router = () => (
   <BrowserRouter>
@@ -32,6 +33,10 @@ const Router = () => (
       <Route 
         exact path={routes.ALLBREEDS}
         component={FindBreeds}
+      />
+      <Route 
+        exact path={routes.SEARCHPAGE}
+        component={SearchPage}
       />
             <Route 
         exact path={routes.PETSDETAIL}
