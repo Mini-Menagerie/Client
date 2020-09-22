@@ -73,6 +73,7 @@ const FindBreeds = () => {
         const result = await response.json();
 
         setAllCollection(result.result);
+        setCollection(result.result);
     };
 
     useEffect(() => {
@@ -274,7 +275,7 @@ const FindBreeds = () => {
                     {collection.length > 0 &&
                         collection.map((item) => {
                             return (
-                                <Col xs={6} md={4}>
+                                <Col xs={6} md={4} key={item._id}>
                                     <Card>
                                         <Card.Img
                                             variant="top"

@@ -3,14 +3,13 @@ import { jsx } from "@emotion/core";
 import { Col, Form, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 
 import PrimaryButton from "../../components/Button/Button";
 import {
     adoptionForm,
     coverImages,
     cover,
-    form,
     formTitle,
     adoptionWrapper,
     adoptionTitle,
@@ -27,81 +26,82 @@ import hamster from "../../assets/hamsterCover.png";
 import bird from "../../assets/birdCover.png";
 
 const AdoptionForm = () => {
-    const [user, setUser] = useState([])
+    const [user, setUser] = useState([]);
     const [form, setForm] = useState({
-        noHandphone: '',
-        detailAddress: '',
-        state: '',
-        province: '',
-        zip_code: '',
-        work: '',
-        workDuration: '',
-        houseStatus: '',
-        hasGivenPet: '',
-        hasChildrenAtHouse: '',
-        willPetBeCaged: '',
-        otherPet: '',
-        salary: ''
-    })
-    const [reason, setReason] = useState('')
-    
+        noHandphone: "",
+        detailAddress: "",
+        state: "",
+        province: "",
+        zip_code: "",
+        work: "",
+        workDuration: "",
+        houseStatus: "",
+        hasGivenPet: "",
+        hasChildrenAtHouse: "",
+        willPetBeCaged: "",
+        otherPet: "",
+        salary: "",
+    });
+    const [reason, setReason] = useState("");
 
     const fetchDataUser = async () => {
-        let result = await axios.get(`http://localhost:8000/users/5f69bb07acf76e287ebdc5dc`) //endpoint
-        setUser(result.data.result); 
-    }
+        let result = await axios.get(
+            `http://localhost:8000/users/5f69bb07acf76e287ebdc5dc`
+        ); //endpoint
+        setUser(result.data.result);
+    };
 
-
-    const updateUser =  () => {
-        return axios.put('http://localhost:8000/users/5f69bb07acf76e287ebdc5dc', form)
-    }
-    const createForm =  () => {
-        return axios.post('http://localhost:8000/formRequest/create', {
+    const updateUser = () => {
+        return axios.put(
+            "http://localhost:8000/users/5f69bb07acf76e287ebdc5dc",
+            form
+        );
+    };
+    const createForm = () => {
+        return axios.post("http://localhost:8000/formRequest/create", {
             idUser: user._id,
-            reason
-        })
-    }
-    const history = useHistory()
+            reason,
+        });
+    };
+    const history = useHistory();
     const handleSubmitForm = async (event) => {
-        event.preventDefault()
-        axios.all([createForm(), updateUser()])
-        .then(axios.spread((form, user) => {
-            console.log(user);
-            console.log(form);
+        event.preventDefault();
+        axios
+            .all([createForm(), updateUser()])
+            .then(
+                axios.spread((form, user) => {
+                    console.log(user);
+                    console.log(form);
 
-            if(form.status === 200){
-                alert('Your request is being processed')
-                history.goBack()
-            }
-        
-        }))
-        .catch(err => console.log(err))
-        
-        
-    }
+                    if (form.status === 200) {
+                        alert("Your request is being processed");
+                        history.goBack();
+                    }
+                })
+            )
+            .catch((err) => console.log(err));
+    };
     const handleChange = (event) => {
         setForm({
             ...form,
-            [event.target.name]: event.target.value
-        })
-    }
+            [event.target.name]: event.target.value,
+        });
+    };
     const reasonChange = (event) => {
-        setReason(event.target.value)
-    }
-
-
+        setReason(event.target.value);
+    };
 
     useEffect(() => {
-        fetchDataUser()
-    },[])
-    
+        fetchDataUser();
+    }, []);
 
     return (
         <div css={adoptionWrapper}>
             <div css={adoptionTitle}>
                 <h1>Hello There!</h1>
                 <h4>
-                    Please Fill Out the Form Below to Continue the Adoption Process
+                    Please Fill Out the Form Below to Continue the Adoption
+                    Process
                 </h4>
             </div>
             <div css={adoptionForm}>
@@ -180,11 +180,11 @@ const AdoptionForm = () => {
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formGridCity">
                                     <Form.Label>City</Form.Label>
-                                    <Form.Control 
-                                    placeholder="City"
-                                    name="state"
-                                    value={form.state}
-                                    onChange={handleChange}
+                                    <Form.Control
+                                        placeholder="City"
+                                        name="state"
+                                        value={form.state}
+                                        onChange={handleChange}
                                     />
                                 </Form.Group>
 
@@ -195,18 +195,17 @@ const AdoptionForm = () => {
                                         name="province"
                                         value={form.province}
                                         onChange={handleChange}
-                                    >
-                                    </Form.Control>
+                                    ></Form.Control>
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formGridZip">
                                     <Form.Label>Zip</Form.Label>
-                                    <Form.Control 
+                                    <Form.Control
                                         placeholder="Zip Code"
                                         name="zip_code"
                                         value={form.zip_code}
                                         onChange={handleChange}
-                                     />
+                                    />
                                 </Form.Group>
                             </Form.Row>
 
@@ -220,7 +219,7 @@ const AdoptionForm = () => {
                                 />
                             </Form.Group>
 
-                        <h3 css={tellUs}>TELL US A BIT ABOUT YOU!</h3>
+                            <h3 css={tellUs}>TELL US A BIT ABOUT YOU!</h3>
                             <fieldset>
                                 <Form.Group as={Row} css={formSpacing}>
                                     <Form.Label
@@ -394,7 +393,8 @@ const AdoptionForm = () => {
                                         />
                                         <Form.Check
                                             type="radio"
-                                            label="No"workduration
+                                            label="No"
+                                            workduration
                                             name="otherPet"
                                             id="formHorizontalRadios2"
                                             value="No"
@@ -408,9 +408,7 @@ const AdoptionForm = () => {
                                 <Form.Group
                                     controlId="formGridAddress1"
                                     css={formSpacing}
-                                >
-            
-                                </Form.Group>
+                                ></Form.Group>
 
                                 <Form.Group as={Row} css={formSpacing}>
                                     <Form.Label
@@ -523,7 +521,10 @@ const AdoptionForm = () => {
                                 </Form.Group>
 
                                 <div css={buttonPlacement}>
-                                    <PrimaryButton css={buttonPlacement} type="submit">
+                                    <PrimaryButton
+                                        css={buttonPlacement}
+                                        type="submit"
+                                    >
                                         Submit Form
                                     </PrimaryButton>
                                 </div>
