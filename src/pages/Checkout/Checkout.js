@@ -13,12 +13,12 @@ import {
 import CartProduct from "../../components/cartItem/cartItem";
 
 const Checkout = () => {
-    const [user, ,] = useState({
+    const [user,] = useState({
         fullName: "Ridho Abdul Majid",
         detailAdress: "Citayam",
         noHandphone: "087882252815",
     });
-    const [cart, ,] = useState([
+    const [cart,] = useState([
         {
             image:
                 "https://img-a.udemycdn.com/course/750x422/147028_d030_9.jpg",
