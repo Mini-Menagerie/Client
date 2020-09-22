@@ -117,7 +117,10 @@ const ProductDetail = props => {
                         </Col>
                     </Row>
                 </Container>
-                <RecommendedProducts />
+                <Container>
+                    <h2>Also Get</h2>
+                    <RecommendedProducts />
+                </Container>
             </div>
         )
     }
