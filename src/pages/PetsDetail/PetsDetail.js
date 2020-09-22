@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/core";
 import { Container } from "react-bootstrap";
 import axios from "axios";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import DetailSection from "./DetailSection/DetailSection";
@@ -71,19 +71,19 @@ import { container, container_animal_list } from "./PetsDetail.styles";
 
 const PetsDetail = (props) => {
     // let id = props.match.params
-    const [, , setCarousel] = useState([]);
-    const [, , setLoading] = useState(true);
-    const [, , setError] = useState(false);
+    const [, setCarousel] = useState([]);
+    const [, setLoading] = useState(true);
+    const [, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
     const [details, setDetails] = useState([]);
-    const [, , setProduct] = useState([]);
+    const [, setProduct] = useState([]);
     const [petCards, setPetCards] = useState([]);
 
     // function handleClick(id) {
     //     window.location.replace(`/pets-detail/${id}`);
     // }
 
-    const fetchCarousel = useCallback(() => {
+    const fetchCarousel = () => {
         const url = "http://localhost:8000/";
         axios
             .get(url)
@@ -96,11 +96,11 @@ const PetsDetail = (props) => {
                 console.log(errorMessage);
                 setLoading(false);
             });
-    }, [setCarousel, errorMessage, setError, setLoading]);
+    };
 
     let { id } = useParams();
 
-    const fetchDetails = useCallback(async () => {
+    const fetchDetails = async () => {
         const url = `http://localhost:8000/pet/${id}`;
         axios
             .get(url)
@@ -113,9 +113,9 @@ const PetsDetail = (props) => {
                 console.log(errorMessage);
                 setLoading(false);
             });
-    }, [errorMessage, id, setLoading]);
+    };
 
-    const fetchProduct = useCallback(() => {
+    const fetchProduct = () => {
         const url = "http://localhost:8000/product";
         axios
             .get(url)
@@ -130,9 +130,9 @@ const PetsDetail = (props) => {
                 setErrorMessage(error.message);
                 setLoading(false);
             });
-    }, [setError, setLoading, setProduct]);
+    };
 
-    const url = useCallback(() => {
+    const url = () => {
         const url = "http://localhost:8000/pet";
         axios
             .get(url)
@@ -147,14 +147,16 @@ const PetsDetail = (props) => {
                 setErrorMessage(error.message);
                 setLoading(false);
             });
-    }, [setLoading, setError]);
+    };
 
     useEffect(() => {
         fetchCarousel();
         fetchDetails();
         fetchProduct();
         url();
-    }, [fetchCarousel, fetchDetails, fetchProduct, url]);
+
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <div>

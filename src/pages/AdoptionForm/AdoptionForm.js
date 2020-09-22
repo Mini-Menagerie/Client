@@ -27,7 +27,7 @@ import bird from "../../assets/birdCover.png";
 
 const AdoptionForm = () => {
     const [fullname, setFullname] = useState(); //save data
-    const [, , setEmail] = useState();
+    const [, setEmail] = useState();
     const [phoneNumber, setPhoneNumber] = useState();
     const [address, setAddress1] = useState();
     const [city, setCity] = useState();
@@ -38,10 +38,10 @@ const AdoptionForm = () => {
     const [ownRent, setOwnRent] = useState();
     const [otherPets, setOtherPets] = useState();
     const [givenPets, setGivenPets] = useState();
-    const [, , setWhatPets] = useState();
+    const [, setWhatPets] = useState();
     const [cage, setCage] = useState();
     const [income, setIncome] = useState();
-    const [, , setReason] = useState();
+    const [, setReason] = useState();
     const [children, setChildren] = useState();
 
     const handleFullName = (e) => {
