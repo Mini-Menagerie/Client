@@ -4,10 +4,10 @@ import { Button } from 'react-bootstrap'
 
 import { button } from './ActionButton.styles'
 
-export const ActionButton = () => {
+export const ActionButton = (props) => {
     return (
         <div css={button}>
-            <Button>Add to Cart</Button>
+            <Button{...props}>Add to Cart</Button>
         </div>
     )
 }

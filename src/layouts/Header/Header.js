@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import React from "react";
 import { jsx } from "@emotion/core";
-import { Button, Navbar, Nav, Dropdown } from "react-bootstrap";
+import { useSelector } from 'react-redux'
+import { Button, Badge, Navbar, Nav, Dropdown } from "react-bootstrap";
 
 import Logo from "../../assets/logo-mini-menagerie.png";
 import {
@@ -15,6 +16,7 @@ import {
 } from "./Header.styles";
 
 const Header = () => {
+    const productCart = useSelector(state => state.addToCart)
     return (
         <React.Fragment>
             <Navbar bg="light" expand="lg">
@@ -53,11 +55,12 @@ const Header = () => {
                                 placeholder="Search your future best friend"
                             ></input>
                             <button type="submit" css={searchButton}>
-                                <i className="fas fa-search"></i>
+                                <i className="fas fa-search fa-lg"></i>
                             </button>
-                            <button type="submit" css={cart}>
-                                <i className="fas fa-shopping-cart"></i>
-                            </button>
+                            <Button type="submit" css={cart}>
+                                <i className="fas fa-shopping-cart fa-lg"></i>
+                                <Badge pill variant="danger">{productCart.cart !== undefined && productCart.cart.length}</Badge>
+                            </Button>
                         </form>
                     </div>
                     <div>
