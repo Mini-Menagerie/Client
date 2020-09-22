@@ -1,70 +1,73 @@
-import { css } from '@emotion/core';
+import { css } from "@emotion/core";
 
 export const wrapperStyles = css`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 50px;
 `;
 
 export const imageStyles = css`
-  width: 120px;
-  margin-right: 30px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+    width: 120px;
+    margin-right: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 `;
 
-export const breedsShop = css `
-display: flex;
-`
+export const breedsShop = css`
+    display: flex;
+`;
 
-export const shopButton = css `
-margin-left: 30px;
-margin-top: 5px;
-color: #272626;
-a {
-  text-decoration: none;
-  color: inherit;
-  margin: 1em;
-  padding: 6px 12px;
-  border-radius: 0.25rem;
-  &:hover {
-    background-color: #22891A;
-    color: #FEFAE0;
-    box-shadow: none;
-  }
-}
-`
+export const shopButton = css`
+    margin-left: 30px;
+    margin-top: 5px;
 
-export const navbar1 = css `
-display: flex;
-align-items: center;
-`
+    @media (max-width: 768px) {
+        margin: 5px 0;
+        padding-left: 12px;
+    }
+`;
+
+export const navbar1 = css`
+    display: flex;
+    align-items: center;
+`;
 
 export const breedsButton = css`
-border: none;
-color: #272626;
-background-color: Transparent;
-`
+    border: none;
+    color: #272626;
+    background-color: Transparent;
+`;
 
-export const formSearch = css `
-margin-left: 30px;`
+export const formSearch = css`
+    margin-left: 30px;
 
-export const searchText = css `
-border: none;
-width: 570px;
-padding-left: 10px`
+    @media (max-width: 768px) {
+        margin: 0;
+    }
+`;
 
-export const searchButton = css `
-background: none;
-border: none;
-border-right: 1px solid #878787;
-padding-right: 30px;
-color: #878787;
-`
+export const searchText = css`
+    border: none;
+    width: 570px;
+    padding-left: 10px;
 
-export const cart = css `
-color:#878787;
-background: none;
-border: none;
-padding-left: 30px;`
+    @media (max-width: 768px) {
+        margin: 5px 0;
+    }
+`;
+
+export const searchButton = css`
+    background: none;
+    border: none;
+    border-right: 1px solid #878787;
+    padding-right: 30px;
+    color: #878787;
+`;
+
+export const cart = css`
+    color: #878787;
+    background: none;
+    border: none;
+    padding-left: 30px;
+`;
