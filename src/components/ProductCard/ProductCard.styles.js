@@ -11,7 +11,7 @@ export const product_price = css`
 
 export const card_img = css`
     width: 100%;
-    height: 100px;
+    height: 200px;
     object-fit: cover;
 `;
 export const loading_css = css`

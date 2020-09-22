@@ -1,13 +1,21 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
-import { Card, Col, Row, Dropdown, Form } from 'react-bootstrap';
+import { jsx } from "@emotion/core";
+import { Dropdown, Form } from "react-bootstrap";
 
 import {
-  wrapperCover, centertext, optionPet, dropdownMenu, otherPets, dropdownItem,
-  textOption, filterPet, dataPet, more
-} from './AllPets.styles'
+    wrapperCover,
+    centertext,
+    optionPet,
+    dropdownMenu,
+    otherPets,
+    dropdownItem,
+    textOption,
+    filterPet,
+    dataPet,
+    more,
+} from "./AllPets.styles";
 
-import CardPet from '../../components/CardPet/CardPet'
+import CardPet from "../../components/CardPet/CardPet";
 
 const AllPets = () => {
     return (
@@ -31,9 +39,7 @@ const AllPets = () => {
                         </Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
-                <span css={textOption}>
-                    You're Looking For : 
-                </span>
+                <span css={textOption}>You're Looking For :</span>
             </div>
             <div css={filterPet}>
                 <div>
@@ -70,7 +76,7 @@ const AllPets = () => {
             <div css={dataPet}>
                 <CardPet />
                 <div css={more}>
-                    <a href="#">See More Result</a>
+                    <a href="/#">See More Result</a>
                 </div>
             </div>
         </div>

@@ -1,17 +1,22 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Row, Col, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { margin, petImage } from "./CardPet.styles";
 
 const CardPet = ({ petCards }) => {
+    const history = useHistory();
+    console.log(petCards);
+
+    const handleClick = (id) => {
+        history.push(`/pets-detail/${id}`)
+    }
     return (
         <Row>
             {petCards.map((e) => (
                 <Col md={3} css={margin}>
-                    <Link to={`/pet/${e._id}`}>
-                        <Card css={petImage}>
+                        <Card css={petImage} onClick={() => handleClick(e._id)}>
                             <Card.Img variant="top" src={e.image} />
                             <Card.Body>
                                 <Card.Title>
@@ -28,7 +33,6 @@ const CardPet = ({ petCards }) => {
                                 </Card.Text>
                             </Card.Body>
                         </Card>
-                    </Link>
                 </Col>
             ))}
         </Row>

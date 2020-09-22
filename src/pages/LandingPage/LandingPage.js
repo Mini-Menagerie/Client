@@ -1,14 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { useEffect, useState } from "react";
-import {
-    Container,
-    Row,
-    Col,
-    Dropdown,
-    Card,
-    Jumbotron,
-} from "react-bootstrap";
+import { Container, Row, Col, Dropdown, Jumbotron } from "react-bootstrap";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -39,8 +32,6 @@ import {
     dogfood2,
     buyNecessities,
     profits,
-    title,
-    choices,
     goToShop,
     colStyles,
     centerMenu,
@@ -63,11 +54,11 @@ import CardPet from "../../components/CardPet/CardPet";
 import RecommendedProducts from "../../components/RecommendedProducts/RecommendedProducts";
 
 const LandingPage = () => {
-    const [categoryPet, setCategoryPet] = useState([]);
+    const [, setCategoryPet] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
-    const [product, setProduct] = useState([]);
+    const [, setProduct] = useState([]);
     const [petCards, setPetCards] = useState([]);
 
     const fetchPet = () => {
@@ -81,7 +72,6 @@ const LandingPage = () => {
             })
             .catch(function (error) {
                 setError(true);
-                console.log(error.messsage);
                 setErrorMessage(error.message);
                 setLoading(false);
             });
@@ -106,9 +96,9 @@ const LandingPage = () => {
 
     const url = () => {
         const url = "http://localhost:8000/pet";
-        axios
-            .get(url)
+        axios.get(url)
             .then(function (response) {
+                console.log(response);
                 const limit = response.data.result.slice(0, 4);
                 setPetCards(limit);
                 setLoading(false);
@@ -125,6 +115,8 @@ const LandingPage = () => {
         fetchPet();
         fetchProduct();
         url();
+
+        // eslint-disable-next-line
     }, []);
 
     return (
