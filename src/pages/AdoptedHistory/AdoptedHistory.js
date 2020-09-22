@@ -8,7 +8,7 @@ import { head, listInfo, mainOne, dated, desc } from "./AdoptedHistory.styles";
 
 const AdoptedHistory = () => {
     const [adoptedHistory, setAdoptedHistory] = useState([]);
-    const [, , setErrorMessage] = useState();
+    const [, setErrorMessage] = useState();
 
     useEffect(() => {
         const url = "http://localhost:8000/listAdoptionTransaction";
