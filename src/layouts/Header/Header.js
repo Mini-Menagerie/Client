@@ -1,10 +1,4 @@
 /** @jsx jsx */
-<<<<<<< HEAD
-import { jsx } from '@emotion/core';
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux'
-import { Dropdown, Modal, Button, Badge, Navbar, Nav, Row, Container, Col, Form } from 'react-bootstrap';
-=======
 import { jsx } from "@emotion/core";
 import React, { useState } from "react";
 import {
@@ -18,7 +12,6 @@ import {
     Col,
     Form,
 } from "react-bootstrap";
->>>>>>> bb9a620348b87cea123ebae8c54c3b35b90713e9
 
 import Logo from "../../assets/logo-mini-menagerie.png";
 import {

@@ -1,8 +1,10 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Card } from "react-bootstrap";
+import { connect } from "react-redux";
 import MoonLoader from "react-spinners/MoonLoader";
 
+import { addToCart } from '../../redux/actions/addToCart'
 import {
     card_img,
     product_name,
