@@ -1,14 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { useEffect, useState } from "react";
-import {
-    Container,
-    Row,
-    Col,
-    Dropdown,
-    Card,
-    Jumbotron,
-} from "react-bootstrap";
+import { useEffect, useState, useCallback } from "react";
+import { Container, Row, Col, Dropdown, Jumbotron } from "react-bootstrap";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -39,8 +32,6 @@ import {
     dogfood2,
     buyNecessities,
     profits,
-    title,
-    choices,
     goToShop,
     colStyles,
     centerMenu,
@@ -60,16 +51,17 @@ import arrow from "../../assets/arrow.png";
 import dogfood from "../../assets/dogfood.png";
 
 import CardPet from "../../components/CardPet/CardPet";
+import RecommendedProducts from "../../components/RecommendedProducts/RecommendedProducts";
 
 const LandingPage = () => {
-    const [categoryPet, setCategoryPet] = useState([]);
+    const [, , setCategoryPet] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
-    const [product, setProduct] = useState([]);
+    const [, , setProduct] = useState([]);
     const [petCards, setPetCards] = useState([]);
 
-    const fetchPet = () => {
+    const fetchPet = useCallback(() => {
         const url = "http://localhost:8000/pet";
         axios
             .get(url)
@@ -84,9 +76,9 @@ const LandingPage = () => {
                 setErrorMessage(error.message);
                 setLoading(false);
             });
-    };
+    }, [setCategoryPet]);
 
-    const fetchProduct = () => {
+    const fetchProduct = useCallback(() => {
         const url = "http://localhost:8000/product";
         axios
             .get(url)
@@ -101,7 +93,7 @@ const LandingPage = () => {
                 setErrorMessage(error.message);
                 setLoading(false);
             });
-    };
+    }, [setProduct]);
 
     const url = () => {
         const url = "http://localhost:8000/pet";
@@ -124,7 +116,7 @@ const LandingPage = () => {
         fetchPet();
         fetchProduct();
         url();
-    }, []);
+    }, [fetchProduct, fetchPet]);
 
     return (
         <div>
@@ -316,26 +308,7 @@ const LandingPage = () => {
                 ) : error ? (
                     <div>{errorMessage}</div>
                 ) : (
-                    product.map((item) => (
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img variant="top" src="holder.js/100px180" />
-                            <Card.Body>
-                                <Card.Title
-                                    css={title}
-                                    style={{ height: "100px" }}
-                                >
-                                    {item.productName}
-                                </Card.Title>
-                                <Card.Text css={choices}>
-                                    More Choices Available
-                                </Card.Text>
-                                <Card.Text>Rp. {item.price}</Card.Text>
-                                <PrimaryButton type="submit" block>
-                                    Add To Cart
-                                </PrimaryButton>
-                            </Card.Body>
-                        </Card>
-                    ))
+                    <RecommendedProducts />
                 )}
             </div>
         </div>

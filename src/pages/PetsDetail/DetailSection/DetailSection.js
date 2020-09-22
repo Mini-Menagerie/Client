@@ -14,18 +14,19 @@ import {
 } from './DetailSection.styles'
 import ColoredLine from '../../../components/ColoredLine';
 
-const DetailSection = () => {
+const DetailSection = ({petDetails}) => {
+    console.log(petDetails);
     return (
         <Row>
             <Col xs={8} css={detail_section_col}>
                 <Row css={detail_section_col_left_first_row}>
-                    <h1>Pet Name</h1>
+                    <h1>{petDetails.petName}</h1>
                     <h1>$400</h1>
                 </Row>
                 <Row css={detail_section_col_left_second_row}>
                     <p>Breeds</p>
                     <h5>&bull;</h5>
-                    <p>Pet location</p>
+                    <p>Pet Location</p>
                 </Row>
                 <Row css={row_line}>
                     <ColoredLine color="#000" />
