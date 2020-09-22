@@ -96,9 +96,9 @@ const LandingPage = () => {
 
     const url = () => {
         const url = "http://localhost:8000/pet";
-        axios
-            .get(url)
+        axios.get(url)
             .then(function (response) {
+                console.log(response);
                 const limit = response.data.result.slice(0, 4);
                 setPetCards(limit);
                 setLoading(false);

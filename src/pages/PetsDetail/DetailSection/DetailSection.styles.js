@@ -12,6 +12,7 @@ export const detail_section_col = css`
 height: 550px;
 // border-style: dashed;
 padding: 40px;
+margin-bottom: 100px;
 
 h1, h5 {
     text-align: center;

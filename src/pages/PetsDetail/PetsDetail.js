@@ -71,11 +71,11 @@ import { container, container_animal_list } from "./PetsDetail.styles";
 
 const PetsDetail = (props) => {
     // let id = props.match.params
-    const [, setCarousel] = useState([]);
-    const [, setLoading] = useState(true);
-    const [, setError] = useState(false);
+    // const [carousel, setCarousel] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
-    const [details, setDetails] = useState([]);
+    const [details, setDetails] = useState({});
     const [, setProduct] = useState([]);
     const [petCards, setPetCards] = useState([]);
 
@@ -88,7 +88,7 @@ const PetsDetail = (props) => {
         axios
             .get(url)
             .then(function (response) {
-                setCarousel(response.data.result);
+                // setCarousel(response.data.result);
                 setLoading(false);
             })
             .catch(function (error) {
@@ -106,6 +106,7 @@ const PetsDetail = (props) => {
             .get(url)
             .then(function (response) {
                 console.log(response);
+                
                 setDetails(response.data.result);
                 setLoading(false);
             })
@@ -157,7 +158,7 @@ const PetsDetail = (props) => {
 
         // eslint-disable-next-line
     }, []);
-
+    console.log(details, 'details');
     return (
         <div>
             {/* Carousel Section */}
@@ -174,12 +175,14 @@ const PetsDetail = (props) => {
 
             {/* Product List Section */}
             <Container css={container}>
+              <h1>Get Necessities For Your New Best Friend</h1>
                 <RecommendedProducts />
             </Container>
             {/* End of Product List Section */}
 
             {/* Animal List Section */}
             <Container css={container_animal_list}>
+              <h1>Pets Available Near You</h1>
                 <CardPet petCards={petCards} />
             </Container>
             {/* End of Animal List Section */}
