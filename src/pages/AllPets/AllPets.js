@@ -22,11 +22,11 @@ const AllPets = () => {
                     </Dropdown.Toggle>
                     <Dropdown.Menu css={dropdownMenu}>
                         <Dropdown.Item href="#Cat" css={dropdownItem}>
-                            <i class="fas fa-paw"></i>
+                            <i className="fas fa-paw"></i>
                             <span>Cat</span>
                         </Dropdown.Item>
                         <Dropdown.Item href="#Dog" css={dropdownItem}>
-                            <i class="fas fa-bone"></i>
+                            <i className="fas fa-bone"></i>
                             <span>Dog</span>
                         </Dropdown.Item>
                     </Dropdown.Menu>

@@ -136,8 +136,8 @@ const LandingPage = () => {
         <Container css={underCoverSearch}>
           <Row>
             <Col md={3} css={colStyles}><input type="text" css={enterLocation} placeholder="Enter Province or State"></input></Col>
-            <Col md={3} css={colStyles}><button css={dogCatButton}><i class="fas fa-bone"></i>&nbsp;&nbsp;&nbsp;Find Dog Breed</button></Col>
-            <Col md={3} css={colStyles}><button css={dogCatButton}><i class="fas fa-paw"></i>&nbsp;&nbsp;&nbsp;Find Cat Breed</button></Col>
+            <Col md={3} css={colStyles}><button css={dogCatButton}><i className="fas fa-bone"></i>&nbsp;&nbsp;&nbsp;Find Dog Breed</button></Col>
+            <Col md={3} css={colStyles}><button css={dogCatButton}><i className="fas fa-paw"></i>&nbsp;&nbsp;&nbsp;Find Cat Breed</button></Col>
             <Col md={3} css={colStyles}>
               <Dropdown>
                 <Dropdown.Toggle css={otherPets}>
