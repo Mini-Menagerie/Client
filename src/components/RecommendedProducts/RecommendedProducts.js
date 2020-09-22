@@ -2,6 +2,7 @@
 import { jsx } from "@emotion/core";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import {Container} from 'react-bootstrap'
 
 import ProductCard from "../ProductCard/ProductCard";
 import { margin } from "./RecommendedProduct.styles";
@@ -26,9 +27,9 @@ const RecommendedProducts = (props) => {
     const currentProducts = shuffled.slice(0, 4);
 
     return (
-        <div css={margin}>
+        <Container css={margin}>
             <ProductCard products={currentProducts} />
-        </div>
+        </Container>
     );
 };
 
