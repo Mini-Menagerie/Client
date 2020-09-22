@@ -82,3 +82,16 @@ export const cart = css`
     border: none;
     padding-left: 30px;
 `;
+
+export const wrapperButtonStyles = css`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const buttonLoginStyles = css`
+    margin-top: 20px;
+`;
+
+export const rowFormSignUp = css`
+    margin: 15px 0px;
+`;
