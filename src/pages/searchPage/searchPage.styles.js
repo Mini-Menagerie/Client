@@ -20,14 +20,14 @@ export const search = css `
     
 `
 export const sortby = css `
-    background-color:  #a885ff;
+    background-color:  #209516;
     color: #ffffff;
     margin: 20px;
     padding: 5px;
     font-wight: 700;
     font-size: 40px;
     border: none !important;
-   
+  
 `
 export const result =css `
     margin: 100px;
@@ -37,7 +37,7 @@ export const margin = css `
     margin: 30px;
 `
 export const whitecolor = css `
-    color: #FFFFFF;
+    color: #6c757d;
 `
 export const card = css `
     padding:30px;

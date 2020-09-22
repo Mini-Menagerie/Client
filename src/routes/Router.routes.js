@@ -10,5 +10,6 @@ export default {
   PETSHOP: '/shop',
   PRODUCTDETAIL: '/product/:id',
   SEARCHPAGE: '/search-page',
+  CATEGORYPET: '/category-pet',
  
 }
