@@ -1,21 +1,16 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'
+import { jsx } from "@emotion/core";
+import { Container } from "react-bootstrap";
+import axios from "axios";
+import { useEffect, useState, useCallback } from "react";
+import { useParams } from "react-router-dom";
 
-
-import CarouselSection from './CarouselSection/CarouselSection';
-import DetailSection from './DetailSection/DetailSection';
-import RecommendedProducts from '../../components/RecommendedProducts/RecommendedProducts'
-import CardPet from '../../components/CardPet/CardPet'
-import {
-    container, container_animal_list
-} from './PetsDetail.styles'
-import logo from '../../assets/logo-mini-menagerie.png'
-import Axios from 'axios';
-
+import DetailSection from "./DetailSection/DetailSection";
+import RecommendedProducts from "../../components/RecommendedProducts/RecommendedProducts";
+import CardPet from "../../components/CardPet/CardPet";
+import { container, container_animal_list } from "./PetsDetail.styles";
+// import logo from "../../assets/logo-mini-menagerie.png";
+// import Axios from "axios";
 
 // const data_carousel = [
 //     {
@@ -74,90 +69,93 @@ import Axios from 'axios';
 //     }
 // ]
 
-const PetsDetail = props => {
+const PetsDetail = (props) => {
     // let id = props.match.params
-    const [carousel, setCarousel] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+    const [, , setCarousel] = useState([]);
+    const [, , setLoading] = useState(true);
+    const [, , setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
     const [details, setDetails] = useState([]);
-    const [product, setProduct] = useState([]);
+    const [, , setProduct] = useState([]);
     const [petCards, setPetCards] = useState([]);
 
-    function handleClick(id) {
-        window.location.replace(`/pets-detail/${id}`)
-    }
+    // function handleClick(id) {
+    //     window.location.replace(`/pets-detail/${id}`);
+    // }
 
-        
-    const fetchCarousel = () => {
-        const url='http://localhost:8000/'
-        axios.get(url)
-        .then(function(response) {
-            setCarousel(response.data.result)
-            setLoading(false)
-        })
-        .catch(function(error){
-            setError(true);
-            console.log(errorMessage);
-            setLoading(false)
-        })
-    }
+    const fetchCarousel = useCallback(() => {
+        const url = "http://localhost:8000/";
+        axios
+            .get(url)
+            .then(function (response) {
+                setCarousel(response.data.result);
+                setLoading(false);
+            })
+            .catch(function (error) {
+                setError(true);
+                console.log(errorMessage);
+                setLoading(false);
+            });
+    }, [setCarousel, errorMessage, setError, setLoading]);
 
-    let {id} = useParams()
+    let { id } = useParams();
 
-    const fetchDetails = async () => {
+    const fetchDetails = useCallback(async () => {
+        const url = `http://localhost:8000/pet/${id}`;
+        axios
+            .get(url)
+            .then(function (response) {
+                console.log(response);
+                setDetails(response.data.result);
+                setLoading(false);
+            })
+            .catch(function (error) {
+                console.log(errorMessage);
+                setLoading(false);
+            });
+    }, [errorMessage, id, setLoading]);
 
-        const url= `http://localhost:8000/pet/${id}`
-        axios.get(url)
-        .then(function(response) {
-            console.log(response);
-            setDetails(response.data.result)
-            setLoading(false)
-        })
-        .catch(function(error) {
-            console.log(errorMessage);
-            setLoading(false)
-        })
-    }
+    const fetchProduct = useCallback(() => {
+        const url = "http://localhost:8000/product";
+        axios
+            .get(url)
+            .then(function (response) {
+                const limit = response.data.result.slice(0, 4);
+                setProduct(limit);
+                setLoading(false);
+            })
+            .catch(function (error) {
+                setError(true);
+                console.log(error.messsage);
+                setErrorMessage(error.message);
+                setLoading(false);
+            });
+    }, [setError, setLoading, setProduct]);
 
-        const fetchProduct = () => {
-        const url='http://localhost:8000/product';
-        axios.get(url)
-        .then(function(response) {
-          const limit = response.data.result.slice(0, 4)
-         setProduct(limit);
-          setLoading(false)
-        })
-        .catch(function(error) {
-          setError(true);
-          console.log(error.messsage)
-          setErrorMessage(error.message)
-          setLoading(false);
-        }); 
-      }
+    const url = useCallback(() => {
+        const url = "http://localhost:8000/pet";
+        axios
+            .get(url)
+            .then(function (response) {
+                const limit = response.data.result.slice(0, 4);
+                setPetCards(limit);
+                setLoading(false);
+            })
+            .catch(function (error) {
+                setError(true);
+                console.log(error.messsage);
+                setErrorMessage(error.message);
+                setLoading(false);
+            });
+    }, [setLoading, setError]);
 
-      const url = () => {
-        const url='http://localhost:8000/pet';
-        axios.get(url)
-        .then(function(response) {
-          const limit = response.data.result.slice(0, 4)
-         setPetCards(limit);
-          setLoading(false)
-        })
-        .catch(function(error) {
-          setError(true);
-          console.log(error.messsage)
-          setErrorMessage(error.message)
-          setLoading(false);
-        }); 
-      }
-    
-    useEffect (() => {
+    useEffect(() => {
         fetchCarousel();
         fetchDetails();
         fetchProduct();
         url();
-      },[]);
+    }, [fetchCarousel, fetchDetails, fetchProduct, url]);
+
     return (
         <div>
             {/* Carousel Section */}
@@ -168,23 +166,23 @@ const PetsDetail = props => {
 
             {/* Detail Section */}
             <Container css={container}>
-                 <DetailSection  petDetails={details} />
+                <DetailSection petDetails={details} />
             </Container>
             {/* End of Detail Section */}
 
             {/* Product List Section */}
             <Container css={container}>
-                <RecommendedProducts/>
+                <RecommendedProducts />
             </Container>
             {/* End of Product List Section */}
 
             {/* Animal List Section */}
             <Container css={container_animal_list}>
-            <CardPet petCards={petCards}/>
+                <CardPet petCards={petCards} />
             </Container>
             {/* End of Animal List Section */}
         </div>
     );
-}
+};
 
 export default PetsDetail;
