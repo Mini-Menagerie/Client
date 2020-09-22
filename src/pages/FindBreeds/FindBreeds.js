@@ -1,56 +1,83 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
-import {useState} from 'react'
+import { jsx } from "@emotion/core";
+import { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
+import { Formik, Form } from "formik";
 import "react-multi-carousel/lib/styles.css";
 
-import { Card, Button, FormControl, Row, Col, ToggleButton, ButtonGroup } from 'react-bootstrap';
+import {
+    Card,
+    Button,
+    FormControl,
+    Row,
+    Col,
+    ToggleButton,
+    ToggleButtonGroup,
+} from "react-bootstrap";
 
 import {
-  wrapperCover,
-  whitecolor, card, margin, buttoncard, marginbutton,
-  widthButton, collections, centertext, filter, buttonGroup
-} from './FindBreeds.styles'
+    wrapperCover,
+    whitecolor,
+    card,
+    margin,
+    buttoncard,
+    marginbutton,
+    widthButton,
+    collections,
+    centertext,
+    filter,
+    buttonGroup,
+} from "./FindBreeds.styles";
 
 const FindBreeds = () => {
-    const [radioValue, setRadioValue] = useState('');
-    const [radiooValue, setRadiooValue] = useState('');
-    const [radioooValue, setRadioooValue] = useState('');
+    const [collection, setCollection] = useState([]);
+    const [allCollection, setAllCollection] = useState([]);
 
-    const radios = [
-        { name: 'Small', value: '1' },
-        { name: 'Medium', value: '2' },
-        { name: 'Large', value: '3' },
-        { name: 'Extra Large', value: '4' },
+    const size = [
+        { name: "Small", value: "Small" },
+        { name: "Medium", value: "Medium" },
+        { name: "Large", value: "Large" },
+        { name: "Extra Large", value: "ExtraLarge" },
     ];
-    const radioss = [
-        { name: 'Low', value: '5' },
-        { name: 'Moderate', value: '6' },
-        { name: 'Height', value: '7' },
+    const gender = [
+        { name: "Female", value: "Female" },
+        { name: "Male", value: "Male" },
     ];
-    const radiosss = [
-        { name: 'Ascending Order', value: '7' },
-        { name: 'Descending Order', value: '8' },
+    const alphabet = [
+        { name: "Ascending Order", value: "asc" },
+        { name: "Descending Order", value: "desc" },
     ];
 
     const responsive = {
         superLargeDesktop: {
-          breakpoint: { max: 4000, min: 3000 },
-          items: 5
+            breakpoint: { max: 4000, min: 3000 },
+            items: 5,
         },
         desktop: {
-          breakpoint: { max: 3000, min: 1024 },
-          items: 3
+            breakpoint: { max: 3000, min: 1024 },
+            items: 3,
         },
         tablet: {
-          breakpoint: { max: 1024, min: 464 },
-          items: 2
+            breakpoint: { max: 1024, min: 464 },
+            items: 2,
         },
         mobile: {
-          breakpoint: { max: 464, min: 0 },
-          items: 1
-        }
+            breakpoint: { max: 464, min: 0 },
+            items: 1,
+        },
     };
+
+    const fetchCollection = async () => {
+        const url = "http://localhost:8000/pet";
+        const response = await fetch(url);
+        const result = await response.json();
+
+        setAllCollection(result.result);
+    };
+
+    useEffect(() => {
+        fetchCollection();
+    }, []);
 
     return (
         <div>
@@ -59,147 +86,211 @@ const FindBreeds = () => {
                     <h1 css={whitecolor}>Let Us Help You</h1>
                     <Card css={card}>
                         <h2 css={whitecolor}>Find The Best Breeds For You</h2>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <div css={buttoncard}>
-                            <Button variant="light" css={marginbutton}>By Collection</Button>
-                            <Button variant="light" css={widthButton}>By Filter</Button>
-                        </div>
+                        <Formik
+                            initialValues={{ search: "" }}
+                            validate={(values) => {
+                                const errors = {};
+                                if (!values.search) {
+                                    errors.search = "Required";
+                                }
+                                return errors;
+                            }}
+                            onSubmit={async (values) => {
+                                const url = `${process.env.REACT_APP_API_URL}/pet/breed?search=${values.search}`;
+                                const response = await fetch(url);
+                                const result = await response.json();
+
+                                setCollection(result.result);
+                            }}
+                        >
+                            {({
+                                values,
+                                errors,
+                                touched,
+                                handleChange,
+                                handleBlur,
+                                handleSubmit,
+                            }) => (
+                                <form onSubmit={handleSubmit}>
+                                    <FormControl
+                                        type="text"
+                                        placeholder="Search"
+                                        className="mr-sm-2"
+                                        name="search"
+                                        onChange={handleChange}
+                                        onBlur={handleBlur}
+                                        value={values.password}
+                                    />
+                                    {errors.search &&
+                                        touched.search &&
+                                        errors.search}
+                                    <div css={buttoncard}>
+                                        <Button
+                                            variant="light"
+                                            css={marginbutton}
+                                            type="submit"
+                                        >
+                                            By Breed
+                                        </Button>
+                                    </div>
+                                </form>
+                            )}
+                        </Formik>
                     </Card>
                 </div>
                 <div></div>
             </div>
             <div css={collections}>
                 <h2 css={centertext}>Search Our Collections</h2>
-                <Carousel responsive={responsive}>
-                    <Col>
-                        <Card>
-                            <Card.Img variant="top" src="https://images.unsplash.com/photo-1565560681175-99ae21e26ce1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-                            <Card.Title css={centertext}>Small Cat</Card.Title>
-                        </Card>
-                    </Col>
-                    <Col>
-                        <Card>
-                            <Card.Img variant="top" src="https://images.unsplash.com/photo-1565560681175-99ae21e26ce1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-                            <Card.Title css={centertext}>Small Cat</Card.Title>
-                        </Card>
-                    </Col>
-                    <Col>
-                        <Card>
-                            <Card.Img variant="top" src="https://images.unsplash.com/photo-1565560681175-99ae21e26ce1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-                            <Card.Title css={centertext}>Small Cat</Card.Title>
-                        </Card>
-                    </Col>
-                    <Col>
-                        <Card>
-                            <Card.Img variant="top" src="https://images.unsplash.com/photo-1565560681175-99ae21e26ce1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-                            <Card.Title css={centertext}>Small Cat</Card.Title>
-                        </Card>
-                    </Col>
+                <Carousel responsive={responsive} infinite={true}>
+                    {allCollection.length > 0 &&
+                        allCollection.map((item) => {
+                            return (
+                                <Col key={item._id}>
+                                    <Card>
+                                        <Card.Img
+                                            variant="top"
+                                            src={item.image[0]}
+                                            style={{
+                                                objectFit: "cover",
+                                                height: "150px",
+                                            }}
+                                        />
+                                        <Card.Title css={centertext}>
+                                            {item.petName}
+                                        </Card.Title>
+                                    </Card>
+                                </Col>
+                            );
+                        })}
                 </Carousel>
             </div>
-            <div css={filter}>
-                <h2 css={centertext}>Filter Breeds</h2>
-                <p css={centertext}>Size</p>
-                <div css={buttonGroup}>
-                    <ButtonGroup toggle css={widthButton}>
-                        {radios.map((radio, idx) => (
-                        <ToggleButton
-                            key={idx}
-                            type="radio"
-                            variant="success"
-                            name="radio"
-                            value={radio.value}
-                            checked={radioValue === radio.value}
-                            onChange={(e) => setRadioValue(e.currentTarget.value)}
-                        >
-                        {radio.name}
-                        </ToggleButton>
-                        ))}
-                    </ButtonGroup>
-                </div>
-                <p css={centertext}>Activity Level</p>
-                <div css={buttonGroup} className="justify-content-md-center">
-                    <ButtonGroup toggle css={widthButton}>
-                        {radioss.map((radio, idx) => (
-                        <ToggleButton
-                            key={idx}
-                            type="radio"
-                            variant="success"
-                            name="radio"
-                            value={radio.value}
-                            checked={radiooValue === radio.value}
-                            onChange={(e) => setRadiooValue(e.currentTarget.value)}
-                        >
-                        {radio.name}
-                        </ToggleButton>
-                        ))}
-                    </ButtonGroup>
-                </div>
-                <p css={centertext}>Find By Alphabetical Order</p>
-                <div css={buttonGroup}>
-                    <ButtonGroup toggle css={widthButton}>
-                        {radiosss.map((radio, idx) => (
-                        <ToggleButton
-                            key={idx}
-                            type="radio"
-                            variant="success"
-                            name="radio"
-                            value={radio.value}
-                            checked={radioooValue === radio.value}
-                            onChange={(e) => setRadioooValue(e.currentTarget.value)}
-                        >
-                        {radio.name}
-                        </ToggleButton>
-                        ))}
-                    </ButtonGroup>
-                </div>
-                <Row className="justify-content-md-center">
-                    <Button variant="success">Filter Result</Button>
-                </Row>
-            </div>
+            <Formik
+                initialValues={{ size: "", gender: "", alphabet: "" }}
+                validate={(values) => {
+                    const errors = {};
+                    if (!values.size) {
+                        errors.size = "Required";
+                    }
+                    return errors;
+                }}
+                onSubmit={async (values) => {
+                    const url = `${process.env.REACT_APP_API_URL}/pet/breed/filter?size=${values.size}&gender=${values.gender}&alphabet=${values.alphabet}`;
+                    const response = await fetch(url);
+                    const result = await response.json();
+
+                    setCollection(result.result);
+                }}
+            >
+                {({
+                    values,
+                    errors,
+                    touched,
+                    handleChange,
+                    handleBlur,
+                    handleSubmit,
+                }) => (
+                    <div css={filter}>
+                        <h2 css={centertext}>Filter Breeds</h2>
+                        <p css={centertext}>Size</p>
+                        <Form>
+                            <div css={buttonGroup}>
+                                <ToggleButtonGroup
+                                    css={widthButton}
+                                    name="size"
+                                    type="radio"
+                                    value={values.size}
+                                >
+                                    {size.map((radio, idx) => {
+                                        return (
+                                            <ToggleButton
+                                                key={idx}
+                                                onChange={handleChange}
+                                                value={radio.value}
+                                                variant="success"
+                                            >
+                                                {radio.name}
+                                            </ToggleButton>
+                                        );
+                                    })}
+                                </ToggleButtonGroup>
+                                <p>{errors.size}</p>
+                            </div>
+                            <p css={centertext}>Gender</p>
+                            <div
+                                css={buttonGroup}
+                                className="justify-content-md-center"
+                            >
+                                <ToggleButtonGroup
+                                    css={widthButton}
+                                    name="gender"
+                                    type="radio"
+                                    value={values.gender}
+                                >
+                                    {gender.map((radio, idx) => (
+                                        <ToggleButton
+                                            key={idx}
+                                            variant="success"
+                                            value={radio.value}
+                                            onChange={handleChange}
+                                        >
+                                            {radio.name}
+                                        </ToggleButton>
+                                    ))}
+                                </ToggleButtonGroup>
+                            </div>
+                            <p css={centertext}>Find By Alphabetical Order</p>
+                            <div css={buttonGroup}>
+                                <ToggleButtonGroup
+                                    css={widthButton}
+                                    name="alphabet"
+                                    type="radio"
+                                    value={values.gender}
+                                >
+                                    {alphabet.map((radio, idx) => (
+                                        <ToggleButton
+                                            key={idx}
+                                            variant="success"
+                                            name="alphabet"
+                                            value={radio.value}
+                                            onChange={handleChange}
+                                        >
+                                            {radio.name}
+                                        </ToggleButton>
+                                    ))}
+                                </ToggleButtonGroup>
+                            </div>
+                            <Row className="justify-content-md-center">
+                                <Button type="submit" variant="success">
+                                    Filter Result
+                                </Button>
+                            </Row>
+                        </Form>
+                    </div>
+                )}
+            </Formik>
             <div css={collections}>
                 <Row>
-                    <Col xs={6} md={4}>
-                        <Card>
-                            <Card.Img variant="top" src="https://images.unsplash.com/photo-1565560681175-99ae21e26ce1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-                            <Card.Title css={centertext}>Small Cat</Card.Title>
-                        </Card>
-                    </Col>
-                    <Col xs={6} md={4}>
-                        <Card>
-                            <Card.Img variant="top" src="https://images.unsplash.com/photo-1565560681175-99ae21e26ce1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-                            <Card.Title css={centertext}>Small Cat</Card.Title>
-                        </Card>
-                    </Col>
-                    <Col xs={6} md={4}>
-                        <Card>
-                            <Card.Img variant="top" src="https://images.unsplash.com/photo-1565560681175-99ae21e26ce1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-                            <Card.Title css={centertext}>Small Cat</Card.Title>
-                        </Card>
-                    </Col>
-                </Row><br/><br/>
-                <Row>
-                    <Col>
-                        <Card>
-                            <Card.Img variant="top" src="https://images.unsplash.com/photo-1565560681175-99ae21e26ce1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-                            <Card.Title css={centertext}>Small Cat</Card.Title>
-                        </Card>
-                    </Col>
-                    <Col>
-                        <Card>
-                            <Card.Img variant="top" src="https://images.unsplash.com/photo-1565560681175-99ae21e26ce1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-                            <Card.Title css={centertext}>Small Cat</Card.Title>
-                        </Card>
-                    </Col>
-                    <Col>
-                        <Card>
-                            <Card.Img variant="top" src="https://images.unsplash.com/photo-1565560681175-99ae21e26ce1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-                            <Card.Title css={centertext}>Small Cat</Card.Title>
-                        </Card>
-                    </Col>
-                </Row>
-                <Row className="justify-content-md-center">
-                    <a href="/">Show More</a>
+                    {collection.length > 0 &&
+                        collection.map((item) => {
+                            return (
+                                <Col xs={6} md={4}>
+                                    <Card>
+                                        <Card.Img
+                                            variant="top"
+                                            src={item.image[0]}
+                                            style={{
+                                                objectFit: "cover",
+                                                height: "200px",
+                                            }}
+                                        />
+                                        <Card.Title css={centertext}>
+                                            {item.petName}
+                                        </Card.Title>
+                                    </Card>
+                                </Col>
+                            );
+                        })}
                 </Row>
             </div>
         </div>
