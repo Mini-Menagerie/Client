@@ -34,6 +34,17 @@ export const navbar1 = css`
 `;
 
 export const breedsButton = css`
+border: none;
+color: #272626;
+background-color: Transparent;
+`
+
+export const modalBodyStyles = css`
+  text-align: center;
+`;
+
+export const bodyTitleStyles = css`
+  font-weight: 700;
     border: none;
     color: #272626;
     background-color: Transparent;
@@ -70,4 +81,17 @@ export const cart = css`
     background: none;
     border: none;
     padding-left: 30px;
+`;
+
+export const wrapperButtonStyles = css`
+    display: flex;
+    flex-direction: column;
+`;
+
+export const buttonLoginStyles = css`
+    margin-top: 20px;
+`;
+
+export const rowFormSignUp = css`
+    margin: 15px 0px;
 `;
