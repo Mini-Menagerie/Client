@@ -10,6 +10,7 @@ import {
     container, head_bg, caption_filter
 } from './PetShop.styles'
 import head_bg_img from '../../assets/bg-shop.jpg'
+import { product } from '../../redux/reducers/addToCartReducer';
 
 const PetShop = () => {
     const [products, setProducts] = useState([])
@@ -22,6 +23,7 @@ const PetShop = () => {
         const getProducts = async () => {
             setLoading(true);
             const response = await axios.get(url)
+            localStorage.setItem('products', JSON.stringify(response.data.result))
             console.log(response.data.result);
             setProducts(response.data.result)
             setLoading(false);
