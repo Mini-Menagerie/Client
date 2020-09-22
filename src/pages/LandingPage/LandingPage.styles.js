@@ -133,6 +133,7 @@ export const informationIcons = css`
 export const jumbotron = css`
     background-color: transparent;
     color: #464646;
+    margin-top: 60px;
 `;
 
 export const iconText = css`

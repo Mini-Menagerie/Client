@@ -64,46 +64,30 @@ const LandingPage = () => {
   const [error, setError] = useState (false);
   const [errorMessage, setErrorMessage] = useState ();
   const [product, setProduct] = useState([]);
-  const [petCards, setPetCards] = useState([])
-  const history = useHistory()
+  const [petCards, setPetCards] = useState([]);
+  const history = useHistory();
     const [categoryPet, setCategoryPet] = useState([]);
 
-    const fetchPet = () => {
-        const url = "http://localhost:8000/pet";
-        axios
-            .get(url)
-            .then(function (response) {
-                const limit = response.data.result.slice(0, 4); //limit item display
-                setCategoryPet(limit);
-                setLoading(false);
-            })
-            .catch(function (error) {
-                setError(true);
-                console.log(error.messsage);
-                setErrorMessage(error.message);
-                setLoading(false);
-            });
-    };
+    // const fetchPet = () => {
+    //     const url = "http://localhost:8000/pet";
+    //     axios
+    //         .get(url)
+    //         .then(function (response) {
+    //             const limit = response.data.result.slice(0, 4); //limit item display
+    //             setCategoryPet(limit);
+    //             setLoading(false);
+    //         })
+    //         .catch(function (error) {
+    //             setError(true);
+    //             console.log(error.messsage);
+    //             setErrorMessage(error.message);
+    //             setLoading(false);
+    //         });
+    // };
 
   function handleClick(id) {
     history.push(`/pets-detail/${id}`)
-    const fetchProduct = () => {
-        const url = "http://localhost:8000/product";
-        axios
-            .get(url)
-            .then(function (response) {
-                const limit = response.data.result.slice(0, 4);
-                setProduct(limit);
-                setLoading(false);
-            })
-            .catch(function (error) {
-                setError(true);
-                console.log(error.messsage);
-                setErrorMessage(error.message);
-                setLoading(false);
-            });
-    };
-}
+  }
 
     const url = () => {
         const url = "http://localhost:8000/pet";
@@ -121,6 +105,11 @@ const LandingPage = () => {
                 setLoading(false);
             });
     };
+
+    useEffect (() => {
+        url();
+      },[]);
+
 
   // const fetchPet = () => {
   //   const url ='http://localhost:8000/pet';
