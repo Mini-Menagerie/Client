@@ -7,7 +7,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 
 import { container, row_quantity, info_col, description_col, info_row, info_name, info_quantity, priceAndStock } from './ProductDetail.styles'
 import RecommendedProducts from '../../components/RecommendedProducts/RecommendedProducts'
-import { Button } from '../../components/Button/ActionButton'
+import ActionButton from '../../components/Button/ActionButton'
 
 const ProductDetail = props => {
     let { id } = useParams()

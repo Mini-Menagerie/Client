@@ -4,7 +4,7 @@ import { Card, Button } from 'react-bootstrap'
 import MoonLoader from "react-spinners/MoonLoader"
 
 import { card_img, product_name, loading_css, product_list, product_price} from './ProductCard.styles'
-import ActionButton from '../Button/ActionButton.styles'
+import ActionButton from '../Button/ActionButton'
 
 const ProductCard = ({ products, loading }) => {
     if (loading) {
