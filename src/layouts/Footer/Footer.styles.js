@@ -40,7 +40,7 @@ export const subscription = css`
 
 export const wrapperStyles2 = css`
     background-color: #12520c;
-    padding: 20px;
+    padding: 15px;
     font-size: 13px;
 
     & i {
@@ -68,3 +68,7 @@ export const subWrapper = css`
     display: flex;
     justify-content: center;
 `;
+
+export const subText = css `
+color: #fff;
+`
