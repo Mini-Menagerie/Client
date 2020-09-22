@@ -3,6 +3,7 @@ import { jsx } from '@emotion/core'
 import { Button, Row, Col, Form } from 'react-bootstrap';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
+import { useHistory } from "react-router-dom";
 
 import {
     detail_section_col,
@@ -16,6 +17,11 @@ import ColoredLine from '../../../components/ColoredLine';
 import PrimaryButton from "../../../components/Button/Button"
 
 const DetailSection = ({petDetails}) => {
+    const history = useHistory();
+    console.log(petDetails);
+    const handleClick = () => {
+        history.push(`/adoption-form`)
+    }
   console.log(petDetails);
     return (
         <Row>
@@ -66,7 +72,7 @@ const DetailSection = ({petDetails}) => {
                         <Form.Control placeholder="email" />
                     </Col>
                     <Col xs={12} css={detail_section_col_right_button}>
-                        <PrimaryButton>Ask for Adoption</PrimaryButton>
+                            <PrimaryButton onClick={() => handleClick()}>Ask for Adoption</PrimaryButton>
                     </Col>
                 </Row>
             </Col>
