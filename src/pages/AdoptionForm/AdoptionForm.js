@@ -47,30 +47,39 @@ const AdoptionForm = () => {
 
     const handleFullName = (e) => { //get value from options and input
         setFullname(e.target.value)
+        console.log(e.target.value);
     }
     const handleEmail = (e) => {
         setEmail(e.target.value)
+        console.log(e.target.value);
     }
     const handlePhoneNumber = (e) => {
         setPhoneNumber(e.target.value)
+        console.log(e.target.value);
     }
     const handleOwnRent = (e) => {
         setOwnRent(e.target.value)
+        console.log(e.target.value);
     }
     const handleAddress1 = (e) => {
         setAddress1(e.target.value)
-
+        console.log(e.target.value);
+    }
     const handleCity = (e) => {
         setCity(e.target.value)
+        console.log(e.target.value);
     }
     const handleZip = (e) => {
         setZip(e.target.value)
+        console.log(e.target.value);
     }
     const handleProvince = (e) => {
         setProvince(e.target.value)
+        console.log(e.target.value);
     }
     const handleOccupation = (e) => {
         setOccupation(e.target.value)
+        console.log(e.target.value);
     }
     const handleDuration = (e) => {
         console.log(e.target.value);
@@ -78,24 +87,31 @@ const AdoptionForm = () => {
     }
     const handleGivenPets = (e) => {
         setGivenPets(e.target.value)
+        console.log(e.target.value);
     }
     const handleOtherPets = (e) => {
         setOtherPets(e.target.value)
+        console.log(e.target.value);
     }
     const handleWhatPets = (e) => {
             setWhatPets(e.target.value)
+            console.log(e.target.value);
         }
     const handleCage = (e) => {
         setCage(e.target.value)
+        console.log(e.target.value);
     }
     const handleIncome = (e) => {
         setIncome(e.target.value)
+        console.log(e.target.value);
     }
     const handleChildren = (e) => {
         setChildren(e.target.value)
+        console.log(e.target.value);
     }
     const handleReason = (e) => {
         setReason(e.target.value)
+        console.log(e.target.value);
     }
 
     const formSubmission = { //left is api property, right is your property ([take this], setblahblah)
@@ -116,13 +132,14 @@ const AdoptionForm = () => {
         zip_code: zip,
         
     }
-
-     axios.post(`http://localhost:8000/users/{$id}`, { formSubmission }) //endpoint
-      .then(res => {
-        console.log(res);
-        console.log(res.data);
-      })
-  
+        const handleSubmit = (event) => {
+          console.log(formSubmission)
+            // axios.post(`http://localhost:8000/users/{$id}`, { formSubmission }) //endpoint
+            //  .then(res => {
+            //    console.log(res);
+            //    console.log(res.data);
+            //  })
+        }
 
     return(
         <div css={adoptionWrapper}>
@@ -148,7 +165,7 @@ const AdoptionForm = () => {
                     </div>
                     <div css={formInput}>
                     <h3 css={personalData}>PERSONAL DATA</h3>
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                         <Form.Row>
                             <Form.Group as={Col} controlId="formGridEmail">
                             <Form.Label>Full Name</Form.Label>
@@ -180,18 +197,18 @@ const AdoptionForm = () => {
                             <Form.Group as={Col} controlId="formGridState">
                             <Form.Label>Province</Form.Label>
                             <Form.Control onChange={handleProvince} as="select" defaultValue="Choose...">
-                                <option value="aceh">Aceh</option>
-                                <option value="bali">Bali</option>
-                                <option value="bangka">Bangka Belitung</option>
-                                <option value="java">Central Java</option>
-                                <option value="sulawesi">Central Sulawesi</option>
-                                <option value="eJava"> East Java</option>
-                                <option value="kalimantan">East Kalimantan</option>
-                                <option value="jakarta">Special Capital Region of Jakarta</option>
-                                <option value="lampung">Lampung</option>
-                                <option value="papua">Papua</option>
-                                <option value="riau">Riau</option>
-                                <option value="yogyakarta">Special Region of Yogyakarta</option>
+                                <option value="Aceh">Aceh</option>
+                                <option value="Bali">Bali</option>
+                                <option value="Bangka Belitung">Bangka Belitung</option>
+                                <option value="Central Java">Central Java</option>
+                                <option value="Central Sulawesi">Central Sulawesi</option>
+                                <option value="East Java"> East Java</option>
+                                <option value="East kalimantan">East Kalimantan</option>
+                                <option value="Jakarta">Special Capital Region of Jakarta</option>
+                                <option value="Lampung">Lampung</option>
+                                <option value="Papua">Papua</option>
+                                <option value="Riau">Riau</option>
+                                <option value="Yogyakarta">Special Region of Yogyakarta</option>
                             </Form.Control>
                             </Form.Group>
 
@@ -205,11 +222,10 @@ const AdoptionForm = () => {
                             <Form.Label>Occupation</Form.Label>
                             <Form.Control onChange={handleOccupation} placeholder="Student" />
                         </Form.Group>
-                    </Form>
+                   
 
                     <h3 css={tellUs}>TELL US A BIT ABOUT YOU!</h3>
-
-                    <Form>
+                        <Form>
                         <fieldset>
                             <Form.Group as={Row} css={formSpacing}>
                             <Form.Label as="legend" column sm={6}size="lg">
@@ -219,7 +235,7 @@ const AdoptionForm = () => {
                                 <Form.Check
                                 type="radio"
                                 label="<6 hours"
-                                name="formHorizontalRadios"
+                                name="<6 Hours"
                                 id="formHorizontalRadios1"
                                 value="<6 Hours"
                                 checked={workingDuration === "<6 Hours"}
@@ -228,7 +244,7 @@ const AdoptionForm = () => {
                                 <Form.Check
                                 type="radio"
                                 label="6-10 hours"
-                                name="formHorizontalRadios"
+                                name="6-10 Hours"
                                 id="formHorizontalRadios2"
                                 value="6-10 Hours"
                                 checked={workingDuration === "6-10 Hours"}
@@ -237,7 +253,7 @@ const AdoptionForm = () => {
                                 <Form.Check
                                 type="radio"
                                 label=">10 hours"
-                                name="formHorizontalRadios"
+                                name=">10 Hours"
                                 id="formHorizontalRadios3"
                                 value=">10 Hours"
                                 checked={workingDuration === ">10 Hours"}
@@ -254,19 +270,19 @@ const AdoptionForm = () => {
                                 <Form.Check
                                 type="radio"
                                 label="Own"
-                                name="formHorizontalRadios"
+                                name="own"
                                 id="formHorizontalRadios1"
                                 value="own"
-                                checked={ownRent === "Own"}
+                                checked={ownRent === "own"}
                                 onChange={handleOwnRent}
                                 />
                                 <Form.Check
                                 type="radio"
                                 label="Rent"
-                                name="formHorizontalRadios"
+                                name="rent"
                                 id="formHorizontalRadios2"
                                 value="rent"
-                                checked={ownRent === "Rent"}
+                                checked={ownRent === "rent"}
                                 onChange={handleOwnRent}
                                 />
                             </Col>
@@ -280,19 +296,19 @@ const AdoptionForm = () => {
                                 <Form.Check
                                 type="radio"
                                 label="Yes"
-                                name="formHorizontalRadios"
+                                name="yes"
                                 id="formHorizontalRadios1"
                                 value="yes"
-                                checked={givenPets === "Yes"}
+                                checked={givenPets === "yes"}
                                 onChange={handleGivenPets}
                                 />
                                 <Form.Check
                                 type="radio"
                                 label="No"
-                                name="formHorizontalRadios"
+                                name="no"
                                 id="formHorizontalRadios2"
-                                value="No"
-                                checked={givenPets === "No"}
+                                value="no"
+                                checked={givenPets === "no"}
                                 onChange={handleGivenPets}
                                 />
                             </Col>
@@ -306,19 +322,19 @@ const AdoptionForm = () => {
                                 <Form.Check
                                 type="radio"
                                 label="Yes"
-                                name="formHorizontalRadios"
+                                name="yes"
                                 id="formHorizontalRadios1"
                                 value="yes"
-                                checked={children === "Yes"}
+                                checked={children === "yes"}
                                 onChange={handleChildren}
                                 />
                                 <Form.Check
                                 type="radio"
                                 label="No"
-                                name="formHorizontalRadios"
+                                name="no"
                                 id="formHorizontalRadios2"
-                                value="No"
-                                checked={children === "No"}
+                                value="no"
+                                checked={children === "no"}
                                 onChange={handleChildren}
                                 />
                             </Col>
@@ -332,19 +348,19 @@ const AdoptionForm = () => {
                                 <Form.Check
                                 type="radio"
                                 label="Yes"
-                                name="formHorizontalRadios"
+                                name="yes"
                                 id="formHorizontalRadios1"
                                 value="yes"
-                                checked={otherPets === "Yes"}
+                                checked={otherPets === "yes"}
                                 onChange={handleOtherPets}
                                 />
                                 <Form.Check
                                 type="radio"
                                 label="No"
-                                name="formHorizontalRadios"
+                                name="no"
                                 id="formHorizontalRadios2"
                                 value="no"
-                                checked={otherPets === "No"}
+                                checked={otherPets === "no"}
                                 onChange={handleOtherPets}
                                 />
                             </Col>
@@ -363,28 +379,28 @@ const AdoptionForm = () => {
                                 <Form.Check
                                 type="radio"
                                 label="Yes"
-                                name="formHorizontalRadios"
+                                name="yes"
                                 id="formHorizontalRadios1"
                                 value="yes"
-                                checked={cage === "Yes"}
+                                checked={cage === "yes"}
                                 onChange={handleCage}
                                 />
                                 <Form.Check
                                 type="radio"
                                 label="No"
-                                name="formHorizontalRadios"
+                                name="no"
                                 id="formHorizontalRadios2"
                                 value="no"
-                                checked={cage === "No"}
+                                checked={cage === "no"}
                                 onChange={handleCage}
                                 />
                                 <Form.Check
                                 type="radio"
                                 label="Sometimes"
-                                name="formHorizontalRadios"
+                                name="sometimes"
                                 id="formHorizontalRadios2"
                                 value="sometimes"
-                                checked={cage === "Sometimes"}
+                                checked={cage === "sometimes"}
                                 onChange={handleCage}
                                 />
                             </Col>
@@ -400,16 +416,16 @@ const AdoptionForm = () => {
                                 <Form.Check
                                 type="radio"
                                 label="< Rp. 5.000.000 IDR"
-                                name="formHorizontalRadios"
+                                name="<5.000.000"
                                 id="formHorizontalRadios1"
                                 value="<5.000.000"
-                                checked={income === "< 5.000.000"}
+                                checked={income === "<5.000.000"}
                                 onChange={handleIncome}
                                 />
                                 <Form.Check
                                 type="radio"
                                 label="Rp. 5.000.000 IDR - Rp. 10.000.000 IDR"
-                                name="formHorizontalRadios"
+                                name="5.000.000-10.000.000"
                                 id="formHorizontalRadios2"
                                 value="5.000.000-10.000.000"
                                 checked={income === "5.000.000-10.000.000"}
@@ -418,10 +434,10 @@ const AdoptionForm = () => {
                                 <Form.Check
                                 type="radio"
                                 label="> Rp. 10.000.000 IDR"
-                                name="formHorizontalRadios"
+                                name=">10.000.000"
                                 id="formHorizontalRadios2"
                                 value=">10.000.000"
-                                checked={income === "<10.000.000"}
+                                checked={income === ">10.000.000"}
                                 onChange={handleIncome}
                                 />
                             </Col>
@@ -436,6 +452,7 @@ const AdoptionForm = () => {
                                  <PrimaryButton css={buttonPlacement}>Submit Form</PrimaryButton>
                             </div>
                         </fieldset>
+                        </Form>
                     </Form>
                     </div>
                 </div>
@@ -443,5 +460,5 @@ const AdoptionForm = () => {
         </div>
     )
 }
-}
+
 export default AdoptionForm;
