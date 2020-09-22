@@ -60,6 +60,7 @@ import arrow from "../../assets/arrow.png";
 import dogfood from "../../assets/dogfood.png";
 
 import CardPet from "../../components/CardPet/CardPet";
+import RecommendedProducts from "../../components/RecommendedProducts/RecommendedProducts";
 
 const LandingPage = () => {
     const [categoryPet, setCategoryPet] = useState([]);
@@ -316,26 +317,7 @@ const LandingPage = () => {
                 ) : error ? (
                     <div>{errorMessage}</div>
                 ) : (
-                    product.map((item) => (
-                        <Card style={{ width: "18rem" }}>
-                            <Card.Img variant="top" src="holder.js/100px180" />
-                            <Card.Body>
-                                <Card.Title
-                                    css={title}
-                                    style={{ height: "100px" }}
-                                >
-                                    {item.productName}
-                                </Card.Title>
-                                <Card.Text css={choices}>
-                                    More Choices Available
-                                </Card.Text>
-                                <Card.Text>Rp. {item.price}</Card.Text>
-                                <PrimaryButton type="submit" block>
-                                    Add To Cart
-                                </PrimaryButton>
-                            </Card.Body>
-                        </Card>
-                    ))
+                    <RecommendedProducts />
                 )}
             </div>
         </div>
