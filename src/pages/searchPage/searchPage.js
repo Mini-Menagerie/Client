@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 
-import { Card, FormControl, Row, Col, Dropdown} from 'react-bootstrap';
+import { Card, FormControl, Row, Col, Form, Dropdown} from 'react-bootstrap';
 
 import {
   wrapperCover, img, 
@@ -63,10 +63,10 @@ const SearchPage = () => {
               </div>
               <div></div>
           </div>
-          <div css={search}>
-            <Card css={search}>
+          <div css={ sortby}>
+            <Card css={ sortby}>
               <Row>
-                  <Col>
+                  <Col css={ sortby}>
                       <div className="nameSearch" css={ sortby}>
                         Search Result for ""
                         {/* <form onSubmit={handleSubmit}>
@@ -75,21 +75,17 @@ const SearchPage = () => {
                       </div>
                   </Col>
                   <Col>
-                      <div className="sortBy">
-                        <Dropdown>
-                          <Dropdown.Toggle variant="success" id="dropdown-basic" css={sortby}>
-                            Sort By:
-                          </Dropdown.Toggle>
-                          <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">Alphabetical Order
-                            </Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Newest to Oldest</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Oldest to Newest</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Nearest Location</Dropdown.Item>
-                          </Dropdown.Menu>
-                        </Dropdown>
-                      </div>
-                  </Col>      
+                      <div className="sortBy" css={sortby}>
+                      <Form.Group as={Col} controlId="formGridFilter" >Sort By:
+                            <Form.Control as="select" defaultValue="Newest" >
+                                <option>Location</option>
+                                <option>Gender</option>
+                                <option>Alphabet</option>
+                                <option>Oldest to Newest</option>
+                            </Form.Control>
+                        </Form.Group> 
+                      </div>                      
+                  </Col>                     
               </Row>              
            </Card>
           </div>
@@ -161,26 +157,22 @@ const SearchPage = () => {
                       </div>
                   </Col>
                   <Col>
-                      <div className="sortBy">
-                        <Dropdown>
-                          <Dropdown.Toggle variant="success" id="dropdown-basic" css={sortby}>
-                            Sort By:
-                          </Dropdown.Toggle>
-                          <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">Alphabetical Order
-                            </Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Newest to Oldest</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Oldest to Newest</Dropdown.Item>
-                            <Dropdown.Item href="#/action-2">Nearest Location</Dropdown.Item>
-                          </Dropdown.Menu>
-                        </Dropdown>
-                      </div>
-                  </Col>      
+                      <div className="sortBy" css={sortby}>
+                      <Form.Group as={Col} controlId="formGridFilter" >Sort By:
+                            <Form.Control as="select" defaultValue="Newest" >
+                                <option>Location</option>
+                                <option>Gender</option>
+                                <option>Alphabet</option>
+                                <option>Oldest to Newest</option>
+                            </Form.Control>
+                        </Form.Group> 
+                      </div>                      
+                  </Col>   
               </Row>              
            </Card>
           </div>
          <Card css={result}>
-              <h5 css={displaying}>Displaying result $ </h5>
+              <h5 css={displaying}>Displaying result {setByGender.length} </h5>
                                          
               <div css={petsAvailable}>
                     {loading ? (

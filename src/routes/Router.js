@@ -13,6 +13,7 @@ import PetsDetail from '../pages/PetsDetail/PetsDetail';
 import AdoptionForm from '../pages/AdoptionForm/AdoptionForm';
 import SearchPage from '../pages/searchPage/searchPage';
 
+
 const Router = () => (
   <BrowserRouter>
   <Global styles={globalStyles}
@@ -38,7 +39,7 @@ const Router = () => (
         exact path={routes.SEARCHPAGE}
         component={SearchPage}
       />
-            <Route 
+      <Route 
         exact path={routes.PETSDETAIL}
         component={PetsDetail}
       />
