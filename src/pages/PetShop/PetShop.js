@@ -15,6 +15,8 @@ import { product } from '../../redux/reducers/addToCartReducer';
 const PetShop = () => {
     const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(false);
+    const [sort, setSort] = useState('');
+    const [filter, setFilter] = useState('');
     const [currentProduct, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(8);
 
@@ -40,6 +42,27 @@ const PetShop = () => {
     //change page
     const paginate = pageNumber => setCurrentPage(pageNumber)
 
+    const handleChangeSort = (event) => {
+        setSort(event.target.value)
+    }
+
+    const handleChangeFilter = (event) => {
+        setFilter(event.target.value)
+    }
+
+    const getSort = async () => {
+        const variableSort = sort.split('-')
+        let url = `http://localhost:8000/product/sort/?variable=${variableSort[0]}&by=${variableSort[1]}`
+        const response = await axios.get(url)
+        setProducts(response.data.result)
+    }
+
+    const getFilter = async () => {
+        let url = `http://localhost:8000/product/filter/?variable=${filter}`
+        const response = await axios.get(url)
+        setProducts(response.data.result)
+    }
+
     return (
         <div>
             {/* Head Background */}
@@ -59,11 +82,20 @@ const PetShop = () => {
                     </Col>
                     <Col>
                         <Form.Group as={Col} controlId="formGridFilter">
-                            <Form.Control as="select" defaultValue="Newest">
-                                <option>Newest</option>
-                                <option>Price (High to Low)</option>
-                                <option>Price (Low to High)</option>
-                                <option>Best Selling</option>
+                            <Form.Control as="select" defaultValue="Newest" onChange={handleChangeSort} onClick={getSort}>
+                                <option value="createdAt-desc">Newest</option>
+                                <option value="price-desc">Price (High to Low)</option>
+                                <option value="price-asc">Price (Low to High)</option>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col>
+                        <Form.Group as={Col} controlId="formGridFilter">
+                            <Form.Control as="select" defaultValue="Newest" onChange={handleChangeFilter} onClick={getFilter}>
+                                <option value="catfood">Cat FOod</option>
+                                <option value="dogfood">Dog Food</option>
+                                <option value="acc">Accessories</option>
+                                <option value="vitdrugs">Vitamin</option>
                             </Form.Control>
                         </Form.Group>
                     </Col>

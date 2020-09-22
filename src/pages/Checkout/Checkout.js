@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { Container, Button, Form } from "react-bootstrap";
 
 import {
@@ -13,6 +14,8 @@ import {
 import CartProduct from "../../components/cartItem/cartItem";
 
 const Checkout = () => {
+    const productCart = useSelector(state => state.addToCart)
+    console.log(productCart, 'product cart')
     const [user,] = useState({
         fullName: "Ridho Abdul Majid",
         detailAdress: "Citayam",
@@ -49,6 +52,8 @@ const Checkout = () => {
     const qty = getQty.reduce(hitung, initialValue);
     let t = price.reduce((a, b) => a + b);
 
+    let cartProduct = JSON.parse(localStorage.getItem('cartProduct'))
+    console.log(cartProduct)
     return (
         <Container>
             <div css={topLeft}>
@@ -60,6 +65,10 @@ const Checkout = () => {
                 <Button variant="primary">
                     Enter A Different Address
                 </Button>{" "}
+            </div>
+
+            <div>
+                <p>{cartProduct[0].productName}</p>
             </div>
 
             <div css={itemHead}>

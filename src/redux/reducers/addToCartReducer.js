@@ -10,8 +10,10 @@ export const addToCartReducer = (state = product, action) => {
             let products = JSON.parse(localStorage.getItem('products'))
             console.log(products, 'products');
             const productById = products.find(item => { return action.id === item._id})
-            let cart = []
+            let cart = JSON.parse(localStorage.getItem('cartProduct')) || []
+            console.log(cart)
             cart.push(productById)
+            localStorage.setItem('cartProduct', JSON.stringify(cart))
             return {
                 ...state,
                 product: {stock: productById.stock - 1, ...productById.stock},

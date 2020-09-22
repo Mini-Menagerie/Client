@@ -1,7 +1,8 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import React, { useState } from "react";
-import { useSelector } from "react-redux"
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import {
     Dropdown,
     Modal,
@@ -66,6 +67,11 @@ const Header = () => {
         setHandleLoginModal(false);
     };
 
+    const redirect = (event) => {
+        event.preventDefault()
+        window.location.href = 'http://localhost:3000/checkout'
+    }
+
     return (
         <React.Fragment>
             <Navbar bg="light" expand="lg">
@@ -106,11 +112,12 @@ const Header = () => {
                             <button type="submit" css={searchButton}>
                                 <i className="fas fa-search"></i>
                             </button>
-                            <Button type="submit" css={cart}>
+                            <Button type="submit" onClick={redirect} css={cart}>
                                 <i className="fas fa-shopping-cart fa-lg"></i>
                                 <Badge pill variant="danger">{productCart.cart !== undefined && productCart.cart.length}</Badge>
                             </Button>
                         </form>
+
                     </div>
                     <div>
                         <Button variant="light" onClick={handleShow}>
