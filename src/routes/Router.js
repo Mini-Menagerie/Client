@@ -16,8 +16,6 @@ import StatusRequest from '../pages/StatusRequest/StatusRequest';
 import AdoptedHistory from '../pages/AdoptedHistory/AdoptedHistory';
 import ProductDetail from '../pages/ProductDetail/ProductDetail';
 import Checkout from '../pages/Checkout/Checkout';
-
-import AdoptionForm from '../pages/AdoptionForm/AdoptionForm';
 import SearchPage from '../pages/searchPage/searchPage';
 
 
