@@ -12,7 +12,7 @@ import {
     wrapperStyles,
     subWrapper,
     imageLogo,
-    subText
+    subText,
 } from "./Footer.styles";
 import subLogo from "../../assets/signUp.png";
 
@@ -20,7 +20,7 @@ const Footer = () => {
     return (
         <Container fluid={true} style={{ padding: "0" }}>
             <div css={wrapperStyles}>
-                <Row>
+                <Row style={{ width: "100%" }}>
                     <Col md={2}>
                         <div css={imageLogo}>
                             <img
