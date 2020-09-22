@@ -185,7 +185,7 @@ const Header = () => {
                                 type="text"
                                 css={searchText}
                                 placeholder="Search your future best friend"
-                                style={{ width: "100%" }}
+                                style={{ maxWidth: "100%" }}
                             ></input>
                             <button type="submit" css={searchButton}>
                                 <i className="fas fa-search"></i>
