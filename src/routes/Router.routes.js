@@ -8,5 +8,7 @@ export default {
   ADOPTEDHISTORY: '/adopted-history',
   CHECKOUT: '/checkout',
   PETSHOP: '/shop',
-  PRODUCTDETAIL: '/product/:id'
+  PRODUCTDETAIL: '/product/:id',
+  SEARCHPAGE: '/search-page',
+ 
 }

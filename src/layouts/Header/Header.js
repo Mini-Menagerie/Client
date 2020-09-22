@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import React, { useState } from "react";
+import { useSelector } from "react-redux"
 import {
     Dropdown,
     Modal,
@@ -11,6 +12,7 @@ import {
     Container,
     Col,
     Form,
+    Badge
 } from "react-bootstrap";
 
 import Logo from "../../assets/logo-mini-menagerie.png";
@@ -30,6 +32,7 @@ import {
 } from "./Header.styles";
 
 const Header = () => {
+    const productCart = useSelector(state => state.addToCart)
     const [show, setShow] = useState(false);
     const [handleForm, setHandleForm] = useState(false);
     const [loginModal, setHandleLoginModal] = useState(false);
@@ -103,9 +106,10 @@ const Header = () => {
                             <button type="submit" css={searchButton}>
                                 <i className="fas fa-search"></i>
                             </button>
-                            <button type="submit" css={cart}>
-                                <i className="fas fa-shopping-cart"></i>
-                            </button>
+                            <Button type="submit" css={cart}>
+                                <i className="fas fa-shopping-cart fa-lg"></i>
+                                <Badge pill variant="danger">{productCart.cart !== undefined && productCart.cart.length}</Badge>
+                            </Button>
                         </form>
                     </div>
                     <div>
@@ -185,98 +189,98 @@ const Header = () => {
                             </Container>
                         </div>
                     ) : (
-                        <div>
-                            <h2 css={bodyTitleStyles}>Sign Up</h2>
-                            <p>Create an Account</p>
-                            {handleForm ? (
-                                <Container>
-                                    <Form>
-                                        <Row css={rowFormSignUp}>
-                                            <Col>
-                                                <Form.Control
-                                                    type="text"
-                                                    placeholder="First Name"
-                                                />
-                                            </Col>
-                                            <Col>
-                                                <Form.Control
-                                                    type="text"
-                                                    placeholder="Last Name"
-                                                />
-                                            </Col>
-                                        </Row>
-                                        <Row css={rowFormSignUp}>
-                                            <Col>
-                                                <Form.Control
-                                                    type="email"
-                                                    placeholder="Email"
-                                                />
-                                            </Col>
-                                        </Row>
-                                        <Row css={rowFormSignUp}>
-                                            <Col>
-                                                <Form.Control
-                                                    type="password"
-                                                    placeholder="Password"
-                                                />
-                                            </Col>
-                                        </Row>
-                                        <Row css={rowFormSignUp}>
-                                            <Col>
-                                                <Button variant="primary" block>
-                                                    Sign Up
+                            <div>
+                                <h2 css={bodyTitleStyles}>Sign Up</h2>
+                                <p>Create an Account</p>
+                                {handleForm ? (
+                                    <Container>
+                                        <Form>
+                                            <Row css={rowFormSignUp}>
+                                                <Col>
+                                                    <Form.Control
+                                                        type="text"
+                                                        placeholder="First Name"
+                                                    />
+                                                </Col>
+                                                <Col>
+                                                    <Form.Control
+                                                        type="text"
+                                                        placeholder="Last Name"
+                                                    />
+                                                </Col>
+                                            </Row>
+                                            <Row css={rowFormSignUp}>
+                                                <Col>
+                                                    <Form.Control
+                                                        type="email"
+                                                        placeholder="Email"
+                                                    />
+                                                </Col>
+                                            </Row>
+                                            <Row css={rowFormSignUp}>
+                                                <Col>
+                                                    <Form.Control
+                                                        type="password"
+                                                        placeholder="Password"
+                                                    />
+                                                </Col>
+                                            </Row>
+                                            <Row css={rowFormSignUp}>
+                                                <Col>
+                                                    <Button variant="primary" block>
+                                                        Sign Up
                                                 </Button>
-                                            </Col>
-                                        </Row>
-                                        <Row>
-                                            <Col>
-                                                <p css={buttonLoginStyles}>
-                                                    Already have an account?
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col>
+                                                    <p css={buttonLoginStyles}>
+                                                        Already have an account?
                                                     <Button
-                                                        onClick={
-                                                            handleLoginModal
-                                                        }
-                                                    >
-                                                        Log In
+                                                            onClick={
+                                                                handleLoginModal
+                                                            }
+                                                        >
+                                                            Log In
                                                     </Button>
-                                                </p>
-                                            </Col>
-                                        </Row>
-                                    </Form>
-                                </Container>
-                            ) : (
-                                <div css={wrapperButtonStyles}>
-                                    <Button
-                                        css={buttonLoginStyles}
-                                        variant="primary"
-                                        onClick={handleGoogleLogin}
-                                    >
-                                        Signup with Google
+                                                    </p>
+                                                </Col>
+                                            </Row>
+                                        </Form>
+                                    </Container>
+                                ) : (
+                                        <div css={wrapperButtonStyles}>
+                                            <Button
+                                                css={buttonLoginStyles}
+                                                variant="primary"
+                                                onClick={handleGoogleLogin}
+                                            >
+                                                Signup with Google
                                     </Button>
-                                    <Button
-                                        css={buttonLoginStyles}
-                                        variant="primary"
-                                        onClick={handleFacebookLogin}
-                                    >
-                                        Signup with Facebook
+                                            <Button
+                                                css={buttonLoginStyles}
+                                                variant="primary"
+                                                onClick={handleFacebookLogin}
+                                            >
+                                                Signup with Facebook
                                     </Button>
-                                    <Button
-                                        css={buttonLoginStyles}
-                                        variant="primary"
-                                        onClick={handleShowFormSignUp}
-                                    >
-                                        Signup with Email
+                                            <Button
+                                                css={buttonLoginStyles}
+                                                variant="primary"
+                                                onClick={handleShowFormSignUp}
+                                            >
+                                                Signup with Email
                                     </Button>
-                                    <p css={buttonLoginStyles}>
-                                        Already have an account?
+                                            <p css={buttonLoginStyles}>
+                                                Already have an account?
                                         <Button onClick={handleLoginModal}>
-                                            Log In
+                                                    Log In
                                         </Button>
-                                    </p>
-                                </div>
-                            )}
-                        </div>
-                    )}
+                                            </p>
+                                        </div>
+                                    )}
+                            </div>
+                        )}
                 </Modal.Body>
             </Modal>
         </React.Fragment>
