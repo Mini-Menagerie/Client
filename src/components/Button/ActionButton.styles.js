@@ -1,6 +1,6 @@
 import { css } from '@emotion/core';
 
-export const button = css `
+export const button = css`
 text-align: center;
 button {
     font-size: 1em;

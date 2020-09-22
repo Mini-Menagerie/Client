@@ -13,7 +13,7 @@ import {
 
 const StatusRequest = () => {
     const [statusRequest, setStatusRequest] = useState([]);
-    const [, , setErrorMessage] = useState();
+    const [, setErrorMessage] = useState();
 
     useEffect(() => {
         const url = "http://localhost:8000/petUpForAdoption";

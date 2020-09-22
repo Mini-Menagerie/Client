@@ -12,7 +12,8 @@ import {
 } from "./ProductCard.styles";
 import ActionButton from "../Button/ActionButton";
 
-const ProductCard = ({ products, loading }) => {
+const ProductCard = ({ products, loading, ...props }) => {
+    console.log(props)
     if (loading) {
         return (
             <div css={loading_css}>
@@ -49,4 +50,17 @@ const ProductCard = ({ products, loading }) => {
     );
 };
 
-export default ProductCard;
+const mapStateToProps = (state) => {
+    console.log(state.addToCart);
+    return {
+        data: state.addToCart,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToCart: (id) => dispatch(addToCart(id))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

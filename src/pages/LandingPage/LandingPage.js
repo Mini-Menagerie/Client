@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { Container, Row, Col, Dropdown, Jumbotron } from "react-bootstrap";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -54,14 +54,14 @@ import CardPet from "../../components/CardPet/CardPet";
 import RecommendedProducts from "../../components/RecommendedProducts/RecommendedProducts";
 
 const LandingPage = () => {
-    const [, , setCategoryPet] = useState([]);
+    const [, setCategoryPet] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
-    const [, , setProduct] = useState([]);
+    const [, setProduct] = useState([]);
     const [petCards, setPetCards] = useState([]);
 
-    const fetchPet = useCallback(() => {
+    const fetchPet = () => {
         const url = "http://localhost:8000/pet";
         axios
             .get(url)
@@ -72,13 +72,12 @@ const LandingPage = () => {
             })
             .catch(function (error) {
                 setError(true);
-                console.log(error.messsage);
                 setErrorMessage(error.message);
                 setLoading(false);
             });
-    }, [setCategoryPet]);
+    };
 
-    const fetchProduct = useCallback(() => {
+    const fetchProduct = () => {
         const url = "http://localhost:8000/product";
         axios
             .get(url)
@@ -93,7 +92,7 @@ const LandingPage = () => {
                 setErrorMessage(error.message);
                 setLoading(false);
             });
-    }, [setProduct]);
+    };
 
     const url = () => {
         const url = "http://localhost:8000/pet";
@@ -116,7 +115,9 @@ const LandingPage = () => {
         fetchPet();
         fetchProduct();
         url();
-    }, [fetchProduct, fetchPet]);
+
+        // eslint-disable-next-line
+    }, []);
 
     return (
         <div>
