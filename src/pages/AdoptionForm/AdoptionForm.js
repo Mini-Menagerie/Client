@@ -3,6 +3,7 @@ import { jsx } from "@emotion/core";
 import { Col, Form, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import {useHistory} from 'react-router-dom'
 
 import PrimaryButton from "../../components/Button/Button";
 import {
@@ -27,128 +28,72 @@ import bird from "../../assets/birdCover.png";
 
 const AdoptionForm = () => {
     const [user, setUser] = useState([])
-    const [fullname, setFullname] = useState(); //save data
-    const [, setEmail] = useState();
-    const [phoneNumber, setPhoneNumber] = useState();
-    const [address, setAddress1] = useState();
-    const [city, setCity] = useState();
-    const [province, setProvince] = useState();
-    const [zip, setZip] = useState();
-    const [occupation, setOccupation] = useState();
-    const [workingDuration, setWorkingDuration] = useState();
-    const [ownRent, setOwnRent] = useState();
-    const [otherPets, setOtherPets] = useState();
-    const [givenPets, setGivenPets] = useState();
-    const [, setWhatPets] = useState();
-    const [cage, setCage] = useState();
-    const [income, setIncome] = useState();
-    // const [, setReason] = useState();
-    const [children, setChildren] = useState();
-
-    const handleFullName = (e) => {
-        //get value from options and input
-        setFullname(e.target.value);
-    };
-    const handleEmail = (e) => {
-        setEmail(e.target.value);
-    };
-    const handlePhoneNumber = (e) => {
-        setPhoneNumber(e.target.value);
-    };
-    const handleOwnRent = (e) => {
-        setOwnRent(e.target.value);
-    };
-
-    const handleAddress1 = (e) => {
-        setAddress1(e.target.value);
-    };
-    const handleCity = (e) => {
-        setCity(e.target.value);
-    };
-    const handleZip = (e) => {
-        setZip(e.target.value);
-    };
-    const handleProvince = (e) => {
-        setProvince(e.target.value);
-    };
-    const handleOccupation = (e) => {
-        setOccupation(e.target.value);
-    };
-    const handleDuration = (e) => {
-        console.log(e.target.value);
-        setWorkingDuration(e.target.value);
-    };
-    const handleGivenPets = (e) => {
-        setGivenPets(e.target.value);
-    };
-    const handleOtherPets = (e) => {
-        setOtherPets(e.target.value);
-    };
-    const handleWhatPets = (e) => {
-        setWhatPets(e.target.value);
-    };
-    const handleCage = (e) => {
-        setCage(e.target.value);
-    };
-    const handleIncome = (e) => {
-        setIncome(e.target.value);
-    };
-    const handleChildren = (e) => {
-        setChildren(e.target.value);
-    };
-    const handleReason = (e) => {
-        setReason(e.target.value);
-    };
-
-    const formSubmission = {
-        //left is api property, right is your property ([take this], setblahblah)
-        fullName: fullname,
-        noHandphone: phoneNumber,
-        province: province,
-        email: "",
-        state: city,
-        detailAddress: address,
-        work: occupation,
-        zip_code: zip,
-        salary: income,
-        workDuration: workingDuration,
-        houseStatus: ownRent,
-        otherPet: otherPets,
-        hasGivenPet: givenPets,
-        hasChildrenAtHouse: children,
-    };
-
+    const [form, setForm] = useState({
+        noHandphone: '',
+        detailAddress: '',
+        state: '',
+        province: '',
+        zip_code: '',
+        work: '',
+        workDuration: '',
+        houseStatus: '',
+        hasGivenPet: '',
+        hasChildrenAtHouse: '',
+        willPetBeCaged: '',
+        otherPet: '',
+        salary: ''
+    })
     const [reason, setReason] = useState('')
+    
 
-    let values= {
-        user,
-        reason
-
-    }
     const fetchDataUser = async () => {
         let result = await axios.get(`http://localhost:8000/users/5f69bb07acf76e287ebdc5dc`) //endpoint
         setUser(result.data.result); 
     }
 
-    const handleSubmitForm = async () => {
-        let result = await axios.put('http://localhost:8000/users/5f69bb07acf76e287ebdc5dc', values.user)
-        if(result.status === 200){
-            let form = await axios.post('http://localhost:8000/formRequest/create', values)
-            if(form.status === 200){
 
-            }
-        } else {
-            console.log('error')
-        }
+    const updateUser =  () => {
+        return axios.put('http://localhost:8000/users/5f69bb07acf76e287ebdc5dc', form)
     }
+    const createForm =  () => {
+        return axios.post('http://localhost:8000/formRequest/create', {
+            idUser: user._id,
+            reason
+        })
+    }
+    const history = useHistory()
+    const handleSubmitForm = async (event) => {
+        event.preventDefault()
+        axios.all([createForm(), updateUser()])
+        .then(axios.spread((form, user) => {
+            console.log(user);
+            console.log(form);
 
+            if(form.status === 200){
+                alert('Your request is being processed')
+                history.goBack()
+            }
+        
+        }))
+        .catch(err => console.log(err))
+        
+        
+    }
+    const handleChange = (event) => {
+        setForm({
+            ...form,
+            [event.target.name]: event.target.value
+        })
+    }
+    const reasonChange = (event) => {
+        setReason(event.target.value)
+    }
 
 
 
     useEffect(() => {
         fetchDataUser()
     },[])
-    console.log(user);
     
 
     return (
@@ -187,12 +132,11 @@ const AdoptionForm = () => {
                     </div>
                     <div css={formInput}>
                         <h3 css={personalData}>PERSONAL DATA</h3>
-                        <Form>
+                        <Form onSubmit={handleSubmitForm}>
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formGridEmail">
                                     <Form.Label>Full Name</Form.Label>
                                     <Form.Control
-                                        onChange={handleFullName}
                                         placeholder={user.fullName}
                                         value={user.fullName}
                                         disabled
@@ -205,7 +149,6 @@ const AdoptionForm = () => {
                                 >
                                     <Form.Label>Email:</Form.Label>
                                     <Form.Control
-                                        onChange={handleEmail}
                                         type="email"
                                         placeholder={user.email}
                                         value={user.email}
@@ -217,80 +160,67 @@ const AdoptionForm = () => {
                             <Form.Group controlId="formGridAddress1">
                                 <Form.Label>Phone Number</Form.Label>
                                 <Form.Control
-                                    onChange={handlePhoneNumber}
-                                    placeholder="+628152368854"
+                                    placeholder="No Handphone"
+                                    name="noHandphone"
+                                    value={form.noHandphone}
+                                    onChange={handleChange}
                                 />
                             </Form.Group>
 
                             <Form.Group controlId="formGridAddress1">
                                 <Form.Label>Address</Form.Label>
                                 <Form.Control
-                                    onChange={handleAddress1}
-                                    placeholder="1234 Main St"
+                                    placeholder="Detail Address"
+                                    name="detailAddress"
+                                    value={form.detailAddress}
+                                    onChange={handleChange}
                                 />
                             </Form.Group>
 
                             <Form.Row>
                                 <Form.Group as={Col} controlId="formGridCity">
                                     <Form.Label>City</Form.Label>
-                                    <Form.Control onChange={handleCity} />
+                                    <Form.Control 
+                                    placeholder="City"
+                                    name="state"
+                                    value={form.state}
+                                    onChange={handleChange}
+                                    />
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formGridState">
                                     <Form.Label>Province</Form.Label>
                                     <Form.Control
-                                        onChange={handleProvince}
-                                        as="select"
-                                        defaultValue="Choose..."
+                                        placeholder="Province"
+                                        name="province"
+                                        value={form.province}
+                                        onChange={handleChange}
                                     >
-                                        <option value="aceh">Aceh</option>
-                                        <option value="bali">Bali</option>
-                                        <option value="bangka">
-                                            Bangka Belitung
-                                        </option>
-                                        <option value="java">
-                                            Central Java
-                                        </option>
-                                        <option value="sulawesi">
-                                            Central Sulawesi
-                                        </option>
-                                        <option value="eJava">
-                                            {" "}
-                                            East Java
-                                        </option>
-                                        <option value="kalimantan">
-                                            East Kalimantan
-                                        </option>
-                                        <option value="jakarta">
-                                            Special Capital Region of Jakarta
-                                        </option>
-                                        <option value="lampung">Lampung</option>
-                                        <option value="papua">Papua</option>
-                                        <option value="riau">Riau</option>
-                                        <option value="yogyakarta">
-                                            Special Region of Yogyakarta
-                                        </option>
                                     </Form.Control>
                                 </Form.Group>
 
                                 <Form.Group as={Col} controlId="formGridZip">
                                     <Form.Label>Zip</Form.Label>
-                                    <Form.Control onChange={handleZip} />
+                                    <Form.Control 
+                                        placeholder="Zip Code"
+                                        name="zip_code"
+                                        value={form.zip_code}
+                                        onChange={handleChange}
+                                     />
                                 </Form.Group>
                             </Form.Row>
 
                             <Form.Group controlId="formGridAddress1">
                                 <Form.Label>Occupation</Form.Label>
                                 <Form.Control
-                                    onChange={handleOccupation}
-                                    placeholder="Student"
+                                    placeholder="Occupation"
+                                    name="work"
+                                    value={form.work}
+                                    onChange={handleChange}
                                 />
                             </Form.Group>
-                        </Form>
 
                         <h3 css={tellUs}>TELL US A BIT ABOUT YOU!</h3>
-
-                        <Form>
                             <fieldset>
                                 <Form.Group as={Row} css={formSpacing}>
                                     <Form.Label
@@ -306,35 +236,37 @@ const AdoptionForm = () => {
                                         <Form.Check
                                             type="radio"
                                             label="<6 hours"
-                                            name="formHorizontalRadios"
+                                            name="workDuration"
                                             id="formHorizontalRadios1"
                                             value="<6 Hours"
-                                            checked={
-                                                workingDuration === "<6 Hours"
-                                            }
-                                            onChange={handleDuration}
+                                            onChange={handleChange}
+                                            // checked={
+                                            //     workingDuration === "<6 Hours"
+                                            // }
                                         />
                                         <Form.Check
                                             type="radio"
                                             label="6-10 hours"
-                                            name="formHorizontalRadios"
+                                            name="workDuration"
                                             id="formHorizontalRadios2"
                                             value="6-10 Hours"
-                                            checked={
-                                                workingDuration === "6-10 Hours"
-                                            }
-                                            onChange={handleDuration}
+                                            onChange={handleChange}
+
+                                            // checked={
+                                            //     workingDuration === "6-10 Hours"
+                                            // }
                                         />
                                         <Form.Check
                                             type="radio"
                                             label=">10 hours"
-                                            name="formHorizontalRadios"
+                                            name="workDuration"
                                             id="formHorizontalRadios3"
                                             value=">10 Hours"
-                                            checked={
-                                                workingDuration === ">10 Hours"
-                                            }
-                                            onChange={handleDuration}
+                                            onChange={handleChange}
+
+                                            // checked={
+                                            //     workingDuration === ">10 Hours"
+                                            // }
                                         />
                                     </Col>
                                 </Form.Group>
@@ -352,20 +284,22 @@ const AdoptionForm = () => {
                                         <Form.Check
                                             type="radio"
                                             label="Own"
-                                            name="own"
+                                            name="houseStatus"
                                             id="formHorizontalRadios1"
-                                            value="own"
-                                            checked={ownRent === "own"}
-                                            onChange={handleOwnRent}
+                                            value="Own"
+                                            onChange={handleChange}
+
+                                            // checked={ownRent === "own"}
                                         />
                                         <Form.Check
                                             type="radio"
                                             label="Rent"
-                                            name="formHorizontalRadios"
+                                            name="houseStatus"
                                             id="formHorizontalRadios2"
-                                            value="rent"
-                                            checked={ownRent === "Rent"}
-                                            onChange={handleOwnRent}
+                                            value="Rent"
+                                            onChange={handleChange}
+
+                                            // checked={ownRent === "Rent"}
                                         />
                                     </Col>
                                 </Form.Group>
@@ -384,20 +318,22 @@ const AdoptionForm = () => {
                                         <Form.Check
                                             type="radio"
                                             label="Yes"
-                                            name="formHorizontalRadios"
+                                            name="hasGivenPet"
                                             id="formHorizontalRadios1"
-                                            value="yes"
-                                            checked={givenPets === "Yes"}
-                                            onChange={handleGivenPets}
+                                            value="Yes"
+                                            onChange={handleChange}
+
+                                            // checked={givenPets === "Yes"}
                                         />
                                         <Form.Check
                                             type="radio"
                                             label="No"
-                                            name="formHorizontalRadios"
+                                            name="hasGivenPet"
                                             id="formHorizontalRadios2"
                                             value="No"
-                                            checked={givenPets === "No"}
-                                            onChange={handleGivenPets}
+                                            onChange={handleChange}
+
+                                            // checked={givenPets === "No"}
                                         />
                                     </Col>
                                 </Form.Group>
@@ -409,27 +345,29 @@ const AdoptionForm = () => {
                                         sm={6}
                                         size="lg"
                                     >
-                                        3. Do You Have Small Children in the
+                                        4. Do You Have Small Children in the
                                         House?
                                     </Form.Label>
                                     <Col sm={4}>
                                         <Form.Check
                                             type="radio"
                                             label="Yes"
-                                            name="formHorizontalRadios"
+                                            name="hasChildrenAtHouse"
                                             id="formHorizontalRadios1"
-                                            value="yes"
-                                            checked={children === "Yes"}
-                                            onChange={handleChildren}
+                                            value="Yes"
+                                            onChange={handleChange}
+
+                                            // checked={children === "Yes"}
                                         />
                                         <Form.Check
                                             type="radio"
                                             label="No"
-                                            name="formHorizontalRadios"
+                                            name="hasChildrenAtHouse"
                                             id="formHorizontalRadios2"
                                             value="No"
-                                            checked={children === "No"}
-                                            onChange={handleChildren}
+                                            onChange={handleChange}
+
+                                            // checked={children === "No"}
                                         />
                                     </Col>
                                 </Form.Group>
@@ -441,26 +379,28 @@ const AdoptionForm = () => {
                                         sm={6}
                                         size="lg"
                                     >
-                                        3. Do You Have Other Pets?
+                                        5. Do You Have Other Pets?
                                     </Form.Label>
                                     <Col sm={4}>
                                         <Form.Check
                                             type="radio"
                                             label="Yes"
-                                            name="formHorizontalRadios"
+                                            name="otherPet"
                                             id="formHorizontalRadios1"
-                                            value="yes"
-                                            checked={otherPets === "Yes"}
-                                            onChange={handleOtherPets}
+                                            value="Yes"
+                                            onChange={handleChange}
+
+                                            // checked={otherPets === "Yes"}
                                         />
                                         <Form.Check
                                             type="radio"
-                                            label="No"
-                                            name="formHorizontalRadios"
+                                            label="No"workduration
+                                            name="otherPet"
                                             id="formHorizontalRadios2"
-                                            value="no"
-                                            checked={otherPets === "No"}
-                                            onChange={handleOtherPets}
+                                            value="No"
+                                            onChange={handleChange}
+
+                                            // checked={otherPets === "No"}
                                         />
                                     </Col>
                                 </Form.Group>
@@ -469,13 +409,7 @@ const AdoptionForm = () => {
                                     controlId="formGridAddress1"
                                     css={formSpacing}
                                 >
-                                    <Form.Label>
-                                        4. If yes, what pets do you own?
-                                    </Form.Label>
-                                    <Form.Control
-                                        onChange={handleWhatPets}
-                                        placeholder="Large Dogs, Cats, Reptiles..."
-                                    />
+            
                                 </Form.Group>
 
                                 <Form.Group as={Row} css={formSpacing}>
@@ -485,36 +419,39 @@ const AdoptionForm = () => {
                                         sm={6}
                                         size="lg"
                                     >
-                                        5. Do You Tend to Keep Your Pets in a
+                                        6. Do You Tend to Keep Your Pets in a
                                         Cage?
                                     </Form.Label>
                                     <Col sm={4}>
                                         <Form.Check
                                             type="radio"
                                             label="Yes"
-                                            name="formHorizontalRadios"
+                                            name="willPetBeCaged"
                                             id="formHorizontalRadios1"
-                                            value="yes"
-                                            checked={cage === "Yes"}
-                                            onChange={handleCage}
+                                            value="Yes"
+                                            onChange={handleChange}
+
+                                            // checked={cage === "Yes"}
                                         />
                                         <Form.Check
                                             type="radio"
                                             label="No"
-                                            name="formHorizontalRadios"
+                                            name="willPetBeCaged"
                                             id="formHorizontalRadios2"
-                                            value="no"
-                                            checked={cage === "No"}
-                                            onChange={handleCage}
+                                            value="No"
+                                            onChange={handleChange}
+
+                                            // checked={cage === "No"}
                                         />
                                         <Form.Check
                                             type="radio"
                                             label="Sometimes"
-                                            name="formHorizontalRadios"
+                                            name="willPetBeCaged"
                                             id="formHorizontalRadios2"
-                                            value="sometimes"
-                                            checked={cage === "Sometimes"}
-                                            onChange={handleCage}
+                                            value="Sometimes"
+                                            onChange={handleChange}
+
+                                            // checked={cage === "Sometimes"}
                                         />
                                     </Col>
                                 </Form.Group>
@@ -526,7 +463,7 @@ const AdoptionForm = () => {
                                         sm={6}
                                         size="lg"
                                     >
-                                        6. What is Your Monthly Income?{" "}
+                                        7. What is Your Monthly Income?{" "}
                                         <br></br>
                                         (This is to check Pet Maintenance costs)
                                     </Form.Label>
@@ -534,32 +471,35 @@ const AdoptionForm = () => {
                                         <Form.Check
                                             type="radio"
                                             label="< Rp. 5.000.000 IDR"
-                                            name="formHorizontalRadios"
+                                            name="salary"
                                             id="formHorizontalRadios1"
                                             value="<5.000.000"
-                                            checked={income === "< 5.000.000"}
-                                            onChange={handleIncome}
+                                            onChange={handleChange}
+
+                                            // checked={income === "< 5.000.000"}
                                         />
                                         <Form.Check
                                             type="radio"
                                             label="Rp. 5.000.000 IDR - Rp. 10.000.000 IDR"
-                                            name="formHorizontalRadios"
+                                            name="salary"
                                             id="formHorizontalRadios2"
                                             value="5.000.000-10.000.000"
-                                            checked={
-                                                income ===
-                                                "5.000.000-10.000.000"
-                                            }
-                                            onChange={handleIncome}
+                                            onChange={handleChange}
+
+                                            // checked={
+                                            //     income ===
+                                            //     "5.000.000-10.000.000"
+                                            // }
                                         />
                                         <Form.Check
                                             type="radio"
                                             label="> Rp. 10.000.000 IDR"
-                                            name="formHorizontalRadios"
+                                            name="salary"
                                             id="formHorizontalRadios2"
                                             value=">10.000.000"
-                                            checked={income === "<10.000.000"}
-                                            onChange={handleIncome}
+                                            onChange={handleChange}
+
+                                            // checked={income === "<10.000.000"}
                                         />
                                     </Col>
                                 </Form.Group>
@@ -569,19 +509,21 @@ const AdoptionForm = () => {
                                     css={formSpacing}
                                 >
                                     <Form.Label>
-                                        7. Finally, Tell Us Why You'd Like To
+                                        8. Finally, Tell Us Why You'd Like To
                                         Adopt this Pet!
                                     </Form.Label>
                                     <Form.Control
-                                        onChange={handleReason}
                                         as="textarea"
                                         rows="3"
+                                        name="reason"
+                                        value={reason}
+                                        onChange={reasonChange}
                                         placeholder="I'd Like To Adopt This Pet Because..."
                                     />
                                 </Form.Group>
 
                                 <div css={buttonPlacement}>
-                                    <PrimaryButton css={buttonPlacement}>
+                                    <PrimaryButton css={buttonPlacement} type="submit">
                                         Submit Form
                                     </PrimaryButton>
                                 </div>
