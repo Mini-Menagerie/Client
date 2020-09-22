@@ -3,7 +3,8 @@ import { jsx } from '@emotion/core'
 import { Card, Button } from 'react-bootstrap'
 import MoonLoader from "react-spinners/MoonLoader"
 
-import { card_img, product_name, loading_css, product_list, button } from './ProductCard.styles'
+import { card_img, product_name, loading_css, product_list, product_price} from './ProductCard.styles'
+import ActionButton from '../Button/ActionButton'
 
 const ProductCard = ({ products, loading }) => {
     if (loading) {
@@ -22,11 +23,8 @@ const ProductCard = ({ products, loading }) => {
                             </div>
                             <Card.Body>
                                 <p css={product_name}>{value.productName}</p>
-                                <Card.Text>Rp {value.price}</Card.Text>
-                                <Card.Text>{value.stock} pcs</Card.Text>
-                                <div css={button}>
-                                    <Button css={button}>Add to Cart</Button>
-                                </div>
+                                <p css={product_price}>Rp {value.price}</p>
+                                <ActionButton/>
                             </Card.Body>
                         </Card>
                     )
