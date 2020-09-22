@@ -1,12 +1,6 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
-import { useEffect, useState } from 'react';
-import { Container, Row, Col, Dropdown, Card, Jumbotron, Form } from 'react-bootstrap';
-import axios from 'axios';
-import { Link } from 'react-router-dom'
-import ReactFilestack from 'filestack-react';
-
-import PrimaryButton from '../../components/Button/Button'
+import { jsx } from "@emotion/core";
+import { useEffect, useState } from "react";
 import {
   wrapperCover,
   h2,
@@ -37,23 +31,33 @@ import {
   colStyles,
 } from './LandingPage.styles';
 import {useHistory} from 'react-router-dom'
+import { Container,
+    Row,
+    Col,
+    Dropdown,
+    Card,
+    Jumbotron,
+} from "react-bootstrap";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
-import fish from '../../assets/fish.png'
-import hamster from '../../assets/hamster.png'
-import horse from '../../assets/horse.png'
-import rabbit from '../../assets/rabbit.png'
-import sheep from '../../assets/sheep.png'
-import bird from '../../assets/bird.png'
-import searchpets from '../../assets/searchpets.png'
-import form from '../../assets/form.png'
-import wait from '../../assets/wait.png'
-import letter from '../../assets/letter.png'
-import arrow from '../../assets/arrow.png'
-import dogfood from '../../assets/dogfood.png'
+import PrimaryButton from "../../components/Button/Button";
+
 
 import CardPet from '../../components/CardPet/CardPet'
 import RecommendedProducts from '../../components/RecommendedProducts/RecommendedProducts'
-
+import fish from "../../assets/fish.png";
+import hamster from "../../assets/hamster.png";
+import horse from "../../assets/horse.png";
+import rabbit from "../../assets/rabbit.png";
+import sheep from "../../assets/sheep.png";
+import bird from "../../assets/bird.png";
+import searchpets from "../../assets/searchpets.png";
+import form from "../../assets/form.png";
+import wait from "../../assets/wait.png";
+import letter from "../../assets/letter.png";
+import arrow from "../../assets/arrow.png";
+import dogfood from "../../assets/dogfood.png";
 
 const LandingPage = () => {
   const [loading, setLoading] = useState (true);
@@ -62,13 +66,61 @@ const LandingPage = () => {
   const [product, setProduct] = useState([]);
   const [petCards, setPetCards] = useState([])
   const history = useHistory()
+    const [categoryPet, setCategoryPet] = useState([]);
 
+    const fetchPet = () => {
+        const url = "http://localhost:8000/pet";
+        axios
+            .get(url)
+            .then(function (response) {
+                const limit = response.data.result.slice(0, 4); //limit item display
+                setCategoryPet(limit);
+                setLoading(false);
+            })
+            .catch(function (error) {
+                setError(true);
+                console.log(error.messsage);
+                setErrorMessage(error.message);
+                setLoading(false);
+            });
+    };
 
   function handleClick(id) {
     history.push(`/pets-detail/${id}`)
+    const fetchProduct = () => {
+        const url = "http://localhost:8000/product";
+        axios
+            .get(url)
+            .then(function (response) {
+                const limit = response.data.result.slice(0, 4);
+                setProduct(limit);
+                setLoading(false);
+            })
+            .catch(function (error) {
+                setError(true);
+                console.log(error.messsage);
+                setErrorMessage(error.message);
+                setLoading(false);
+            });
+    };
+}
 
-    console.log(`${id} clicked`);
-  }
+    const url = () => {
+        const url = "http://localhost:8000/pet";
+        axios
+            .get(url)
+            .then(function (response) {
+                const limit = response.data.result.slice(0, 4);
+                setPetCards(limit);
+                setLoading(false);
+            })
+            .catch(function (error) {
+                setError(true);
+                console.log(error.messsage);
+                setErrorMessage(error.message);
+                setLoading(false);
+            });
+    };
 
   // const fetchPet = () => {
   //   const url ='http://localhost:8000/pet';
@@ -86,46 +138,6 @@ const LandingPage = () => {
   //   });
   // }
 
-  const fetchProduct = () => {
-    const url='http://localhost:8000/product';
-    axios.get(url)
-    .then(function(response) {
-      const limit = response.data.result.slice(0, 4)
-     setProduct(limit);
-      setLoading(false)
-    })
-    .catch(function(error) {
-      setError(true);
-      console.log(error.messsage)
-      setErrorMessage(error.message)
-      setLoading(false);
-    }); 
-  }
-
-  const url = () => {
-    const url='http://localhost:8000/pet';
-    axios.get(url)
-    .then(function(response) {
-      const limit = response.data.result.slice(0, 4)
-     setPetCards(limit);
-      setLoading(false)
-    })
-    .catch(function(error) {
-      setError(true);
-      console.log(error.messsage)
-      setErrorMessage(error.message)
-      setLoading(false);
-    }); 
-  }
-
-  useEffect (() => {
-    // fetchPet();
-    fetchProduct();
-    url();
-  },[]);
-
-
-  
   return (
     <div>
       <div css={wrapperCover}>
