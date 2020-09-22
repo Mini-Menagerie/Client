@@ -9,7 +9,7 @@ export const addToCartReducer = (state = product, action) => {
         case 'ADD_TO_CART':
             let products = JSON.parse(localStorage.getItem('products'))
             console.log(products, 'products');
-            const productById = products.find(item => { return action.id == item._id})
+            const productById = products.find(item => { return action.id === item._id})
             let cart = []
             cart.push(productById)
             return {
