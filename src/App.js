@@ -1,17 +1,17 @@
 /** @jsx jsx */
-import { jsx, Global } from '@emotion/core';
+import { jsx, Global } from "@emotion/core";
 
-import Router from './routes/Router';
-import LayoutTheme from './layouts/LayoutTheme/LayoutTheme';
-import globalStyles from './styles/Global';
+import Router from "./routes/Router";
+import LayoutTheme from "./layouts/LayoutTheme/LayoutTheme";
+import globalStyles from "./styles/Global";
 
 const App = () => {
-  return (
-      <LayoutTheme>
-        <Global styles={globalStyles} />
-        <Router />
-      </LayoutTheme>
-  );
-}
+    return (
+        <LayoutTheme>
+            <Global styles={globalStyles} />
+            <Router />
+        </LayoutTheme>
+    );
+};
 
 export default App;
