@@ -9,7 +9,7 @@ const CardPet = ({ petCards }) => {
     return (
         <Row>
             {petCards.map((e) => (
-                <Col md={3} css={margin}>
+                <Col md={3} css={margin} key={`${e._id}`}>
                     <Link to={`/pet/${e._id}`}>
                         <Card css={petImage}>
                             <Card.Img variant="top" src={e.image} />
