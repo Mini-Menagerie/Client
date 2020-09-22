@@ -34,17 +34,17 @@ export const navbar1 = css`
 `;
 
 export const breedsButton = css`
-border: none;
-color: #272626;
-background-color: Transparent;
-`
+    border: none;
+    color: #272626;
+    background-color: Transparent;
+`;
 
 export const modalBodyStyles = css`
-  text-align: center;
+    text-align: center;
 `;
 
 export const bodyTitleStyles = css`
-  font-weight: 700;
+    font-weight: 700;
     border: none;
     color: #272626;
     background-color: Transparent;

@@ -12,68 +12,11 @@ import { container, container_animal_list } from "./PetsDetail.styles";
 // import logo from "../../assets/logo-mini-menagerie.png";
 // import Axios from "axios";
 
-// const data_carousel = [
-//     {
-//         image: "https://dummyimage.com/2000x500/007aeb/4196e5",
-//         caption: "Praesent mauris sapien, tempus nec libero vitae, tempor hendrerit ipsum."
-//     },
-//     {
-//         image: "https://dummyimage.com/2000x500/96622e/4196e5",
-//         caption: "Nunc ac euismod felis. Pellentesque habitant morbi tristique senectus et."
-//     },
-//     {
-//         image: "https://dummyimage.com/2000x500/7a446b/4196e5",
-//         caption: "Quisque in lacus dictum quam elementum tempor a ut eros."
-//     }
-// ]
-
-// const product_data = [
-//     {
-//         image: "https://dummyimage.com/286x180/b8a7b8/081285",
-//         title: "Product name",
-//         about: "Suspendisse iaculis consectetur tempor. Fusce porta elementum mauris quis ullamcorper",
-//         price: 50000
-//     },
-//     {
-//         image: "https://dummyimage.com/286x180/b8a7b8/081285",
-//         title: "Product name",
-//         about: "Suspendisse iaculis consectetur tempor. Fusce porta elementum mauris quis ullamcorper",
-//         price: 50000
-//     },
-//     {
-//         image: "https://dummyimage.com/286x180/b8a7b8/081285",
-//         title: "Product name",
-//         about: "Suspendisse iaculis consectetur tempor. Fusce porta elementum mauris quis ullamcorper",
-//         price: 50000
-//     }
-// ]
-
-// const animal_data = [
-//     {
-//         image: "https://dummyimage.com/200/000000/fff",
-//         name: "Doggy",
-//         age: 5,
-//         breed: "Bulldog"
-//     },
-//     {
-//         image: "https://dummyimage.com/200/000000/fff",
-//         name: "Catty",
-//         age: 2,
-//         breed: "Persian"
-//     },
-//     {
-//         image: "https://dummyimage.com/200/000000/fff",
-//         name: "Gukguk",
-//         age: 3,
-//         breed: "Chihuahua"
-//     }
-// ]
-
 const PetsDetail = (props) => {
     // let id = props.match.params
     // const [carousel, setCarousel] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
+    const [, setLoading] = useState(true);
+    const [, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
     const [details, setDetails] = useState({});
     const [, setProduct] = useState([]);
@@ -106,7 +49,7 @@ const PetsDetail = (props) => {
             .get(url)
             .then(function (response) {
                 console.log(response);
-                
+
                 setDetails(response.data.result);
                 setLoading(false);
             })
@@ -158,7 +101,7 @@ const PetsDetail = (props) => {
 
         // eslint-disable-next-line
     }, []);
-    console.log(details, 'details');
+    console.log(details, "details");
     return (
         <div>
             {/* Carousel Section */}
@@ -175,14 +118,14 @@ const PetsDetail = (props) => {
 
             {/* Product List Section */}
             <Container css={container}>
-              <h1>Get Necessities For Your New Best Friend</h1>
+                <h1>Get Necessities For Your New Best Friend</h1>
                 <RecommendedProducts />
             </Container>
             {/* End of Product List Section */}
 
             {/* Animal List Section */}
             <Container css={container_animal_list}>
-              <h1>Pets Available Near You</h1>
+                <h1>Pets Available Near You</h1>
                 <CardPet petCards={petCards} />
             </Container>
             {/* End of Animal List Section */}
