@@ -100,7 +100,7 @@ const AdoptionForm = () => {
 
     const formSubmission = { //left is api property, right is your property ([take this], setblahblah)
         fullName: fullname,
-        noHandhpone: phoneNumber,
+        noHandphone: phoneNumber,
         province: province,
         email:"chris@gmail.com",
         state: city,

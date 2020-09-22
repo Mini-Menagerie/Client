@@ -15,36 +15,35 @@ import {
 import ColoredLine from '../../../components/ColoredLine';
 
 const DetailSection = ({petDetails}) => {
-    console.log(petDetails);
+  console.log(petDetails);
     return (
         <Row>
             <Col xs={8} css={detail_section_col}>
                 <Row css={detail_section_col_left_first_row}>
                     <h1>{petDetails.petName}</h1>
-                    <h1>$400</h1>
+                    <h1>$ {petDetails.fee}</h1>
                 </Row>
                 <Row css={detail_section_col_left_second_row}>
-                    <p>Breeds</p>
+                    {/* <p>{petDetails.idBreed.breedName}</p> */}
                     <h5>&bull;</h5>
-                    <p>Pet Location</p>
+                    <p>{petDetails.location}</p>
                 </Row>
                 <Row css={row_line}>
                     <ColoredLine color="#000" />
                 </Row>
                 <Row css={detail_section_col_left_second_row}>
-                    <p>Gender</p>
+                    <p>{petDetails.gender}</p>
                     <h5>&bull;</h5>
-                    <p>Age</p>
+                    <p>{petDetails.age}</p>
                     <h5>&bull;</h5>
-                    <p>Size</p>
+                    <p>{petDetails.size}</p>
                 </Row>
                 <Row css={row_line}>
                     <ColoredLine color="#000" />
                 </Row>
                 <Row>
                     <h2>About</h2>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam tortor lectus, pulvinar sed gravida id, posuere vel mauris. Sed vehicula sem id lacinia porttitor. Fusce tempor quam risus, a luctus velit gravida eget. Integer nec laoreet orci. Praesent sit amet ipsum nec nisi faucibus semper in non lorem. Aliquam luctus sem quis interdum pellentesque. Aliquam et lobortis libero.
-                    Vestibulum auctor erat et lorem mollis fermentum. Suspendisse maximus scelerisque nulla vel mattis. Sed quis lacinia tellus, in ornare est. Fusce et arcu sit amet massa ornare ultricies. Aenean lobortis nisl id est euismod, volutpat porta massa varius. Morbi accumsan tristique nunc, ut porta nunc porta eget. Ut sed nunc sapien. Sed ac ligula at mi volutpat auctor.</p>
+                    <p>{petDetails.about}</p>
                 </Row>
             </Col>
             <Col xs={4} css={detail_section_col}>

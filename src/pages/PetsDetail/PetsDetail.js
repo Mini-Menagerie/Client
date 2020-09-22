@@ -76,7 +76,7 @@ import Axios from 'axios';
 
 const PetsDetail = props => {
     // let id = props.match.params
-    const [carousel, setCarousel] = useState([]);
+    // const [carousel, setCarousel] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
@@ -84,24 +84,24 @@ const PetsDetail = props => {
     const [product, setProduct] = useState([]);
     const [petCards, setPetCards] = useState([]);
 
-    function handleClick(id) {
-        window.location.replace(`/pets-detail/${id}`)
-    }
+    // function handleClick(id) {
+    //     window.location.replace(`/pets-detail/${id}`)
+    // }
 
         
-    const fetchCarousel = () => {
-        const url='http://localhost:8000/'
-        axios.get(url)
-        .then(function(response) {
-            setCarousel(response.data.result)
-            setLoading(false)
-        })
-        .catch(function(error){
-            setError(true);
-            console.log(errorMessage);
-            setLoading(false)
-        })
-    }
+    // const fetchCarousel = () => {
+    //     const url='http://localhost:8000/'
+    //     axios.get(url)
+    //     .then(function(response) {
+    //         setCarousel(response.data.result)
+    //         setLoading(false)
+    //     })
+    //     .catch(function(error){
+    //         setError(true);
+    //         console.log(errorMessage);
+    //         setLoading(false)
+    //     })
+    // }
 
     let {id} = useParams()
 
@@ -153,11 +153,12 @@ const PetsDetail = props => {
       }
     
     useEffect (() => {
-        fetchCarousel();
+        // fetchCarousel();
         fetchDetails();
         fetchProduct();
         url();
       },[]);
+
     return (
         <div>
             {/* Carousel Section */}
