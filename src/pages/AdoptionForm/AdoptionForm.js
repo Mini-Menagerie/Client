@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Col, Form, Row } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 import PrimaryButton from "../../components/Button/Button";
@@ -26,6 +26,7 @@ import hamster from "../../assets/hamsterCover.png";
 import bird from "../../assets/birdCover.png";
 
 const AdoptionForm = () => {
+    const [user, setUser] = useState([])
     const [fullname, setFullname] = useState(); //save data
     const [, setEmail] = useState();
     const [phoneNumber, setPhoneNumber] = useState();
@@ -41,7 +42,7 @@ const AdoptionForm = () => {
     const [, setWhatPets] = useState();
     const [cage, setCage] = useState();
     const [income, setIncome] = useState();
-    const [, setReason] = useState();
+    // const [, setReason] = useState();
     const [children, setChildren] = useState();
 
     const handleFullName = (e) => {
@@ -104,7 +105,7 @@ const AdoptionForm = () => {
         fullName: fullname,
         noHandphone: phoneNumber,
         province: province,
-        email: "chris@gmail.com",
+        email: "",
         state: city,
         detailAddress: address,
         work: occupation,
@@ -117,20 +118,45 @@ const AdoptionForm = () => {
         hasChildrenAtHouse: children,
     };
 
-    axios
-        .post(`http://localhost:8000/users/{$id}`, { formSubmission }) //endpoint
-        .then((res) => {
-            console.log(res);
-            console.log(res.data);
-        });
+    const [reason, setReason] = useState('')
+
+    let values= {
+        user,
+        reason
+
+    }
+    const fetchDataUser = async () => {
+        let result = await axios.get(`http://localhost:8000/users/5f69bb07acf76e287ebdc5dc`) //endpoint
+        setUser(result.data.result); 
+    }
+
+    const handleSubmitForm = async () => {
+        let result = await axios.put('http://localhost:8000/users/5f69bb07acf76e287ebdc5dc', values.user)
+        if(result.status === 200){
+            let form = await axios.post('http://localhost:8000/formRequest/create', values)
+            if(form.status === 200){
+
+            }
+        } else {
+            console.log('error')
+        }
+    }
+
+
+
+
+    useEffect(() => {
+        fetchDataUser()
+    },[])
+    console.log(user);
+    
 
     return (
         <div css={adoptionWrapper}>
             <div css={adoptionTitle}>
                 <h1>Hello There!</h1>
                 <h4>
-                    Please Fill Out the Form Below to Continue the Adoption
-                    Process
+                    Please Fill Out the Form Below to Continue the Adoption Process
                 </h4>
             </div>
             <div css={adoptionForm}>
@@ -167,7 +193,9 @@ const AdoptionForm = () => {
                                     <Form.Label>Full Name</Form.Label>
                                     <Form.Control
                                         onChange={handleFullName}
-                                        placeholder="Full Name"
+                                        placeholder={user.fullName}
+                                        value={user.fullName}
+                                        disabled
                                     />
                                 </Form.Group>
 
@@ -179,8 +207,8 @@ const AdoptionForm = () => {
                                     <Form.Control
                                         onChange={handleEmail}
                                         type="email"
-                                        placeholder="chris@gamil.com"
-                                        value="chris@gmail.com"
+                                        placeholder={user.email}
+                                        value={user.email}
                                         disabled
                                     />
                                 </Form.Group>
@@ -324,10 +352,10 @@ const AdoptionForm = () => {
                                         <Form.Check
                                             type="radio"
                                             label="Own"
-                                            name="formHorizontalRadios"
+                                            name="own"
                                             id="formHorizontalRadios1"
                                             value="own"
-                                            checked={ownRent === "Own"}
+                                            checked={ownRent === "own"}
                                             onChange={handleOwnRent}
                                         />
                                         <Form.Check
