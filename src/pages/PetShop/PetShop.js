@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import axios from "axios";
 
-<<<<<<< HEAD
 import Pagination from '../../components/Pagination'
 import ProductCard from '../../components/ProductCard/ProductCard';
 import {
@@ -13,12 +12,6 @@ import {
     sortFilter
 } from './PetShop.styles'
 import head_bg_img from '../../assets/bg-shop.jpg'  
-=======
-import Pagination from "../../components/Pagination";
-import ProductCard from "../../components/ProductCard/ProductCard";
-import { container, head_bg, caption_filter } from "./PetShop.styles";
-import head_bg_img from "../../assets/bg-shop.jpg";
->>>>>>> a529bdf6d39c8c138a4a4c4099d772a91898b369
 
 const PetShop = () => {
     const [products, setProducts] = useState([]);

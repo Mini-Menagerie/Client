@@ -1,18 +1,18 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Container, Button, Row, Col } from "react-bootstrap";
+import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 import "react-toastify/dist/ReactToastify.css";
 import {
-    topLeft,
     listCheckoutProduct,
     listCheckoutDetails,
-    button
+    button,
+    userDetails
 } from "./Checkout.styles";
 import CartProduct from "../../components/cartItem/cartItem";
 
@@ -21,7 +21,7 @@ const Checkout = () => {
     async function handleToken(token, addresses) {
         const response = await axios.post(
             "https://x6nw5.sse.codesandbox.io/checkout",
-            { token, product }
+            { token, cart }
         );
         const { status } = response.data;
         console.log("Response:", response.data);
@@ -33,42 +33,23 @@ const Checkout = () => {
     }
 
     const productCart = useSelector(state => state.addToCart)
-
-    const [product] = useState({
-        name: "Tesla Roadster",
-        price: 64998.67,
-        description: "Cool car"
-    });
-
     console.log(productCart, 'product cart')
-    const [user,] = useState({
-        fullName: "Ridho Abdul Majid",
-        detailAdress: "Citayam",
-        noHandphone: "087882252815",
-    });
-    // const [cart,] = useState([
-    //     {
-    //         image:
-    //             "https://img-a.udemycdn.com/course/750x422/147028_d030_9.jpg",
-    //         productName: "ROYAL CANIN KITTEN",
-    //         quantity: 2,
-    //         price: 100000,
-    //     },
-    //     {
-    //         image:
-    //             "https://img-a.udemycdn.com/course/750x422/147028_d030_9.jpg",
-    //         productName: "ROYAL CANIN ADULT",
-    //         quantity: 3,
-    //         price: 100000,
-    //     },
-    //     {
-    //         image:
-    //             "https://img-a.udemycdn.com/course/750x422/147028_d030_9.jpg",
-    //         productName: "ROYAL CANIN ADULT",
-    //         quantity: 3,
-    //         price: 100000,
-    //     },
-    // ]);
+
+    const [user, setUser] = useState({})
+    const userLogin = JSON.parse(localStorage.getItem('user'))
+    console.log(userLogin)
+
+    const getUser = async () => {
+        // setLoading(true);
+        const response = await axios.get(`http://localhost:8000/userAccount/${userLogin.id}`);
+        setUser(response.data.result);
+        // setLoading(false);
+    };
+    useEffect(() => {
+        getUser();
+    }, []);
+    console.log(user)
+    console.log(user.idUser)
 
     const cart = JSON.parse(localStorage.getItem('cartProduct'))
     let initialValue = 0;
@@ -86,22 +67,63 @@ const Checkout = () => {
     let t = price.reduce((a, b) => a + b);
 
     let cartProduct = JSON.parse(localStorage.getItem('cartProduct'))
+
+    const storeAddress = (event) => {
+        event.preventDefault()
+    }
     return (
         <Container>
-            <div css={topLeft}>
-                <h3>Checkout</h3>
-                <h5>Shipping Address :</h5>
-                <h6>{user.fullName}</h6>
-                <h6>{user.detailAdress}</h6>
-                <h6>{user.noHandphone}</h6>
-                <Button variant="primary">
-                    Enter A Different Address
-                </Button>{" "}
-            </div>
+            <Row style={{marginTop: "10px"}}>
+                <h1>User Details</h1>
+            </Row>
+            <Row>
+                <Col xs={7} css={userDetails}>
+                    <Form>
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="formGridName">
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control type="text" placeholder="Enter name" disabled />
+                            </Form.Group>
 
-            <div>
-                <p>{cartProduct[0].productName}</p>
-            </div>
+                            <Form.Group as={Col} controlId="formGridEmail">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control type="email" placeholder="Email" disabled />
+                            </Form.Group>
+                        </Form.Row>
+
+                        <Form.Group controlId="formGridAddress">
+                            <Form.Label>Address</Form.Label>
+                            <Form.Control placeholder="Address" />
+                        </Form.Group>
+
+                        <Form.Row>
+                            <Form.Group as={Col} controlId="formGridCity">
+                                <Form.Label>City</Form.Label>
+                                <Form.Control />
+                            </Form.Group>
+
+                            {/* <Form.Group as={Col} controlId="formGridState">
+                                <Form.Label>State</Form.Label>
+                                <Form.Control as="select" defaultValue="Choose...">
+                                    <option>Choose...</option>
+                                    <option>...</option>
+                                </Form.Control>
+                            </Form.Group> */}
+
+                            <Form.Group as={Col} controlId="formGridZip">
+                                <Form.Label>Zip</Form.Label>
+                                <Form.Control />
+                            </Form.Group>
+                        </Form.Row>
+
+                        <div css={button}>
+                            <Button>Save Address</Button>
+                        </div>
+                    </Form>
+                </Col>
+                <Col>
+                </Col>
+            </Row>
 
             <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Col xs={7} css={listCheckoutProduct}>
@@ -114,7 +136,7 @@ const Checkout = () => {
                         </Row>
                         <Row style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
                             <Col xs={7} style={{ paddingLeft: '0px' }}>
-                                <p>Subtotal (${cartProduct.length} items):</p>
+                                <p>Subtotal ({cartProduct.length} items):</p>
                             </Col>
                             <Col xs={5}>
                                 <p>Rp. {t}</p>
@@ -125,7 +147,7 @@ const Checkout = () => {
                                 <p>Shipping Fee:</p>
                             </Col>
                             <Col xs={5}>
-                                <p>Rp. 12000</p>
+                                <p>Rp. 10000</p>
                             </Col>
                         </Row>
                         <hr />
@@ -134,7 +156,7 @@ const Checkout = () => {
                                 <p style={{ fontWeight: '600' }}>Total:</p>
                             </Col>
                             <Col xs={5}>
-                                <p style={{ fontWeight: '600' }}>Rp {t + 12000}</p>
+                                <p style={{ fontWeight: '600' }}>Rp {t + 10000}</p>
                             </Col>
                         </Row>
                         <div css={button}>
@@ -145,7 +167,7 @@ const Checkout = () => {
                                 stripeKey="pk_test_51HUN7sAjKylxkZ24xTuIpYu3NQco33z811UgWTi4ihOvCKIf435HdOw9sGOrii2xvAo3wrrKkl4UHdOx9XJSFJP000su8RU6tk"
                                 token={handleToken}
                                 currency="IDR"
-                                amount={(t + 12000)*100}
+                                amount={(t + 10000) * 100}
                                 billingAddress
                                 shippingAddress
                             />
