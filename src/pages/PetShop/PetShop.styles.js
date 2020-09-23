@@ -11,10 +11,7 @@ object-fit: cover;
 background-position: center center;
 background-repeat: no-repeat;
 `
-
-export const caption_filter = css`
-display: flex; 
-justify-content: space-between; 
+export const sortFilter = css`
+display: flex;
 align-items: center;
-padding: 0px; 
 `
