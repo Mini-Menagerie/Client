@@ -18,6 +18,7 @@ import ProductDetail from '../pages/ProductDetail/ProductDetail';
 import Checkout from '../pages/Checkout/Checkout';
 import SearchPage from '../pages/searchPage/searchPage';
 import ShoppingCart from '../pages/ShoppingCart/ShoppingCart'
+import CategoryPet from '../pages/CategoryAllPets/CategoryAllPets';
 
 
 const Router = () => (
@@ -72,6 +73,8 @@ const Router = () => (
       <Route
         exact path={routes.SHOPPINGCART}
         component={ShoppingCart}
+        exact path={routes.CATEGORYPET}
+        component={CategoryPet}
       />
     </Switch>
   </BrowserRouter>

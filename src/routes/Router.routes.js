@@ -11,4 +11,5 @@ export default {
   PRODUCTDETAIL: '/product/:id',
   SEARCHPAGE: '/search-page',
   SHOPPINGCART: '/cart'
+  CATEGORYPET: '/category-pet',
 }
