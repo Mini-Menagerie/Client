@@ -1,31 +1,36 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
-import Axios from 'axios';
-import { useState } from 'react';
-import { Tabs, Tab } from 'react-bootstrap'
+import axios from 'axios';
+import { useState, useEffect } from 'react';
+import { Tabs, Tab, Container } from 'react-bootstrap'
+import { useParams } from 'react-router-dom'
 
-import aboutMe from '../../components/AboutMe/aboutMe'
-import accountSettings from '../../components/AboutMe/accountSettings'
+import AboutMeTab from '../../components/AboutMe/aboutMeTab'
+import { containerWrapper, marginSet } from './AboutMe.styles'
+import AccountSettings from '../../components/AboutMe/accountSettings'
 
 
-const allProfile = () => {
+const AllProfile = () => {
   const [loading, setLoading] = useState (true);
   const [error, setError] = useState (false);
   const [errorMessage, setErrorMessage] = useState ();
   const [aboutMe, setAboutMe] = useState([]);
+  const [key, setKey] = useState('home');
 
-  let {id} = useParams()
 
-  const handleEditProfile = (e) => {
-    let result = await axios.put(`http://localhost:8000/users/${id}`)
-    setAboutMe(e.target.value)
-  }
+  // const handleEditProfile = async (e) => {
+  //   let result = await axios.put(`http://localhost:8000/users/${id}`)
+  //   setAboutMe(e.target.value)
+ //put add a pet pop up in pet up for adoption
+
+  let userLogin = JSON.parse(localStorage.getItem('user'))
+  console.log(userLogin.id);
 
   const profile = async () => {
-    const url = `http://localhost:8000/users/${id}`
-    axios.get(url)
+    const url = `http://localhost:8000/userAccount/${userLogin.id}`
+    await axios.get(url)
     .then(function(response) {
-      console.log(response);
+      console.log(response, 'response');
       setAboutMe(response.data.result)
       setLoading(false)
     })
@@ -40,27 +45,26 @@ const allProfile = () => {
   },[]);
 
 return (
-    <div>
-      <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
-      <Tab eventKey="home" title="About Me">
-        <aboutMe />
-      </Tab>
-      <Tab eventKey="profile" title="Account Settings">
-        <accountSettings handleEditProfile={handleEditProfile} />
-      </Tab>
-      <Tab eventKey="contact" title="Pet Up For Adoption">
-        <Sonnet />
-      </Tab>
-      <Tab eventKey="contact" title="Pet List">
-        <Sonnet />
-      </Tab>
-      <Tab eventKey="contact" title="Adoption Request">
-        <Sonnet />
-      </Tab>
-    </Tabs>
-  </div>
+    <Container fluid css={containerWrapper}>
+      <div css={marginSet}>
+        <Tabs
+          id="controlled-tab-example"
+          activeKey={key}
+          onSelect={(k) => setKey(k)}
+        >
+          <Tab eventKey="home" title="About Me">
+            <AboutMeTab profile={aboutMe}/ >
+          </Tab>
+          <Tab eventKey="profile" title="Account Settings">
+            {/* <AccountSettings/> */}
+          </Tab>
+          <Tab eventKey="contact" title="Pets Up For Adoption">
+            test 3
+          </Tab>
+        </Tabs>
+        </div>
+  </Container>
 )
 }
 
-export default allProfile;
- //put add a pet pop up in pet up for adoption
+export default AllProfile;

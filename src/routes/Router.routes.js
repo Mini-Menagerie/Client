@@ -13,4 +13,5 @@ export default {
     SHOPPINGCART: "/cart",
     CATEGORYPET: "/category-pet",
     BREEDBYCATEGORY: "/all-breeds/category/:category",
+    ABOUTME:"/about-me"
 };

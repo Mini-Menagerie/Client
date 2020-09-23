@@ -6,11 +6,10 @@ import { useHistory } from 'react-router-dom'
 
 import PrimaryButton from "../../components/Button/Button";
 
-const accountSettings = ({account, props}) => {
+const AccountSettings = ({ account, props }) => {
     console.log(account);
-
-    const [profile, setProfile] = useState(false)
-
+    // const [profile, setProfile] = useState(false)
+    //onclick={props.handleEditProfile} di icon, onChange={handleEditProfile}
     return (
         <Container fluid>
             <div>
@@ -22,16 +21,16 @@ const accountSettings = ({account, props}) => {
                     <Form.Group controlId="formGridAddress1">
                                 <Form.Label>Full Name:</Form.Label>
                                 <Form.Control disabled
-                                    placeholder={user.fullName}
+                                    placeholder={account.fullName}
                                 />
-                                <i class="fas fa-edit" onclick={props.handleEditProfile}></i>
+                                <i class="fas fa-edit"></i>
                             </Form.Group>
                     </Row>
                 </Col>
-                <PrimaryButton onChange={handleEditProfile}>Submit Changes</PrimaryButton>
+                <PrimaryButton>Submit Changes</PrimaryButton>
             </div>
         </Container>
     )
 }
 
-export default accountSettings;
+export default AccountSettings;
