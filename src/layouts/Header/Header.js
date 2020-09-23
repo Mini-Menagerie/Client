@@ -145,6 +145,11 @@ const Header = () => {
         setHandleLoginModal(false);
     };
 
+    const redirect = (event) => {
+        event.preventDefault()
+        window.location.href = 'http://localhost:3000/checkout'
+    }
+    
     if(user === null) {
         return (
             <React.Fragment>
@@ -190,7 +195,7 @@ const Header = () => {
                             <button type="submit" css={searchButton}>
                                 <i className="fas fa-search"></i>
                             </button>
-                            <Button type="submit" css={cart}>
+                            <Button type="submit" onClick={redirect} css={cart}>
                                 <i className="fas fa-shopping-cart fa-lg"></i>
                                 <Badge pill variant="danger">
                                     {productCart.cart !== undefined &&
@@ -198,6 +203,7 @@ const Header = () => {
                                 </Badge>
                             </Button>
                         </form>
+
                     </div>
                         <div>
                             <Button variant="light" onClick={handleShow}>
