@@ -96,7 +96,8 @@ const LandingPage = () => {
 
     const url = () => {
         const url = "http://localhost:8000/pet";
-        axios.get(url)
+        axios
+            .get(url)
             .then(function (response) {
                 console.log(response);
                 const limit = response.data.result.slice(0, 4);
@@ -124,7 +125,7 @@ const LandingPage = () => {
             <div css={wrapperCover}>
                 <h2 css={h2}>Provide For Those Who Needs It.</h2>
                 <p css={p}>Save A Live Today</p>
-                <Link to="/" css={linkTo}>
+                <Link to="/category-pet" css={linkTo}>
                     <PrimaryButton type="submit">Start Searching</PrimaryButton>
                 </Link>
             </div>
