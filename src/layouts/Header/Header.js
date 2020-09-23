@@ -145,7 +145,7 @@ const Header = () => {
 
     const redirect = (event) => {
         event.preventDefault();
-        window.location.href = "http://localhost:3000/checkout";
+        window.location.href = "http://localhost:3000/checkout"
     };
 
     if (user === null) {

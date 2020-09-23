@@ -34,14 +34,8 @@ const Checkout = () => {
     const productCart = useSelector((state) => state.addToCart);
     console.log(productCart, "product cart");
 
-<<<<<<< HEAD
     const [user, setUser] = useState({})
     const userLogin = JSON.parse(localStorage.getItem('user'))
-=======
-    const [user, setUser] = useState({});
-    const userLogin = JSON.parse(localStorage.getItem("user"));
-    console.log(userLogin);
->>>>>>> a8e1f9997077a30dc412c6d2bdaa93b6ffa77906
 
     const getUser = async () => {
         // setLoading(true);
@@ -53,26 +47,24 @@ const Checkout = () => {
     };
     useEffect(() => {
         getUser();
-
-        //eslint-disable-next-line
     }, []);
     console.log(user);
     console.log(user.idUser);
 
     const cart = JSON.parse(localStorage.getItem("cartProduct"));
-    let initialValue = 0;
+    // let initialValue = 0;
 
     const price = cart.map((item) => {
         return item.price * item.quantity;
     });
-    const hitung = (accumulator, item) => {
-        return accumulator + item;
-    };
-    const getQty = cart.map((item) => {
-        return item.quantity;
-    });
-    const qty = getQty.reduce(hitung, initialValue);
-    let t = price.reduce((a, b) => a + b);
+    // const hitung = (accumulator, item) => {
+    //     return accumulator + item;
+    // };
+    // const getQty = cart.map((item) => {
+    //     return item.quantity;
+    // });
+    // const qty = getQty.reduce(hitung, initialValue);
+    let totalPrice = price.reduce((a, b) => a + b);
 
     let cartProduct = JSON.parse(localStorage.getItem("cartProduct"));
 
@@ -90,28 +82,12 @@ const Checkout = () => {
                         <Form.Row>
                             <Form.Group as={Col} controlId="formGridName">
                                 <Form.Label>Name</Form.Label>
-<<<<<<< HEAD
-                                <Form.Control value={user.idUser != undefined && user.idUser.fullName} type="text" placeholder="Enter name" disabled />
-=======
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Enter name"
-                                    disabled
-                                />
->>>>>>> a8e1f9997077a30dc412c6d2bdaa93b6ffa77906
+                                <Form.Control value={user.idUser !== undefined && user.idUser.fullName} type="text" placeholder="Enter name" disabled />
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="formGridEmail">
                                 <Form.Label>Email</Form.Label>
-<<<<<<< HEAD
-                                <Form.Control value={user.email != undefined && user.email} type="email" placeholder="Email" disabled />
-=======
-                                <Form.Control
-                                    type="email"
-                                    placeholder="Email"
-                                    disabled
-                                />
->>>>>>> a8e1f9997077a30dc412c6d2bdaa93b6ffa77906
+                                <Form.Control value={user.email !== undefined && user.email} type="email" placeholder="Email" disabled />
                             </Form.Group>
                         </Form.Row>
 
@@ -173,7 +149,7 @@ const Checkout = () => {
                                 <p>Subtotal ({cartProduct.length} items):</p>
                             </Col>
                             <Col xs={5}>
-                                <p>Rp. {t}</p>
+                                <p>Rp. {totalPrice}</p>
                             </Col>
                         </Row>
                         <Row
@@ -197,7 +173,7 @@ const Checkout = () => {
                             </Col>
                             <Col xs={5}>
                                 <p style={{ fontWeight: "600" }}>
-                                    Rp {t + 10000}
+                                    Rp {totalPrice + 10000}
                                 </p>
                             </Col>
                         </Row>
@@ -209,7 +185,7 @@ const Checkout = () => {
                                 stripeKey="pk_test_51HUN7sAjKylxkZ24xTuIpYu3NQco33z811UgWTi4ihOvCKIf435HdOw9sGOrii2xvAo3wrrKkl4UHdOx9XJSFJP000su8RU6tk"
                                 token={handleToken}
                                 currency="IDR"
-                                amount={(t + 10000) * 100}
+                                amount={(totalPrice + 10000) * 100}
                                 billingAddress
                                 shippingAddress
                             />
