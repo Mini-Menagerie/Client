@@ -44,14 +44,15 @@ const Header = () => {
     });
     let user = JSON.parse(localStorage.getItem("user"));
     let loggedUser = "";
-    if (user) {
-        loggedUser = user.email;
-    }
-
     const [formLogin, setFormLogin] = useState({
         email: "",
         password: "",
     });
+    const [search, setSearch] = useState("");
+    if (user) {
+        loggedUser = user.email;
+    }
+
     const handleLogin = (event) => {
         event.preventDefault();
         setFormLogin({
@@ -148,6 +149,16 @@ const Header = () => {
         window.location.href = "http://localhost:3000/checkout";
     };
 
+    const searchBar = (event) => {
+        event.preventDefault();
+
+        localStorage.setItem("search", search);
+        window.location.href = "/search-page";
+    };
+    const handleSearch = (event) => {
+        setSearch(event.target.value);
+    };
+
     if (user === null) {
         return (
             <React.Fragment>
@@ -193,8 +204,14 @@ const Header = () => {
                                     css={searchText}
                                     placeholder="Search your future best friend"
                                     style={{ maxWidth: "100%" }}
+                                    onChange={handleSearch}
+                                    value={search}
                                 ></input>
-                                <button type="submit" css={searchButton}>
+                                <button
+                                    type="submit"
+                                    css={searchButton}
+                                    onClick={searchBar}
+                                >
                                     <i className="fas fa-search"></i>
                                 </button>
                                 <Button
