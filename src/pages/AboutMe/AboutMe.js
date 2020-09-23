@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
-import Axios from 'axios';
-import { useState } from 'react';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { Tabs, Tab } from 'react-bootstrap'
 
 import aboutMe from '../../components/AboutMe/aboutMe'
@@ -16,7 +16,7 @@ const allProfile = () => {
 
   let {id} = useParams()
 
-  const handleEditProfile = (e) => {
+  const handleEditProfile = async (e) => {
     let result = await axios.put(`http://localhost:8000/users/${id}`)
     setAboutMe(e.target.value)
   }

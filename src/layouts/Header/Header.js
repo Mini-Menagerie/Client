@@ -256,21 +256,21 @@ const Header = () => {
                                             </Col>
                                         </Row>
                                     </Form>
-                                    <p>Or login with</p>
+                                    <p>Or Login With</p>
                                     <div css={wrapperButtonStyles}>
                                         <Button
                                             css={buttonLoginStyles}
                                             variant="primary"
                                             onClick={handleGoogleLogin}
                                         >
-                                            Sig in with Google
+                                            Sign In With Google
                                         </Button>
                                         <Button
                                             css={buttonLoginStyles}
                                             variant="primary"
                                             onClick={handleFacebookLogin}
                                         >
-                                            Sign in with Facebook
+                                            Sign In With Facebook
                                         </Button>
                                         <p css={buttonLoginStyles}>
                                             Need an account?
@@ -353,21 +353,21 @@ const Header = () => {
                                                     variant="primary"
                                                     onClick={handleGoogleLogin}
                                                 >
-                                                    Signup with Google
+                                                    Sign Up With Google
                                         </Button>
                                                 <Button
                                                     css={buttonLoginStyles}
                                                     variant="primary"
                                                     onClick={handleFacebookLogin}
                                                 >
-                                                    Signup with Facebook
+                                                    Sign Up With Facebook
                                         </Button>
                                                 <Button
                                                     css={buttonLoginStyles}
                                                     variant="primary"
                                                     onClick={handleShowFormSignUp}
                                                 >
-                                                    Signup with Email
+                                                    Sign Up With Email
                                         </Button>
                                                 <p css={buttonLoginStyles}>
                                                     Already have an account?
@@ -480,7 +480,7 @@ const Header = () => {
                                         <Row>
                                             <Col>
                                                 <Button onClick={handleLoginModal}>
-                                                    Forgot password?
+                                                    Forgot Password?
                                                 </Button>
                                             </Col>
                                         </Row>
@@ -492,17 +492,17 @@ const Header = () => {
                                             variant="primary"
                                             onClick={handleGoogleLogin}
                                         >
-                                            Sig in with Google
+                                            Sign In with Google
                                         </Button>
                                         <Button
                                             css={buttonLoginStyles}
                                             variant="primary"
                                             onClick={handleFacebookLogin}
                                         >
-                                            Sign in with Facebook
+                                            Sign In With Facebook
                                         </Button>
                                         <p css={buttonLoginStyles}>
-                                            Need an account?
+                                            Need an Account?
                                             <Button onClick={handleSignUpModal}>
                                                 Sign Up
                                             </Button>
@@ -562,7 +562,7 @@ const Header = () => {
                                                 <Row>
                                                     <Col>
                                                         <p css={buttonLoginStyles}>
-                                                            Already have an account?
+                                                            Already Have an Account?
                                                         <Button
                                                                 onClick={
                                                                     handleLoginModal
@@ -582,24 +582,24 @@ const Header = () => {
                                                     variant="primary"
                                                     onClick={handleGoogleLogin}
                                                 >
-                                                    Signup with Google
+                                                    Sign Up with Google
                                         </Button>
                                                 <Button
                                                     css={buttonLoginStyles}
                                                     variant="primary"
                                                     onClick={handleFacebookLogin}
                                                 >
-                                                    Signup with Facebook
+                                                    Sign Up with Facebook
                                         </Button>
                                                 <Button
                                                     css={buttonLoginStyles}
                                                     variant="primary"
                                                     onClick={handleShowFormSignUp}
                                                 >
-                                                    Signup with Email
+                                                    Sign Up with Email
                                         </Button>
                                                 <p css={buttonLoginStyles}>
-                                                    Already have an account?
+                                                    Already Have An account?
                                             <Button onClick={handleLoginModal}>
                                                         Log In
                                             </Button>

@@ -17,6 +17,7 @@ import AdoptedHistory from '../pages/AdoptedHistory/AdoptedHistory';
 import ProductDetail from '../pages/ProductDetail/ProductDetail';
 import Checkout from '../pages/Checkout/Checkout';
 import SearchPage from '../pages/searchPage/searchPage';
+import AboutMe from '../pages/AboutMe/AboutMe'
 
 
 const Router = () => (
@@ -67,6 +68,10 @@ const Router = () => (
       <Route
         exact path={routes.PRODUCTDETAIL}
         component={ProductDetail}
+      />
+      <Route
+        exact path={routes.ABOUTME}
+        component={AboutMe}
       />
     </Switch>
   </BrowserRouter>
