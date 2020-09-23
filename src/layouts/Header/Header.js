@@ -64,7 +64,7 @@ const Header = () => {
     const logout = async (event) => {
         event.preventDefault();
         localStorage.clear();
-        window.location.reload();
+        window.location.replace('/');
     };
 
     const handleLoginSubmit = async (event) => {
@@ -84,6 +84,9 @@ const Header = () => {
         } catch (error) {
             if (error.message === "Request failed with status code 400") {
                 alert("password salah");
+                setShow(false);
+            }else if(error.message === "Request failed with status code 404"){
+                alert("Email sudah terdaftar menggunakan email social media")
                 setShow(false);
             }
         }
@@ -109,7 +112,11 @@ const Header = () => {
             }
         } catch (error) {
             if (error.message === "Request failed with status code 400") {
-                alert("email sudah terdaftar");
+                alert("Email sudah terdaftar, gunakan Email lain");
+                setShow(false);
+            }
+            else if (error.message === "Request failed with status code 404") {
+                alert("Email sudah terdaftar melalui Social Media, gunakan Email lain");
                 setShow(false);
             }
         }
