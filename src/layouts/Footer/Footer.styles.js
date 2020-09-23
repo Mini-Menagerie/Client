@@ -6,6 +6,7 @@ export const wrapperStyles = css`
     display: flex;
     flex-wrap: wrap;
     background-color: #209516;
+    justify-content: space-between;
 `;
 
 export const imageLogo = css`
@@ -40,7 +41,7 @@ export const subscription = css`
 
 export const wrapperStyles2 = css`
     background-color: #12520c;
-    padding: 15px;
+    padding-top: 15px;
     font-size: 13px;
 
     & i {
@@ -67,6 +68,8 @@ export const icon = css`
 export const subWrapper = css`
     display: flex;
     justify-content: center;
+    text-align: center;
+    align-content: center;
 `;
 
 export const subText = css `

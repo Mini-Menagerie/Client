@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Tabs, Tab } from 'react-bootstrap'
 
 import aboutMe from '../../components/AboutMe/aboutMe'
+import accountSettings from '../../components/AboutMe/accountSettings'
 
 
 const allProfile = () => {
@@ -15,6 +16,10 @@ const allProfile = () => {
 
   let {id} = useParams()
 
+  const handleEditProfile = (e) => {
+    let result = await axios.put(`http://localhost:8000/users/${id}`)
+    setAboutMe(e.target.value)
+  }
 
   const profile = async () => {
     const url = `http://localhost:8000/users/${id}`
@@ -41,7 +46,7 @@ return (
         <aboutMe />
       </Tab>
       <Tab eventKey="profile" title="Account Settings">
-        <Sonnet />
+        <accountSettings handleEditProfile={handleEditProfile} />
       </Tab>
       <Tab eventKey="contact" title="Pet Up For Adoption">
         <Sonnet />
@@ -57,4 +62,5 @@ return (
 )
 }
 
+export default allProfile;
  //put add a pet pop up in pet up for adoption
