@@ -12,4 +12,5 @@ export default {
     SEARCHPAGE: "/search-page",
     SHOPPINGCART: "/cart",
     CATEGORYPET: "/category-pet",
+    BREEDBYCATEGORY: "/all-breeds/category/:category",
 };
