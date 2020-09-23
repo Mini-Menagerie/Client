@@ -7,10 +7,11 @@ import axios from 'axios'
 import Pagination from '../../components/Pagination'
 import ProductCard from '../../components/ProductCard/ProductCard';
 import {
-    container, head_bg, caption_filter
+    container,
+    head_bg,
+    sortFilter
 } from './PetShop.styles'
-import head_bg_img from '../../assets/bg-shop.jpg'
-import { product } from '../../redux/reducers/addToCartReducer';
+import head_bg_img from '../../assets/bg-shop.jpg'  
 
 const PetShop = () => {
     const [products, setProducts] = useState([])
@@ -42,12 +43,9 @@ const PetShop = () => {
     //change page
     const paginate = pageNumber => setCurrentPage(pageNumber)
 
+    //handle sorting product
     const handleChangeSort = (event) => {
         setSort(event.target.value)
-    }
-
-    const handleChangeFilter = (event) => {
-        setFilter(event.target.value)
     }
 
     const getSort = async () => {
@@ -55,6 +53,11 @@ const PetShop = () => {
         let url = `http://localhost:8000/product/sort/?variable=${variableSort[0]}&by=${variableSort[1]}`
         const response = await axios.get(url)
         setProducts(response.data.result)
+    }
+
+    //handle filter product
+    const handleChangeFilter = (event) => {
+        setFilter(event.target.value)
     }
 
     const getFilter = async () => {
@@ -76,12 +79,12 @@ const PetShop = () => {
             {/* Product List */}
             <Container css={container}>
                 <Row>
-                    <Col xs={10} css={caption_filter}>
-                        <p>(1-9 of {products.length} results)</p>
-                        <p>Sort by</p>
+                    <Col xs={6} style={{display: 'flex', alignItems: 'center'}}>
+                        <p>{products.length} results</p>
                     </Col>
-                    <Col>
-                        <Form.Group as={Col} controlId="formGridFilter">
+                    <Col css={sortFilter}>
+                        <p>Sort by</p>
+                        <Form.Group as={Col} controlId="formGridSort">
                             <Form.Control as="select" defaultValue="Newest" onChange={handleChangeSort} onClick={getSort}>
                                 <option value="createdAt-desc">Newest</option>
                                 <option value="price-desc">Price (High to Low)</option>
@@ -89,10 +92,11 @@ const PetShop = () => {
                             </Form.Control>
                         </Form.Group>
                     </Col>
-                    <Col>
+                    <Col css={sortFilter}>
+                        <p>Filter by</p>
                         <Form.Group as={Col} controlId="formGridFilter">
                             <Form.Control as="select" defaultValue="Newest" onChange={handleChangeFilter} onClick={getFilter}>
-                                <option value="catfood">Cat FOod</option>
+                                <option value="catfood">Cat Food</option>
                                 <option value="dogfood">Dog Food</option>
                                 <option value="acc">Accessories</option>
                                 <option value="vitdrugs">Vitamin</option>
