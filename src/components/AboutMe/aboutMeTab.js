@@ -1,8 +1,7 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
-import { Col, Row, Container } from 'react-bootstrap'
-import ReactFilestack from 'filestack-react';
- 
+import { jsx } from "@emotion/core";
+import { Col, Row, Container } from "react-bootstrap";
+import ReactFilestack from "filestack-react";
 
 import PrimaryButton from "../Button/Button";
 import {
@@ -11,30 +10,41 @@ import {
     welcomeText,
     avatar,
     rowMargin2,
-    editProfile
-}
-from './aboutMeTab.styles'
+    editProfile,
+} from "./aboutMeTab.styles";
 
-const AboutMeTab = ({profile}) => {
+const AboutMeTab = ({ profile }) => {
     console.log(profile.userId);
     return (
         <Container fluid css={containerWrapper}>
             <div>
-            <h1 css={welcomeText}>Welcome,</h1>
+                <h1 css={welcomeText}>Welcome,</h1>
             </div>
             <div>
                 <Row css={rowMargin}>
                     <Col xs={6}>
-                    <img  css={avatar} src={profile.userId !== undefined && profile.userId.avatar}/>
-                    <ReactFilestack
-                    apikey={"AugqfuGzTQouENQs5OOe2z"}
-                    customRender={({ onPick }) => (
-                        <div>
-                        <PrimaryButton css={rowMargin2} onClick={onPick}>Upload Photo</PrimaryButton>
-                        </div>
-                    )}
-                    onSuccess={(res) => console.log(res)}
-                    />
+                        <img
+                            css={avatar}
+                            src={
+                                profile.userId !== undefined &&
+                                profile.userId.avatar
+                            }
+                            alt="avatar"
+                        />
+                        <ReactFilestack
+                            apikey={"AugqfuGzTQouENQs5OOe2z"}
+                            customRender={({ onPick }) => (
+                                <div>
+                                    <PrimaryButton
+                                        css={rowMargin2}
+                                        onClick={onPick}
+                                    >
+                                        Upload Photo
+                                    </PrimaryButton>
+                                </div>
+                            )}
+                            onSuccess={(res) => console.log(res)}
+                        />
                     </Col>
                     <Col xs={6}>
                         <p>Name: </p>
@@ -74,7 +84,7 @@ const AboutMeTab = ({profile}) => {
             <div>
                 <Row>
                     <Col xs={6}>
-                       <p>City:</p>
+                        <p>City:</p>
                     </Col>
                     <Col xs={6}>
                         <p>Zip Code:</p>
@@ -82,14 +92,12 @@ const AboutMeTab = ({profile}) => {
                 </Row>
             </div>
             <div>
-                    <p>
-                        Address: 
-                    </p>
+                <p>Address:</p>
             </div>
             <PrimaryButton css={editProfile}>Edit Profile</PrimaryButton>
         </Container>
-    )
-}
+    );
+};
 
 export default AboutMeTab;
 //put edit profile here
