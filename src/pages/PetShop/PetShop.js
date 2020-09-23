@@ -4,14 +4,20 @@ import { useEffect, useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
 import axios from "axios";
 
-import Pagination from "../../components/Pagination";
-import ProductCard from "../../components/ProductCard/ProductCard";
-import { container, head_bg, caption_filter } from "./PetShop.styles";
-import head_bg_img from "../../assets/bg-shop.jpg";
+import Pagination from '../../components/Pagination'
+import ProductCard from '../../components/ProductCard/ProductCard';
+import {
+    container,
+    head_bg,
+    sortFilter
+} from './PetShop.styles'
+import head_bg_img from '../../assets/bg-shop.jpg'  
 
 const PetShop = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [sort, setSort] = useState('');
+    const [filter, setFilter] = useState('');
     const [currentProduct, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(8);
 
@@ -43,6 +49,29 @@ const PetShop = () => {
     //change page
     const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+    //handle sorting product
+    const handleChangeSort = (event) => {
+        setSort(event.target.value)
+    }
+
+    const getSort = async () => {
+        const variableSort = sort.split('-')
+        let url = `http://localhost:8000/product/sort/?variable=${variableSort[0]}&by=${variableSort[1]}`
+        const response = await axios.get(url)
+        setProducts(response.data.result)
+    }
+
+    //handle filter product
+    const handleChangeFilter = (event) => {
+        setFilter(event.target.value)
+    }
+
+    const getFilter = async () => {
+        let url = `http://localhost:8000/product/filter/?variable=${filter}`
+        const response = await axios.get(url)
+        setProducts(response.data.result)
+    }
+
     return (
         <div>
             {/* Head Background */}
@@ -56,17 +85,27 @@ const PetShop = () => {
             {/* Product List */}
             <Container css={container}>
                 <Row>
-                    <Col xs={10} css={caption_filter}>
-                        <p>(1-9 of {products.length} results)</p>
-                        <p>Sort by</p>
+                    <Col xs={6} style={{display: 'flex', alignItems: 'center'}}>
+                        <p>{products.length} results</p>
                     </Col>
-                    <Col>
+                    <Col css={sortFilter}>
+                        <p>Sort by</p>
+                        <Form.Group as={Col} controlId="formGridSort">
+                            <Form.Control as="select" defaultValue="Newest" onChange={handleChangeSort} onClick={getSort}>
+                                <option value="createdAt-desc">Newest</option>
+                                <option value="price-desc">Price (High to Low)</option>
+                                <option value="price-asc">Price (Low to High)</option>
+                            </Form.Control>
+                        </Form.Group>
+                    </Col>
+                    <Col css={sortFilter}>
+                        <p>Filter by</p>
                         <Form.Group as={Col} controlId="formGridFilter">
-                            <Form.Control as="select" defaultValue="Newest">
-                                <option>Newest</option>
-                                <option>Price (High to Low)</option>
-                                <option>Price (Low to High)</option>
-                                <option>Best Selling</option>
+                            <Form.Control as="select" defaultValue="Newest" onChange={handleChangeFilter} onClick={getFilter}>
+                                <option value="catfood">Cat Food</option>
+                                <option value="dogfood">Dog Food</option>
+                                <option value="acc">Accessories</option>
+                                <option value="vitdrugs">Vitamin</option>
                             </Form.Control>
                         </Form.Group>
                     </Col>

@@ -9,15 +9,18 @@ margin-right: 150px;
 `
 
 export const coverImages = css `
-max-width: 230px;
-margin-right: 10px;
-margin-left: 10px;
+max-width: 100%;
+width: 200px;
+height: auto;
 `
 
 export const cover = css `
 display: flex;
-justify-content: center;
+justify-content: space-between;
 margin-top: 50px;
+margin-left: 150px;
+margin-right: 150px;
+
 `
 
 export const formTitle = css `
@@ -72,4 +75,5 @@ margin-bottom: 50px;
 `
 export const buttonPlacement = css `
 justify-content: center;
+margin-bottom: 50px;
 `

@@ -128,7 +128,7 @@ const AdoptionForm = () => {
                 </div>
                 <div css={form}>
                     <div>
-                        <h2 css={formTitle}>PET ADOPTION FORM</h2>
+                        <h2 css={formTitle} >PET ADOPTION FORM</h2>
                     </div>
                     <div css={formInput}>
                         <h3 css={personalData}>PERSONAL DATA</h3>

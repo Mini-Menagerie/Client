@@ -18,6 +18,8 @@ import ProductDetail from '../pages/ProductDetail/ProductDetail';
 import Checkout from '../pages/Checkout/Checkout';
 import SearchPage from '../pages/searchPage/searchPage';
 import AboutMe from '../pages/AboutMe/AboutMe'
+import ShoppingCart from '../pages/ShoppingCart/ShoppingCart'
+import CategoryPet from '../pages/CategoryAllPets/CategoryAllPets';
 
 
 const Router = () => (
@@ -41,27 +43,27 @@ const Router = () => (
         exact path={routes.ALLBREEDS}
         component={FindBreeds}
       />
-      <Route 
+      <Route
         exact path={routes.SEARCHPAGE}
         component={SearchPage}
       />
-      <Route 
+      <Route
         exact path={routes.PETSDETAIL}
         component={PetsDetail}
       />
-      <Route 
+      <Route
         exact path={routes.STATUSREQUEST}
         component={StatusRequest}
       />
-      <Route 
+      <Route
         exact path={routes.ADOPTEDHISTORY}
         component={AdoptedHistory}
       />
-    <Route 
+      <Route
         exact path={routes.CHECKOUT}
         component={Checkout}
       />
-     <Route
+      <Route
         exact path={routes.PETSHOP}
         component={PetShop}
       />
@@ -72,6 +74,14 @@ const Router = () => (
       <Route
         exact path={routes.ABOUTME}
         component={AboutMe}
+      />
+      <Route
+        exact path={routes.SHOPPINGCART}
+        component={ShoppingCart}
+      />
+      <Route
+        exact path={routes.CATEGORYPET}
+        component={CategoryPet}
       />
     </Switch>
   </BrowserRouter>
