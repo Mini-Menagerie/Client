@@ -168,13 +168,6 @@ const FindBreeds = () => {
             </div>
             <Formik
                 initialValues={{ size: "", gender: "", alphabet: "" }}
-                validate={(values) => {
-                    const errors = {};
-                    if (!values.size) {
-                        errors.size = "Required";
-                    }
-                    return errors;
-                }}
                 onSubmit={async (values) => {
                     const url = `${process.env.REACT_APP_API_URL}/pet/breed/filter?size=${values.size}&gender=${values.gender}&alphabet=${values.alphabet}`;
                     const response = await fetch(url);
@@ -215,7 +208,6 @@ const FindBreeds = () => {
                                         );
                                     })}
                                 </ToggleButtonGroup>
-                                <p>{errors.size}</p>
                             </div>
                             <p css={centertext}>Gender</p>
                             <div
