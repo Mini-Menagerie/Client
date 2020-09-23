@@ -273,21 +273,21 @@ const Header = () => {
                                             </Col>
                                         </Row>
                                     </Form>
-                                    <p>Or login with</p>
+                                    <p>Or Login With</p>
                                     <div css={wrapperButtonStyles}>
                                         <Button
                                             css={buttonLoginStyles}
                                             variant="primary"
                                             onClick={handleGoogleLogin}
                                         >
-                                            Sig in with Google
+                                            Sign In With Google
                                         </Button>
                                         <Button
                                             css={buttonLoginStyles}
                                             variant="primary"
                                             onClick={handleFacebookLogin}
                                         >
-                                            Sign in with Facebook
+                                            Sign In With Facebook
                                         </Button>
                                         <p css={buttonLoginStyles}>
                                             Need an account?
@@ -467,7 +467,7 @@ const Header = () => {
                             </form>
                         </div>
                         <div>
-                            {loggedUser}
+                            <a href={`/about-me`}>{loggedUser}</a>
                             <Button
                                 onClick={logout}
                                 style={{
@@ -478,6 +478,7 @@ const Header = () => {
                             >
                                 Log Out
                             </Button>
+                            
                         </div>
                     </Navbar.Collapse>
                 </Navbar>
@@ -526,10 +527,8 @@ const Header = () => {
                                         </Row>
                                         <Row>
                                             <Col>
-                                                <Button
-                                                    onClick={handleLoginModal}
-                                                >
-                                                    Forgot password?
+                                                <Button onClick={handleLoginModal}>
+                                                    Forgot Password?
                                                 </Button>
                                             </Col>
                                         </Row>
@@ -541,17 +540,17 @@ const Header = () => {
                                             variant="primary"
                                             onClick={handleGoogleLogin}
                                         >
-                                            Sig in with Google
+                                            Sign In with Google
                                         </Button>
                                         <Button
                                             css={buttonLoginStyles}
                                             variant="primary"
                                             onClick={handleFacebookLogin}
                                         >
-                                            Sign in with Facebook
+                                            Sign In With Facebook
                                         </Button>
                                         <p css={buttonLoginStyles}>
-                                            Need an account?
+                                            Need an Account?
                                             <Button onClick={handleSignUpModal}>
                                                 Sign Up
                                             </Button>
@@ -614,12 +613,12 @@ const Header = () => {
                                                     >
                                                         Sign Up
                                                     </Button>
-                                                </Col>
-                                            </Row>
-                                            <Row>
-                                                <Col>
-                                                    <p css={buttonLoginStyles}>
-                                                        Already have an account?
+                                                    </Col>
+                                                </Row>
+                                                <Row>
+                                                    <Col>
+                                                        <p css={buttonLoginStyles}>
+                                                            Already Have an Account?
                                                         <Button
                                                             onClick={
                                                                 handleLoginModal
