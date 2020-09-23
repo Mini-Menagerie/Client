@@ -12,12 +12,11 @@ import {
     listCheckoutProduct,
     listCheckoutDetails,
     button,
-    userDetails
+    userDetails,
 } from "./Checkout.styles";
 import CartProduct from "../../components/cartItem/cartItem";
 
 const Checkout = () => {
-
     async function handleToken(token, addresses) {
         const response = await axios.post(
             "https://x6nw5.sse.codesandbox.io/checkout",
@@ -32,25 +31,35 @@ const Checkout = () => {
         }
     }
 
-    const productCart = useSelector(state => state.addToCart)
-    console.log(productCart, 'product cart')
+    const productCart = useSelector((state) => state.addToCart);
+    console.log(productCart, "product cart");
 
+<<<<<<< HEAD
     const [user, setUser] = useState({})
     const userLogin = JSON.parse(localStorage.getItem('user'))
+=======
+    const [user, setUser] = useState({});
+    const userLogin = JSON.parse(localStorage.getItem("user"));
+    console.log(userLogin);
+>>>>>>> a8e1f9997077a30dc412c6d2bdaa93b6ffa77906
 
     const getUser = async () => {
         // setLoading(true);
-        const response = await axios.get(`http://localhost:8000/userAccount/${userLogin.id}`);
+        const response = await axios.get(
+            `http://localhost:8000/userAccount/${userLogin.id}`
+        );
         setUser(response.data.result);
         // setLoading(false);
     };
     useEffect(() => {
         getUser();
-    }, []);
-    console.log(user)
-    console.log(user.idUser)
 
-    const cart = JSON.parse(localStorage.getItem('cartProduct'))
+        //eslint-disable-next-line
+    }, []);
+    console.log(user);
+    console.log(user.idUser);
+
+    const cart = JSON.parse(localStorage.getItem("cartProduct"));
     let initialValue = 0;
 
     const price = cart.map((item) => {
@@ -65,11 +74,11 @@ const Checkout = () => {
     const qty = getQty.reduce(hitung, initialValue);
     let t = price.reduce((a, b) => a + b);
 
-    let cartProduct = JSON.parse(localStorage.getItem('cartProduct'))
+    let cartProduct = JSON.parse(localStorage.getItem("cartProduct"));
 
     const storeAddress = (event) => {
-        event.preventDefault()
-    }
+        event.preventDefault();
+    };
     return (
         <Container>
             <Row style={{ marginTop: "10px" }}>
@@ -81,12 +90,28 @@ const Checkout = () => {
                         <Form.Row>
                             <Form.Group as={Col} controlId="formGridName">
                                 <Form.Label>Name</Form.Label>
+<<<<<<< HEAD
                                 <Form.Control value={user.idUser != undefined && user.idUser.fullName} type="text" placeholder="Enter name" disabled />
+=======
+                                <Form.Control
+                                    type="text"
+                                    placeholder="Enter name"
+                                    disabled
+                                />
+>>>>>>> a8e1f9997077a30dc412c6d2bdaa93b6ffa77906
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="formGridEmail">
                                 <Form.Label>Email</Form.Label>
+<<<<<<< HEAD
                                 <Form.Control value={user.email != undefined && user.email} type="email" placeholder="Email" disabled />
+=======
+                                <Form.Control
+                                    type="email"
+                                    placeholder="Email"
+                                    disabled
+                                />
+>>>>>>> a8e1f9997077a30dc412c6d2bdaa93b6ffa77906
                             </Form.Group>
                         </Form.Row>
 
@@ -120,11 +145,10 @@ const Checkout = () => {
                         </div>
                     </Form>
                 </Col>
-                <Col>
-                </Col>
+                <Col></Col>
             </Row>
 
-            <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Row style={{ display: "flex", justifyContent: "space-between" }}>
                 <Col xs={7} css={listCheckoutProduct}>
                     <CartProduct data={cart} />
                     <p className="text-primary">
@@ -133,19 +157,33 @@ const Checkout = () => {
                 </Col>
                 <Col xs={4} css={listCheckoutDetails}>
                     <Col>
-                        <Row style={{ marginBottom: '15px' }}>
-                            <h5 style={{ fontWeight: '600' }}>Payment Details</h5>
+                        <Row style={{ marginBottom: "15px" }}>
+                            <h5 style={{ fontWeight: "600" }}>
+                                Payment Details
+                            </h5>
                         </Row>
-                        <Row style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-                            <Col xs={7} style={{ paddingLeft: '0px' }}>
+                        <Row
+                            style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                marginBottom: "10px",
+                            }}
+                        >
+                            <Col xs={7} style={{ paddingLeft: "0px" }}>
                                 <p>Subtotal ({cartProduct.length} items):</p>
                             </Col>
                             <Col xs={5}>
                                 <p>Rp. {t}</p>
                             </Col>
                         </Row>
-                        <Row style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
-                            <Col xs={7} style={{ paddingLeft: '0px' }}>
+                        <Row
+                            style={{
+                                display: "flex",
+                                justifyContent: "space-between",
+                                marginBottom: "10px",
+                            }}
+                        >
+                            <Col xs={7} style={{ paddingLeft: "0px" }}>
                                 <p>Shipping Fee:</p>
                             </Col>
                             <Col xs={5}>
@@ -154,11 +192,13 @@ const Checkout = () => {
                         </Row>
                         <hr />
                         <Row>
-                            <Col xs={7} style={{ paddingLeft: '0px' }}>
-                                <p style={{ fontWeight: '600' }}>Total:</p>
+                            <Col xs={7} style={{ paddingLeft: "0px" }}>
+                                <p style={{ fontWeight: "600" }}>Total:</p>
                             </Col>
                             <Col xs={5}>
-                                <p style={{ fontWeight: '600' }}>Rp {t + 10000}</p>
+                                <p style={{ fontWeight: "600" }}>
+                                    Rp {t + 10000}
+                                </p>
                             </Col>
                         </Row>
                         <div css={button}>

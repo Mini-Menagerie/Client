@@ -3,12 +3,12 @@ import { jsx } from "@emotion/core";
 import { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import { Formik, Form } from "formik";
+import { useParams } from "react-router-dom";
 import "react-multi-carousel/lib/styles.css";
 
 import {
     Card,
     Button,
-    FormControl,
     Row,
     Col,
     ToggleButton,
@@ -17,21 +17,17 @@ import {
 
 import {
     wrapperCover,
-    whitecolor,
-    card,
-    margin,
-    buttoncard,
-    marginbutton,
     widthButton,
     collections,
     centertext,
     filter,
     buttonGroup,
-} from "./FindBreeds.styles";
+} from "./BreedByCategory.styles";
 
-const FindBreeds = () => {
+const BreedByCategory = () => {
     const [collection, setCollection] = useState([]);
     const [allCollection, setAllCollection] = useState([]);
+    const { category } = useParams();
 
     const size = [
         { name: "Small", value: "Small" },
@@ -68,7 +64,7 @@ const FindBreeds = () => {
     };
 
     const fetchCollection = async () => {
-        const url = "http://localhost:8000/pet";
+        const url = `${process.env.REACT_APP_API_URL}/pet/category/${category}`;
         const response = await fetch(url);
         const result = await response.json();
 
@@ -78,67 +74,13 @@ const FindBreeds = () => {
 
     useEffect(() => {
         fetchCollection();
+
+        //eslint-disable-next-line
     }, []);
 
     return (
         <div>
             <div css={wrapperCover}>
-                <div css={margin}>
-                    <h1 css={whitecolor}>Let Us Help You</h1>
-                    <Card css={card}>
-                        <h2 css={whitecolor}>Find The Best Breeds For You</h2>
-                        <Formik
-                            initialValues={{ search: "" }}
-                            validate={(values) => {
-                                const errors = {};
-                                if (!values.search) {
-                                    errors.search = "Required";
-                                }
-                                return errors;
-                            }}
-                            onSubmit={async (values) => {
-                                const url = `${process.env.REACT_APP_API_URL}/pet/breed?search=${values.search}`;
-                                const response = await fetch(url);
-                                const result = await response.json();
-
-                                setCollection(result.result);
-                            }}
-                        >
-                            {({
-                                values,
-                                errors,
-                                touched,
-                                handleChange,
-                                handleBlur,
-                                handleSubmit,
-                            }) => (
-                                <form onSubmit={handleSubmit}>
-                                    <FormControl
-                                        type="text"
-                                        placeholder="Search"
-                                        className="mr-sm-2"
-                                        name="search"
-                                        onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        value={values.password}
-                                    />
-                                    {errors.search &&
-                                        touched.search &&
-                                        errors.search}
-                                    <div css={buttoncard}>
-                                        <Button
-                                            variant="light"
-                                            css={marginbutton}
-                                            type="submit"
-                                        >
-                                            By Breed
-                                        </Button>
-                                    </div>
-                                </form>
-                            )}
-                        </Formik>
-                    </Card>
-                </div>
                 <div></div>
             </div>
             <div css={collections}>
@@ -169,7 +111,7 @@ const FindBreeds = () => {
             <Formik
                 initialValues={{ size: "", gender: "", alphabet: "" }}
                 onSubmit={async (values) => {
-                    const url = `${process.env.REACT_APP_API_URL}/pet/breed/filter?size=${values.size}&gender=${values.gender}&alphabet=${values.alphabet}`;
+                    const url = `${process.env.REACT_APP_API_URL}/pet/breed/${category}/filter?size=${values.size}&gender=${values.gender}&alphabet=${values.alphabet}`;
                     const response = await fetch(url);
                     const result = await response.json();
 
@@ -290,4 +232,4 @@ const FindBreeds = () => {
     );
 };
 
-export default FindBreeds;
+export default BreedByCategory;
