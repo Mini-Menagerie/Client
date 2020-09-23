@@ -453,7 +453,11 @@ const Header = () => {
                                 <button type="submit" css={searchButton}>
                                     <i className="fas fa-search"></i>
                                 </button>
-                                <Button type="submit" css={cart}>
+                                <Button
+                                    type="submit"
+                                    onClick={redirect}
+                                    css={cart}
+                                >
                                     <i className="fas fa-shopping-cart fa-lg"></i>
                                     <Badge pill variant="danger">
                                         {productCart.cart !== undefined &&
