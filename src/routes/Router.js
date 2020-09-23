@@ -4,6 +4,7 @@ import {
   Route, Switch, BrowserRouter,
 } from 'react-router-dom';
 
+
 import routes from './Router.routes';
 import LandingPage from '../pages/LandingPage/LandingPage';
 import globalStyles from '../styles/Global';
@@ -21,6 +22,7 @@ import AboutMe from '../pages/AboutMe/AboutMe'
 import ShoppingCart from '../pages/ShoppingCart/ShoppingCart'
 import CategoryPet from '../pages/CategoryAllPets/CategoryAllPets';
 import BreedByCategory from '../pages/BreedByCategory/BreedByCategory'
+
 
 const Router = () => (
     <BrowserRouter>

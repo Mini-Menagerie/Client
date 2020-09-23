@@ -21,6 +21,7 @@ export const addToCartReducer = (state = product, action) => {
 
             localStorage.setItem('cartProduct', JSON.stringify(newCart))
 
+            console.log('click');
             return {
                 ...state,
                 product: {stock: productById.stock - 1, ...productById.stock},
