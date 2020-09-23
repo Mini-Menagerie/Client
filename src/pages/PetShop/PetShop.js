@@ -1,9 +1,10 @@
 /** @jsx jsx */
-import { jsx } from '@emotion/core'
-import { useEffect, useState } from 'react';
-import { Container, Row, Col, Form } from 'react-bootstrap';
-import axios from 'axios'
+import { jsx } from "@emotion/core";
+import { useEffect, useState } from "react";
+import { Container, Row, Col, Form } from "react-bootstrap";
+import axios from "axios";
 
+<<<<<<< HEAD
 import Pagination from '../../components/Pagination'
 import ProductCard from '../../components/ProductCard/ProductCard';
 import {
@@ -12,9 +13,15 @@ import {
     sortFilter
 } from './PetShop.styles'
 import head_bg_img from '../../assets/bg-shop.jpg'  
+=======
+import Pagination from "../../components/Pagination";
+import ProductCard from "../../components/ProductCard/ProductCard";
+import { container, head_bg, caption_filter } from "./PetShop.styles";
+import head_bg_img from "../../assets/bg-shop.jpg";
+>>>>>>> a529bdf6d39c8c138a4a4c4099d772a91898b369
 
 const PetShop = () => {
-    const [products, setProducts] = useState([])
+    const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
     const [sort, setSort] = useState('');
     const [filter, setFilter] = useState('');
@@ -22,26 +29,32 @@ const PetShop = () => {
     const [productsPerPage] = useState(8);
 
     useEffect(() => {
-        let url = 'http://localhost:8000/product'
+        let url = "http://localhost:8000/product";
         const getProducts = async () => {
             setLoading(true);
-            const response = await axios.get(url)
-            localStorage.setItem('products', JSON.stringify(response.data.result))
+            const response = await axios.get(url);
+            localStorage.setItem(
+                "products",
+                JSON.stringify(response.data.result)
+            );
             console.log(response.data.result);
-            setProducts(response.data.result)
+            setProducts(response.data.result);
             setLoading(false);
-        }
+        };
 
         getProducts();
-    }, [])
+    }, []);
 
     //get current products
     const indexOfLastProduct = currentProduct * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProducts = products.slice(indexOfFirstProduct, indexOfLastProduct);
+    const currentProducts = products.slice(
+        indexOfFirstProduct,
+        indexOfLastProduct
+    );
 
     //change page
-    const paginate = pageNumber => setCurrentPage(pageNumber)
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     //handle sorting product
     const handleChangeSort = (event) => {
@@ -113,12 +126,15 @@ const PetShop = () => {
             </Container>
 
             <div>
-                <Pagination productsPerPage={productsPerPage} totalProducts={products.length} paginate={paginate} />
+                <Pagination
+                    productsPerPage={productsPerPage}
+                    totalProducts={products.length}
+                    paginate={paginate}
+                />
             </div>
             {/* End of Product List */}
         </div>
     );
-
-}
+};
 
 export default PetShop;

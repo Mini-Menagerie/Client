@@ -109,8 +109,8 @@ export const howToAdopt = css`
     padding: 15px 30px;
     margin-top: 100px;
     text-align: center;
-    margin-left: 300px;
-    margin-right: 300px;
+    margin-left: 500px;
+    margin-right: 500px;
     border-radius: 50px;
 
     @media (max-width: 768px) {
@@ -151,7 +151,7 @@ export const iconContainer = css`
     align-content: center;
     text-align: center;
     margin-top: -60px;
-
+    z-index: -1;
     @media (max-width: 768px) {
         border: 0px;
         margin: 10px 0;
