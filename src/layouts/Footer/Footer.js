@@ -87,7 +87,7 @@ const Footer = () => {
                 </Row>
             </div>
             <div css={wrapperStyles2}>
-                <Row>
+                <Row style={{ width: "100%" }}>
                     <Col md={4}>
                         <p>@2020 MiniMenagerie.com</p>
                     </Col>
