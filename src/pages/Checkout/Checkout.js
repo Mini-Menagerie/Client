@@ -37,7 +37,6 @@ const Checkout = () => {
 
     const [user, setUser] = useState({})
     const userLogin = JSON.parse(localStorage.getItem('user'))
-    console.log(userLogin)
 
     const getUser = async () => {
         // setLoading(true);
@@ -73,7 +72,7 @@ const Checkout = () => {
     }
     return (
         <Container>
-            <Row style={{marginTop: "10px"}}>
+            <Row style={{ marginTop: "10px" }}>
                 <h1>User Details</h1>
             </Row>
             <Row>
@@ -82,12 +81,12 @@ const Checkout = () => {
                         <Form.Row>
                             <Form.Group as={Col} controlId="formGridName">
                                 <Form.Label>Name</Form.Label>
-                                <Form.Control type="text" placeholder="Enter name" disabled />
+                                <Form.Control value={user.idUser != undefined && user.idUser.fullName} type="text" placeholder="Enter name" disabled />
                             </Form.Group>
 
                             <Form.Group as={Col} controlId="formGridEmail">
                                 <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" placeholder="Email" disabled />
+                                <Form.Control value={user.email != undefined && user.email} type="email" placeholder="Email" disabled />
                             </Form.Group>
                         </Form.Row>
 
@@ -128,6 +127,9 @@ const Checkout = () => {
             <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Col xs={7} css={listCheckoutProduct}>
                     <CartProduct data={cart} />
+                    <p className="text-primary">
+                        <i class="fas fa-info-circle mr-1"></i>Do not delay the purchase, adding items to your cart does not mean booking them.
+                    </p>
                 </Col>
                 <Col xs={4} css={listCheckoutDetails}>
                     <Col>
