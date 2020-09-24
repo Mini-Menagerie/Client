@@ -91,13 +91,13 @@ const DetailSection = ({ petDetails, user }) => {
                     <Col xs={12}>
                         <Row css={rowMargin3}>
                             <i class="fas fa-map-marker-alt fa-2x">&nbsp; &nbsp;</i>
-                            <h5>{petDetails.location} / {petDetails.idUser !==undefined && petDetails.idUser.detailAddress}</h5>
+                            <p>{petDetails.location} / {petDetails.idUser !==undefined && petDetails.idUser.detailAddress}</p>
                         </Row>
                     </Col>
                     <Col xs={12}>
                         <Row css={rowMargin3}>
                             <i class="fas fa-envelope-open-text fa-2x">&nbsp; &nbsp;</i>
-                            <h5>{petDetails.idUser !== undefined && petDetails.idUser.email}</h5>
+                            <p>{petDetails.idUser !== undefined && petDetails.idUser.email}</p>
                         </Row>
                     </Col>
                     <Col xs={12} css={detail_section_col_right_button}>
