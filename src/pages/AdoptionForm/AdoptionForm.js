@@ -64,6 +64,7 @@ const AdoptionForm = () => {
         });
     };
     const history = useHistory();
+    
     const handleSubmitForm = async (event) => {
         event.preventDefault();
         axios
