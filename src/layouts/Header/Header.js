@@ -31,6 +31,7 @@ import {
     buttonLoginStyles,
     rowFormSignUp,
 } from "./Header.styles";
+import swal from 'sweetalert';
 
 const Header = () => {
     const productCart = JSON.parse(localStorage.getItem("cartProduct"));
@@ -75,14 +76,24 @@ const Header = () => {
                 formLogin
             );
             if (user.status === 200) {
-                alert("welcome");
+
+                swal({
+                    title: "Sukses!",
+                    text: "Login berhasil!",
+                    icon: "success",
+                });
+                // console.log(user);
                 localStorage.setItem("menagerie", user.data.token);
                 localStorage.setItem("user", JSON.stringify(user.data.user));
                 setShow(false);
+                window.location.reload()
             }
         } catch (error) {
             if (error.message === "Request failed with status code 400") {
-                alert("password salah");
+                swal({
+                    title: "Gagal!",
+                    icon: "warning",
+                });
                 setShow(false);
             } else if (
                 error.message === "Request failed with status code 404"
@@ -131,7 +142,11 @@ const Header = () => {
         setHandleForm(false);
         setHandleLoginModal(false);
     };
-    const handleShow = () => setShow(true);
+    const handleShowSignUp = () => setShow(true);
+    const handleShowLogin = () => {
+        setHandleLoginModal(true);
+        setShow(true);
+    }
 
     const handleGoogleLogin = () => {
         const urlGoogleLogin = "http://localhost:8000/auth/google";
@@ -239,10 +254,10 @@ const Header = () => {
                             </form>
                         </div>
                         <div>
-                            <Button variant="light" onClick={handleShow}>
+                            <Button variant="light" onClick={handleShowSignUp}>
                                 Sign Up
                             </Button>
-                            <Button variant="light" onClick={handleShow}>
+                            <Button variant="light" onClick={handleShowLogin}>
                                 Log In
                             </Button>
                         </div>

@@ -1,9 +1,9 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Row, Col, Form } from "react-bootstrap";
-import { FaMapMarkerAlt } from "react-icons/fa";
-import { MdEmail } from "react-icons/md";
+import { Row, Col, Form} from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import {useState, useRef} from 'react';
+
 
 import {
     detail_section_col,
@@ -12,11 +12,13 @@ import {
     row_line,
     detail_section_col_right,
     detail_section_col_right_button,
+    location,
+    rowMargin3
 } from "./DetailSection.styles";
 import ColoredLine from "../../../components/ColoredLine";
 import PrimaryButton from "../../../components/Button/Button";
 
-const DetailSection = ({ petDetails }) => {
+const DetailSection = ({ petDetails, user }) => {
     const history = useHistory();
     const handleClick = () => {
         history.push(`/adoption-form`);
@@ -85,32 +87,32 @@ const DetailSection = ({ petDetails }) => {
                         src="script.js?id=9daa310da0fcf7860fb39c3f74182bf2930d64f3"
                     ></script>
                 </Row>
-                <Row>
-                    <Col xs={12} css={detail_section_col_right}>
-                        <h4>
-                            <FaMapMarkerAlt />
-                        </h4>
-                        <Form.Control placeholder="pet location" />
+                <Row css={location}>
+                    <Col xs={12}>
+                        <Row css={rowMargin3}>
+                            <i class="fas fa-map-marker-alt fa-2x">&nbsp; &nbsp;</i>
+                            <p>{petDetails.location} / {petDetails.idUser !==undefined && petDetails.idUser.detailAddress}</p>
+                        </Row>
                     </Col>
-                    <Col xs={12} css={detail_section_col_right}>
-                        <h4>
-                            <MdEmail />
-                        </h4>
-                        <Form.Control placeholder="email" />
+                    <Col xs={12}>
+                        <Row css={rowMargin3}>
+                            <i class="fas fa-envelope-open-text fa-2x">&nbsp; &nbsp;</i>
+                            <p>{petDetails.idUser !== undefined && petDetails.idUser.email}</p>
+                        </Row>
                     </Col>
                     <Col xs={12} css={detail_section_col_right_button}>
                         {JSON.parse(localStorage.getItem("user") !== null) ? (
                             <PrimaryButton onClick={() => handleClick()}>
                                 Ask for Adoption
                             </PrimaryButton>
-                        ) : (
-                            <PrimaryButton
-                                onClick={null}
+                        ) : ( 
+                            <PrimaryButton 
+                                onClick={() => alert('Please Login to Continue')}
                                 variant="danger"
-                                disabled
                             >
                                 Ask for Adoption
                             </PrimaryButton>
+                           
                         )}
                     </Col>
                 </Row>

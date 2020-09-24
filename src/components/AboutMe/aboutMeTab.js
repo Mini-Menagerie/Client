@@ -1,99 +1,132 @@
 /** @jsx jsx */
-import { jsx } from "@emotion/core";
-import { Col, Row, Container } from "react-bootstrap";
-import ReactFilestack from "filestack-react";
+import { jsx } from '@emotion/core'
+import { Col, Row, Container, Modal, Table } from 'react-bootstrap'
+
+import { useState, useEffect } from 'react'
+ 
 
 import PrimaryButton from "../Button/Button";
 import {
     rowMargin,
     containerWrapper,
-    welcomeText,
     avatar,
     rowMargin2,
     editProfile,
-} from "./aboutMeTab.styles";
+    first,
+    welcomeText,
+}
+from './aboutMeTab.styles'
+import axios from 'axios';
+import EditProfile from './EditProfile'
 
-const AboutMeTab = ({ profile }) => {
+const AboutMeTab = ({profile}) => {
+    console.log(profile);
+
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+
+    // const fetchAvatar = async () => {
+    //     let response = await axios.get( `http://localhost:8000/users/${userData.idUser}`)
+    //     console.log(response);
+    //     setAvatar(response.data.result)
+    // }
+
+    // const handleChange = (event) => {
+    //    setAvatar({[event.target.name]: event.target.value})
+    // }
+
+    // const handleAvatar = async (event) => {
+    //     event.preventDefault();
+    //     return (
+    //         axios.put(
+    //             `http://localhost:8000/users/${userData.idUser}`
+    //         )
+    //         .then(() => window.location.reload())
+    //     )
+    // }
+
     return (
         <Container fluid css={containerWrapper}>
-            <div>
-                <h1 css={welcomeText}>Welcome,</h1>
+             <div>
+            <h1 css={welcomeText}>Welcome, {profile.idUser !== undefined && profile.idUser.fullName} </h1>
+            </div>
+            <div css={first}>
+            <Modal show={show} onHide={handleClose}>
+                <Modal.Dialog>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Edit Profile</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                    <EditProfile edit={profile} handleClose={handleClose}/>
+                    </Modal.Body>
+                </Modal.Dialog>
+            </Modal>
+
+                 <Row css={rowMargin}>
+                    <Col xs={6}>
+                    <img  css={avatar} src={profile.idUser !== undefined && profile.idUser.avatar}/>
+                    </Col>
+                    <Col xs={6}>
+                    <Table style={{borderStyle:"hidden"}}>
+                        <tbody>
+                            <tr style={{borderStyle:"hidden"}}>
+                            <td>Name:</td>
+                            <td>{profile.idUser !== undefined && profile.idUser.fullName}</td>
+                            </tr>
+                            <tr style={{borderStyle:"hidden"}}>
+                            <td>Email:</td>
+                            <td>{profile.email}</td>
+                            </tr>
+                            <tr style={{borderStyle:"hidden"}}>
+                            <td>Phone Number:</td>
+                            <td>{profile.idUser !== undefined && profile.idUser.noHandphone}</td>
+                            </tr>
+                     </tbody>
+                </Table>
+                    </Col>
+                </Row>      
             </div>
             <div>
-                <Row css={rowMargin}>
-                    <Col xs={6}>
-                        <img
-                            css={avatar}
-                            src={
-                                profile.userId !== undefined &&
-                                profile.userId.avatar
-                            }
-                            alt="avatar"
-                        />
-                        <ReactFilestack
-                            apikey={"AugqfuGzTQouENQs5OOe2z"}
-                            customRender={({ onPick }) => (
-                                <div>
-                                    <PrimaryButton
-                                        css={rowMargin2}
-                                        onClick={onPick}
-                                    >
-                                        Upload Photo
-                                    </PrimaryButton>
-                                </div>
-                            )}
-                            onSuccess={(res) => console.log(res)}
-                        />
-                    </Col>
-                    <Col xs={6}>
-                        <p>Name: </p>
-                        <p>Phone Number: </p>
-                        <p>Email: </p>
-                    </Col>
-                </Row>
-                {/* <Col xs={6}>
-                    <img src={profile.avatar}/>
-                    <ReactFilestack
-                    apikey={"AugqfuGzTQouENQs5OOe2z"}
-                    customRender={({ onPick }) => (
-                        <div>
-                        <PrimaryButton onClick={onPick}>Upload Photo</PrimaryButton>
-                        </div>
-                    )}
-                    onSuccess={(res) => console.log(res)}
-                    />
-                    
+                <Row>
+                    <Col>
+                <Table style={{borderStyle:"hidden"}}>
+                        <tbody>
+                            <tr style={{borderStyle:"hidden"}}>
+                            <td>Location:</td>
+                            <td>{profile.idUser !== undefined && profile.idUser.country}</td>
+                            </tr>
+                            <tr style={{borderStyle:"hidden"}}>
+                            <td>Province:</td>
+                            <td>{profile.idUser !== undefined && profile.idUser.province}</td>
+                            </tr>
+                            <tr style={{borderStyle:"hidden"}}>
+                            <td>City:</td>
+                            <td>{profile.idUser !== undefined && profile.idUser.state}</td>
+                            </tr>
+                     </tbody>
+                </Table>
                 </Col>
-                <Col xs={6}>
-                        <p>Name: {profile.fullName}</p>
-                        <p>Phone Number: {profile.noHandphone}</p>
-                        <p>Email: {profile.email}</p>
-                </Col> */}
-            </div>
-            <div>
-                <Row>
-                    <Col xs={6}>
-                        <p>Location: </p>
-                    </Col>
-                    <Col xs={6}>
-                        <p>Province: </p>
-                    </Col>
+                <Col>
+            <Table style={{borderStyle:"hidden"}}>
+                        <tbody>
+                            <tr style={{borderStyle:"hidden"}}>
+                            <td>Zip Code:</td>
+                            <td>{profile.idUser !== undefined && profile.idUser.zip_code}</td>
+                            </tr>
+                            <tr style={{borderStyle:"hidden"}}>
+                            <td>Address:</td>
+                            <td>{profile.idUser !== undefined && profile.idUser.detailAddress}</td>
+                            </tr>
+                     </tbody>
+                </Table>
+                </Col>
                 </Row>
             </div>
-            <div>
-                <Row>
-                    <Col xs={6}>
-                        <p>City:</p>
-                    </Col>
-                    <Col xs={6}>
-                        <p>Zip Code:</p>
-                    </Col>
-                </Row>
-            </div>
-            <div>
-                <p>Address:</p>
-            </div>
-            <PrimaryButton css={editProfile}>Edit Profile</PrimaryButton>
+            <PrimaryButton css={editProfile} onClick={handleShow}>Edit Profile</PrimaryButton>
         </Container>
     );
 };
