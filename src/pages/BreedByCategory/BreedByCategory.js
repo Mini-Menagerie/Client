@@ -3,7 +3,7 @@ import { jsx } from "@emotion/core";
 import { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import { Formik, Form } from "formik";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import "react-multi-carousel/lib/styles.css";
 
 import {
@@ -68,8 +68,25 @@ const BreedByCategory = () => {
         const response = await fetch(url);
         const result = await response.json();
 
-        setAllCollection(result.result);
-        setCollection(result.result);
+        function removeDuplicates(originalArray, prop) {
+            var newArray = [];
+            var lookupObject = {};
+
+            for (var i in originalArray) {
+                lookupObject[originalArray[i]["idBreed"][prop]] =
+                    originalArray[i];
+            }
+
+            for (i in lookupObject) {
+                newArray.push(lookupObject[i]);
+            }
+            return newArray;
+        }
+
+        var uniqueArray = removeDuplicates(result.result, "_id");
+
+        setAllCollection(uniqueArray);
+        setCollection(uniqueArray);
     };
 
     useEffect(() => {
@@ -91,6 +108,7 @@ const BreedByCategory = () => {
                             return (
                                 <Col key={item._id}>
                                     <a href="/pets-detail/:id">
+
                                         <Card>
                                             <Card.Img
                                                 variant="top"
@@ -213,6 +231,7 @@ const BreedByCategory = () => {
                             return (
                                 <Col xs={6} md={4} key={item._id}>
                                     <a href="/pets-detail/:id">
+
                                         <Card>
                                             <Card.Img
                                                 variant="top"
@@ -227,6 +246,7 @@ const BreedByCategory = () => {
                                             </Card.Title>
                                         </Card>
                                     </a>
+
                                 </Col>
                             );
                         })}

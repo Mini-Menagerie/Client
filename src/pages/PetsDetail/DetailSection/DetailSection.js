@@ -1,7 +1,9 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Row, Col, Form } from "react-bootstrap";
+import { Row, Col, Form} from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import {useState, useRef} from 'react';
+
 
 import {
     detail_section_col,
@@ -89,13 +91,13 @@ const DetailSection = ({ petDetails, user }) => {
                     <Col xs={12}>
                         <Row css={rowMargin3}>
                             <i class="fas fa-map-marker-alt fa-2x">&nbsp; &nbsp;</i>
-                            <h5>{petDetails.location} / {petDetails.idUser !==undefined && petDetails.idUser.detailAddress}</h5>
+                            <p>{petDetails.location} / {petDetails.idUser !==undefined && petDetails.idUser.detailAddress}</p>
                         </Row>
                     </Col>
                     <Col xs={12}>
                         <Row css={rowMargin3}>
                             <i class="fas fa-envelope-open-text fa-2x">&nbsp; &nbsp;</i>
-                            <h5>{petDetails.idUser !== undefined && petDetails.idUser.email}</h5>
+                            <p>{petDetails.idUser !== undefined && petDetails.idUser.email}</p>
                         </Row>
                     </Col>
                     <Col xs={12} css={detail_section_col_right_button}>
@@ -103,14 +105,14 @@ const DetailSection = ({ petDetails, user }) => {
                             <PrimaryButton onClick={() => handleClick()}>
                                 Ask for Adoption
                             </PrimaryButton>
-                        ) : (
-                            <PrimaryButton
-                                onClick={null}
+                        ) : ( 
+                            <PrimaryButton 
+                                onClick={() => alert('Please Login to Continue')}
                                 variant="danger"
-                                disabled
                             >
                                 Ask for Adoption
                             </PrimaryButton>
+                           
                         )}
                     </Col>
                 </Row>

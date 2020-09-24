@@ -1,27 +1,45 @@
+/** @jsx jsx */
+import { jsx } from '@emotion/core'
 import { Col, Row, Container, Form } from 'react-bootstrap'
 import axios from "axios"
+import ReactFilestack from 'filestack-react';
 
 import PrimaryButton from "../Button/Button";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const EditProfile = ({edit}) => {
+import {
+    upload,
+    uploadPhoto
+} from './EditProfile.styles'
+
+
+const EditProfile = ({edit, handleClose}) => {
+
+    console.log(edit);
 
     const [user, setUser] = useState([]);
     const [form, setForm] = useState({
         fullName: "",
         email: "",
+        noHandphone:"",
         state: "",
         province: "",
         zipcode: "",
         country: "",
-        detailAddress: ""
+        detailAddress: "",
+        avatar: ""
     });
 
+
+    let userData = JSON.parse(localStorage.getItem("user"))
+
+    
     const fetchProfile = async () => {
-        let result = await axios.get(
-            `http://localhost:8000/users/${id}`
+        let response = await axios.get(
+            `http://localhost:8000/users/${userData.idUser}` //if let id=userData.id then ${id}
         ); //endpoint
-        setUser(result.data.result);
+        console.log(response);
+        setUser(response.data.result);
     };
 
     const handleChange = (event) => {
@@ -35,8 +53,9 @@ const EditProfile = ({edit}) => {
         event.preventDefault();
         return (
             axios.put(
-                `http://localhost:8000/users/${id}`, form
+                `http://localhost:8000/users/${userData.idUser}`, form
             )
+            .then(() => window.location.reload())
         )
     }
 
@@ -46,29 +65,98 @@ const EditProfile = ({edit}) => {
 
     return (
         <div>
-            <h1>Edit Profile</h1>
-            <Form>
+            <Form onSubmit={handleEditProfile}>
                 <Form.Row>
+                <ReactFilestack
+                    apikey={"AugqfuGzTQouENQs5OOe2z"}
+                    customRender={({ onPick }) => (
+                        <div css={uploadPhoto}>
+                        <PrimaryButton css={upload} onClick={onPick}>Upload Photo</PrimaryButton>
+                        </div>
+                    )}
+                   onSuccess= {(res) => setForm({
+                       ...form,
+                    avatar: res.filesUploaded[0].url
+                   })}
+                    />
                         <Form.Group as={Row} controlId="formPlaintextPassword">
-                            <Form.Label column sm="2">
+                            <Form.Label column sm="4">
                                 Name:
                             </Form.Label>
-                                <Col sm="10">
-                                <Form.Control type="text" placeholder={edit.fullName} value={edit.fullname} onChange={handleChange}/>
+                                <Col sm="8">
+                                <Form.Control type="text" placeholder={edit.idUser !==undefined && edit.idUser.fullName} value={form.fullName} name="fullName" onChange={handleChange}/>
                                 </Col>
                         </Form.Group>
                         <Form.Group as={Row} controlId="formPlaintextPassword">
-                            <Form.Label column sm="2">
-                                Email
+                            <Form.Label column sm="4">
+                                Email:
                             </Form.Label>
-                            <Col sm="10">
+                            <Col sm="8">
                                 <Form.Control type="text" placeholder={edit.email} value={edit.email}/>
                             </Col>
                         </Form.Group>
+                        <Form.Group as={Row} controlId="formPlaintextPassword">
+                            <Form.Label column sm="4">
+                                Phone Number:
+                            </Form.Label>
+                            <Col sm="8">
+                                <Form.Control type="text" placeholder={edit.idUser.noHandphone} value={form.noHandphone} name="noHandphone" onChange={handleChange}/>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="formPlaintextPassword">
+                            <Form.Label column sm="4">
+                                Location:
+                            </Form.Label>
+                            <Col sm="8">
+                                <Form.Control type="text" placeholder={edit.idUser.country} value={form.country} name="country" onChange={handleChange}/>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="formPlaintextPassword">
+                            <Form.Label column sm="4">
+                                Province:
+                            </Form.Label>
+                            <Col sm="8">
+                                <Form.Control type="text" placeholder={edit.idUser.province} value={form.province} name="province" onChange={handleChange}/>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="formPlaintextPassword">
+                            <Form.Label column sm="4">
+                                City:
+                            </Form.Label>
+                            <Col sm="8">
+                                <Form.Control type="text" placeholder={edit.idUser.state} value={form.state} name="state" onChange={handleChange}/>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="formPlaintextPassword">
+                            <Form.Label column sm="4">
+                                Zip Code:
+                            </Form.Label>
+                            <Col sm="8">
+                                <Form.Control type="text" placeholder={edit.idUser.zip_code} value={form.zip_code} name="state" onChange={handleChange}/>
+                            </Col>
+                        </Form.Group>
+                        <Form.Group as={Row} controlId="formPlaintextPassword">
+                            <Form.Label column sm="4">
+                                Address:
+                            </Form.Label>
+                            <Col sm="8">
+                                <Form.Control type="text" placeholder={edit.idUser.detailAddress} value={form.detailAddress} name="state" onChange={handleChange}/>
+                            </Col>
+                        </Form.Group>
+                        {/* <Form.Group as={Row} controlId="formPlaintextPassword">
+                            <Form.Label column sm="2">
+                                Location:
+                            </Form.Label>
+                            <Col sm="10">
+                                <Form.Control type="text" placeholder={edit.idUser.country} value={form.country} name="country" onChange={handleChange}/>
+                            </Col>
+                        </Form.Group> */}
                 </Form.Row>
-                <PrimaryButton type="submit" onClick={handleEditProfile}>Submit</PrimaryButton>
+                <PrimaryButton type="submit" onClick={()=> {handleClose()}}>Submit</PrimaryButton>
             </Form>
         </div>
     )
 
 }
+
+export default EditProfile;

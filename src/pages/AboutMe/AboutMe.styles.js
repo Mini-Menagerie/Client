@@ -6,7 +6,7 @@ justify-content: center;
 `
 
 export const marginSet = css `
-margin-left: 200px;
-margin-right: 200px;
+margin-left: 300px;
+margin-right: 300px;
 margin-top: 100px;
 `

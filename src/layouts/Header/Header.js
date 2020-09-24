@@ -85,6 +85,7 @@ const Header = () => {
                 localStorage.setItem("menagerie", user.data.token);
                 localStorage.setItem("user", JSON.stringify(user.data.user));
                 setShow(false);
+                window.location.reload()
             }
         } catch (error) {
             if (error.message === "Request failed with status code 400") {
