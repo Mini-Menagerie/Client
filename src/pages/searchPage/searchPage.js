@@ -79,9 +79,9 @@ const SearchPage = () => {
   }, []);
   console.log(searchPet);
   // kalau searchnya gender looping setBygender
-  let setByGender = searchPet.filter(pet => {
-    return pet.gender.toLowerCase() === search
-  })
+  // let setByGender = searchPet.filter(pet => {
+  //   return pet.gender.toLowerCase() === search
+  // })
 
 
   return (
