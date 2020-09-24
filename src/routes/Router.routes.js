@@ -15,4 +15,5 @@ export default {
     CATEGORYPET: "/category-pet",
     PETBYBREED: "/all-breeds/category/:category/:breed",
     BREEDBYCATEGORY: "/all-breeds/category/:category",
+    HISTORYPURCHASE: "/history-purchase",
 };
