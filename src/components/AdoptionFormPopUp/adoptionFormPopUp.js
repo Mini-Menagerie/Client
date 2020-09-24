@@ -3,12 +3,10 @@ import { jsx } from "@emotion/core";
 import { Container, Row, Col, Dropdown, Jumbotron } from "react-bootstrap";
 import axios from "axios";
 
-import AdoptionForm from '../../pages/AdoptionForm/AdoptionForm'
+import AdoptionForm from "../../pages/AdoptionForm/AdoptionForm";
 
-const FormPopUp = ({data}) => {
-    console.log(data);
-
-    return(
+const FormPopUp = ({ data }) => {
+    return (
         <Container fluid>
             <div>
                 <h1>Form Submission</h1>
@@ -37,12 +35,19 @@ const FormPopUp = ({data}) => {
                         <p>8. What is your monthly income?</p>
                     </Row>
                     <Row>
-                        <p>9. Finally, tell us why you'd like to adopt this pet:</p>
+                        <p>
+                            9. Finally, tell us why you'd like to adopt this
+                            pet:
+                        </p>
                     </Row>
                 </Col>
                 <Col>
                     <Row>
-                        <input onChange={event => setWorkingDuration(event.target.value)}/>
+                        <input
+                            onChange={(event) =>
+                                setWorkingDuration(event.target.value)
+                            }
+                        />
                     </Row>
                     <Row>
                         <p></p>
@@ -71,7 +76,7 @@ const FormPopUp = ({data}) => {
                 </Col>
             </div>
         </Container>
-    )
-}
+    );
+};
 
-export default FormPopUp
+export default FormPopUp;

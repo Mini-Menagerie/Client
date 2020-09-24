@@ -18,19 +18,17 @@ import PrimaryButton from "../../../components/Button/Button";
 
 const DetailSection = ({ petDetails, user }) => {
     const history = useHistory();
-    console.log(petDetails);
-    console.log(user, "user");
     const handleClick = () => {
         history.push(`/adoption-form`);
     };
-    console.log(petDetails);
+
     return (
         <Row>
             <Col xs={8} css={detail_section_col}>
                 <Row css={detail_section_col_left_first_row}>
                     <img
                         src={petDetails.image}
-                        style={{ width: "710px", marginBottom: "30px" }}
+                        style={{ width: "100%", height: "500px", objectFit: "cover", marginBottom: "30px" }}
                         alt="pet_image"
                     />
                     <h1>{petDetails.petName}</h1>
@@ -101,9 +99,19 @@ const DetailSection = ({ petDetails, user }) => {
                         </Row>
                     </Col>
                     <Col xs={12} css={detail_section_col_right_button}>
-                        <PrimaryButton onClick={() => handleClick()}>
-                            Ask for Adoption
-                        </PrimaryButton>
+                        {JSON.parse(localStorage.getItem("user") !== null) ? (
+                            <PrimaryButton onClick={() => handleClick()}>
+                                Ask for Adoption
+                            </PrimaryButton>
+                        ) : (
+                            <PrimaryButton
+                                onClick={null}
+                                variant="danger"
+                                disabled
+                            >
+                                Ask for Adoption
+                            </PrimaryButton>
+                        )}
                     </Col>
                 </Row>
             </Col>

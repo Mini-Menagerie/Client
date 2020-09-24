@@ -2,8 +2,11 @@
 import { jsx } from "@emotion/core";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { connect } from "react-redux";
 import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
+
+import { addToCart } from "../../redux/actions/addToCart";
 
 import {
     container,
@@ -80,7 +83,13 @@ const ProductDetail = (props) => {
                                             />
                                         </Col>
                                         <Col>
-                                            <ActionButton />
+                                            <ActionButton
+                                                onClick={() => {
+                                                    props.addToCart(
+                                                        product._id
+                                                    );
+                                                }}
+                                            />
                                         </Col>
                                     </Row>
                                 </Col>
@@ -153,7 +162,13 @@ const ProductDetail = (props) => {
                                             />
                                         </Col>
                                         <Col>
-                                            <ActionButton />
+                                            <ActionButton
+                                                onClick={() => {
+                                                    props.addToCart(
+                                                        product._id
+                                                    );
+                                                }}
+                                            />
                                         </Col>
                                     </Row>
                                 </Col>
@@ -192,4 +207,16 @@ const ProductDetail = (props) => {
     }
 };
 
-export default ProductDetail;
+const mapStateToProps = (state) => {
+    return {
+        data: state.addToCart,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addToCart: (id) => dispatch(addToCart(id)),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
