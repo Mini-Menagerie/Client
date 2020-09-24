@@ -70,9 +70,6 @@ const AdoptionForm = () => {
             .all([createForm(), updateUser()])
             .then(
                 axios.spread((form, user) => {
-                    console.log(user);
-                    console.log(form);
-
                     if (form.status === 200) {
                         alert("Your request is being processed");
                         history.goBack();
@@ -128,7 +125,7 @@ const AdoptionForm = () => {
                 </div>
                 <div css={form}>
                     <div>
-                        <h2 css={formTitle} >PET ADOPTION FORM</h2>
+                        <h2 css={formTitle}>PET ADOPTION FORM</h2>
                     </div>
                     <div css={formInput}>
                         <h3 css={personalData}>PERSONAL DATA</h3>

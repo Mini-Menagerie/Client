@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import {
     Dropdown,
     Modal,
@@ -33,7 +32,7 @@ import {
 } from "./Header.styles";
 
 const Header = () => {
-    const productCart = useSelector((state) => state.addToCart);
+    const productCart = JSON.parse(localStorage.getItem("cartProduct"));
     const [show, setShow] = useState(false);
     const [handleForm, setHandleForm] = useState(false);
     const [loginModal, setHandleLoginModal] = useState(false);
@@ -64,7 +63,7 @@ const Header = () => {
     const logout = async (event) => {
         event.preventDefault();
         localStorage.clear();
-        window.location.replace('/');
+        window.location.replace("/");
     };
 
     const handleLoginSubmit = async (event) => {
@@ -76,7 +75,6 @@ const Header = () => {
             );
             if (user.status === 200) {
                 alert("welcome");
-                // console.log(user);
                 localStorage.setItem("menagerie", user.data.token);
                 localStorage.setItem("user", JSON.stringify(user.data.user));
                 setShow(false);
@@ -85,8 +83,10 @@ const Header = () => {
             if (error.message === "Request failed with status code 400") {
                 alert("password salah");
                 setShow(false);
-            }else if(error.message === "Request failed with status code 404"){
-                alert("Email sudah terdaftar menggunakan email social media")
+            } else if (
+                error.message === "Request failed with status code 404"
+            ) {
+                alert("Email sudah terdaftar menggunakan email social media");
                 setShow(false);
             }
         }
@@ -114,9 +114,12 @@ const Header = () => {
             if (error.message === "Request failed with status code 400") {
                 alert("Email sudah terdaftar, gunakan Email lain");
                 setShow(false);
-            }
-            else if (error.message === "Request failed with status code 404") {
-                alert("Email sudah terdaftar melalui Social Media, gunakan Email lain");
+            } else if (
+                error.message === "Request failed with status code 404"
+            ) {
+                alert(
+                    "Email sudah terdaftar melalui Social Media, gunakan Email lain"
+                );
                 setShow(false);
             }
         }
@@ -153,7 +156,7 @@ const Header = () => {
 
     const redirect = (event) => {
         event.preventDefault();
-        window.location.href = "http://localhost:3000/checkout"
+        window.location.href = "http://localhost:3000/checkout";
     };
 
     const searchBar = (event) => {
@@ -228,8 +231,8 @@ const Header = () => {
                                 >
                                     <i className="fas fa-shopping-cart fa-lg"></i>
                                     <Badge pill variant="danger">
-                                        {productCart.cart !== undefined &&
-                                            productCart.cart.length}
+                                        {productCart !== undefined &&
+                                            productCart.length}
                                     </Badge>
                                 </Button>
                             </form>
@@ -484,8 +487,8 @@ const Header = () => {
                                 >
                                     <i className="fas fa-shopping-cart fa-lg"></i>
                                     <Badge pill variant="danger">
-                                        {productCart.cart !== undefined &&
-                                            productCart.cart.length}
+                                        {productCart !== undefined &&
+                                            productCart.length}
                                     </Badge>
                                 </Button>
                             </form>
@@ -502,7 +505,6 @@ const Header = () => {
                             >
                                 Log Out
                             </Button>
-                            
                         </div>
                     </Navbar.Collapse>
                 </Navbar>
@@ -551,7 +553,9 @@ const Header = () => {
                                         </Row>
                                         <Row>
                                             <Col>
-                                                <Button onClick={handleLoginModal}>
+                                                <Button
+                                                    onClick={handleLoginModal}
+                                                >
                                                     Forgot Password?
                                                 </Button>
                                             </Col>
@@ -637,12 +641,12 @@ const Header = () => {
                                                     >
                                                         Sign Up
                                                     </Button>
-                                                    </Col>
-                                                </Row>
-                                                <Row>
-                                                    <Col>
-                                                        <p css={buttonLoginStyles}>
-                                                            Already Have an Account?
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col>
+                                                    <p css={buttonLoginStyles}>
+                                                        Already Have an Account?
                                                         <Button
                                                             onClick={
                                                                 handleLoginModal

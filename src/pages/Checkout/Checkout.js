@@ -23,7 +23,6 @@ const Checkout = () => {
             { token, cart }
         );
         const { status } = response.data;
-        console.log("Response:", response.data);
         if (status === "success") {
             toast("Success! Check email for details", { type: "success" });
         } else {
@@ -32,7 +31,6 @@ const Checkout = () => {
     }
 
     const productCart = useSelector((state) => state.addToCart);
-    console.log(productCart, "product cart");
 
     const [user, setUser] = useState({});
     const userLogin = JSON.parse(localStorage.getItem("user"));
@@ -45,14 +43,12 @@ const Checkout = () => {
         setUser(response.data.result);
         // setLoading(false);
     };
-    
+
     useEffect(() => {
         getUser();
 
         //eslint-disable-next-line
     }, []);
-    console.log(user);
-    console.log(user.idUser);
 
     const cart = JSON.parse(localStorage.getItem("cartProduct"));
     // let initialValue = 0;

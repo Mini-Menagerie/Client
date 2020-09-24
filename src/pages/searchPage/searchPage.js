@@ -36,7 +36,6 @@ const SearchPage = () => {
     const [errorMessage, setErrorMessage] = useState();
 
     const handleChange = (event) => {
-        console.log(event.target.value);
         setSearch(event.target.value);
     };
 
@@ -84,13 +83,11 @@ const SearchPage = () => {
         axios
             .get(url)
             .then(function (response) {
-                console.log(response.data.result);
                 setSearchPet(response.data.result);
                 setLoading(false);
             })
             .catch(function (error) {
                 setError(true);
-                console.log(error.messsage);
                 setErrorMessage(error.message);
                 setLoading(false);
             });
