@@ -13,5 +13,6 @@ export default {
     ABOUTME: "/about-me",
     SHOPPINGCART: "/cart",
     CATEGORYPET: "/category-pet",
+    PETBYBREED: "/all-breeds/category/:category/:breed",
     BREEDBYCATEGORY: "/all-breeds/category/:category",
 };

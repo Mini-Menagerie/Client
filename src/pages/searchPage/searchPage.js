@@ -2,6 +2,7 @@
 import { jsx } from "@emotion/core";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import {
     Card,
@@ -165,28 +166,34 @@ const SearchPage = () => {
                                 {searchPet.length > 0 &&
                                     searchPet.map((item) => (
                                         <Col md={4}>
-                                            <Card style={{ width: "18rem" }}>
-                                                <Card.Img
-                                                    css={img}
-                                                    variant="top"
-                                                    src={item.image}
-                                                />
-                                                <Card.Body>
-                                                    <Card.Title css={title}>
-                                                        {item.petName}
-                                                    </Card.Title>
-                                                    <Card.Text>
-                                                        {item.gender},{" "}
-                                                        {item.age} Years Old
-                                                    </Card.Text>
-                                                    <Card.Text>
-                                                        {item.about}
-                                                    </Card.Text>
-                                                    <Card.Text>
-                                                        {item.location}
-                                                    </Card.Text>
-                                                </Card.Body>
-                                            </Card>
+                                            <Link
+                                                to={`/pets-detail/${item._id}`}
+                                            >
+                                                <Card
+                                                    style={{ width: "18rem" }}
+                                                >
+                                                    <Card.Img
+                                                        css={img}
+                                                        variant="top"
+                                                        src={item.image}
+                                                    />
+                                                    <Card.Body>
+                                                        <Card.Title css={title}>
+                                                            {item.petName}
+                                                        </Card.Title>
+                                                        <Card.Text>
+                                                            {item.gender},{" "}
+                                                            {item.age} Years Old
+                                                        </Card.Text>
+                                                        <Card.Text>
+                                                            {item.about}
+                                                        </Card.Text>
+                                                        <Card.Text>
+                                                            {item.location}
+                                                        </Card.Text>
+                                                    </Card.Body>
+                                                </Card>
+                                            </Link>
                                         </Col>
                                     ))}
                             </Row>
