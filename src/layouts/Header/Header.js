@@ -231,7 +231,7 @@ const Header = () => {
                                 >
                                     <i className="fas fa-shopping-cart fa-lg"></i>
                                     <Badge pill variant="danger">
-                                        {productCart !== undefined &&
+                                        {productCart !== undefined && productCart !== null &&
                                             productCart.length}
                                     </Badge>
                                 </Button>
@@ -487,7 +487,7 @@ const Header = () => {
                                 >
                                     <i className="fas fa-shopping-cart fa-lg"></i>
                                     <Badge pill variant="danger">
-                                        {productCart !== undefined &&
+                                        {productCart !== undefined && productCart !== null &&
                                             productCart.length}
                                     </Badge>
                                 </Button>
