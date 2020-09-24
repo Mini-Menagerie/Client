@@ -32,7 +32,7 @@ const CategoryPet = () => {
       <div >
         <Row css={category}>
           <Col md={3} css={margin} key="">
-            <a href="/all-breeds/dog">
+            <a href="/all-breeds/category/Dog">
               <Card css={petImage}>
                 <Card.Img variant="top" src="https://images.unsplash.com/photo-1555325084-b068599743c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=323&q=80" />
                 <Card.Body css={center}>
@@ -49,7 +49,7 @@ const CategoryPet = () => {
             </a>
           </Col>
           <Col md={3} css={margin} key="">
-          <a href="/all-breeds/cat ">
+          <a href="/all-breeds/category/Cat ">
             <Card css={petImage}>
               <Card.Img variant="top" src="https://images.unsplash.com/photo-1520315342629-6ea920342047?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" />
               <Card.Body css={center}>

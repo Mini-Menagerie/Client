@@ -38,6 +38,9 @@ export const collections = css`
 `;
 export const centertext = css`
     text-align: center;
+    font-weight: 500;
+    font-size: 30px;
+    padding: 10px 5px;
 `;
 export const filter = css`
     padding: 80px 25px;
