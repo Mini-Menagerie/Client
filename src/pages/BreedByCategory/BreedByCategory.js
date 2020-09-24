@@ -107,7 +107,7 @@ const BreedByCategory = () => {
                         allCollection.map((item) => {
                             return (
                                 <Col key={item._id}>
-                                    <a href="/pets-detail/:id">
+                                    <Link to={`/pets-detail/${item._id}`}>
 
                                         <Card>
                                             <Card.Img
@@ -122,7 +122,7 @@ const BreedByCategory = () => {
                                                 {item.petName}
                                             </Card.Title>
                                         </Card>
-                                    </a>
+                                    </Link>
                                 </Col>
                             );
                         })}
@@ -230,7 +230,7 @@ const BreedByCategory = () => {
                         collection.map((item) => {
                             return (
                                 <Col xs={6} md={4} key={item._id}>
-                                    <a href="/pets-detail/:id">
+                                    <Link to={`/pets-detail/${item._id}`}>
 
                                         <Card>
                                             <Card.Img
@@ -245,7 +245,7 @@ const BreedByCategory = () => {
                                                 {item.petName}
                                             </Card.Title>
                                         </Card>
-                                    </a>
+                                    </Link>
 
                                 </Col>
                             );
