@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
 
 import {
     Dropdown,
@@ -158,7 +157,7 @@ const Header = () => {
 
     const redirect = (event) => {
         event.preventDefault();
-        window.location.href = "http://localhost:3000/checkout";
+        window.location.replace('/checkout');
     };
 
     const searchBar = (event) => {
@@ -233,7 +232,7 @@ const Header = () => {
                                 >
                                     <i className="fas fa-shopping-cart fa-lg"></i>
                                     <Badge pill variant="danger">
-                                        {productCart !== undefined &&
+                                        {productCart !== undefined && productCart !== null &&
                                             productCart.length}
                                     </Badge>
                                 </Button>
@@ -478,8 +477,15 @@ const Header = () => {
                                     type="text"
                                     css={searchText}
                                     placeholder="Search your future best friend"
+                                    style={{ maxWidth: "100%" }}
+                                    onChange={handleSearch}
+                                    value={search}
                                 ></input>
-                                <button type="submit" css={searchButton}>
+                                <button
+                                    type="submit"
+                                    css={searchButton}
+                                    onClick={searchBar}
+                                >
                                     <i className="fas fa-search"></i>
                                 </button>
                                 <Button
@@ -490,7 +496,6 @@ const Header = () => {
                                     <i className="fas fa-shopping-cart fa-lg"></i>
                                     <Badge pill variant="danger">
                                         {productCart !== undefined && productCart !== null && productCart.length}
-                                        {productCart === null ? (<Redirect to="/shop" />) : (<Redirect to="/" />)}
                                     </Badge>
                                 </Button>
                             </form>
