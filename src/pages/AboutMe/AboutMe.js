@@ -57,6 +57,9 @@ const AllProfile = () => {
                     <Tab eventKey="contact" title="Pets Up For Adoption">
                         test 3
                     </Tab>
+                    <Tab eventKey="purchasedProduct" title="Purchased Product">
+                        {/* <PurchasedProduct /> */}
+                    </Tab>
                 </Tabs>
             </div>
         </Container>

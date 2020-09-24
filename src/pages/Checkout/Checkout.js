@@ -6,6 +6,13 @@ import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { loadStripe } from '@stripe/stripe-js';
+import {
+    CardElement,
+    Elements,
+    useStripe,
+    useElements,
+} from '@stripe/react-stripe-js';
 
 import "react-toastify/dist/ReactToastify.css";
 import {
@@ -16,7 +23,32 @@ import {
 } from "./Checkout.styles";
 import CartProduct from "../../components/cartItem/cartItem";
 
+const CheckoutForm = () => {
+    const stripe = useStripe();
+    const elements = useElements();
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        const { error, paymentMethod } = await stripe.createPaymentMethod({
+            type: 'card',
+            card: elements.getElement(CardElement),
+        });
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <CardElement />
+            <button type="submit" disabled={!stripe}>
+                Pay
+        </button>
+        </form>
+    );
+};
+
+const stripePromise = loadStripe('pk_test_51HUN7sAjKylxkZ24xTuIpYu3NQco33z811UgWTi4ihOvCKIf435HdOw9sGOrii2xvAo3wrrKkl4UHdOx9XJSFJP000su8RU6tk');
+
 const Checkout = () => {
+
     async function handleToken(token, addresses) {
         const response = await axios.post(
             "https://x6nw5.sse.codesandbox.io/checkout",
@@ -75,6 +107,11 @@ const Checkout = () => {
         <Container>
             <Row style={{ marginTop: "10px" }}>
                 <h1>User Details</h1>
+            </Row>
+            <Row>
+                <Elements stripe={stripePromise}>
+                    <CheckoutForm />
+                </Elements>
             </Row>
             <Row>
                 <Col xs={7} css={userDetails}>
