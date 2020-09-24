@@ -20,11 +20,9 @@ const StatusRequest = () => {
         axios
             .get(url)
             .then(function (result) {
-                console.log(result.data.result);
                 setStatusRequest(result.data.result);
             })
             .catch(function (error) {
-                console.log(error.message);
                 setErrorMessage(error.message);
             });
     }, [setErrorMessage]);

@@ -1,11 +1,11 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Card } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import MoonLoader from "react-spinners/MoonLoader";
 
-import { addToCart } from '../../redux/actions/addToCart'
+import { addToCart } from "../../redux/actions/addToCart";
 import {
     card_img,
     product_name,
@@ -16,7 +16,6 @@ import {
 import ActionButton from "../Button/ActionButton";
 
 const ProductCard = ({ products, loading, ...props }) => {
-    console.log(props)
     if (loading) {
         return (
             <div css={loading_css}>
@@ -44,7 +43,9 @@ const ProductCard = ({ products, loading, ...props }) => {
                         <Card.Body>
                             <p css={product_name}>{value.productName}</p>
                             <p css={product_price}>Rp {value.price}</p>
-                            <ActionButton onClick={() => props.addToCart(value._id)} />
+                            <ActionButton
+                                onClick={() => props.addToCart(value._id)}
+                            />
                         </Card.Body>
                     </Card>
                 );
@@ -54,16 +55,15 @@ const ProductCard = ({ products, loading, ...props }) => {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state.addToCart);
     return {
         data: state.addToCart,
-    }
-}
+    };
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addToCart: (id) => dispatch(addToCart(id))
-    }
-}
+        addToCart: (id) => dispatch(addToCart(id)),
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

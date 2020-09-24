@@ -18,11 +18,10 @@ import PrimaryButton from "../../../components/Button/Button";
 
 const DetailSection = ({ petDetails }) => {
     const history = useHistory();
-    console.log(petDetails);
     const handleClick = () => {
         history.push(`/adoption-form`);
     };
-    console.log(petDetails);
+
     return (
         <Row>
             <Col xs={8} css={detail_section_col}>
@@ -100,18 +99,19 @@ const DetailSection = ({ petDetails }) => {
                         <Form.Control placeholder="email" />
                     </Col>
                     <Col xs={12} css={detail_section_col_right_button}>
-                        {JSON.parse(localStorage.getItem('user') !== null) ? 
-                        (
+                        {JSON.parse(localStorage.getItem("user") !== null) ? (
                             <PrimaryButton onClick={() => handleClick()}>
-                            Ask for Adoption
-                        </PrimaryButton>
+                                Ask for Adoption
+                            </PrimaryButton>
                         ) : (
-                            <PrimaryButton onClick={null} variant="danger" disabled>
-                            Ask for Adoption
-                        </PrimaryButton>
-                        )
-                        }
-                        
+                            <PrimaryButton
+                                onClick={null}
+                                variant="danger"
+                                disabled
+                            >
+                                Ask for Adoption
+                            </PrimaryButton>
+                        )}
                     </Col>
                 </Row>
             </Col>

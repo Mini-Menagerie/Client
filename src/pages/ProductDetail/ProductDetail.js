@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { Container, Row, Col } from "react-bootstrap";
 
-import { addToCart } from '../../redux/actions/addToCart'
+import { addToCart } from "../../redux/actions/addToCart";
 
 import {
     container,
@@ -39,8 +39,6 @@ const ProductDetail = (props) => {
 
         getProduct();
     }, [id]);
-
-    console.log(product);
 
     if (product.stock <= 10) {
         return (
@@ -85,7 +83,13 @@ const ProductDetail = (props) => {
                                             />
                                         </Col>
                                         <Col>
-                                            <ActionButton onClick={() => props.addToCart(product._id)} />
+                                            <ActionButton
+                                                onClick={() => {
+                                                    props.addToCart(
+                                                        product._id
+                                                    );
+                                                }}
+                                            />
                                         </Col>
                                     </Row>
                                 </Col>
@@ -158,7 +162,13 @@ const ProductDetail = (props) => {
                                             />
                                         </Col>
                                         <Col>
-                                            <ActionButton />
+                                            <ActionButton
+                                                onClick={() => {
+                                                    props.addToCart(
+                                                        product._id
+                                                    );
+                                                }}
+                                            />
                                         </Col>
                                     </Row>
                                 </Col>
@@ -198,17 +208,15 @@ const ProductDetail = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state.addToCart);
     return {
         data: state.addToCart,
-    }
-}
+    };
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addToCart: (id) => dispatch(addToCart(id))
-    }
-}
+        addToCart: (id) => dispatch(addToCart(id)),
+    };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetail);
-
