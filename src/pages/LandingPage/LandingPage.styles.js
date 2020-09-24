@@ -34,6 +34,22 @@ export const enterLocation = css`
     background-color: #22891a;
     padding: 20px 40px;
     width: 270px;
+    height: 80px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+
+    ::placeholder {
+        color: #fff;
+    }
+`;
+
+export const searchLoc = css`
+    color: #ffffff;
+    background-color: #22b216;
+    padding: 20px 30px;
+    height: 80px;
+    font-size: 16px;
     border: none;
     border-radius: 10px 0px 0px 10px;
     outline: none;
@@ -54,6 +70,9 @@ export const dogCatButton = css`
     background-color: #22b216;
     padding: 20px 40px;
     border: none;
+    height: 80px;
+    font-size: 16px;
+
     &:hover {
         outline: none;
         background-color: #22891a;
@@ -70,6 +89,9 @@ export const otherPets = css`
     font-size: 12px;
     box-shadow: none;
     outline: none;
+    height: 80px;
+    font-size: 16px;
+
     &:hover {
         outline: none;
         background-color: #22891a;
@@ -205,12 +227,20 @@ export const dogfood1 = css`
     transform: rotate(-20deg);
     width: 80px;
     filter: brightness(0) invert(1);
+
+    @media (max-width: 768px) {
+        width: 18%;
+    }
 `;
 
 export const dogfood2 = css`
     transform: rotate(20deg);
     width: 80px;
-    filter: brightness(0) invert(1); ;
+    filter: brightness(0) invert(1);
+
+    @media (max-width: 768px) {
+        width: 18%;
+    }
 `;
 
 export const buyNecessities = css`
@@ -221,7 +251,10 @@ export const buyNecessities = css`
     border-radius: 20px;
 
     @media (max-width: 768px) {
-        padding: 10px;
+        padding: 20px;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
     }
 `;
 
@@ -253,6 +286,8 @@ export const colStyles = css`
         & > input,
         .dropdown > button {
             width: 100%;
+            border-radius: 10px 10px 10px 10px;
+            font-size: 14px;
         }
     }
 `;

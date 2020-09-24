@@ -51,7 +51,7 @@ export const bodyTitleStyles = css`
 `;
 
 export const formSearch = css`
-    margin-left: 30px;
+    width: 689px;
 
     @media (max-width: 768px) {
         margin: 0;
@@ -60,8 +60,11 @@ export const formSearch = css`
 
 export const searchText = css`
     border: none;
-    width: 570px;
-    padding-left: 10px;
+    width: 560px;
+    padding-left: 15px;
+    line-height: 35px;
+    margin-right: 10px;
+    border-radius: 10px;
 
     @media (max-width: 768px) {
         margin: 5px 0;
@@ -72,7 +75,7 @@ export const searchButton = css`
     background: none;
     border: none;
     border-right: 1px solid #878787;
-    padding-right: 30px;
+    padding-right: 20px;
     color: #878787;
 `;
 
@@ -80,7 +83,7 @@ export const cart = css`
     color: #878787;
     background: none;
     border: none;
-    padding-left: 30px;
+    padding-left: 20px;
 `;
 
 export const wrapperButtonStyles = css`
@@ -95,3 +98,12 @@ export const buttonLoginStyles = css`
 export const rowFormSignUp = css`
     margin: 15px 0px;
 `;
+
+export const navSearch = css`
+    margin-right: 10px !important;
+`
+
+export const cssAbout = css`
+    display: flex;
+    flex-direction: column;
+`
