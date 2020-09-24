@@ -20,6 +20,7 @@ import {
     listCheckoutDetails,
     button,
     userDetails,
+    payment,
 } from "./Checkout.styles";
 import CartProduct from "../../components/cartItem/cartItem";
 
@@ -108,12 +109,7 @@ const Checkout = () => {
             <Row style={{ marginTop: "10px" }}>
                 <h1>User Details</h1>
             </Row>
-            <Row>
-                <Elements stripe={stripePromise}>
-                    <CheckoutForm />
-                </Elements>
-            </Row>
-            <Row>
+            <Row style={{display: 'flex', justifyContent: 'space-between'}}>
                 <Col xs={7} css={userDetails}>
                     <Form>
                         <Form.Row>
@@ -158,7 +154,11 @@ const Checkout = () => {
                         </div>
                     </Form>
                 </Col>
-                <Col></Col>
+                <Col xs={4} css={payment}>
+                    <Elements stripe={stripePromise}>
+                        <CheckoutForm />
+                    </Elements>
+                </Col>
             </Row>
 
             <Row style={{ display: "flex", justifyContent: "space-between" }}>
