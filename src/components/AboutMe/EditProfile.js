@@ -31,12 +31,12 @@ const EditProfile = ({edit, handleClose}) => {
     });
 
 
-    let userData = JSON.parse(localStorage.getItem("user"))
+    let userData = JSON.parse(localStorage.getItem("user")) //key di local storage
 
     
     const fetchProfile = async () => {
         let response = await axios.get(
-            `http://localhost:8000/users/${userData.idUser}` //if let id=userData.id then ${id}
+            `http://localhost:8000/users/${userData.idUser}` //if let id=userData.id then ${id}, id(account), idUser(users)
         ); //endpoint
         console.log(response);
         setUser(response.data.result);
@@ -55,8 +55,12 @@ const EditProfile = ({edit, handleClose}) => {
             axios.put(
                 `http://localhost:8000/users/${userData.idUser}`, form
             )
-            .then(() => window.location.reload())
+            .then((result) => 
+            console.log(result))
+            // .then(() => window.location.reload())
         )
+        .catch((error) =>
+        console.log(error))
     }
 
     useEffect(() => {
@@ -132,7 +136,7 @@ const EditProfile = ({edit, handleClose}) => {
                                 Zip Code:
                             </Form.Label>
                             <Col sm="8">
-                                <Form.Control type="text" placeholder={edit.idUser.zip_code} value={form.zip_code} name="state" onChange={handleChange}/>
+                                <Form.Control type="text" placeholder={edit.idUser.zip_code} value={form.zip_code} name="zip_code" onChange={handleChange}/>
                             </Col>
                         </Form.Group>
                         <Form.Group as={Row} controlId="formPlaintextPassword">
@@ -140,7 +144,7 @@ const EditProfile = ({edit, handleClose}) => {
                                 Address:
                             </Form.Label>
                             <Col sm="8">
-                                <Form.Control type="text" placeholder={edit.idUser.detailAddress} value={form.detailAddress} name="state" onChange={handleChange}/>
+                                <Form.Control type="text" placeholder={edit.idUser.detailAddress} value={form.detailAddress} name="detailAddress" onChange={handleChange}/>
                             </Col>
                         </Form.Group>
                         {/* <Form.Group as={Row} controlId="formPlaintextPassword">
