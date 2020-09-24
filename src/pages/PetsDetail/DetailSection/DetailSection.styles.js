@@ -54,3 +54,12 @@ export const detail_section_col_right_button = css`
 margin-top:  1.25rem;
 text-align: center;
 `
+
+export const location = css `
+margin-top: 30px;
+`
+
+export const rowMargin3 = css `
+padding-bottom: 20px;
+align-content: center;
+`
