@@ -7,7 +7,7 @@ import { Tabs, Tab, Container } from "react-bootstrap";
 
 import AboutMeTab from "../../components/AboutMe/aboutMeTab";
 import { containerWrapper, marginSet } from "./AboutMe.styles";
-// import AccountSettings from "../../components/AboutMe/accountSettings";
+import AccountSettings from "../../components/AboutMe/accountSettings";
 
 const AllProfile = () => {
     const [, setLoading] = useState(true);
@@ -52,7 +52,7 @@ const AllProfile = () => {
                         <AboutMeTab profile={aboutMe} />
                     </Tab>
                     <Tab eventKey="profile" title="Account Settings">
-                        {/* <AccountSettings/> */}
+                        <AccountSettings/>
                     </Tab>
                     <Tab eventKey="contact" title="Pets Up For Adoption">
                         test 3

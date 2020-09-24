@@ -21,6 +21,8 @@ import EditProfile from './EditProfile'
 
 const AboutMeTab = ({profile}) => {
     console.log(profile);
+    let userData = JSON.parse(localStorage.getItem("user"));
+    console.log(userData);
 
     const [show, setShow] = useState(false);
 
@@ -54,13 +56,13 @@ const AboutMeTab = ({profile}) => {
             <h1 css={welcomeText}>Welcome, {profile.idUser !== undefined && profile.idUser.fullName} </h1>
             </div>
             <div css={first}>
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Dialog>
+            <Modal show={show} centered onHide={handleClose} size="lg" aria-labelledby="example-modal-sizes-title-lg" >
+                <Modal.Dialog size="lg" id="example-modal-sizes-title-lg">
                     <Modal.Header closeButton>
                         <Modal.Title>Edit Profile</Modal.Title>
                     </Modal.Header>
 
-                    <Modal.Body>
+                    <Modal.Body className="modal-body modal-md">
                     <EditProfile edit={profile} handleClose={handleClose}/>
                     </Modal.Body>
                 </Modal.Dialog>
@@ -92,7 +94,7 @@ const AboutMeTab = ({profile}) => {
             </div>
             <div>
                 <Row>
-                    <Col>
+                    <Col xs={6}>
                 <Table style={{borderStyle:"hidden"}}>
                         <tbody>
                             <tr style={{borderStyle:"hidden"}}>
