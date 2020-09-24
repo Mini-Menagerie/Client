@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import {
     Dropdown,
     Modal,
@@ -31,9 +30,10 @@ import {
     buttonLoginStyles,
     rowFormSignUp,
 } from "./Header.styles";
+import swal from 'sweetalert';
 
 const Header = () => {
-    const productCart = useSelector((state) => state.addToCart);
+    const productCart = JSON.parse(localStorage.getItem("cartProduct"));
     const [show, setShow] = useState(false);
     const [handleForm, setHandleForm] = useState(false);
     const [loginModal, setHandleLoginModal] = useState(false);
@@ -44,14 +44,15 @@ const Header = () => {
     });
     let user = JSON.parse(localStorage.getItem("user"));
     let loggedUser = "";
-    if (user) {
-        loggedUser = user.email;
-    }
-
     const [formLogin, setFormLogin] = useState({
         email: "",
         password: "",
     });
+    const [search, setSearch] = useState("");
+    if (user) {
+        loggedUser = user.email;
+    }
+
     const handleLogin = (event) => {
         event.preventDefault();
         setFormLogin({
@@ -63,7 +64,7 @@ const Header = () => {
     const logout = async (event) => {
         event.preventDefault();
         localStorage.clear();
-        window.location.reload();
+        window.location.replace("/");
     };
 
     const handleLoginSubmit = async (event) => {
@@ -74,15 +75,29 @@ const Header = () => {
                 formLogin
             );
             if (user.status === 200) {
-                alert("welcome");
+
+                swal({
+                    title: "Sukses!",
+                    text: "Login berhasil!",
+                    icon: "success",
+                });
                 // console.log(user);
                 localStorage.setItem("menagerie", user.data.token);
                 localStorage.setItem("user", JSON.stringify(user.data.user));
                 setShow(false);
+                window.location.reload()
             }
         } catch (error) {
             if (error.message === "Request failed with status code 400") {
-                alert("password salah");
+                swal({
+                    title: "Gagal!",
+                    icon: "warning",
+                });
+                setShow(false);
+            } else if (
+                error.message === "Request failed with status code 404"
+            ) {
+                alert("Email sudah terdaftar menggunakan email social media");
                 setShow(false);
             }
         }
@@ -108,7 +123,14 @@ const Header = () => {
             }
         } catch (error) {
             if (error.message === "Request failed with status code 400") {
-                alert("email sudah terdaftar");
+                alert("Email sudah terdaftar, gunakan Email lain");
+                setShow(false);
+            } else if (
+                error.message === "Request failed with status code 404"
+            ) {
+                alert(
+                    "Email sudah terdaftar melalui Social Media, gunakan Email lain"
+                );
                 setShow(false);
             }
         }
@@ -119,7 +141,11 @@ const Header = () => {
         setHandleForm(false);
         setHandleLoginModal(false);
     };
-    const handleShow = () => setShow(true);
+    const handleShowSignUp = () => setShow(true);
+    const handleShowLogin = () => {
+        setHandleLoginModal(true);
+        setShow(true);
+    }
 
     const handleGoogleLogin = () => {
         const urlGoogleLogin = "http://localhost:8000/auth/google";
@@ -146,6 +172,16 @@ const Header = () => {
     const redirect = (event) => {
         event.preventDefault();
         window.location.href = "http://localhost:3000/checkout";
+    };
+
+    const searchBar = (event) => {
+        event.preventDefault();
+
+        localStorage.setItem("search", search);
+        window.location.href = "/search-page";
+    };
+    const handleSearch = (event) => {
+        setSearch(event.target.value);
     };
 
     if (user === null) {
@@ -193,8 +229,14 @@ const Header = () => {
                                     css={searchText}
                                     placeholder="Search your future best friend"
                                     style={{ maxWidth: "100%" }}
+                                    onChange={handleSearch}
+                                    value={search}
                                 ></input>
-                                <button type="submit" css={searchButton}>
+                                <button
+                                    type="submit"
+                                    css={searchButton}
+                                    onClick={searchBar}
+                                >
                                     <i className="fas fa-search"></i>
                                 </button>
                                 <Button
@@ -204,17 +246,17 @@ const Header = () => {
                                 >
                                     <i className="fas fa-shopping-cart fa-lg"></i>
                                     <Badge pill variant="danger">
-                                        {productCart.cart !== undefined &&
-                                            productCart.cart.length}
+                                        {productCart !== undefined && productCart !== null &&
+                                            productCart.length}
                                     </Badge>
                                 </Button>
                             </form>
                         </div>
                         <div>
-                            <Button variant="light" onClick={handleShow}>
+                            <Button variant="light" onClick={handleShowSignUp}>
                                 Sign Up
                             </Button>
-                            <Button variant="light" onClick={handleShow}>
+                            <Button variant="light" onClick={handleShowLogin}>
                                 Log In
                             </Button>
                         </div>
@@ -449,8 +491,15 @@ const Header = () => {
                                     type="text"
                                     css={searchText}
                                     placeholder="Search your future best friend"
+                                    style={{ maxWidth: "100%" }}
+                                    onChange={handleSearch}
+                                    value={search}
                                 ></input>
-                                <button type="submit" css={searchButton}>
+                                <button
+                                    type="submit"
+                                    css={searchButton}
+                                    onClick={searchBar}
+                                >
                                     <i className="fas fa-search"></i>
                                 </button>
                                 <Button
@@ -460,8 +509,8 @@ const Header = () => {
                                 >
                                     <i className="fas fa-shopping-cart fa-lg"></i>
                                     <Badge pill variant="danger">
-                                        {productCart.cart !== undefined &&
-                                            productCart.cart.length}
+                                        {productCart !== undefined && productCart !== null &&
+                                            productCart.length}
                                     </Badge>
                                 </Button>
                             </form>
@@ -478,7 +527,6 @@ const Header = () => {
                             >
                                 Log Out
                             </Button>
-                            
                         </div>
                     </Navbar.Collapse>
                 </Navbar>
@@ -527,7 +575,9 @@ const Header = () => {
                                         </Row>
                                         <Row>
                                             <Col>
-                                                <Button onClick={handleLoginModal}>
+                                                <Button
+                                                    onClick={handleLoginModal}
+                                                >
                                                     Forgot Password?
                                                 </Button>
                                             </Col>
@@ -613,12 +663,12 @@ const Header = () => {
                                                     >
                                                         Sign Up
                                                     </Button>
-                                                    </Col>
-                                                </Row>
-                                                <Row>
-                                                    <Col>
-                                                        <p css={buttonLoginStyles}>
-                                                            Already Have an Account?
+                                                </Col>
+                                            </Row>
+                                            <Row>
+                                                <Col>
+                                                    <p css={buttonLoginStyles}>
+                                                        Already Have an Account?
                                                         <Button
                                                             onClick={
                                                                 handleLoginModal

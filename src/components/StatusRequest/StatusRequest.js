@@ -3,13 +3,7 @@ import { jsx } from "@emotion/core";
 import { Card, Col, Row } from "react-bootstrap";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import {
-    head,
-    statusInfo,
-    listInfo,
-    mainOne,
-    mainBody,
-} from "./StatusRequest.styles";
+import { listInfo, mainOne, mainBody } from "./StatusRequest.styles";
 
 const StatusRequest = () => {
     const [statusRequest, setStatusRequest] = useState([]);
@@ -29,15 +23,6 @@ const StatusRequest = () => {
 
     return (
         <div>
-            <div css={head}>
-                <h2>Adoption Status Request</h2>
-            </div>
-            <div css={statusInfo}>
-                <div>All Request</div>
-                <div>Approved</div>
-                <div>Denied</div>
-                <div>Waiting For Approval</div>
-            </div>
             <div css={listInfo}>
                 {statusRequest.map((e) => (
                     <div key={statusRequest}>

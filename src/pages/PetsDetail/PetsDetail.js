@@ -41,6 +41,7 @@ const PetsDetail = (props) => {
     //         });
     // };
 
+
     let { id } = useParams();
 
     const fetchDetails = async () => {
@@ -48,13 +49,10 @@ const PetsDetail = (props) => {
         axios
             .get(url)
             .then(function (response) {
-                console.log(response);
-
                 setDetails(response.data.result);
                 setLoading(false);
             })
             .catch(function (error) {
-                console.log(errorMessage);
                 setLoading(false);
             });
     };
@@ -70,7 +68,6 @@ const PetsDetail = (props) => {
             })
             .catch(function (error) {
                 setError(true);
-                console.log(error.messsage);
                 setErrorMessage(error.message);
                 setLoading(false);
             });
@@ -87,7 +84,6 @@ const PetsDetail = (props) => {
             })
             .catch(function (error) {
                 setError(true);
-                console.log(error.messsage);
                 setErrorMessage(error.message);
                 setLoading(false);
             });
@@ -118,8 +114,7 @@ const PetsDetail = (props) => {
 
         // eslint-disable-next-line
     }, []);
-    console.log(details, "details");
-    console.log(user, "user");
+
     return (
         <div>
             {/* Carousel Section */}

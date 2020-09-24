@@ -128,8 +128,8 @@ const AboutMeTab = ({profile}) => {
             </div>
             <PrimaryButton css={editProfile} onClick={handleShow}>Edit Profile</PrimaryButton>
         </Container>
-    )
-}
+    );
+};
 
 export default AboutMeTab;
 //put edit profile here
