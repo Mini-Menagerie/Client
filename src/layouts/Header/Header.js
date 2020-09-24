@@ -87,7 +87,10 @@ const Header = () => {
             }
         } catch (error) {
             if (error.message === "Request failed with status code 400") {
-                alert("password salah");
+                swal({
+                    title: "Gagal!",
+                    icon: "warning",
+                });
                 setShow(false);
             }
         }
