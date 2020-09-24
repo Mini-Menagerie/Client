@@ -11,3 +11,7 @@ justify-content: center;
 align-content: center;
 
 `
+export const fs = css`
+    width: 800px;
+    display: block;
+`
