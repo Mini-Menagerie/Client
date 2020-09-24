@@ -10,9 +10,8 @@ export default {
     PETSHOP: "/shop",
     PRODUCTDETAIL: "/product/:id",
     SEARCHPAGE: "/search-page",
-    ABOUTME: '/about-me',
+    ABOUTME: "/about-me",
     SHOPPINGCART: "/cart",
     CATEGORYPET: "/category-pet",
     BREEDBYCATEGORY: "/all-breeds/category/:category",
-    ABOUTME:"/about-me"
 };
