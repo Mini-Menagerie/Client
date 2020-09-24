@@ -1,7 +1,9 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Row, Col, Form } from "react-bootstrap";
+import { Row, Col, Form} from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import {useState, useRef} from 'react';
+
 
 import {
     detail_section_col,
@@ -103,14 +105,14 @@ const DetailSection = ({ petDetails, user }) => {
                             <PrimaryButton onClick={() => handleClick()}>
                                 Ask for Adoption
                             </PrimaryButton>
-                        ) : (
-                            <PrimaryButton
-                                onClick={null}
+                        ) : ( 
+                            <PrimaryButton 
+                                onClick={() => alert('Please Login to Continue')}
                                 variant="danger"
-                                disabled
                             >
                                 Ask for Adoption
                             </PrimaryButton>
+                           
                         )}
                     </Col>
                 </Row>
