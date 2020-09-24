@@ -26,8 +26,8 @@ import hamster from "../../assets/hamsterCover.png";
 import bird from "../../assets/birdCover.png";
 
 const AdoptionForm = () => {
-    const [user, setUser] = useState([]);
-    const [form, setForm] = useState({
+    // const [user, setUser] = useState([]);
+    const [user, setUser] = useState({
         noHandphone: "",
         detailAddress: "",
         state: "",
@@ -44,30 +44,34 @@ const AdoptionForm = () => {
     });
     const [reason, setReason] = useState("");
 
+    const userData = JSON.parse(localStorage.getItem('user'))
+    console.log(userData);
+    let id = userData.idUser._id
+
     const fetchDataUser = async () => {
         let result = await axios.get(
-            `http://localhost:8000/users/5f69bb07acf76e287ebdc5dc`
+            `http://localhost:8000/users/${id}`
         ); //endpoint
         setUser(result.data.result);
     };
-
+    
     const updateUser = () => {
         return axios.put(
-            "http://localhost:8000/users/5f69bb07acf76e287ebdc5dc",
-            form
-        );
-    };
-    const createForm = () => {
-        return axios.post("http://localhost:8000/formRequest/create", {
-            idUser: user._id,
-            reason,
-        });
-    };
-    const history = useHistory();
-    
-    const handleSubmitForm = async (event) => {
-        event.preventDefault();
-        axios
+            `http://localhost:8000/users/${id}`,
+            user
+            );
+        };
+        const createForm = () => {
+            return axios.post("http://localhost:8000/formRequest/create", {
+                idUser: user._id,
+                reason,
+            });
+        };
+        const history = useHistory();
+        
+        const handleSubmitForm = async (event) => {
+            event.preventDefault();
+            axios
             .all([createForm(), updateUser()])
             .then(
                 axios.spread((form, user) => {
@@ -76,25 +80,26 @@ const AdoptionForm = () => {
                         history.goBack();
                     }
                 })
-            )
-            .catch((err) => console.log(err));
-    };
-    const handleChange = (event) => {
-        setForm({
-            ...form,
-            [event.target.name]: event.target.value,
-        });
-    };
-    const reasonChange = (event) => {
-        setReason(event.target.value);
-    };
-
-    useEffect(() => {
-        fetchDataUser();
-    }, []);
-
-    return (
-        <div css={adoptionWrapper}>
+                )
+                .catch((err) => console.log(err));
+            };
+            const handleChange = (event) => {
+                setUser({
+                    ...user,
+                    [event.target.name]: event.target.value,
+                });
+            };
+            const reasonChange = (event) => {
+                setReason(event.target.value);
+            };
+            
+            useEffect(() => {
+                fetchDataUser();
+            }, []);
+            console.log(user);
+            
+            return (
+                <div css={adoptionWrapper}>
             <div css={adoptionTitle}>
                 <h1>Hello There!</h1>
                 <h4>
@@ -124,7 +129,7 @@ const AdoptionForm = () => {
                         ></img>
                     </div>
                 </div>
-                <div css={form}>
+                <div>
                     <div>
                         <h2 css={formTitle}>PET ADOPTION FORM</h2>
                     </div>
@@ -135,8 +140,8 @@ const AdoptionForm = () => {
                                 <Form.Group as={Col} controlId="formGridEmail">
                                     <Form.Label>Full Name</Form.Label>
                                     <Form.Control
-                                        placeholder={user.fullName}
-                                        value={user.fullName}
+                                        placeholder={userData.fullName}
+                                        value={userData.fullName}
                                         disabled
                                     />
                                 </Form.Group>
@@ -148,8 +153,8 @@ const AdoptionForm = () => {
                                     <Form.Label>Email:</Form.Label>
                                     <Form.Control
                                         type="email"
-                                        placeholder={user.email}
-                                        value={user.email}
+                                        placeholder={userData.email}
+                                        value={userData.email}
                                         disabled
                                     />
                                 </Form.Group>
@@ -160,7 +165,7 @@ const AdoptionForm = () => {
                                 <Form.Control
                                     placeholder="No Handphone"
                                     name="noHandphone"
-                                    value={form.noHandphone}
+                                    value={user.noHandphone}
                                     onChange={handleChange}
                                     required
                                 />
@@ -171,7 +176,7 @@ const AdoptionForm = () => {
                                 <Form.Control
                                     placeholder="Detail Address"
                                     name="detailAddress"
-                                    value={form.detailAddress}
+                                    value={user.detailAddress}
                                     onChange={handleChange}
                                     required
                                 />
@@ -183,7 +188,7 @@ const AdoptionForm = () => {
                                     <Form.Control
                                         placeholder="City"
                                         name="state"
-                                        value={form.state}
+                                        value={user.state}
                                         onChange={handleChange}
                                         required
                                     />
@@ -194,7 +199,7 @@ const AdoptionForm = () => {
                                     <Form.Control
                                         placeholder="Province"
                                         name="province"
-                                        value={form.province}
+                                        value={user.province}
                                         onChange={handleChange}
                                         required
                                     ></Form.Control>
@@ -205,7 +210,7 @@ const AdoptionForm = () => {
                                     <Form.Control
                                         placeholder="Zip Code"
                                         name="zip_code"
-                                        value={form.zip_code}
+                                        value={user.zip_code}
                                         onChange={handleChange}
                                         required
                                     />
@@ -217,7 +222,7 @@ const AdoptionForm = () => {
                                 <Form.Control
                                     placeholder="Occupation"
                                     name="work"
-                                    value={form.work}
+                                    value={user.work}
                                     onChange={handleChange}
                                     required
                                 />
@@ -255,6 +260,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios2"
                                             value="6-10 Hours"
                                             onChange={handleChange}
+                                            required
 
                                             // checked={
                                             //     workingDuration === "6-10 Hours"
@@ -267,6 +273,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios3"
                                             value=">10 Hours"
                                             onChange={handleChange}
+                                            required
 
                                             // checked={
                                             //     workingDuration === ">10 Hours"
@@ -303,6 +310,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios2"
                                             value="Rent"
                                             onChange={handleChange}
+                                            required
 
                                             // checked={ownRent === "Rent"}
                                         />
@@ -338,6 +346,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios2"
                                             value="No"
                                             onChange={handleChange}
+                                            required
 
                                             // checked={givenPets === "No"}
                                         />
@@ -373,6 +382,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios2"
                                             value="No"
                                             onChange={handleChange}
+                                            required
 
                                             // checked={children === "No"}
                                         />
@@ -408,6 +418,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios2"
                                             value="No"
                                             onChange={handleChange}
+                                            required
 
                                             // checked={otherPets === "No"}
                                         />
@@ -448,6 +459,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios2"
                                             value="No"
                                             onChange={handleChange}
+                                            required
 
                                             // checked={cage === "No"}
                                         />
@@ -458,6 +470,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios2"
                                             value="Sometimes"
                                             onChange={handleChange}
+                                            required
 
                                             // checked={cage === "Sometimes"}
                                         />
@@ -494,6 +507,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios2"
                                             value="5.000.000-10.000.000"
                                             onChange={handleChange}
+                                            required
 
                                             // checked={
                                             //     income ===
@@ -507,6 +521,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios2"
                                             value=">10.000.000"
                                             onChange={handleChange}
+                                            required
 
                                             // checked={income === "<10.000.000"}
                                         />
