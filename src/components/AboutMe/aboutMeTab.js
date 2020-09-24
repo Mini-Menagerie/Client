@@ -94,7 +94,7 @@ const AboutMeTab = ({profile}) => {
             </div>
             <div>
                 <Row>
-                    <Col>
+                    <Col xs={6}>
                 <Table style={{borderStyle:"hidden"}}>
                         <tbody>
                             <tr style={{borderStyle:"hidden"}}>
