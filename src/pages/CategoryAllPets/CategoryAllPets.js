@@ -13,7 +13,7 @@ import {
 
 
 const CategoryPet = () => {
-  
+
   return (
     <div>
       <div>
@@ -31,7 +31,8 @@ const CategoryPet = () => {
       </div>
       <div >
         <Row css={category}>
-          <Col md={3} css={margin} key="">            
+          <Col md={3} css={margin} key="">
+            <a href="/all-breeds/dog">
               <Card css={petImage}>
                 <Card.Img variant="top" src="https://images.unsplash.com/photo-1555325084-b068599743c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=323&q=80" />
                 <Card.Body css={center}>
@@ -41,87 +42,90 @@ const CategoryPet = () => {
                     </h4>
                   </Card.Title>
                   <Card.Text>
-                   "There's a reason dogs are called man's best friend."
+                    "There's a reason dogs are called man's best friend."
                   </Card.Text>
                 </Card.Body>
-              </Card>            
+              </Card>
+            </a>
           </Col>
-          <Col md={3} css={margin} key="">            
-              <Card css={petImage}>
-                <Card.Img variant="top" src="https://images.unsplash.com/photo-1520315342629-6ea920342047?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" />
-                <Card.Body css={center}>
-                  <Card.Title>
-                    <h4>
-                     Cat
+          <Col md={3} css={margin} key="">
+          <a href="/all-breeds/cat ">
+            <Card css={petImage}>
+              <Card.Img variant="top" src="https://images.unsplash.com/photo-1520315342629-6ea920342047?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=80" />
+              <Card.Body css={center}>
+                <Card.Title>
+                  <h4>
+                    Cat
                     </h4>
-                  </Card.Title>
-                  <Card.Text>
-                   "A cat's courage is as strong as a dog's chain"
+                </Card.Title>
+                <Card.Text>
+                  "A cat's courage is as strong as a dog's chain"
                   </Card.Text>
-                </Card.Body>
-              </Card>            
+              </Card.Body>
+            </Card>
+            </a>
           </Col>
-          <Col md={3} css={margin} key="">            
-              <Card css={petImage}>
-                <Card.Img variant="top" src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
-                <Card.Body css={center}>
-                  <Card.Title>
-                    <h4>
-                      Small and Furry
+          <Col md={3} css={margin} key="">
+            <Card css={petImage}>
+              <Card.Img variant="top" src="https://images.unsplash.com/photo-1425082661705-1834bfd09dca?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60" />
+              <Card.Body css={center}>
+                <Card.Title>
+                  <h4>
+                    Small and Furry
                     </h4>
-                  </Card.Title>
-                  <Card.Text>
-                   "The world's tragedy is that men love women, women love children, and children love hamsters."
+                </Card.Title>
+                <Card.Text>
+                  "The world's tragedy is that men love women, women love children, and children love hamsters."
                   </Card.Text>
-                </Card.Body>
-              </Card>            
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
         <Row css={category}>
-          <Col md={3} css={margin} key="">            
-              <Card css={petImage}>
-                <Card.Img variant="top" src="https://images.unsplash.com/photo-1574040692842-6c45d85907a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=741&q=80" />
-                <Card.Body css={center}>
-                  <Card.Title>
-                    <h4>
-                      Birds
+          <Col md={3} css={margin} key="">
+            <Card css={petImage}>
+              <Card.Img variant="top" src="https://images.unsplash.com/photo-1574040692842-6c45d85907a1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=741&q=80" />
+              <Card.Body css={center}>
+                <Card.Title>
+                  <h4>
+                    Birds
                     </h4>
-                  </Card.Title>
-                  <Card.Text>
-                   "A pleasant morning wake up call goes a long way"
+                </Card.Title>
+                <Card.Text>
+                  "A pleasant morning wake up call goes a long way"
                   </Card.Text>
-                </Card.Body>
-              </Card>            
+              </Card.Body>
+            </Card>
           </Col>
-          <Col md={3} css={margin} key="">            
-              <Card css={petImage}>
-                <Card.Img variant="top" src="https://images.unsplash.com/photo-1598674953515-32809625dfa2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=484&q=80" />
-                <Card.Body css={center}>
-                  <Card.Title>
-                    <h4>
-                      Fish
+          <Col md={3} css={margin} key="">
+            <Card css={petImage}>
+              <Card.Img variant="top" src="https://images.unsplash.com/photo-1598674953515-32809625dfa2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=484&q=80" />
+              <Card.Body css={center}>
+                <Card.Title>
+                  <h4>
+                    Fish
                     </h4>
-                  </Card.Title>
-                  <Card.Text>
-                   "Fis are friends, not food"
+                </Card.Title>
+                <Card.Text>
+                  "Fis are friends, not food"
                   </Card.Text>
-                </Card.Body>
-              </Card>            
+              </Card.Body>
+            </Card>
           </Col>
-          <Col md={3} css={margin} key="">            
-              <Card css={petImage}>
-                <Card.Img variant="top" src="https://images.unsplash.com/photo-1591913928909-af4bbc97ec34?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"/>
-                <Card.Body css={center}>
-                  <Card.Title>
-                    <h4>
-                      Horses
+          <Col md={3} css={margin} key="">
+            <Card css={petImage}>
+              <Card.Img variant="top" src="https://images.unsplash.com/photo-1591913928909-af4bbc97ec34?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" />
+              <Card.Body css={center}>
+                <Card.Title>
+                  <h4>
+                    Horses
                     </h4>
-                  </Card.Title>
-                  <Card.Text>
-                   "Horses are like chocolates you can't just have one"
+                </Card.Title>
+                <Card.Text>
+                  "Horses are like chocolates you can't just have one"
                   </Card.Text>
-                </Card.Body>
-              </Card>            
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
       </div>

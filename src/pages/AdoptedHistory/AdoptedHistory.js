@@ -15,11 +15,9 @@ const AdoptedHistory = () => {
         axios
             .get(url)
             .then(function (result) {
-                console.log(result.data.result);
                 setAdoptedHistory(result.data.result);
             })
             .catch(function (error) {
-                console.log(error.message);
                 setErrorMessage(error.message);
             });
     }, [setErrorMessage]);

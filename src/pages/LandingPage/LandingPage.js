@@ -88,7 +88,6 @@ const LandingPage = () => {
             })
             .catch(function (error) {
                 setError(true);
-                console.log(error.messsage);
                 setErrorMessage(error.message);
                 setLoading(false);
             });
@@ -99,14 +98,12 @@ const LandingPage = () => {
         axios
             .get(url)
             .then(function (response) {
-                console.log(response);
                 const limit = response.data.result.slice(0, 4);
                 setPetCards(limit);
                 setLoading(false);
             })
             .catch(function (error) {
                 setError(true);
-                console.log(error.messsage);
                 setErrorMessage(error.message);
                 setLoading(false);
             });

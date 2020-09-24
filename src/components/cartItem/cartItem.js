@@ -9,6 +9,11 @@ import {
     cartImage,
 } from "./cartItem.styles";
 
+const removeProduct = (event) => {
+    event.preventDefault();
+    localStorage.removeItem("cartProduct");
+};
+
 const CartProduct = ({ data }) => {
     return (
         <div>
@@ -30,9 +35,10 @@ const CartProduct = ({ data }) => {
                                 <p>{value.quantity} PCS</p>
                             </div>
                             <a
-                                href="#!"
+                                href="/#"
                                 type="button"
                                 className="card-link-secondary small text-uppercase mr-3"
+                                onClick={removeProduct}
                             >
                                 <i class="fas fa-trash-alt mr-1"></i> Remove
                                 item{" "}
