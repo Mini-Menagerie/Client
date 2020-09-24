@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from '@emotion/core'
-import { Col, Row, Container } from 'react-bootstrap'
+import { Col, Row, Container, Form } from 'react-bootstrap'
 import ReactFilestack from 'filestack-react';
  
 
@@ -14,6 +14,7 @@ import {
     editProfile
 }
 from './aboutMeTab.styles'
+import axios from 'axios';
 
 const AboutMeTab = ({profile}) => {
     console.log(profile.userId);
@@ -37,9 +38,29 @@ const AboutMeTab = ({profile}) => {
                     />
                     </Col>
                     <Col xs={6}>
-                        <p>Name: </p>
+                        <Form>
+                            <Form.Row>
+                            <Form.Group as={Row} controlId="formPlaintextPassword">
+                                <Form.Label column sm="2">
+                                Name:
+                                </Form.Label>
+                                <Col sm="10">
+                                <Form.Control type="text" placeholder={profile.fullName} value={profile.fullname}/>
+                                </Col>
+                            </Form.Group>
+                            <Form.Group as={Row} controlId="formPlaintextPassword">
+                                <Form.Label column sm="2">
+                                Email
+                                </Form.Label>
+                                <Col sm="10">
+                                <Form.Control type="text" placeholder={profile.email} value={profile.email}/>
+                                </Col>
+                            </Form.Group>
+                            </Form.Row>
+                        </Form>
+                        {/* <p>Name: </p>
                         <p>Phone Number: </p>
-                        <p>Email: </p>
+                        <p>Email: </p> */}
                     </Col>
                 </Row>
                 {/* <Col xs={6}>

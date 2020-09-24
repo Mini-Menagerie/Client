@@ -19,27 +19,27 @@ const PetsDetail = (props) => {
     const [, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
     const [details, setDetails] = useState({});
-    const [, setProduct] = useState([]);
+    const [ ,setProduct] = useState([]);
     const [petCards, setPetCards] = useState([]);
-
+    const [user, setUser] = useState({});
     // function handleClick(id) {
     //     window.location.replace(`/pets-detail/${id}`);
     // }
 
-    const fetchCarousel = () => {
-        const url = "http://localhost:8000/";
-        axios
-            .get(url)
-            .then(function (response) {
-                // setCarousel(response.data.result);
-                setLoading(false);
-            })
-            .catch(function (error) {
-                setError(true);
-                console.log(errorMessage);
-                setLoading(false);
-            });
-    };
+    // const fetchCarousel = () => {
+    //     const url = "http://localhost:8000/";
+    //     axios
+    //         .get(url)
+    //         .then(function (response) {
+    //             // setCarousel(response.data.result);
+    //             setLoading(false);
+    //         })
+    //         .catch(function (error) {
+    //             setError(true);
+    //             console.log(errorMessage);
+    //             setLoading(false);
+    //         });
+    // };
 
     let { id } = useParams();
 
@@ -93,15 +93,33 @@ const PetsDetail = (props) => {
             });
     };
 
+    const fetchUser = () => {
+        const idUser = details.idUser!==undefined && details.idUser._id
+        const url =`http://localhost:8000/users/${idUser}`
+        axios.get(url)
+        .then(function (response) {
+            setUser(response.data.result)
+            console.log(response.data.result);
+            setLoading(false)
+        })
+        .catch(function(error) {
+            console.log(error.message);
+            setErrorMessage(error.message);
+            setLoading(false)
+        })
+    }
+
     useEffect(() => {
-        fetchCarousel();
+        // fetchCarousel();
         fetchDetails();
         fetchProduct();
+        fetchUser();
         url();
 
         // eslint-disable-next-line
     }, []);
     console.log(details, "details");
+    console.log(user, "user");
     return (
         <div>
             {/* Carousel Section */}
@@ -112,7 +130,7 @@ const PetsDetail = (props) => {
 
             {/* Detail Section */}
             <Container css={container}>
-                <DetailSection petDetails={details} />
+                <DetailSection petDetails={details} user={user}/>
             </Container>
             {/* End of Detail Section */}
 
