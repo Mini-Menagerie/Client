@@ -162,6 +162,7 @@ const AdoptionForm = () => {
                                     name="noHandphone"
                                     value={form.noHandphone}
                                     onChange={handleChange}
+                                    required
                                 />
                             </Form.Group>
 
@@ -172,6 +173,7 @@ const AdoptionForm = () => {
                                     name="detailAddress"
                                     value={form.detailAddress}
                                     onChange={handleChange}
+                                    required
                                 />
                             </Form.Group>
 
@@ -183,6 +185,7 @@ const AdoptionForm = () => {
                                         name="state"
                                         value={form.state}
                                         onChange={handleChange}
+                                        required
                                     />
                                 </Form.Group>
 
@@ -193,6 +196,7 @@ const AdoptionForm = () => {
                                         name="province"
                                         value={form.province}
                                         onChange={handleChange}
+                                        required
                                     ></Form.Control>
                                 </Form.Group>
 
@@ -203,6 +207,7 @@ const AdoptionForm = () => {
                                         name="zip_code"
                                         value={form.zip_code}
                                         onChange={handleChange}
+                                        required
                                     />
                                 </Form.Group>
                             </Form.Row>
@@ -214,6 +219,7 @@ const AdoptionForm = () => {
                                     name="work"
                                     value={form.work}
                                     onChange={handleChange}
+                                    required
                                 />
                             </Form.Group>
 
@@ -237,6 +243,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios1"
                                             value="<6 Hours"
                                             onChange={handleChange}
+                                            required
                                             // checked={
                                             //     workingDuration === "<6 Hours"
                                             // }
@@ -285,6 +292,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios1"
                                             value="Own"
                                             onChange={handleChange}
+                                            required
 
                                             // checked={ownRent === "own"}
                                         />
@@ -319,6 +327,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios1"
                                             value="Yes"
                                             onChange={handleChange}
+                                            required
 
                                             // checked={givenPets === "Yes"}
                                         />
@@ -353,6 +362,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios1"
                                             value="Yes"
                                             onChange={handleChange}
+                                            required
 
                                             // checked={children === "Yes"}
                                         />
@@ -386,6 +396,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios1"
                                             value="Yes"
                                             onChange={handleChange}
+                                            required
 
                                             // checked={otherPets === "Yes"}
                                         />
@@ -426,6 +437,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios1"
                                             value="Yes"
                                             onChange={handleChange}
+                                            required
 
                                             // checked={cage === "Yes"}
                                         />
@@ -471,6 +483,7 @@ const AdoptionForm = () => {
                                             id="formHorizontalRadios1"
                                             value="<5.000.000"
                                             onChange={handleChange}
+                                            required
 
                                             // checked={income === "< 5.000.000"}
                                         />
@@ -515,6 +528,7 @@ const AdoptionForm = () => {
                                         value={reason}
                                         onChange={reasonChange}
                                         placeholder="I'd Like To Adopt This Pet Because..."
+                                        required
                                     />
                                 </Form.Group>
 
