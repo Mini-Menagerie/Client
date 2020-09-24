@@ -23,6 +23,7 @@ import AboutMe from '../pages/AboutMe/AboutMe'
 import ShoppingCart from '../pages/ShoppingCart/ShoppingCart'
 import CategoryPet from '../pages/CategoryAllPets/CategoryAllPets';
 import BreedByCategory from '../pages/BreedByCategory/BreedByCategory';
+import PetByBreed from "../pages/PetByBreed/PetByBreed";
 
 const Router = () => (
     <BrowserRouter>
@@ -59,6 +60,8 @@ const Router = () => (
                 path={routes.BREEDBYCATEGORY}
                 component={BreedByCategory}
             />
+
+            <Route exact path={routes.PETBYBREED} component={PetByBreed} />
             <Route
                 exact
                 path={routes.HISTORYPURCHASE}

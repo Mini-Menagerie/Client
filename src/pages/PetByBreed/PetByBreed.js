@@ -1,10 +1,8 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { useState, useEffect } from "react";
-import Carousel from "react-multi-carousel";
 import { Formik, Form } from "formik";
 import { useParams, Link } from "react-router-dom";
-import "react-multi-carousel/lib/styles.css";
 
 import {
     Card,
@@ -22,12 +20,11 @@ import {
     centertext,
     filter,
     buttonGroup,
-} from "./BreedByCategory.styles";
+} from "./PetByBreed.styles";
 
-const BreedByCategory = () => {
+const PetByBreed = () => {
     const [collection, setCollection] = useState([]);
-    const [allCollection, setAllCollection] = useState([]);
-    const { category } = useParams();
+    const { category, breed } = useParams();
 
     const size = [
         { name: "Small", value: "Small" },
@@ -44,49 +41,12 @@ const BreedByCategory = () => {
         { name: "Descending Order", value: "desc" },
     ];
 
-    const responsive = {
-        superLargeDesktop: {
-            breakpoint: { max: 4000, min: 3000 },
-            items: 5,
-        },
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 3,
-        },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 2,
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1,
-        },
-    };
-
     const fetchCollection = async () => {
-        const url = `${process.env.REACT_APP_API_URL}/pet/category/${category}`;
+        const url = `${process.env.REACT_APP_API_URL}/petdetail/?category=${category}&search=${breed}`;
         const response = await fetch(url);
         const result = await response.json();
 
-        function removeDuplicates(originalArray, prop) {
-            var newArray = [];
-            var lookupObject = {};
-
-            for (var i in originalArray) {
-                lookupObject[originalArray[i]["idBreed"][prop]] =
-                    originalArray[i];
-            }
-
-            for (i in lookupObject) {
-                newArray.push(lookupObject[i]);
-            }
-            return newArray;
-        }
-
-        var uniqueArray = removeDuplicates(result.result, "_id");
-
-        setAllCollection(uniqueArray);
-        setCollection(uniqueArray);
+        setCollection(result.data);
     };
 
     useEffect(() => {
@@ -100,39 +60,10 @@ const BreedByCategory = () => {
             <div css={wrapperCover}>
                 <div></div>
             </div>
-            <div css={collections}>
-                <h2 css={centertext}>Search Our Collections</h2>
-                <Carousel responsive={responsive} infinite={true}>
-                    {allCollection.length > 0 &&
-                        allCollection.map((item) => {
-                            return (
-                                <Link
-                                    to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
-                                >
-                                    <Col key={item._id}>
-                                        <Card>
-                                            <Card.Img
-                                                variant="top"
-                                                src={item.image[0]}
-                                                style={{
-                                                    objectFit: "cover",
-                                                    height: "150px",
-                                                }}
-                                            />
-                                            <Card.Title css={centertext}>
-                                                {item.idBreed.breedName}
-                                            </Card.Title>
-                                        </Card>
-                                    </Col>
-                                </Link>
-                            );
-                        })}
-                </Carousel>
-            </div>
             <Formik
                 initialValues={{ size: "", gender: "", alphabet: "" }}
                 onSubmit={async (values) => {
-                    const url = `${process.env.REACT_APP_API_URL}/pet/breed/${category}/filter?size=${values.size}&gender=${values.gender}&alphabet=${values.alphabet}`;
+                    const url = `${process.env.REACT_APP_API_URL}/pet/breed/${category}/${breed}/filter?size=${values.size}&gender=${values.gender}&alphabet=${values.alphabet}`;
                     const response = await fetch(url);
                     const result = await response.json();
 
@@ -231,9 +162,7 @@ const BreedByCategory = () => {
                         collection.map((item) => {
                             return (
                                 <Col xs={6} md={4} key={item._id}>
-                                    <Link
-                                        to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
-                                    >
+                                    <Link to={`/pets-detail/${item.id}`}>
                                         <Card>
                                             <Card.Img
                                                 variant="top"
@@ -244,8 +173,16 @@ const BreedByCategory = () => {
                                                 }}
                                             />
                                             <Card.Title css={centertext}>
-                                                {item.idBreed.breedName}
+                                                {item.petName}
                                             </Card.Title>
+                                            <Card.Text css={centertext}>
+                                                {item.breed}
+                                                <br />
+                                                {item.gender}, {item.age} Years
+                                                Old
+                                                <br />
+                                                {item.location}
+                                            </Card.Text>
                                         </Card>
                                     </Link>
                                 </Col>
@@ -257,4 +194,4 @@ const BreedByCategory = () => {
     );
 };
 
-export default BreedByCategory;
+export default PetByBreed;

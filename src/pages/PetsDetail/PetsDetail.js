@@ -17,7 +17,7 @@ const PetsDetail = (props) => {
     // const [carousel, setCarousel] = useState([]);
     const [, setLoading] = useState(true);
     const [, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState();
+    const [, setErrorMessage] = useState();
     const [details, setDetails] = useState({});
     const [ ,setProduct] = useState([]);
     const [petCards, setPetCards] = useState([]);
