@@ -30,7 +30,6 @@ const PetShop = () => {
                 "products",
                 JSON.stringify(response.data.result)
             );
-            console.log(response.data.result);
             setProducts(response.data.result);
             setLoading(false);
         };

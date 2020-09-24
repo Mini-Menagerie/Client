@@ -64,15 +64,13 @@ const AdoptionForm = () => {
         });
     };
     const history = useHistory();
+    
     const handleSubmitForm = async (event) => {
         event.preventDefault();
         axios
             .all([createForm(), updateUser()])
             .then(
                 axios.spread((form, user) => {
-                    console.log(user);
-                    console.log(form);
-
                     if (form.status === 200) {
                         alert("Your request is being processed");
                         history.goBack();

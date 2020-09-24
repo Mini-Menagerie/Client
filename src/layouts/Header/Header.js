@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import {
     Dropdown,
     Modal,
@@ -34,7 +33,7 @@ import {
 import swal from 'sweetalert';
 
 const Header = () => {
-    const productCart = useSelector((state) => state.addToCart);
+    const productCart = JSON.parse(localStorage.getItem("cartProduct"));
     const [show, setShow] = useState(false);
     const [handleForm, setHandleForm] = useState(false);
     const [loginModal, setHandleLoginModal] = useState(false);
@@ -45,14 +44,15 @@ const Header = () => {
     });
     let user = JSON.parse(localStorage.getItem("user"));
     let loggedUser = "";
-    if (user) {
-        loggedUser = user.email;
-    }
-
     const [formLogin, setFormLogin] = useState({
         email: "",
         password: "",
     });
+    const [search, setSearch] = useState("");
+    if (user) {
+        loggedUser = user.email;
+    }
+
     const handleLogin = (event) => {
         event.preventDefault();
         setFormLogin({
@@ -64,7 +64,7 @@ const Header = () => {
     const logout = async (event) => {
         event.preventDefault();
         localStorage.clear();
-        window.location.reload();
+        window.location.replace("/");
     };
 
     const handleLoginSubmit = async (event) => {
@@ -75,6 +75,7 @@ const Header = () => {
                 formLogin
             );
             if (user.status === 200) {
+
                 swal({
                     title: "Sukses!",
                     text: "Login berhasil!",
@@ -91,6 +92,11 @@ const Header = () => {
                     title: "Gagal!",
                     icon: "warning",
                 });
+                setShow(false);
+            } else if (
+                error.message === "Request failed with status code 404"
+            ) {
+                alert("Email sudah terdaftar menggunakan email social media");
                 setShow(false);
             }
         }
@@ -116,7 +122,14 @@ const Header = () => {
             }
         } catch (error) {
             if (error.message === "Request failed with status code 400") {
-                alert("email sudah terdaftar");
+                alert("Email sudah terdaftar, gunakan Email lain");
+                setShow(false);
+            } else if (
+                error.message === "Request failed with status code 404"
+            ) {
+                alert(
+                    "Email sudah terdaftar melalui Social Media, gunakan Email lain"
+                );
                 setShow(false);
             }
         }
@@ -158,6 +171,16 @@ const Header = () => {
     const redirect = (event) => {
         event.preventDefault();
         window.location.href = "http://localhost:3000/checkout";
+    };
+
+    const searchBar = (event) => {
+        event.preventDefault();
+
+        localStorage.setItem("search", search);
+        window.location.href = "/search-page";
+    };
+    const handleSearch = (event) => {
+        setSearch(event.target.value);
     };
 
     if (user === null) {
@@ -205,8 +228,14 @@ const Header = () => {
                                     css={searchText}
                                     placeholder="Search your future best friend"
                                     style={{ maxWidth: "100%" }}
+                                    onChange={handleSearch}
+                                    value={search}
                                 ></input>
-                                <button type="submit" css={searchButton}>
+                                <button
+                                    type="submit"
+                                    css={searchButton}
+                                    onClick={searchBar}
+                                >
                                     <i className="fas fa-search"></i>
                                 </button>
                                 <Button
@@ -216,8 +245,8 @@ const Header = () => {
                                 >
                                     <i className="fas fa-shopping-cart fa-lg"></i>
                                     <Badge pill variant="danger">
-                                        {productCart.cart !== undefined &&
-                                            productCart.cart.length}
+                                        {productCart !== undefined && productCart !== null &&
+                                            productCart.length}
                                     </Badge>
                                 </Button>
                             </form>
@@ -285,21 +314,21 @@ const Header = () => {
                                             </Col>
                                         </Row>
                                     </Form>
-                                    <p>Or login with</p>
+                                    <p>Or Login With</p>
                                     <div css={wrapperButtonStyles}>
                                         <Button
                                             css={buttonLoginStyles}
                                             variant="primary"
                                             onClick={handleGoogleLogin}
                                         >
-                                            Sig in with Google
+                                            Sign In With Google
                                         </Button>
                                         <Button
                                             css={buttonLoginStyles}
                                             variant="primary"
                                             onClick={handleFacebookLogin}
                                         >
-                                            Sign in with Facebook
+                                            Sign In With Facebook
                                         </Button>
                                         <p css={buttonLoginStyles}>
                                             Need an account?
@@ -461,8 +490,15 @@ const Header = () => {
                                     type="text"
                                     css={searchText}
                                     placeholder="Search your future best friend"
+                                    style={{ maxWidth: "100%" }}
+                                    onChange={handleSearch}
+                                    value={search}
                                 ></input>
-                                <button type="submit" css={searchButton}>
+                                <button
+                                    type="submit"
+                                    css={searchButton}
+                                    onClick={searchBar}
+                                >
                                     <i className="fas fa-search"></i>
                                 </button>
                                 <Button
@@ -472,14 +508,14 @@ const Header = () => {
                                 >
                                     <i className="fas fa-shopping-cart fa-lg"></i>
                                     <Badge pill variant="danger">
-                                        {productCart.cart !== undefined &&
-                                            productCart.cart.length}
+                                        {productCart !== undefined && productCart !== null &&
+                                            productCart.length}
                                     </Badge>
                                 </Button>
                             </form>
                         </div>
                         <div>
-                            {loggedUser}
+                            <a href={`/about-me`}>{loggedUser}</a>
                             <Button
                                 onClick={logout}
                                 style={{
@@ -541,7 +577,7 @@ const Header = () => {
                                                 <Button
                                                     onClick={handleLoginModal}
                                                 >
-                                                    Forgot password?
+                                                    Forgot Password?
                                                 </Button>
                                             </Col>
                                         </Row>
@@ -553,17 +589,17 @@ const Header = () => {
                                             variant="primary"
                                             onClick={handleGoogleLogin}
                                         >
-                                            Sig in with Google
+                                            Sign In with Google
                                         </Button>
                                         <Button
                                             css={buttonLoginStyles}
                                             variant="primary"
                                             onClick={handleFacebookLogin}
                                         >
-                                            Sign in with Facebook
+                                            Sign In With Facebook
                                         </Button>
                                         <p css={buttonLoginStyles}>
-                                            Need an account?
+                                            Need an Account?
                                             <Button onClick={handleSignUpModal}>
                                                 Sign Up
                                             </Button>
@@ -631,7 +667,7 @@ const Header = () => {
                                             <Row>
                                                 <Col>
                                                     <p css={buttonLoginStyles}>
-                                                        Already have an account?
+                                                        Already Have an Account?
                                                         <Button
                                                             onClick={
                                                                 handleLoginModal
