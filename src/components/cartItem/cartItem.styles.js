@@ -1,20 +1,29 @@
 import { css } from '@emotion/core';
 
-export const cartHolder = css`
-    width: 100%;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    display: flex;
-    justify-content: space-around;
-    border: 1px solid #333;
+export const cartItem = css`
+margin-bottom: 15px;
 `
 
 export const cartImage = css`
-    width: 200px;
-    height: 200px;
+width: 100%;
+height: 150px;
+object-fit: cover;
+
 `
-export const cartDetail = css`
-    width: 300px;
-    heigth: 200px;
-    display: flex;
+
+export const productName = css`
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+h5
+{
+    font-weight: 600;
+}
+`
+
+export const productQuantity = css`
+h5
+{
+    font-weight: 600;
+}
 `

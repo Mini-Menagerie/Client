@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Card } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import MoonLoader from "react-spinners/MoonLoader";
 
@@ -32,13 +33,13 @@ const ProductCard = ({ products, loading, ...props }) => {
                         style={{ width: "16rem", marginBottom: "15px" }}
                     >
                         <div style={{ padding: "10px" }}>
-                            <a href={`/product/${value._id}`}>
+                            <Link to={`/product/${value._id}`}>
                                 <Card.Img
                                     css={card_img}
                                     variant="top"
                                     src={value.image[0].image}
                                 />
-                            </a>
+                            </Link>
                         </div>
                         <Card.Body>
                             <p css={product_name}>{value.productName}</p>

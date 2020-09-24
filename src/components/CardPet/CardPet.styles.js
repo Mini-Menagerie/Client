@@ -5,6 +5,9 @@ export const dataPet = css`
 `;
 export const margin = css`
     margin-bottom: 25px;
+    &: hover {
+        cursor: pointer;
+    }
 `;
 
 export const petImage = css`

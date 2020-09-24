@@ -8,10 +8,20 @@ export const addToCartReducer = (state = product, action) => {
     switch (action.type) {
         case 'ADD_TO_CART':
             let products = JSON.parse(localStorage.getItem('products'))
-            console.log(products, 'products');
-            const productById = products.find(item => { return action.id === item._id})
-            let cart = []
+            let productById = products.find(item => { return action.id === item._id})
+            let qty = {quantity: 1}
+            productById = {...productById, ...qty}
+
+            let cart = JSON.parse(localStorage.getItem('cartProduct')) || []
             cart.push(productById)
+
+            const mergeDuplicateProduct = new Map(cart.map(object => [object._id, { ...object, quantity: 0 }]));
+            for (const { _id } of cart) mergeDuplicateProduct.get(_id).quantity++;
+            const newCart = Array.from(mergeDuplicateProduct.values());
+
+            localStorage.setItem('cartProduct', JSON.stringify(newCart))
+
+            console.log('click');
             return {
                 ...state,
                 product: {stock: productById.stock - 1, ...productById.stock},

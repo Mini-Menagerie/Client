@@ -33,4 +33,19 @@ const RecommendedProducts = (props) => {
     );
 };
 
-export default RecommendedProducts;
+// const mapStateToProps = (state) => {
+//     console.log(state.addToCart);
+//     return {
+//         data: state.addToCart,
+//     }
+// }
+
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         addToCart: (id) => dispatch(addToCart(id))
+//     }
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(RecommendedProducts);
+
+export default RecommendedProducts

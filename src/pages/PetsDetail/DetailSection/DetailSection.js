@@ -100,9 +100,18 @@ const DetailSection = ({ petDetails }) => {
                         <Form.Control placeholder="email" />
                     </Col>
                     <Col xs={12} css={detail_section_col_right_button}>
-                        <PrimaryButton onClick={() => handleClick()}>
+                        {JSON.parse(localStorage.getItem('user') !== null) ? 
+                        (
+                            <PrimaryButton onClick={() => handleClick()}>
                             Ask for Adoption
                         </PrimaryButton>
+                        ) : (
+                            <PrimaryButton onClick={null} variant="danger" disabled>
+                            Ask for Adoption
+                        </PrimaryButton>
+                        )
+                        }
+                        
                     </Col>
                 </Row>
             </Col>
