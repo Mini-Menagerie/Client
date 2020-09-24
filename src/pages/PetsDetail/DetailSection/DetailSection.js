@@ -29,7 +29,7 @@ const DetailSection = ({ petDetails }) => {
                 <Row css={detail_section_col_left_first_row}>
                     <img
                         src={petDetails.image}
-                        style={{ width: "710px", marginBottom: "30px" }}
+                        style={{ width: "100%", height: "500px", objectFit: "cover", marginBottom: "30px" }}
                         alt="pet_image"
                     />
                     <h1>{petDetails.petName}</h1>
