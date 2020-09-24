@@ -476,8 +476,15 @@ const Header = () => {
                                     type="text"
                                     css={searchText}
                                     placeholder="Search your future best friend"
+                                    style={{ maxWidth: "100%" }}
+                                    onChange={handleSearch}
+                                    value={search}
                                 ></input>
-                                <button type="submit" css={searchButton}>
+                                <button
+                                    type="submit"
+                                    css={searchButton}
+                                    onClick={searchBar}
+                                >
                                     <i className="fas fa-search"></i>
                                 </button>
                                 <Button
