@@ -106,25 +106,24 @@ const BreedByCategory = () => {
                     {allCollection.length > 0 &&
                         allCollection.map((item) => {
                             return (
-                                <Link
-                                    to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
-                                >
-                                    <Col key={item._id}>
+                                <Col key={item._id}>
+                                    <a href="/pets-detail/:id">
+
                                         <Card>
                                             <Card.Img
                                                 variant="top"
                                                 src={item.image[0]}
                                                 style={{
                                                     objectFit: "cover",
-                                                    height: "150px",
+                                                    height: "350px",
                                                 }}
                                             />
                                             <Card.Title css={centertext}>
-                                                {item.idBreed.breedName}
+                                                {item.petName}
                                             </Card.Title>
                                         </Card>
-                                    </Col>
-                                </Link>
+                                    </a>
+                                </Col>
                             );
                         })}
                 </Carousel>
@@ -147,83 +146,83 @@ const BreedByCategory = () => {
                     handleBlur,
                     handleSubmit,
                 }) => (
-                    <div css={filter}>
-                        <h2 css={centertext}>Filter Breeds</h2>
-                        <p css={centertext}>Size</p>
-                        <Form>
-                            <div css={buttonGroup}>
-                                <ToggleButtonGroup
-                                    css={widthButton}
-                                    name="size"
-                                    type="radio"
-                                    value={values.size}
+                        <div css={filter}>
+                            <h2 css={centertext}>Filter Breeds</h2>
+                            <p css={centertext}>Size</p>
+                            <Form>
+                                <div css={buttonGroup}>
+                                    <ToggleButtonGroup
+                                        css={widthButton}
+                                        name="size"
+                                        type="radio"
+                                        value={values.size}
+                                    >
+                                        {size.map((radio, idx) => {
+                                            return (
+                                                <ToggleButton
+                                                    key={idx}
+                                                    onChange={handleChange}
+                                                    value={radio.value}
+                                                    variant="success"
+                                                >
+                                                    {radio.name}
+                                                </ToggleButton>
+                                            );
+                                        })}
+                                    </ToggleButtonGroup>
+                                </div>
+                                <p css={centertext}>Gender</p>
+                                <div
+                                    css={buttonGroup}
+                                    className="justify-content-md-center"
                                 >
-                                    {size.map((radio, idx) => {
-                                        return (
+                                    <ToggleButtonGroup
+                                        css={widthButton}
+                                        name="gender"
+                                        type="radio"
+                                        value={values.gender}
+                                    >
+                                        {gender.map((radio, idx) => (
                                             <ToggleButton
                                                 key={idx}
-                                                onChange={handleChange}
-                                                value={radio.value}
                                                 variant="success"
+                                                value={radio.value}
+                                                onChange={handleChange}
                                             >
                                                 {radio.name}
                                             </ToggleButton>
-                                        );
-                                    })}
-                                </ToggleButtonGroup>
-                            </div>
-                            <p css={centertext}>Gender</p>
-                            <div
-                                css={buttonGroup}
-                                className="justify-content-md-center"
-                            >
-                                <ToggleButtonGroup
-                                    css={widthButton}
-                                    name="gender"
-                                    type="radio"
-                                    value={values.gender}
-                                >
-                                    {gender.map((radio, idx) => (
-                                        <ToggleButton
-                                            key={idx}
-                                            variant="success"
-                                            value={radio.value}
-                                            onChange={handleChange}
-                                        >
-                                            {radio.name}
-                                        </ToggleButton>
-                                    ))}
-                                </ToggleButtonGroup>
-                            </div>
-                            <p css={centertext}>Find By Alphabetical Order</p>
-                            <div css={buttonGroup}>
-                                <ToggleButtonGroup
-                                    css={widthButton}
-                                    name="alphabet"
-                                    type="radio"
-                                    value={values.gender}
-                                >
-                                    {alphabet.map((radio, idx) => (
-                                        <ToggleButton
-                                            key={idx}
-                                            variant="success"
-                                            name="alphabet"
-                                            value={radio.value}
-                                            onChange={handleChange}
-                                        >
-                                            {radio.name}
-                                        </ToggleButton>
-                                    ))}
-                                </ToggleButtonGroup>
-                            </div>
-                            <Row className="justify-content-md-center">
-                                <Button type="submit" variant="success">
-                                    Filter Result
+                                        ))}
+                                    </ToggleButtonGroup>
+                                </div>
+                                <p css={centertext}>Find By Alphabetical Order</p>
+                                <div css={buttonGroup}>
+                                    <ToggleButtonGroup
+                                        css={widthButton}
+                                        name="alphabet"
+                                        type="radio"
+                                        value={values.gender}
+                                    >
+                                        {alphabet.map((radio, idx) => (
+                                            <ToggleButton
+                                                key={idx}
+                                                variant="success"
+                                                name="alphabet"
+                                                value={radio.value}
+                                                onChange={handleChange}
+                                            >
+                                                {radio.name}
+                                            </ToggleButton>
+                                        ))}
+                                    </ToggleButtonGroup>
+                                </div>
+                                <Row className="justify-content-md-center">
+                                    <Button type="submit" variant="success">
+                                        Filter Result
                                 </Button>
-                            </Row>
-                        </Form>
-                    </div>
-                )}
+                                </Row>
+                            </Form>
+                        </div>
+                    )}
             </Formik>
             <div css={collections}>
                 <Row>
@@ -231,23 +230,23 @@ const BreedByCategory = () => {
                         collection.map((item) => {
                             return (
                                 <Col xs={6} md={4} key={item._id}>
-                                    <Link
-                                        to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
-                                    >
+                                    <a href="/pets-detail/:id">
+
                                         <Card>
                                             <Card.Img
                                                 variant="top"
                                                 src={item.image[0]}
                                                 style={{
                                                     objectFit: "cover",
-                                                    height: "200px",
+                                                    height: "350px",
                                                 }}
                                             />
                                             <Card.Title css={centertext}>
-                                                {item.idBreed.breedName}
+                                                {item.petName}
                                             </Card.Title>
                                         </Card>
-                                    </Link>
+                                    </a>
+
                                 </Col>
                             );
                         })}
