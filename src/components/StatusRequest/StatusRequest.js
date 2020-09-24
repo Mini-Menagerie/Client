@@ -3,11 +3,7 @@ import { jsx } from "@emotion/core";
 import { Card, Col, Row } from "react-bootstrap";
 import axios from "axios";
 import { useState, useEffect } from "react";
-import {
-    listInfo,
-    mainOne,
-    mainBody,
-} from "./StatusRequest.styles";
+import { listInfo, mainOne, mainBody } from "./StatusRequest.styles";
 
 const StatusRequest = () => {
     const [statusRequest, setStatusRequest] = useState([]);
@@ -18,11 +14,9 @@ const StatusRequest = () => {
         axios
             .get(url)
             .then(function (result) {
-                console.log(result.data.result);
                 setStatusRequest(result.data.result);
             })
             .catch(function (error) {
-                console.log(error.message);
                 setErrorMessage(error.message);
             });
     }, [setErrorMessage]);

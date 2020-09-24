@@ -7,7 +7,6 @@ import { Col, Row, Container, Form } from "react-bootstrap";
 import PrimaryButton from "../../components/Button/Button";
 
 const AccountSettings = ({ account, props }) => {
-    console.log(account);
     // const [profile, setProfile] = useState(false)
     //onclick={props.handleEditProfile} di icon, onChange={handleEditProfile}
     return (

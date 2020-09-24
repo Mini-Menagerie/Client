@@ -14,7 +14,6 @@ import {
 } from "./aboutMeTab.styles";
 
 const AboutMeTab = ({ profile }) => {
-    console.log(profile.userId);
     return (
         <Container fluid css={containerWrapper}>
             <div>
