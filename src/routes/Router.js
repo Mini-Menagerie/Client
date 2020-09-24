@@ -12,6 +12,7 @@ import PetShop from "../pages/PetShop/PetShop";
 import AdoptionForm from "../pages/AdoptionForm/AdoptionForm";
 import StatusRequest from "../pages/StatusRequest/StatusRequest";
 import AdoptedHistory from "../pages/AdoptedHistory/AdoptedHistory";
+import PurchaseHistory from "../pages/PurchaseHistory/PurchaseHistory";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
 import Checkout from "../pages/Checkout/Checkout";
 import SearchPage from "../pages/searchPage/searchPage";
@@ -52,6 +53,11 @@ const Router = () => (
                 exact
                 path={routes.BREEDBYCATEGORY}
                 component={BreedByCategory}
+            />
+            <Route
+                exact
+                path={routes.HISTORYPURCHASE}
+                component={PurchaseHistory}
             />
         </Switch>
     </BrowserRouter>
