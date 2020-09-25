@@ -9,10 +9,10 @@ text-align:center;
 `
 
 export const detail_section_col = css`
-height: 550px;
 // border-style: dashed;
 padding: 40px;
-margin-bottom: 100px;
+border: solid 2px #e3e3e3;
+border-radius: .35rem;
 
 h1, h5 {
     text-align: center;

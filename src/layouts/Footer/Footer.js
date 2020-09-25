@@ -13,6 +13,7 @@ import {
     subWrapper,
     imageLogo,
     subText,
+    rowFooter
 } from "./Footer.styles";
 import subLogo from "../../assets/signUp.png";
 
@@ -87,7 +88,7 @@ const Footer = () => {
                 </Row>
             </div>
             <div css={wrapperStyles2}>
-                <Row style={{ width: "100%" }}>
+                <Row css={rowFooter}>
                     <Col md={4}>
                         <p>@2020 MiniMenagerie.com</p>
                     </Col>

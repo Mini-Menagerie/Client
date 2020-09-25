@@ -35,6 +35,7 @@ import {
     goToShop,
     colStyles,
     centerMenu,
+    searchLoc
 } from "./LandingPage.styles";
 
 import fish from "../../assets/fish.png";
@@ -60,6 +61,7 @@ const LandingPage = () => {
     const [errorMessage, setErrorMessage] = useState();
     const [, setProduct] = useState([]);
     const [petCards, setPetCards] = useState([]);
+    const [search, setSearch] = useState("");
 
     const fetchPet = () => {
         const url = "http://localhost:8000/pet";
@@ -117,6 +119,30 @@ const LandingPage = () => {
         // eslint-disable-next-line
     }, []);
 
+
+    const handleSearch = (event) => {
+        setSearch(event.target.value);
+    };
+
+    const searchBar = (event) => {
+        event.preventDefault();
+
+        localStorage.setItem("search", search);
+        window.location.href = "/search-page";
+    };
+
+    const categoryPet = (event) => {
+        event.preventDefault();
+
+        window.location.href = "/all-breeds/category/dog";
+    }
+
+    const categoryCat = (event) => {
+        event.preventDefault();
+        
+        window.location.href = "/all-breeds/category/cat";
+    }
+
     return (
         <div>
             <div css={wrapperCover}>
@@ -127,102 +153,115 @@ const LandingPage = () => {
                 </Link>
             </div>
             <div css={underCoverSearch}>
-                <div css={centerMenu}>
-                    <div css={colStyles}>
-                        <input
-                            type="text"
-                            css={enterLocation}
-                            placeholder="Enter Province or State"
-                        ></input>
+                <form>
+                    <div css={centerMenu}>
+                        <div css={colStyles}>
+                            <button
+                                type="submit"
+                                css={searchLoc}
+                                onClick={searchBar}
+                            >
+                                <i className="fas fa-search"></i>
+                            </button>
+                        </div>
+                        <div css={colStyles}>
+                            <input
+                                type="text"
+                                css={enterLocation}
+                                placeholder="Enter Province or State"
+                                value={search}
+                                onChange={handleSearch}
+                            ></input>
+                        </div>
+                        <div css={colStyles}>
+                            <button onClick={categoryPet} css={dogCatButton}>
+                                <i className="fas fa-bone"></i>
+                                &nbsp;&nbsp;&nbsp;Find Dog Breed
+                            </button>
+                        </div>
+                        <div css={colStyles}>
+                            <button onClick={categoryCat} css={dogCatButton}>
+                                <i className="fas fa-paw"></i>&nbsp;&nbsp;&nbsp;Find
+                                Cat Breed
+                            </button>
+                        </div>
+                        <div css={colStyles}>
+                            <Dropdown>
+                                <Dropdown.Toggle css={otherPets}>
+                                    Find Other Pet
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu css={dropdownMenu}>
+                                    <Dropdown.Item
+                                        href="#/action-1"
+                                        css={breedsLogo}
+                                    >
+                                        <img
+                                            src={rabbit}
+                                            css={breedsLogo}
+                                            alt="Pet"
+                                        />
+                                        &nbsp; Rabbit
+                                    </Dropdown.Item>
+                                    <Dropdown.Item
+                                        href="#/action-2"
+                                        css={breedsLogo}
+                                    >
+                                        <img
+                                            src={hamster}
+                                            css={breedsLogo}
+                                            alt="pet_image"
+                                        />
+                                        &nbsp; Small & Furry
+                                    </Dropdown.Item>
+                                    <Dropdown.Item
+                                        href="#/action-2"
+                                        css={breedsLogo}
+                                    >
+                                        <img
+                                            src={bird}
+                                            css={breedsLogo}
+                                            alt="pet"
+                                        ></img>
+                                        &nbsp; Birds
+                                    </Dropdown.Item>
+                                    <Dropdown.Item
+                                        href="#/action-2"
+                                        css={breedsLogo}
+                                    >
+                                        <img
+                                            src={fish}
+                                            css={breedsLogo}
+                                            alt="pet"
+                                        ></img>
+                                        &nbsp; Scales & Fins
+                                    </Dropdown.Item>
+                                    <Dropdown.Item
+                                        href="#/action-2"
+                                        css={breedsLogo}
+                                    >
+                                        <img
+                                            src={horse}
+                                            css={breedsLogo}
+                                            alt="pet"
+                                        ></img>
+                                        &nbsp; Horse
+                                    </Dropdown.Item>
+                                    <Dropdown.Item
+                                        href="#/action-2"
+                                        css={breedsLogo}
+                                    >
+                                        <img
+                                            src={sheep}
+                                            css={breedsLogo}
+                                            alt="pet"
+                                        ></img>
+                                        &nbsp; Barnyard
+                                    </Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                        </div>
                     </div>
-                    <div css={colStyles}>
-                        <button css={dogCatButton}>
-                            <i className="fas fa-bone"></i>
-                            &nbsp;&nbsp;&nbsp;Find Dog Breed
-                        </button>
-                    </div>
-                    <div css={colStyles}>
-                        <button css={dogCatButton}>
-                            <i className="fas fa-paw"></i>&nbsp;&nbsp;&nbsp;Find
-                            Cat Breed
-                        </button>
-                    </div>
-                    <div css={colStyles}>
-                        <Dropdown>
-                            <Dropdown.Toggle css={otherPets}>
-                                Find Other Pet
-                            </Dropdown.Toggle>
-                            <Dropdown.Menu css={dropdownMenu}>
-                                <Dropdown.Item
-                                    href="#/action-1"
-                                    css={breedsLogo}
-                                >
-                                    <img
-                                        src={rabbit}
-                                        css={breedsLogo}
-                                        alt="Pet"
-                                    />
-                                    &nbsp; Rabbit
-                                </Dropdown.Item>
-                                <Dropdown.Item
-                                    href="#/action-2"
-                                    css={breedsLogo}
-                                >
-                                    <img
-                                        src={hamster}
-                                        css={breedsLogo}
-                                        alt="pet_image"
-                                    />
-                                    &nbsp; Small & Furry
-                                </Dropdown.Item>
-                                <Dropdown.Item
-                                    href="#/action-2"
-                                    css={breedsLogo}
-                                >
-                                    <img
-                                        src={bird}
-                                        css={breedsLogo}
-                                        alt="pet"
-                                    ></img>
-                                    &nbsp; Birds
-                                </Dropdown.Item>
-                                <Dropdown.Item
-                                    href="#/action-2"
-                                    css={breedsLogo}
-                                >
-                                    <img
-                                        src={fish}
-                                        css={breedsLogo}
-                                        alt="pet"
-                                    ></img>
-                                    &nbsp; Scales & Fins
-                                </Dropdown.Item>
-                                <Dropdown.Item
-                                    href="#/action-2"
-                                    css={breedsLogo}
-                                >
-                                    <img
-                                        src={horse}
-                                        css={breedsLogo}
-                                        alt="pet"
-                                    ></img>
-                                    &nbsp; Horse
-                                </Dropdown.Item>
-                                <Dropdown.Item
-                                    href="#/action-2"
-                                    css={breedsLogo}
-                                >
-                                    <img
-                                        src={sheep}
-                                        css={breedsLogo}
-                                        alt="pet"
-                                    ></img>
-                                    &nbsp; Barnyard
-                                </Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
-                    </div>
-                </div>
+                </form>
             </div>
             <div css={petsAvailableText}>
                 <h2>Pets Available for Adoption Near You</h2>
@@ -297,7 +336,7 @@ const LandingPage = () => {
                 </p>
             </div>
             <div css={goToShop}>
-                <h5>Go To Shop &#62;</h5>
+                <h5><Link to="/shop" >Go To Shop &#62;</Link></h5>
             </div>
             <div css={shop} className="shop">
                 {loading ? (
