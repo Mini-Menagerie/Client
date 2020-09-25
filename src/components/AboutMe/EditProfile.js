@@ -26,7 +26,7 @@ const EditProfile = ({ edit, handleClose }) => {
     });
 
     let userData = JSON.parse(localStorage.getItem("user"));
-    
+
     const fetchProfile = async () => {
         let response = await axios.get(
             `http://localhost:8000/users/${userData.idUser._id}` //if let id=userData.id then ${id}
@@ -41,7 +41,7 @@ const EditProfile = ({ edit, handleClose }) => {
             [event.target.name]: event.target.value,
         });
     };
-    console.log(userData.idUser, 'id user woi');
+    console.log(userData.idUser, "id user woi");
     const handleEditProfile = async (event) => {
         event.preventDefault();
         return axios
@@ -51,6 +51,8 @@ const EditProfile = ({ edit, handleClose }) => {
 
     useEffect(() => {
         fetchProfile();
+
+        //eslint-disable-next-line
     }, []);
 
     return (
@@ -63,7 +65,7 @@ const EditProfile = ({ edit, handleClose }) => {
                             customRender={({ onPick }) => (
                                 <div css={uploadPhoto}>
                                     <PrimaryButton
-                                     style={{margin: '10px 40%'}}
+                                        style={{ margin: "10px 40%" }}
                                         css={upload}
                                         onClick={onPick}
                                     >
@@ -162,7 +164,7 @@ const EditProfile = ({ edit, handleClose }) => {
                         </Form.Label>
                         <Col sm="7">
                             <Form.Control
-                                style={{ width: "400px", marginLeft: '5px'}}
+                                style={{ width: "400px", marginLeft: "5px" }}
                                 type="text"
                                 placeholder={edit.idUser.state}
                                 value={form.state}
@@ -211,7 +213,7 @@ const EditProfile = ({ edit, handleClose }) => {
                         </Form.Group> */}
                 </Form.Row>
                 <PrimaryButton
-                    style={{margin: '0 40%'}}
+                    style={{ margin: "0 40%" }}
                     type="submit"
                     onClick={() => {
                         handleClose();

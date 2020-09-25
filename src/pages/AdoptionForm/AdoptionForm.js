@@ -44,34 +44,29 @@ const AdoptionForm = () => {
     });
     const [reason, setReason] = useState("");
 
-    const userData = JSON.parse(localStorage.getItem('user'))
+    const userData = JSON.parse(localStorage.getItem("user"));
     console.log(userData);
-    let id = userData.idUser._id
+    let id = userData.idUser._id;
 
     const fetchDataUser = async () => {
-        let result = await axios.get(
-            `http://localhost:8000/users/${id}`
-        ); //endpoint
+        let result = await axios.get(`http://localhost:8000/users/${id}`); //endpoint
         setUser(result.data.result);
     };
-    
+
     const updateUser = () => {
-        return axios.put(
-            `http://localhost:8000/users/${id}`,
-            user
-            );
-        };
-        const createForm = () => {
-            return axios.post("http://localhost:8000/formRequest/create", {
-                idUser: user._id,
-                reason,
-            });
-        };
-        const history = useHistory();
-        
-        const handleSubmitForm = async (event) => {
-            event.preventDefault();
-            axios
+        return axios.put(`http://localhost:8000/users/${id}`, user);
+    };
+    const createForm = () => {
+        return axios.post("http://localhost:8000/formRequest/create", {
+            idUser: user._id,
+            reason,
+        });
+    };
+    const history = useHistory();
+
+    const handleSubmitForm = async (event) => {
+        event.preventDefault();
+        axios
             .all([createForm(), updateUser()])
             .then(
                 axios.spread((form, user) => {
@@ -80,26 +75,28 @@ const AdoptionForm = () => {
                         history.goBack();
                     }
                 })
-                )
-                .catch((err) => console.log(err));
-            };
-            const handleChange = (event) => {
-                setUser({
-                    ...user,
-                    [event.target.name]: event.target.value,
-                });
-            };
-            const reasonChange = (event) => {
-                setReason(event.target.value);
-            };
-            
-            useEffect(() => {
-                fetchDataUser();
-            }, []);
-            console.log(user);
-            
-            return (
-                <div css={adoptionWrapper}>
+            )
+            .catch((err) => console.log(err));
+    };
+    const handleChange = (event) => {
+        setUser({
+            ...user,
+            [event.target.name]: event.target.value,
+        });
+    };
+    const reasonChange = (event) => {
+        setReason(event.target.value);
+    };
+
+    useEffect(() => {
+        fetchDataUser();
+
+        //eslint-disable-next-line
+    }, []);
+    console.log(user);
+
+    return (
+        <div css={adoptionWrapper}>
             <div css={adoptionTitle}>
                 <h1>Hello There!</h1>
                 <h4>

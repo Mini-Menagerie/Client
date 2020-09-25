@@ -118,7 +118,7 @@ const BreedByCategory = () => {
                                                 }}
                                             />
                                             <Card.Title css={centertext}>
-                                                {item.petName}
+                                                {item.idBreed.breedName}
                                             </Card.Title>
                                         </Card>
                                     </Link>

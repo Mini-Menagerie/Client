@@ -30,9 +30,9 @@ import {
     buttonLoginStyles,
     rowFormSignUp,
     navSearch,
-    cssAbout
+    cssAbout,
 } from "./Header.styles";
-import swal from 'sweetalert';
+import swal from "sweetalert";
 
 const Header = () => {
     const productCart = JSON.parse(localStorage.getItem("cartProduct"));
@@ -46,6 +46,7 @@ const Header = () => {
     });
     let user = JSON.parse(localStorage.getItem("user"));
     let loggedUser = "";
+
     const [formLogin, setFormLogin] = useState({
         email: "",
         password: "",
@@ -77,7 +78,6 @@ const Header = () => {
                 formLogin
             );
             if (user.status === 200) {
-
                 swal({
                     title: "Sukses!",
                     text: "Login berhasil!",
@@ -87,7 +87,7 @@ const Header = () => {
                 localStorage.setItem("menagerie", user.data.token);
                 localStorage.setItem("user", JSON.stringify(user.data.user));
                 setShow(false);
-                window.location.reload()
+                window.location.reload();
             }
         } catch (error) {
             if (error.message === "Request failed with status code 400") {
@@ -147,7 +147,7 @@ const Header = () => {
     const handleShowLogin = () => {
         setHandleLoginModal(true);
         setShow(true);
-    }
+    };
 
     const handleGoogleLogin = () => {
         const urlGoogleLogin = "http://localhost:8000/auth/google";
@@ -248,7 +248,8 @@ const Header = () => {
                                 >
                                     <i className="fas fa-shopping-cart fa-lg"></i>
                                     <Badge pill variant="danger">
-                                        {productCart !== undefined && productCart !== null &&
+                                        {productCart !== undefined &&
+                                            productCart !== null &&
                                             productCart.length}
                                     </Badge>
                                 </Button>
@@ -493,7 +494,10 @@ const Header = () => {
                                     type="text"
                                     css={searchText}
                                     placeholder="Search your future best friend"
-                                    style={{ maxWidth: "70%", backgroundColor: "#f5f5f5" }}
+                                    style={{
+                                        maxWidth: "70%",
+                                        backgroundColor: "#f5f5f5",
+                                    }}
                                     onChange={handleSearch}
                                     value={search}
                                 ></input>
@@ -511,14 +515,19 @@ const Header = () => {
                                 >
                                     <i className="fas fa-shopping-cart fa-lg"></i>
                                     <Badge pill variant="danger">
-                                        {productCart !== undefined && productCart !== null &&
+                                        {productCart !== undefined &&
+                                            productCart !== null &&
                                             productCart.length}
                                     </Badge>
                                 </Button>
                             </form>
                         </div>
                         <div css={cssAbout}>
-                            <a href={`/about-me`}>{user.fullName == null ? user.email : user.fullName}</a>
+                            <a href={`/about-me`}>
+                                {user.fullName == null
+                                    ? user.email
+                                    : user.fullName}
+                            </a>
                             <Button
                                 onClick={logout}
                                 style={{
