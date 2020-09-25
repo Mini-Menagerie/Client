@@ -4,7 +4,6 @@ import {
   Route, Switch, BrowserRouter,
 } from 'react-router-dom';
 
-
 import routes from './Router.routes';
 import LandingPage from '../pages/LandingPage/LandingPage';
 import globalStyles from '../styles/Global';
