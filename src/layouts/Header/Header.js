@@ -31,7 +31,6 @@ import {
     buttonLoginStyles,
     rowFormSignUp,
     navSearch,
-    cssAbout,
 } from "./Header.styles";
 import Swal from "sweetalert2";
 
@@ -46,7 +45,6 @@ const Header = () => {
         password: "",
     });
     let user = JSON.parse(localStorage.getItem("user"));
-    let loggedUser = "";
 
     const [formLogin, setFormLogin] = useState({
         email: "",

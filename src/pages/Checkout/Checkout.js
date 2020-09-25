@@ -6,7 +6,6 @@ import axios from "axios";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { loadStripe } from "@stripe/stripe-js";
 import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
 import {
     CardElement,
     Elements,
@@ -29,7 +28,8 @@ const CheckoutForm = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+
+        await stripe.createPaymentMethod({
             type: "card",
             card: elements.getElement(CardElement),
         });
@@ -80,60 +80,28 @@ const Checkout = () => {
 
     const cart = JSON.parse(localStorage.getItem("cartProduct"));
 
-    // if (cart === null) {
-    //     window.alert("sometext");
-    //     window.location.replace('/')
-    // }
-
     if (cart === null) {
         Swal.fire({
             imageUrl:
                 "https://thumbs.gfycat.com/AccurateAgreeableDairycow.webp",
             title: "You dont have any purchases",
             text: "this page will be redirected automatically",
-            timer: 5000,
-            showConfirmButton: false,
             timerProgressBar: true,
-        }).then(function () {
-            window.location.replace("/");
         });
+
+        setTimeout(() => {
+            window.location.replace("/");
+        }, 1000);
     }
 
-    const price = cart.map((item) => {
-        return item.price * item.quantity;
-    });
+    const price =
+        cart.length > 0 &&
+        cart.map((item) => {
+            return item.price * item.quantity;
+        });
 
     let totalPrice = price.reduce((a, b) => a + b);
     let cartProduct = JSON.parse(localStorage.getItem("cartProduct"));
-
-    // if (cart === null) {
-    //     window.location.replace('/')
-    // }
-
-    // const MySwal = withReactContent(Swal)
-
-    // if (cart === null) {
-    //     MySwal.fire({
-    //         title: <p>Hello World</p>,
-    //     }).then((params) => {
-    //         console.log(params, 'params');
-    //         return (
-    //             window.location.replace('/')
-    //         )
-    //     })
-    // }\
-
-    // if (cart === null) {
-    //     Swal.fire({
-    //         title: "Success!",
-    //         text: "Redirecting in 2 seconds.",
-    //         type: "success",
-    //         timer: 2000,
-    //         showConfirmButton: false
-    //       }, function(){
-    //             window.location.href = "/shop";
-    //       });
-    // }
 
     return (
         <Container>
