@@ -531,7 +531,7 @@ const Header = () => {
                                 </Button>
                             </form>
                         </div>
-                        <div css={cssAbout}>
+                        <div>
                             <a href={`/about-me`}>
                                 {user.fullName == null
                                     ? user.email
