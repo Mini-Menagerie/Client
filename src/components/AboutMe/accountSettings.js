@@ -16,12 +16,12 @@ import {
 const AccountSettings = ({ account }) => {
 
     const [email, setEmail] = useState();
-    const [password,setPassword] = useState();
+    const [password,setPassword] = useState({
+        passwordLama: "",
+        passwordBaru: ""
+    });
     const [form, setForm] = useState({
-        email: "",
-        currentPassword: "",
-        newPassword: "",
-        confirmPassword: ""
+        email: ""
     });
 
     let userData = JSON.parse(localStorage.getItem("user"))
@@ -63,10 +63,11 @@ const AccountSettings = ({ account }) => {
         )
     }
 
-    handleConfirmOldPassword = (event) => {
-        if(event.target.value !== ) {
+    const handleConfirmOldPassword = (event) => {
+        if(event.target.value !== password.passwordLama) {
             alert("Wrong Current Password")
         } else {
+            handleConfirmNewPassword()
             //lanjut ke (handleconfirmNewPassword)
         }
     }
@@ -75,14 +76,14 @@ const AccountSettings = ({ account }) => {
     //     await bcrypt.compare(currentPassword, )
     // if(!handleConfirmOldPassword){
     //     alert("Wrong Current Password")
+    // } else {
+
     // }}
 
-    handleConfirmNewPassword = (event) => {
-        if(event.target.value !== newPassword) {
+   const handleConfirmNewPassword = (event) => {
+        if(event.target.value !== password.passwordBaru) {
             alert("Passwords Don't Match")
-        } else {
-            //lanjut ke (handlechange)
-        }
+        } 
     }
 
     const handleChange = (event) => {
@@ -127,14 +128,14 @@ const AccountSettings = ({ account }) => {
                     <Row>
                         <Form.Group controlId="formBasicPassword">
                                 <Form.Control
-                                    placeholder="Current Password" name="currentPassword" onChange={handleConfirmOldPassword}
+                                    placeholder="Current Password" name="passwordLama" onChange={handleConfirmOldPassword}
                                 />
                         </Form.Group>
                     </Row>
                     <Row>
                         <Form.Group controlId="formBasicPassword">
                                 <Form.Control
-                                    placeholder="New Password" name="newPassword"
+                                    placeholder="New Password" name="passwordBaru"
                                 />
                         </Form.Group>
                     </Row>
