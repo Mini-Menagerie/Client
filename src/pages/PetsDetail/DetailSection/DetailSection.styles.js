@@ -13,6 +13,7 @@ export const detail_section_col = css`
 padding: 40px;
 border: solid 2px #e3e3e3;
 border-radius: .35rem;
+margin-right: 47px;
 
 h1, h5 {
     text-align: center;

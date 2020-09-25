@@ -66,6 +66,7 @@ export const searchText = css`
 
     @media (max-width: 768px) {
         margin: 5px 0;
+        width: 100%;
     }
 `;
 
@@ -103,7 +104,7 @@ export const navSearch = css`
 
 export const cssAbout = css`
     display: flex;
-    flex-direction: column;
+    align-items: center;
 `;
 
 export const navbarspace = css `

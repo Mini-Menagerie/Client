@@ -34,7 +34,7 @@ import {
     cssAbout,
     navbarspace
 } from "./Header.styles";
-import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 const Header = () => {
     const productCart = JSON.parse(localStorage.getItem("cartProduct"));
@@ -54,9 +54,6 @@ const Header = () => {
         password: "",
     });
     const [search, setSearch] = useState("");
-    if (user) {
-        loggedUser = user.fullName == null ? user.email : user.fullName;
-    }
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -79,8 +76,10 @@ const Header = () => {
                 "http://localhost:8000/userAccount/login",
                 formLogin
             );
+
             if (user.status === 200) {
-                swal({
+                console.log(user.status);
+                Swal.fire({
                     title: "Sukses!",
                     text: "Login berhasil!",
                     icon: "success",
@@ -89,11 +88,11 @@ const Header = () => {
                 localStorage.setItem("menagerie", user.data.token);
                 localStorage.setItem("user", JSON.stringify(user.data.user));
                 setShow(false);
-                window.location.reload();
+                window.location.replace("/");
             }
         } catch (error) {
             if (error.message === "Request failed with status code 400") {
-                swal({
+                Swal.fire({
                     title: "Gagal!",
                     icon: "warning",
                 });
@@ -202,7 +201,10 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse
                         id="basic-navbar-nav"
-                        style={{ width: "100%" }}
+                        style={{
+                            width: "100%",
+                            justifyContent: "space-between",
+                        }}
                     >
                         <Nav className="mr-auto">
                             <Dropdown>
@@ -467,7 +469,10 @@ const Header = () => {
                         />
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
+                    <Navbar.Collapse
+                        id="basic-navbar-nav"
+                        style={{ justifyContent: "space-between" }}
+                    >
                         <Nav className="mr-auto" css={navSearch}>
                             <Dropdown>
                                 <Dropdown.Toggle
@@ -524,7 +529,7 @@ const Header = () => {
                                 </Button>
                             </form>
                         </div>
-                        <div css={cssAbout}>
+                        <div>
                             <a href={`/about-me`}>
                                 {user.fullName == null
                                     ? user.email
