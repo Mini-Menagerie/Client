@@ -26,15 +26,15 @@ const DetailSection = ({ petDetails, user }) => {
 
     return (
         <Row>
-            <Col xs={8} css={detail_section_col}>
+            <Col xs={7} css={detail_section_col}>
                 <Row css={detail_section_col_left_first_row}>
                     <img
                         src={petDetails.image}
                         style={{ width: "100%", height: "500px", objectFit: "cover", marginBottom: "30px" }}
                         alt="pet_image"
                     />
-                    <h1>{petDetails.petName}</h1>
-                    <h1>$ {petDetails.fee}</h1>
+                    <h2>{petDetails.petName}</h2>
+                    <h2>$ {petDetails.fee}</h2>
                 </Row>
                 <Row css={detail_section_col_left_second_row}>
                     <p>
