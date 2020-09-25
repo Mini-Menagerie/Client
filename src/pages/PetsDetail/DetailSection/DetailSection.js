@@ -1,19 +1,15 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Row, Col, Form} from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import {useState, useRef} from 'react';
-
 
 import {
     detail_section_col,
-    detail_section_col_left_first_row,
     detail_section_col_left_second_row,
     row_line,
-    detail_section_col_right,
     detail_section_col_right_button,
     location,
-    rowMargin3
+    rowMargin3,
 } from "./DetailSection.styles";
 import ColoredLine from "../../../components/ColoredLine";
 import PrimaryButton from "../../../components/Button/Button";
@@ -26,16 +22,19 @@ const DetailSection = ({ petDetails, user }) => {
 
     return (
         <Row>
-            <Col xs={7} css={detail_section_col}>
-                <Row css={detail_section_col_left_first_row}>
-                    <img
-                        src={petDetails.image}
-                        style={{ width: "100%", height: "500px", objectFit: "cover", marginBottom: "30px" }}
-                        alt="pet_image"
-                    />
-                    <h2>{petDetails.petName}</h2>
-                    <h2>$ {petDetails.fee}</h2>
-                </Row>
+            <Col xs={12} md={7} css={detail_section_col}>
+                <img
+                    src={petDetails.image}
+                    style={{
+                        width: "100%",
+                        height: "500px",
+                        objectFit: "cover",
+                        marginBottom: "30px",
+                    }}
+                    alt="pet_image"
+                />
+                <h2>{petDetails.petName}</h2>
+                <h2>{petDetails.fee}</h2>
                 <Row css={detail_section_col_left_second_row}>
                     <p>
                         {petDetails.idBreed !== undefined &&
@@ -64,7 +63,7 @@ const DetailSection = ({ petDetails, user }) => {
                     <p>{petDetails.about}</p>
                 </Row>
             </Col>
-            <Col xs={4} css={detail_section_col}>
+            <Col xs={12} md={4} css={detail_section_col}>
                 <h1>
                     {petDetails.idUser !== undefined &&
                         petDetails.idUser.fullName}
@@ -90,14 +89,25 @@ const DetailSection = ({ petDetails, user }) => {
                 <Row css={location}>
                     <Col xs={12}>
                         <Row css={rowMargin3}>
-                            <i class="fas fa-map-marker-alt fa-2x">&nbsp; &nbsp;</i>
-                            <p>{petDetails.location} / {petDetails.idUser !==undefined && petDetails.idUser.detailAddress}</p>
+                            <i class="fas fa-map-marker-alt fa-2x">
+                                &nbsp; &nbsp;
+                            </i>
+                            <p>
+                                {petDetails.location} /{" "}
+                                {petDetails.idUser !== undefined &&
+                                    petDetails.idUser.detailAddress}
+                            </p>
                         </Row>
                     </Col>
                     <Col xs={12}>
                         <Row css={rowMargin3}>
-                            <i class="fas fa-envelope-open-text fa-2x">&nbsp; &nbsp;</i>
-                            <p>{petDetails.idUser !== undefined && petDetails.idUser.email}</p>
+                            <i class="fas fa-envelope-open-text fa-2x">
+                                &nbsp; &nbsp;
+                            </i>
+                            <p>
+                                {petDetails.idUser !== undefined &&
+                                    petDetails.idUser.email}
+                            </p>
                         </Row>
                     </Col>
                     <Col xs={12} css={detail_section_col_right_button}>
@@ -105,14 +115,15 @@ const DetailSection = ({ petDetails, user }) => {
                             <PrimaryButton onClick={() => handleClick()}>
                                 Ask for Adoption
                             </PrimaryButton>
-                        ) : ( 
-                            <PrimaryButton 
-                                onClick={() => alert('Please Login to Continue')}
+                        ) : (
+                            <PrimaryButton
+                                onClick={() =>
+                                    alert("Please Login to Continue")
+                                }
                                 variant="danger"
                             >
                                 Ask for Adoption
                             </PrimaryButton>
-                           
                         )}
                     </Col>
                 </Row>
