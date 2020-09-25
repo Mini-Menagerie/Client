@@ -38,6 +38,10 @@ const AccountSettings = ({ account }) => {
         // })
     };
 
+    // const comparePassword = () => {
+    //     if()
+    // }
+
     const handleEditAccount = async (event) => {
         event.preventDefault();
         return (
@@ -55,22 +59,38 @@ const AccountSettings = ({ account }) => {
         event.preventDefault();
         return (
             axios.put(
-                `http://localhost:8000/userAccountPassword/${userData.id}`, form
+                `http://localhost:8000/userAccountPassword/${userData.id}`, password
             )
-            .then(result => setPassword(result.data.result.password))
+            .then(result => {
+                if(result.status === 200){ //liat di backend res
+                    alert('Password Changed Succesfully!')
+                }
+            })
             .then(() => window.location.reload())
-            .catch(err => console.log(err))
+            .catch(err => {
+                if(err.message === "Request failed with status code 400"){
+                    alert('Wrong Current Password')
+                }
+            })
         )
     }
 
-    const handleConfirmOldPassword = (event) => {
-        if(event.target.value !== password.passwordLama) {
-            alert("Wrong Current Password")
-        } else {
-            handleConfirmNewPassword()
-            //lanjut ke (handleconfirmNewPassword)
-        }
+    const handleChangePassword = (event) => {
+        event.preventDefault()
+        setPassword({
+            ...password,
+            [event.target.name]: event.target.value
+        })
     }
+
+    // const handleConfirmOldPassword = (event) => {
+    //     if(event.target.value !== password.passwordLama) {
+    //         alert("Wrong Current Password")
+    //     } else {
+    //         handleConfirmNewPassword()
+    //         //lanjut ke (handleconfirmNewPassword)
+    //     }
+    // }
 
     // handleConfirmOldPassword = () => {
     //     await bcrypt.compare(currentPassword, )
@@ -80,11 +100,11 @@ const AccountSettings = ({ account }) => {
 
     // }}
 
-   const handleConfirmNewPassword = (event) => {
-        if(event.target.value !== password.passwordBaru) {
-            alert("Passwords Don't Match")
-        } 
-    }
+//    const handleConfirmNewPassword = (event) => {
+//         if(event.target.value !== password.passwordBaru) {
+//             alert("Passwords Don't Match")
+//         } 
+//     }
 
     const handleChange = (event) => {
         setForm({
@@ -128,24 +148,23 @@ const AccountSettings = ({ account }) => {
                     <Row>
                         <Form.Group controlId="formBasicPassword">
                                 <Form.Control
-                                    placeholder="Current Password" name="passwordLama" onChange={handleConfirmOldPassword}
+                                    placeholder="Current Password" name="passwordLama" onChange={handleChangePassword}
                                 />
                         </Form.Group>
                     </Row>
                     <Row>
                         <Form.Group controlId="formBasicPassword">
                                 <Form.Control
-                                    placeholder="New Password" name="passwordBaru"
+                                    placeholder="New Password" name="passwordBaru" onChange={handleChangePassword}
                                 />
                         </Form.Group>
                     </Row>
-                    <Row>
+                    {/* <Row>
                         <Form.Group controlId="formBasicPassword">
                                 <Form.Control
-                                    placeholder="Confirm Password" name="confirmNewPassword" value={form.password} onChange={handleChange}
-                                    />
+                                    placeholder="Confirm Password" name="confirmNewPassword"
                         </Form.Group>
-                    </Row>
+                    </Row> */}
                     <Row>
                         <PrimaryButton type="submit">Update Password</PrimaryButton>
                     </Row>
