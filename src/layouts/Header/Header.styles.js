@@ -104,5 +104,5 @@ export const navSearch = css`
 
 export const cssAbout = css`
     display: flex;
-    flex-direction: column;
+    align-items: center;
 `;

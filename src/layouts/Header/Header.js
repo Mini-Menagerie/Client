@@ -33,7 +33,7 @@ import {
     navSearch,
     cssAbout,
 } from "./Header.styles";
-import swal from "sweetalert2";
+import Swal from "sweetalert2";
 
 const Header = () => {
     const productCart = JSON.parse(localStorage.getItem("cartProduct"));
@@ -78,8 +78,10 @@ const Header = () => {
                 "http://localhost:8000/userAccount/login",
                 formLogin
             );
+
             if (user.status === 200) {
-                swal({
+                console.log(user.status);
+                Swal.fire({
                     title: "Sukses!",
                     text: "Login berhasil!",
                     icon: "success",
@@ -92,7 +94,7 @@ const Header = () => {
             }
         } catch (error) {
             if (error.message === "Request failed with status code 400") {
-                swal({
+                Swal.fire({
                     title: "Gagal!",
                     icon: "warning",
                 });
