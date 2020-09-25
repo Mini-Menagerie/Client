@@ -80,6 +80,7 @@ const Header = () => {
             );
 
             if (user.status === 200) {
+
                 console.log(user.status);
                 Swal.fire({
                     title: "Sukses!",
@@ -469,7 +470,7 @@ const Header = () => {
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto" css={navSearch}>
+                        <Nav className="mr-auto">
                             <Dropdown>
                                 <Dropdown.Toggle
                                     variant="success"
@@ -525,7 +526,7 @@ const Header = () => {
                                 </Button>
                             </form>
                         </div>
-                        <div css={cssAbout}>
+                        <div>
                             <a href={`/about-me`}>
                                 {user.fullName == null
                                     ? user.email
