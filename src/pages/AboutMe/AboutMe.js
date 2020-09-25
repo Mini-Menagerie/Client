@@ -9,6 +9,8 @@ import AboutMeTab from "../../components/AboutMe/aboutMeTab";
 import { containerWrapper, marginSet } from "./AboutMe.styles";
 import AccountSettings from "../../components/AboutMe/accountSettings";
 import Swal from "sweetalert2";
+import StatusRequest from "./StatusRequest/StatusRequest";
+import AdoptedHistory from "./AdoptedHistory/AdoptedHistory";
 
 const AllProfile = () => {
     const [, setLoading] = useState(true);
@@ -63,6 +65,15 @@ const AllProfile = () => {
                     </Tab>
                     <Tab eventKey="profile" title="Account Settings">
                         <AccountSettings />
+                    </Tab>
+                    <Tab eventKey="adopReq" title="Adoption Request">
+                        <StatusRequest />
+                    </Tab>
+                    <Tab eventKey="adopHistory" title="Adopted history">
+                        <AdoptedHistory />
+                    </Tab>
+                    <Tab eventKey="approveReq" title="Approve Request">
+                        test 3
                     </Tab>
                     <Tab eventKey="contact" title="Pets Up For Adoption">
                         test 3
