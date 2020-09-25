@@ -107,7 +107,9 @@ const BreedByCategory = () => {
                         allCollection.map((item) => {
                             return (
                                 <Col key={item._id}>
-                                    <Link to={`/pets-detail/${item._id}`}>
+                                    <Link
+                                        to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
+                                    >
                                         <Card>
                                             <Card.Img
                                                 variant="top"
