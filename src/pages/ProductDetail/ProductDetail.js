@@ -39,6 +39,8 @@ const ProductDetail = (props) => {
         };
 
         getProduct();
+
+        //eslint-disable-next-line
     }, [id]);
 
     if (product.stock <= 10) {

@@ -60,7 +60,6 @@ const Router = () => (
                 path={routes.BREEDBYCATEGORY}
                 component={BreedByCategory}
             />
-
             <Route exact path={routes.PETBYBREED} component={PetByBreed} />
             <Route
                 exact
