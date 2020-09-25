@@ -66,6 +66,7 @@ export const searchText = css`
 
     @media (max-width: 768px) {
         margin: 5px 0;
+        width: 100%;
     }
 `;
 
