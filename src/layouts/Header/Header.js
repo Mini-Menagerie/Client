@@ -53,9 +53,6 @@ const Header = () => {
         password: "",
     });
     const [search, setSearch] = useState("");
-    if (user) {
-        loggedUser = user.fullName == null ? user.email : user.fullName;
-    }
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -80,7 +77,6 @@ const Header = () => {
             );
 
             if (user.status === 200) {
-
                 console.log(user.status);
                 Swal.fire({
                     title: "Sukses!",
@@ -91,7 +87,7 @@ const Header = () => {
                 localStorage.setItem("menagerie", user.data.token);
                 localStorage.setItem("user", JSON.stringify(user.data.user));
                 setShow(false);
-                window.location.reload();
+                window.location.replace("/");
             }
         } catch (error) {
             if (error.message === "Request failed with status code 400") {
@@ -204,7 +200,10 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse
                         id="basic-navbar-nav"
-                        style={{ width: "100%" }}
+                        style={{
+                            width: "100%",
+                            justifyContent: "space-between",
+                        }}
                     >
                         <Nav className="mr-auto">
                             <Dropdown>
@@ -469,8 +468,11 @@ const Header = () => {
                         />
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto">
+                    <Navbar.Collapse
+                        id="basic-navbar-nav"
+                        style={{ justifyContent: "space-between" }}
+                    >
+                        <Nav className="mr-auto" css={navSearch}>
                             <Dropdown>
                                 <Dropdown.Toggle
                                     variant="success"
