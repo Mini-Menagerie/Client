@@ -51,8 +51,6 @@ export const bodyTitleStyles = css`
 `;
 
 export const formSearch = css`
-    width: 689px;
-
     @media (max-width: 768px) {
         margin: 0;
     }
@@ -101,9 +99,9 @@ export const rowFormSignUp = css`
 
 export const navSearch = css`
     margin-right: 10px !important;
-`
+`;
 
 export const cssAbout = css`
     display: flex;
     flex-direction: column;
-`
+`;
