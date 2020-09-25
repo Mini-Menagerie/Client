@@ -174,7 +174,7 @@ const Header = () => {
 
     const redirect = (event) => {
         event.preventDefault();
-        window.location.replace('/checkout');
+        window.location.replace('/cart');
     };
 
     const searchBar = (event) => {

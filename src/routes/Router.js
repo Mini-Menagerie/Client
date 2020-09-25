@@ -16,10 +16,9 @@ import StatusRequest from '../pages/StatusRequest/StatusRequest';
 import AdoptedHistory from '../pages/AdoptedHistory/AdoptedHistory';
 import PurchaseHistory from "../pages/PurchaseHistory/PurchaseHistory";
 import ProductDetail from '../pages/ProductDetail/ProductDetail';
-import Checkout from '../pages/Checkout/Checkout';
+import ShoppingCart from '../pages/ShoppingCart/ShoppingCart';
 import SearchPage from '../pages/searchPage/searchPage';
-import AboutMe from '../pages/AboutMe/AboutMe'
-import ShoppingCart from '../pages/ShoppingCart/ShoppingCart'
+import AboutMe from '../pages/AboutMe/AboutMe';
 import CategoryPet from '../pages/CategoryAllPets/CategoryAllPets';
 import BreedByCategory from '../pages/BreedByCategory/BreedByCategory';
 import PetByBreed from "../pages/PetByBreed/PetByBreed";
@@ -44,7 +43,6 @@ const Router = () => (
                 path={routes.ADOPTEDHISTORY}
                 component={AdoptedHistory}
             />
-            <Route exact path={routes.CHECKOUT} component={Checkout} />
             <Route exact path={routes.PETSHOP} component={PetShop} />
             <Route
                 exact
