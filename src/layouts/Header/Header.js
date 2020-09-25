@@ -45,15 +45,11 @@ const Header = () => {
         password: "",
     });
     let user = JSON.parse(localStorage.getItem("user"));
-    let loggedUser = "";
     const [formLogin, setFormLogin] = useState({
         email: "",
         password: "",
     });
     const [search, setSearch] = useState("");
-    if (user) {
-        loggedUser = user.fullName == null ? user.email : user.fullName;
-    }
 
     const handleLogin = (event) => {
         event.preventDefault();
@@ -87,6 +83,7 @@ const Header = () => {
                 localStorage.setItem("menagerie", user.data.token);
                 localStorage.setItem("user", JSON.stringify(user.data.user));
                 setShow(false);
+                window.location.replace("/");
             }
         } catch (error) {
             if (error.message === "Request failed with status code 400") {

@@ -7,6 +7,7 @@ import { Tabs, Tab, Container } from "react-bootstrap";
 
 import AboutMeTab from "../../components/AboutMe/aboutMeTab";
 import { containerWrapper, marginSet } from "./AboutMe.styles";
+import Swal from 'sweetalert';
 // import AccountSettings from "../../components/AboutMe/accountSettings";
 
 const AllProfile = () => {
@@ -20,6 +21,7 @@ const AllProfile = () => {
     //put add a pet pop up in pet up for adoption
 
     let userLogin = JSON.parse(localStorage.getItem("user"));
+    let token = JSON.parse(localStorage.getItem("menagerie"));
 
     const profile = async () => {
         const url = `http://localhost:8000/userAccount/${userLogin.id}`;
@@ -35,6 +37,14 @@ const AllProfile = () => {
     };
 
     useEffect(() => {
+        if(userLogin == null || token == null) {
+            Swal({
+                title: "Gagal!",
+                text: "Silahkan login dahulu!",
+                icon: "warning",
+            });
+            window.location.replace("/");
+        }
         profile();
 
         //eslint-disable-next-line
