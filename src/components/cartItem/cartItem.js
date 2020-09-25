@@ -11,7 +11,11 @@ import {
 
 const removeProduct = (event) => {
     event.preventDefault();
-    localStorage.removeItem("cartProduct");
+    const cart = JSON.parse(localStorage.getItem("cartProduct"));
+    let indexToRemove = 1;
+    cart.splice(indexToRemove, 1);
+    localStorage.setItem("cartProduct", JSON.stringify(cart));
+    // window.location.reload ();
 };
 
 const CartProduct = ({ data }) => {

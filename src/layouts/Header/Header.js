@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import React, { useState } from "react";
+
 import {
     Dropdown,
     Modal,
@@ -173,7 +174,7 @@ const Header = () => {
 
     const redirect = (event) => {
         event.preventDefault();
-        window.location.href = "http://localhost:3000/checkout";
+        window.location.replace("/checkout");
     };
 
     const searchBar = (event) => {
