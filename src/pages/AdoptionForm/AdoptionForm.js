@@ -43,6 +43,7 @@ const AdoptionForm = () => {
         salary: "",
     });
     const [reason, setReason] = useState("");
+    let idPet = localStorage.getItem('selectedPet')
 
     const userData = JSON.parse(localStorage.getItem("user"));
     console.log(userData);
@@ -59,6 +60,7 @@ const AdoptionForm = () => {
     const createForm = () => {
         return axios.post("http://localhost:8000/formRequest/create", {
             idUser: user._id,
+            idPet,
             reason,
         });
     };
@@ -93,7 +95,7 @@ const AdoptionForm = () => {
 
         //eslint-disable-next-line
     }, []);
-    console.log(user);
+   
 
     return (
         <div css={adoptionWrapper}>

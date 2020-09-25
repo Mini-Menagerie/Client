@@ -22,7 +22,7 @@ const AllProfile = () => {
     //put add a pet pop up in pet up for adoption
 
     let userLogin = JSON.parse(localStorage.getItem("user"));
-    let token = JSON.parse(localStorage.getItem("menagerie"));
+    let token = localStorage.getItem("menagerie");
 
     const profile = async () => {
         const url = `http://localhost:8000/userAccount/${userLogin.id}`;
