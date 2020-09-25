@@ -4,15 +4,15 @@ import { useState, useEffect } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { loadStripe } from '@stripe/stripe-js';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import { loadStripe } from "@stripe/stripe-js";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 import {
     CardElement,
     Elements,
     useStripe,
     useElements,
-} from '@stripe/react-stripe-js';
+} from "@stripe/react-stripe-js";
 
 import {
     listCheckoutProduct,
@@ -30,7 +30,7 @@ const CheckoutForm = () => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type: 'card',
+            type: "card",
             card: elements.getElement(CardElement),
         });
     };
@@ -40,15 +40,16 @@ const CheckoutForm = () => {
             <CardElement />
             <button type="submit" disabled={!stripe}>
                 Pay
-        </button>
+            </button>
         </form>
     );
 };
 
-const stripePromise = loadStripe('pk_test_51HUN7sAjKylxkZ24xTuIpYu3NQco33z811UgWTi4ihOvCKIf435HdOw9sGOrii2xvAo3wrrKkl4UHdOx9XJSFJP000su8RU6tk');
+const stripePromise = loadStripe(
+    "pk_test_51HUN7sAjKylxkZ24xTuIpYu3NQco33z811UgWTi4ihOvCKIf435HdOw9sGOrii2xvAo3wrrKkl4UHdOx9XJSFJP000su8RU6tk"
+);
 
 const Checkout = () => {
-
     async function handleToken(token, addresses) {
         const response = await axios.post(
             "https://x6nw5.sse.codesandbox.io/checkout",
@@ -56,9 +57,7 @@ const Checkout = () => {
         );
         const { status } = response.data;
         if (status === "success") {
-            return (
-                <h1>sucess</h1>
-            )
+            return <h1>sucess</h1>;
         } else {
         }
     }
@@ -75,6 +74,8 @@ const Checkout = () => {
 
     useEffect(() => {
         getUser();
+
+        //eslint-disable-next-line
     }, []);
 
     const cart = JSON.parse(localStorage.getItem("cartProduct"));
@@ -86,15 +87,16 @@ const Checkout = () => {
 
     if (cart === null) {
         Swal.fire({
-            imageUrl: 'https://thumbs.gfycat.com/AccurateAgreeableDairycow.webp',
-            title: 'You dont have any purchases',
-            text: 'this page will be redirected automatically',
+            imageUrl:
+                "https://thumbs.gfycat.com/AccurateAgreeableDairycow.webp",
+            title: "You dont have any purchases",
+            text: "this page will be redirected automatically",
             timer: 5000,
             showConfirmButton: false,
             timerProgressBar: true,
         }).then(function () {
-            window.location.replace('/')
-        })
+            window.location.replace("/");
+        });
     }
 
     const price = cart.map((item) => {
@@ -138,7 +140,7 @@ const Checkout = () => {
             <Row style={{ marginTop: "10px" }}>
                 <h1>User Details</h1>
             </Row>
-            <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Row style={{ display: "flex", justifyContent: "space-between" }}>
                 <Col xs={7} css={userDetails}>
                     <Form>
                         <Form.Row>

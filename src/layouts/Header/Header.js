@@ -203,7 +203,10 @@ const Header = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse
                         id="basic-navbar-nav"
-                        style={{ width: "100%" }}
+                        style={{
+                            width: "100%",
+                            justifyContent: "space-between",
+                        }}
                     >
                         <Nav className="mr-auto">
                             <Dropdown>
@@ -468,7 +471,10 @@ const Header = () => {
                         />
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
+                    <Navbar.Collapse
+                        id="basic-navbar-nav"
+                        style={{ justifyContent: "space-between" }}
+                    >
                         <Nav className="mr-auto" css={navSearch}>
                             <Dropdown>
                                 <Dropdown.Toggle
