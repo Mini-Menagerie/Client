@@ -33,7 +33,7 @@ import {
     navSearch,
     cssAbout,
 } from "./Header.styles";
-import swal from "sweetalert";
+import swal from "sweetalert2";
 
 const Header = () => {
     const productCart = JSON.parse(localStorage.getItem("cartProduct"));
