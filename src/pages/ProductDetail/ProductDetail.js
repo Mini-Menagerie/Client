@@ -27,6 +27,7 @@ const ProductDetail = (props) => {
     const [productImage, setProductImage] = useState([]);
 
     useEffect(() => {
+        console.log(props.addToCart());
         const getProduct = async () => {
             // setLoading(true);
             const response = await axios.get(

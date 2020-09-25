@@ -29,6 +29,8 @@ import {
     wrapperButtonStyles,
     buttonLoginStyles,
     rowFormSignUp,
+    navSearch,
+    cssAbout
 } from "./Header.styles";
 import swal from 'sweetalert';
 
@@ -50,7 +52,7 @@ const Header = () => {
     });
     const [search, setSearch] = useState("");
     if (user) {
-        loggedUser = user.email;
+        loggedUser = user.fullName == null ? user.email : user.fullName;
     }
 
     const handleLogin = (event) => {
@@ -187,7 +189,7 @@ const Header = () => {
     if (user === null) {
         return (
             <React.Fragment>
-                <Navbar bg="light" expand="lg">
+                <Navbar expand="lg">
                     <Navbar.Brand href="/">
                         <img
                             src={Logo}
@@ -228,7 +230,7 @@ const Header = () => {
                                     type="text"
                                     css={searchText}
                                     placeholder="Search your future best friend"
-                                    style={{ maxWidth: "100%" }}
+                                    style={{ backgroundColor: "#f5f5f5" }}
                                     onChange={handleSearch}
                                     value={search}
                                 ></input>
@@ -453,7 +455,7 @@ const Header = () => {
     } else if (user !== null) {
         return (
             <React.Fragment>
-                <Navbar bg="light" expand="lg">
+                <Navbar expand="lg">
                     <Navbar.Brand href="/">
                         <img
                             src={Logo}
@@ -463,7 +465,7 @@ const Header = () => {
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="mr-auto">
+                        <Nav className="mr-auto" css={navSearch}>
                             <Dropdown>
                                 <Dropdown.Toggle
                                     variant="success"
@@ -491,7 +493,7 @@ const Header = () => {
                                     type="text"
                                     css={searchText}
                                     placeholder="Search your future best friend"
-                                    style={{ maxWidth: "100%" }}
+                                    style={{ maxWidth: "70%", backgroundColor: "#f5f5f5" }}
                                     onChange={handleSearch}
                                     value={search}
                                 ></input>
@@ -515,8 +517,8 @@ const Header = () => {
                                 </Button>
                             </form>
                         </div>
-                        <div>
-                            <a href={`/about-me`}>{loggedUser}</a>
+                        <div css={cssAbout}>
+                            <a href={`/about-me`}>{user.fullName == null ? user.email : user.fullName}</a>
                             <Button
                                 onClick={logout}
                                 style={{

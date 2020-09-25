@@ -75,3 +75,8 @@ export const subWrapper = css`
 export const subText = css `
 color: #fff;
 `
+
+export const rowFooter = css `
+    width: 100%;
+    padding: 20px 20px;
+`
