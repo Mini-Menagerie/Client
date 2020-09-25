@@ -45,10 +45,11 @@ const SearchPage = () => {
     };
 
     const getFilter = () => {
-        const url = `http://localhost:8000/pet/filter/?variable=${filter}`;
+        const url = `http://localhost:8000/petdetail/?search=${search}`;
         axios
             .get(url)
             .then(function (response) {
+                console.log(response);
                 setSearchPet(response.data.result);
                 setLoading(false);
             })
@@ -60,10 +61,11 @@ const SearchPage = () => {
     };
 
     const getSearch = () => {
-        const url = `http://localhost:8000/pet/search?variable=${search}`;
+        const url = `http://localhost:8000/petdetail/?search=${search}`;
         axios
             .get(url)
             .then(function (response) {
+                console.log(response);
                 setSearchPet(response.data.result);
                 setLoading(false);
             })
@@ -78,13 +80,14 @@ const SearchPage = () => {
         const searchBar = localStorage.getItem("search");
         const url =
             searchBar !== null
-                ? `${process.env.REACT_APP_API_URL}/pet/search?variable=${searchBar}`
+                ? `${process.env.REACT_APP_API_URL}/petdetail/?search=${searchBar}`
                 : `${process.env.REACT_APP_API_URL}/pet`;
 
         axios
             .get(url)
             .then(function (response) {
-                setSearchPet(response.data.result);
+                console.log(response);
+                setSearchPet(response.data.data);
                 setLoading(false);
             })
             .catch(function (error) {
@@ -163,11 +166,11 @@ const SearchPage = () => {
                     ) : (
                         <Container>
                             <Row>
-                                {searchPet.length > 0 &&
+                                {searchPet !== undefined && searchPet.length > 0 &&
                                     searchPet.map((item) => (
                                         <Col md={4}>
                                             <Link
-                                                to={`/pets-detail/${item._id}`}
+                                                to={`/pets-detail/${item.id}`}
                                             >
                                                 <Card
                                                     style={{ width: "18rem" }}
