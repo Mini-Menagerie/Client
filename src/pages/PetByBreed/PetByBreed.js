@@ -162,7 +162,13 @@ const PetByBreed = () => {
                         collection.map((item) => {
                             return (
                                 <Col xs={6} md={4} key={item._id}>
-                                    <Link to={`/pets-detail/${item.id}`}>
+                                    <Link
+                                        to={`/pets-detail/${
+                                            item.id !== undefined
+                                                ? item.id
+                                                : item._id
+                                        }`}
+                                    >
                                         <Card>
                                             <Card.Img
                                                 variant="top"
