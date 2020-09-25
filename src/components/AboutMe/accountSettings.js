@@ -3,6 +3,7 @@ import { jsx } from "@emotion/core";
 import { Col, Row, Container, Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios"
+import { EmojiFoodBeverageTwoTone } from "@material-ui/icons";
 
 
 import PrimaryButton from "../../components/Button/Button";
@@ -14,12 +15,13 @@ import {
 
 const AccountSettings = ({ account }) => {
 
-
     const [email, setEmail] = useState();
     const [password,setPassword] = useState();
     const [form, setForm] = useState({
         email: "",
-        password: ""
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: ""
     });
 
     let userData = JSON.parse(localStorage.getItem("user"))
@@ -47,6 +49,40 @@ const AccountSettings = ({ account }) => {
             .then(() => window.location.reload())
             .catch(err => console.log(err))
         )
+    }
+
+    const handleEditPassword = async (event) => {
+        event.preventDefault();
+        return (
+            axios.put(
+                `http://localhost:8000/userAccountPassword/${userData.id}`, form
+            )
+            .then(result => setPassword(result.data.result.password))
+            .then(() => window.location.reload())
+            .catch(err => console.log(err))
+        )
+    }
+
+    handleConfirmOldPassword = (event) => {
+        if(event.target.value !== ) {
+            alert("Wrong Current Password")
+        } else {
+            //lanjut ke (handleconfirmNewPassword)
+        }
+    }
+
+    // handleConfirmOldPassword = () => {
+    //     await bcrypt.compare(currentPassword, )
+    // if(!handleConfirmOldPassword){
+    //     alert("Wrong Current Password")
+    // }}
+
+    handleConfirmNewPassword = (event) => {
+        if(event.target.value !== newPassword) {
+            alert("Passwords Don't Match")
+        } else {
+            //lanjut ke (handlechange)
+        }
     }
 
     const handleChange = (event) => {
@@ -83,27 +119,30 @@ const AccountSettings = ({ account }) => {
                     <Row>
                         <PrimaryButton type="submit">Update Email</PrimaryButton>
                     </Row>
+                </Form>
+                <Form onSubmit={handleEditPassword}>
                     <Row css={changePassword}>
                         <h5>Change Password:</h5>
                     </Row>
                     <Row>
-                        <Form.Group controlId="formGridAddress1">
+                        <Form.Group controlId="formBasicPassword">
                                 <Form.Control
-                                    placeholder="Current Password"
+                                    placeholder="Current Password" name="currentPassword" onChange={handleConfirmOldPassword}
                                 />
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Form.Group controlId="formGridAddress1">
+                        <Form.Group controlId="formBasicPassword">
                                 <Form.Control
-                                    placeholder="New Password"
+                                    placeholder="New Password" name="newPassword"
                                 />
                         </Form.Group>
                     </Row>
                     <Row>
-                        <Form.Group controlId="formGridAddress1">
+                        <Form.Group controlId="formBasicPassword">
                                 <Form.Control
-                                    placeholder="Confirm Password"/>
+                                    placeholder="Confirm Password" name="confirmNewPassword" value={form.password} onChange={handleChange}
+                                    />
                         </Form.Group>
                     </Row>
                     <Row>

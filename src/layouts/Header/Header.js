@@ -32,6 +32,7 @@ import {
     rowFormSignUp,
     navSearch,
     cssAbout,
+    navbarspace
 } from "./Header.styles";
 import swal from "sweetalert";
 

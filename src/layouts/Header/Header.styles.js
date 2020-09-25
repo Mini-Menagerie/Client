@@ -105,3 +105,7 @@ export const cssAbout = css`
     display: flex;
     flex-direction: column;
 `;
+
+export const navbarspace = css `
+justify-content: space-between;
+`
