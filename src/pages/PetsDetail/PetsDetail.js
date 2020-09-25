@@ -43,6 +43,7 @@ const PetsDetail = (props) => {
 
 
     let { id } = useParams();
+    localStorage.setItem('selectedPet', id)
 
     const fetchDetails = async () => {
         const url = `http://localhost:8000/pet/${id}`;
