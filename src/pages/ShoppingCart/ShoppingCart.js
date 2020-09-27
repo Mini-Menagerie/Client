@@ -1,193 +1,140 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-// import { useState, useEffect } from "react";
-// import axios from "axios";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { useState, useEffect } from 'react';
+import { loadStripe } from '@stripe/stripe-js';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import Swal from 'sweetalert2'
 
 import {
-    listCheckoutProduct,
-    listCheckoutDetails,
-    button,
-    // userDetails,
-    // payment,
+  button,
+  itemDetails,
+  paymentDetails,
+  container,
+  quantity
 } from "./ShoppingCart.styles";
-import CartProduct from "../../components/cartItem/cartItem";
 
+const stripePromise = loadStripe("pk_test_51HUN7sAjKylxkZ24d0YxRuxiDVNFIoEAsNmyg8WFxzcExHz1cPsfdouNHOsw3E9SJQpQ19rG2TFByvkQ3MNzAXey00DUfRySaY");
 
 const ShoppingCart = () => {
+  const [data, setData] = useState([]);
+  const [state, dispatch] = useState({
+    loading: false,
+    error: null,
+  });
 
-    // const [user, setUser] = useState({});
-    // const userLogin = JSON.parse(localStorage.getItem("user"));
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("cartProduct")) || [];
+    setData(cart);
+  }, [])
 
-    // const getUser = async () => {
-    //     const response = await axios.get(
-    //         `http://localhost:8000/userAccount/${userLogin.id}`
-    //     );
-    //     setUser(response.data.result);
-    // };
+  useEffect(() => {
+    localStorage.setItem("cartProduct", JSON.stringify(data));
+  }, [data]);
 
-    // useEffect(() => {
-    //     getUser();
-    // }, []);
+  if (data === null) {
+    Swal.fire({
+      imageUrl: 'https://thumbs.gfycat.com/AccurateAgreeableDairycow.webp',
+      title: 'You dont have any purchases',
+      text: 'this page will be redirected automatically',
+      timer: 3000,
+      showConfirmButton: false,
+      timerProgressBar: true,
+    }).then(function () {
+      window.location.replace('/')
+    })
+  }
 
-    const cart = JSON.parse(localStorage.getItem("cartProduct"));
+  const handleChange = (e, id) => {
+    const { value } = e.target;
 
-    // if (cart === null) {
-    //     window.alert("sometext");
-    //     window.location.replace('/')
-    // }
-
-    if (cart === null) {
-        Swal.fire({
-            imageUrl: 'https://thumbs.gfycat.com/AccurateAgreeableDairycow.webp',
-            title: 'You dont have any purchases',
-            text: 'this page will be redirected automatically',
-            timer: 5000,
-            showConfirmButton: false,
-            timerProgressBar: true,
-        }).then(function () {
-            window.location.replace('/')
-        })
-    }
-
-    const price = cart.map((item) => {
-        return item.price * item.quantity;
-    });
-
-    let totalPrice = price.reduce((a, b) => a + b);
-    let cartProduct = JSON.parse(localStorage.getItem("cartProduct"));
-
-    return (
-        <Container>
-            {/* <Row style={{ marginTop: "10px" }}>
-                <h1>User Details</h1>
-            </Row>
-            <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
-                <Col xs={7} css={userDetails}>
-                    <Form>
-                        <Form.Row>
-                            <Form.Group as={Col} controlId="formGridName">
-                                <Form.Label>Name</Form.Label>
-                                <Form.Control
-                                    value={
-                                        user.idUser !== undefined &&
-                                        user.idUser.fullName
-                                    }
-                                    type="text"
-                                    placeholder="Enter name"
-                                    disabled
-                                />
-                            </Form.Group>
-
-                            <Form.Group as={Col} controlId="formGridEmail">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control
-                                    value={
-                                        user.email !== undefined && user.email
-                                    }
-                                    type="email"
-                                    placeholder="Email"
-                                    disabled
-                                />
-                            </Form.Group>
-                        </Form.Row>
-
-                        <Form.Group controlId="formGridAddress">
-                            <Form.Label>Address</Form.Label>
-                            <Form.Control placeholder="Address" />
-                        </Form.Group>
-
-                        <Form.Row>
-                            <Form.Group as={Col} controlId="formGridCity">
-                                <Form.Label>City</Form.Label>
-                                <Form.Control />
-                            </Form.Group>
-
-                            <Form.Group as={Col} controlId="formGridState">
-                                <Form.Label>State</Form.Label>
-                                <Form.Control as="select" defaultValue="Choose...">
-                                    <option>Choose...</option>
-                                    <option>...</option>
-                                </Form.Control>
-                            </Form.Group>
-
-                            <Form.Group as={Col} controlId="formGridZip">
-                                <Form.Label>Zip</Form.Label>
-                                <Form.Control />
-                            </Form.Group>
-                        </Form.Row>
-
-                        <div css={button}>
-                            <Button>Save Address</Button>
-                        </div>
-                    </Form>
-                </Col>
-            </Row> */}
-
-            <Row style={{ display: "flex", justifyContent: "space-between" }}>
-                <Col xs={7} css={listCheckoutProduct}>
-                    <CartProduct data={cart} />
-                    <p className="text-primary">
-                        <i class="fas fa-info-circle mr-1"></i>Do not delay the
-                        purchase, adding items to your cart does not mean
-                        booking them.
-                    </p>
-                </Col>
-                <Col xs={4} css={listCheckoutDetails}>
-                    <Col>
-                        <Row style={{ marginBottom: "15px" }}>
-                            <h5 style={{ fontWeight: "600" }}>
-                                Payment Details
-                            </h5>
-                        </Row>
-                        <Row
-                            style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                marginBottom: "10px",
-                            }}
-                        >
-                            <Col xs={7} style={{ paddingLeft: "0px" }}>
-                                <p>Subtotal ({cartProduct.length} items):</p>
-                            </Col>
-                            <Col xs={5}>
-                                <p>Rp. {totalPrice}</p>
-                            </Col>
-                        </Row>
-                        <Row
-                            style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                                marginBottom: "10px",
-                            }}
-                        >
-                            <Col xs={7} style={{ paddingLeft: "0px" }}>
-                                <p>Shipping Fee:</p>
-                            </Col>
-                            <Col xs={5}>
-                                <p>Rp. 10000</p>
-                            </Col>
-                        </Row>
-                        <hr />
-                        <Row>
-                            <Col xs={7} style={{ paddingLeft: "0px" }}>
-                                <p style={{ fontWeight: "600" }}>Total:</p>
-                            </Col>
-                            <Col xs={5}>
-                                <p style={{ fontWeight: "600" }}>
-                                    Rp {totalPrice + 10000}
-                                </p>
-                            </Col>
-                        </Row>
-                        <div css={button}>
-                            <Button variant="primary">Buy Now</Button>
-                        </div>
-                    </Col>
-                </Col>
-            </Row>
-        </Container>
+    setData((prev) =>
+      prev.map((item) => {
+        if (item._id !== id) {
+          return item;
+        }
+        return { ...item, quantity: parseInt(value) };
+      })
     );
-};
+  }
+
+  const handleClick = async (event) => {
+    // Call your backend to create the Checkout session.
+    dispatch({ type: 'setLoading', payload: { loading: true } });
+    // When the customer clicks on the button, redirect them to Checkout.
+    const stripe = await stripePromise;
+    const { error } = await stripe.redirectToCheckout({
+      mode: 'payment',
+      lineItems: data.map(item => (
+        {
+          price: item.stripe,
+          quantity: item.quantity
+        })),
+      successUrl: `${window.location.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancelUrl: `${window.location.origin}/cart`,
+    });
+    if (error) {
+      dispatch({ type: 'setError', payload: { error } });
+      dispatch({ type: 'setLoading', payload: { loading: false } });
+    }
+  };
+
+  let itemPriceX = data.map((item) => {
+    return item.price * item.quantity;
+  });
+
+  console.log(itemPriceX);
+
+  // let totalPrice = itemPriceX.reduce((a, b) => a + b);
+
+
+  return (
+    <Container css={container}>
+      <Col xs={7} css={itemDetails}>
+        <div>
+          {data.map((item) => (
+            <Row style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+              <Col xs={7}>
+                <h6>{item.productName}</h6>
+              </Col>
+              <Col xs={2} css={quantity}>
+                <input
+                  key={item._id}
+                  type="number"
+                  placeholder="qty"
+                  min="1"
+                  value={item.quantity}
+                  onChange={(e) => handleChange(e, item._id)}
+                />
+              </Col>
+              <Col xs={3}>
+                <h6>Rp. {item.price * item.quantity}</h6>
+              </Col>
+            </Row>
+          ))}
+          {/* {data.map((item) => (
+            <div key={item.id}>{item.productName}</div>
+          ))} */}
+        </div>
+        <div>
+          <p className="text-primary">
+            <i class="fas fa-info-circle mr-1"></i>
+          Do not delay the purchase, adding items to your cart does not mean booking them.
+          </p>
+        </div>
+      </Col>
+
+      <Col xs={4} css={paymentDetails}>
+        <Row>
+          <Col>
+            <h6>Total Price:</h6>
+          </Col>
+        </Row>
+        <div css={button} onClick={handleClick} disabled={state.loading}>
+          <Button>Checkout Now</Button>
+        </div>
+      </Col>
+    </Container>
+  );
+}
 
 export default ShoppingCart;

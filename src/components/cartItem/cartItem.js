@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Col, Row } from "react-bootstrap";
+import { useState, useEffect, useContext } from "react"
 
 import {
     cartItem,
@@ -9,19 +10,53 @@ import {
     cartImage,
 } from "./cartItem.styles";
 
-const removeProduct = (event) => {
-    event.preventDefault();
-    const cart = JSON.parse(localStorage.getItem("cartProduct"));
-    let indexToRemove = 1;
-    cart.splice(indexToRemove, 1);
-    localStorage.setItem("cartProduct", JSON.stringify(cart));
-    // window.location.reload ();
-};
+function formatPrice(amount) {
+    return `$${(amount * 0.01).toFixed(2)}`
+  }
+  
+  function totalPrice(items) {
+    return items.reduce((acc, item) => acc + item.quantity * item.amount, 0.0)
+  }
 
-const CartProduct = ({ data }) => {
+const CartProduct = ({ stripeToken }) => {
+    const removeProduct = (event) => {
+        event.preventDefault();
+        const cart = JSON.parse(localStorage.getItem("cartProduct"));
+        let indexToRemove = 1;
+        cart.splice(indexToRemove, 1);
+        localStorage.setItem("cartProduct", JSON.stringify(cart));
+        // window.location.reload ();
+    };
+
+    const [stripe, setStripe] = useState(null)
+    const ctx = useContext(CartContext)
+
+    useEffect(() => {
+        if (window.Stripe) setStripe(window.Stripe(stripeToken))
+    }, [stripeToken])
+
+    const checkout = () => {
+        stripe.redirectToCheckout({
+            lineItems: ctx.items.map(item => ({
+                price: item.price,
+                quantity: item.quantity
+            })),
+            mode: 'payment',
+            billingAddressCollection: 'required',
+            successUrl: 'https://your-website.com/success',
+            cancelUrl: 'https://your-website.com/canceled',
+        })
+            .then(function (result) {
+                if (result.error) {
+                    var displayError = document.getElementById('error-message');
+                    displayError.textContent = result.error.message;
+                }
+            });
+    }
+
     return (
         <div>
-            {data.map((value) => {
+            {ctx.items.map((value) => {
                 let totalItemPrice = value.price * value.quantity;
 
                 return (
