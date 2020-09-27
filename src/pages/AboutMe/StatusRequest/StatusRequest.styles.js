@@ -20,9 +20,6 @@ export const statusInfo = css`
         padding: 8px
     }
 `
-export const listInfo = css`
-    margin: 20px 40px;
-`
 export const mainBody = css`
     display: flex;
     justify-content: space-around;
