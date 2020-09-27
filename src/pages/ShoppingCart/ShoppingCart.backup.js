@@ -40,15 +40,16 @@ const ShoppingCart = () => {
 
     if (cart === null) {
         Swal.fire({
-            imageUrl: 'https://thumbs.gfycat.com/AccurateAgreeableDairycow.webp',
-            title: 'You dont have any purchases',
-            text: 'this page will be redirected automatically',
+            imageUrl:
+                "https://thumbs.gfycat.com/AccurateAgreeableDairycow.webp",
+            title: "You dont have any purchases",
+            text: "this page will be redirected automatically",
             timer: 5000,
             showConfirmButton: false,
             timerProgressBar: true,
         }).then(function () {
-            window.location.replace('/')
-        })
+            window.location.replace("/");
+        });
     }
 
     const price = cart.map((item) => {
@@ -63,7 +64,7 @@ const ShoppingCart = () => {
             {/* <Row style={{ marginTop: "10px" }}>
                 <h1>User Details</h1>
             </Row>
-            <Row style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Row style={{ display: "flex", justifyContent: "space-between" }}>
                 <Col xs={7} css={userDetails}>
                     <Form>
                         <Form.Row>

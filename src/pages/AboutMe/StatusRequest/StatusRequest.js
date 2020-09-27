@@ -5,22 +5,25 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import {
     head,
-    statusInfo,
-    listInfo,
+    // statusInfo,
     mainOne,
     mainBody,
 } from "./StatusRequest.styles";
 
 const StatusRequest = () => {
+    
+    let userData = JSON.parse(localStorage.getItem("user"))
+
     const [statusRequest, setStatusRequest] = useState([]);
     const [, setErrorMessage] = useState();
 
     useEffect(() => {
-        const url = "http://localhost:8000/petUpForAdoption";
+        const url = `http://localhost:8000/formRequest/all/${userData.idUser._id}`;
         axios
             .get(url)
             .then(function (result) {
-                setStatusRequest(result.data.result);
+                console.log(result.data.filterReq);
+                setStatusRequest(result.data.filterReq);
             })
             .catch(function (error) {
                 setErrorMessage(error.message);
@@ -31,19 +34,19 @@ const StatusRequest = () => {
         <div>
             <div css={head}>
                 <h2>Adoption Status Request</h2>
-            </div>
-            <div css={statusInfo}>
+            </div><br />
+            {/* <div css={statusInfo}>
                 <div>All Request</div>
                 <div>Approved</div>
                 <div>Denied</div>
                 <div>Waiting For Approval</div>
-            </div>
-            <div css={listInfo}>
+            </div> */}
+            <div>
                 {statusRequest.map((e) => (
                     <div key={statusRequest}>
                         <Card>
                             <Card.Header>
-                                <b>{e.idPet.petName}</b> - <span></span>
+                                <b>{e.idPet.petName}</b> - <span>{e.idPet.idBreed.breedName}</span>
                             </Card.Header>
                             <Card.Body css={mainBody}>
                                 <Row>
@@ -51,21 +54,23 @@ const StatusRequest = () => {
                                         <img
                                             src={e.idPet.image}
                                             alt="mberrrr"
+                                            style={{
+                                                objectFit: "cover",
+                                                height: "200px",
+                                            }}
                                         />
                                     </Col>
                                     <Col>
                                         <p>Name : {e.idPet.petName}</p>
-                                        <p>Breed : </p>
-                                        <p>Color : </p>
+                                        <p>Breed : {e.idPet.idBreed.breedName}</p>
                                         <p>Age : {e.idPet.age}</p>
                                         <p>Size : {e.idPet.size}</p>
                                     </Col>
                                     <Col>
                                         <p>Weight : {e.idPet.weight}</p>
                                         <p>Gender : {e.idPet.gender}</p>
-                                        <p>PetId : {e.idPet._id}</p>
                                         <br />
-                                        <h5>Status:{e.status}</h5>
+                                        <h5>Status: {e.status}</h5>
                                     </Col>
                                 </Row>
                             </Card.Body>

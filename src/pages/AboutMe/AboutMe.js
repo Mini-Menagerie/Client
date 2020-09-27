@@ -8,6 +8,9 @@ import { Tabs, Tab, Container } from "react-bootstrap";
 import AboutMeTab from "../../components/AboutMe/aboutMeTab";
 import { containerWrapper, marginSet } from "./AboutMe.styles";
 import AccountSettings from "../../components/AboutMe/accountSettings";
+import Swal from "sweetalert2";
+import StatusRequest from "./StatusRequest/StatusRequest";
+import AdoptedHistory from "./AdoptedHistory/AdoptedHistory";
 
 const AllProfile = () => {
     const [, setLoading] = useState(true);
@@ -20,6 +23,7 @@ const AllProfile = () => {
     //put add a pet pop up in pet up for adoption
 
     let userLogin = JSON.parse(localStorage.getItem("user"));
+    let token = localStorage.getItem("menagerie");
 
     const profile = async () => {
         const url = `http://localhost:8000/userAccount/${userLogin.id}`;
@@ -35,6 +39,14 @@ const AllProfile = () => {
     };
 
     useEffect(() => {
+        if (userLogin == null || token == null) {
+            Swal({
+                title: "Gagal!",
+                text: "Silahkan login dahulu!",
+                icon: "warning",
+            });
+            window.location.replace("/");
+        }
         profile();
 
         //eslint-disable-next-line
@@ -52,7 +64,16 @@ const AllProfile = () => {
                         <AboutMeTab profile={aboutMe} />
                     </Tab>
                     <Tab eventKey="profile" title="Account Settings">
-                        <AccountSettings/>
+                        <AccountSettings />
+                    </Tab>
+                    <Tab eventKey="adopReq" title="Adoption Request">
+                        <StatusRequest />
+                    </Tab>
+                    <Tab eventKey="adopHistory" title="Adopted history">
+                        <AdoptedHistory />
+                    </Tab>
+                    <Tab eventKey="approveReq" title="Approve Request">
+                        test 3
                     </Tab>
                     <Tab eventKey="contact" title="Pets Up For Adoption">
                         test 3
