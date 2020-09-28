@@ -1,9 +1,10 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Col, Row, Container, Card, } from "react-bootstrap";
+import { Col, Row, Container, Card, Modal } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 
 import { useState, useEffect } from "react";
+import AddAdoption from './AddAdoption';
 
 
 import PrimaryButton from "../Button/Button";
@@ -21,6 +22,8 @@ const ListPetUp = ({ petUp }) => {
    
 
     const [show, setShow] = useState(false);
+    
+    const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
    
@@ -29,8 +32,28 @@ const ListPetUp = ({ petUp }) => {
     return (
         <Container css={container}>
           <PrimaryButton onClick={handleShow}>
-                              Pet Up for adoption
+                              Add a Pet
           </PrimaryButton>
+          <Modal
+                    show={show}
+                    centered
+                    onHide={handleClose}
+                    size="lg"
+                    aria-labelledby="example-modal-sizes-title-lg"
+                >
+                    <Modal.Dialog size="lg" id="example-modal-sizes-title-lg">
+                        <Modal.Header closeButton>
+                            <Modal.Title>Add a Pet</Modal.Title>
+                        </Modal.Header>
+
+                        <Modal.Body className="modal-body modal-md">
+                            <AddAdoption
+                                // edit={profile}
+                                handleClose={handleClose}
+                            />
+                        </Modal.Body>
+                    </Modal.Dialog>
+                </Modal>
              <Row>
             
                 <Col md={3} css={margin}>
@@ -63,4 +86,4 @@ const ListPetUp = ({ petUp }) => {
 };
 
 export default ListPetUp;
-//put edit profile here
+

@@ -31,7 +31,7 @@ import {
 const SearchPage = () => {
     const [searchPet, setSearchPet] = useState([]);
     const [search, setSearch] = useState("");
-    const [filter, setFilter] = useState("");
+    const [, setFilter] = useState("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
@@ -166,7 +166,8 @@ const SearchPage = () => {
                     ) : (
                         <Container>
                             <Row>
-                                {searchPet !== undefined && searchPet.length > 0 &&
+                                {searchPet !== undefined &&
+                                    searchPet.length > 0 &&
                                     searchPet.map((item) => (
                                         <Col md={4}>
                                             <Link

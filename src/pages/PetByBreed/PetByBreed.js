@@ -147,7 +147,7 @@ const PetByBreed = () => {
                                     ))}
                                 </ToggleButtonGroup>
                             </div>
-                            <Row className="justify-content-md-center">
+                            <Row className="justify-content-center">
                                 <Button type="submit" variant="success">
                                     Filter Result
                                 </Button>
@@ -161,7 +161,12 @@ const PetByBreed = () => {
                     {collection.length > 0 &&
                         collection.map((item) => {
                             return (
-                                <Col xs={6} md={4} key={item._id}>
+                                <Col
+                                    xs={12}
+                                    md={4}
+                                    key={item._id}
+                                    style={{ margin: 10 }}
+                                >
                                     <Link
                                         to={`/pets-detail/${
                                             item.id !== undefined
