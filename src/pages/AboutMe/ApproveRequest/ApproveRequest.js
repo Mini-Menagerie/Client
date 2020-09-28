@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import { head, mainOne, mainBody, border, carbodyT } from "./Approve.styles";
+import FormPopUp from "../../../components/AdoptionFormPopUp/adoptionFormPopUp";
 
 const ApproveRequest = () => {
 
@@ -91,7 +92,7 @@ const ApproveRequest = () => {
                                         <p>Zip Code : {e.idPet.gender}</p>
                                         <p>Address : {e.idPet.gender}</p>
                                         <br />
-                                        <Button>Request Form</Button>
+                                        <FormPopUp />
                                     </Col>
                                 </Row>
                             </Card.Body>
