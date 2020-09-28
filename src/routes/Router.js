@@ -18,6 +18,8 @@ import ShoppingCart from '../pages/ShoppingCart/ShoppingCart';
 import SuccessCheckout from '../pages/ShoppingCart/success'
 import SearchPage from '../pages/searchPage/searchPage';
 import AboutMe from '../pages/AboutMe/AboutMe';
+import AdoptedHistory from '../pages/AboutMe/AdoptedHistory/AdoptedHistory';
+import StatusRequest from '../pages/AboutMe/StatusRequest/StatusRequest';
 import CategoryPet from '../pages/CategoryAllPets/CategoryAllPets';
 import BreedByCategory from '../pages/BreedByCategory/BreedByCategory';
 import PetByBreed from "../pages/PetByBreed/PetByBreed";
