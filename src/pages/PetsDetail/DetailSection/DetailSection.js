@@ -17,6 +17,7 @@ import {
 } from "./DetailSection.styles";
 import ColoredLine from "../../../components/ColoredLine";
 import PrimaryButton from "../../../components/Button/Button";
+import Swal from "sweetalert2";
 
 const DetailSection = ({ petDetails, user }) => {
     const history = useHistory();
@@ -107,7 +108,7 @@ const DetailSection = ({ petDetails, user }) => {
                             </PrimaryButton>
                         ) : ( 
                             <PrimaryButton 
-                                onClick={() => alert('Please Login to Continue')}
+                                onClick={() => Swal({title:"Please Login to Continue", icon:"warning",})}
                                 variant="danger"
                             >
                                 Ask for Adoption
