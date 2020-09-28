@@ -3,6 +3,7 @@ import { css } from '@emotion/core';
 export const head = css`
     background-color: #209516;
     padding: 13px;
+    margin-bottom: 20px;
 
     h2 {
         text-align: center;
