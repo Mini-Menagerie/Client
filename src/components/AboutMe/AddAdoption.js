@@ -14,50 +14,34 @@ const AddAdoption = ({ edit, handleClose }) => {
 
     const [user, setUser] = useState([]);
     const [form, setForm] = useState({
-        fullName: "",
-        email: "",
-        noHandphone: "",
-        state: "",
-        province: "",
-        zipcode: "",
+        petName: "",
+        CategoryName: "",
+        breedName: "",
         country: "",
+        province: "",
+        city: "",
+        postalCode: "",
         detailAddress: "",
-        avatar: "",
+        image: "",
+        fee:"",
     });
-
-    let userData = JSON.parse(localStorage.getItem("user"));
-
-    const fetchProfile = async () => {
-        let response = await axios.get(
-            `http://localhost:8000/users/${userData.idUser._id}` //if let id=userData.id then ${id}
-        ); //endpoint
-        console.log(response);
-        setUser(response.data.result);
-    };
-
     const handleChange = (event) => {
         setForm({
             ...form,
             [event.target.name]: event.target.value,
         });
     };
-    console.log(userData.idUser, "id user woi");
-    const handleEditProfile = async (event) => {
-        event.preventDefault();
-        return axios
-            .put(`http://localhost:8000/users/${userData.idUser._id}`, form)
-            .then(() => window.location.reload());
+    const handleFilter = (event) => {
+        setForm({
+            ...form,
+            [event.target.name]: event.target.value,
+        });
     };
 
-    useEffect(() => {
-        fetchProfile();
-
-        //eslint-disable-next-line
-    }, []);
 
     return (
         <div>
-            <Form onSubmit={handleEditProfile}>
+            <Form >
                 <Form.Row>
                     <div css={fs}>
                         <ReactFilestack
@@ -76,141 +60,148 @@ const AddAdoption = ({ edit, handleClose }) => {
                             onSuccess={(res) =>
                                 setForm({
                                     ...form,
-                                    avatar: res.filesUploaded[0].url,
+                                    image: res.filesUploaded[0].url,
                                 })
                             }
                         />
                     </div>
-
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column sm="5">
-                            Name:
+                    <Row style={{ display: "flex", justifyContent: "space-between" }}>
+                        <Col>
+                            <Form.Row>
+                                <Form.Group as={Col} >
+                                    <Form.Label column sm="5">
+                                        Pet Name:
+                                    </Form.Label>
+                                    <Col sm="7">
+                                        <Form.Control
+                                            placeholder=" Pet Name"
+                                            style={{ width: "350px" }}
+                                            type="text"
+                                            value={form.petName}
+                                            name="Pet Name"
+                                            onChange={handleChange}
+                                        />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Col} >
+                                    <Form.Label column sm="5">
+                                        Fee:
                         </Form.Label>
-                        <Col sm="7">
-                            <Form.Control
-                                style={{ width: "400px" }}
-                                type="text"
-                                placeholder={
-                                    edit.idUser !== undefined &&
-                                    edit.idUser.fullName
-                                }
-                                value={form.fullName}
-                                name="fullName"
-                                onChange={handleChange}
-                            />
+                                    <Col sm="7">
+                                        <Form.Control
+                                            placeholder="Rp. "
+                                            style={{ width: "350px" }}
+                                            type="text"
+                                            value={form.fee}
+                                            name="Fee"
+                                            onChange={handleChange}
+                                        />
+                                    </Col>
+                                </Form.Group>
+                            </Form.Row>
                         </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column sm="5">
-                            Email:
+                    </Row>
+                    <Row style={{ display: "flex", justifyContent: "space-between" }}>
+                        <Col>
+                            <Form.Row>
+                                <Form.Group as={Col} >
+                                    <Form.Label column sm="5">
+                                        Category Pet:
+                                    </Form.Label>
+                                    <Col sm="7">
+                                    <Form.Control
+                                        style={{ width: "350px" }}
+                                        onChange={handleFilter}
+                                        onClick=''
+                                        as="select"
+                                        defaultValue="Category Pet"
+                                    >
+                                        <option value="dog-asc">
+                                            Dog
+                                        </option>
+                                        <option value="cat-asc">
+                                            Cat
+                                        </option>                                        
+                                    </Form.Control>
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Col} >
+                                    <Form.Label column sm="5">
+                                        Breeds:
                         </Form.Label>
-                        <Col sm="7">
-                            <Form.Control
-                                style={{ width: "400px" }}
-                                type="text"
-                                placeholder={edit.email}
-                                value={edit.email}
-                            />
+                                    <Col sm="7">
+                                    <Form.Control
+                                        style={{ width: "350px" }}
+                                        onChange={handleFilter}
+                                        onClick=''
+                                        as="select"
+                                        defaultValue="Breeds"
+                                    >
+                                        <option value="Breeds-asc">
+                                            Siberian
+                                        </option>
+                                        <option value="Breeds-asc">
+                                            Himalayan
+                                        </option>                                        
+                                    </Form.Control>
+                                    </Col>
+                                </Form.Group>
+                            </Form.Row>
                         </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column sm="4">
-                            Phone Number:
-                        </Form.Label>
-                        <Col sm="8">
-                            <Form.Control
-                                style={{ width: "400px", marginLeft: "14px" }}
-                                type="text"
-                                placeholder={edit.idUser.noHandphone}
-                                value={form.noHandphone}
-                                name="noHandphone"
-                                onChange={handleChange}
-                            />
+                    </Row>
+                    <Row style={{ display: "flex", justifyContent: "space-between" }}>
+                        <Col>
+                            <Form.Row>
+                                <Form.Group as={Col} >
+                                    <Form.Label column sm="5">
+                                        Country:
+                                    </Form.Label>
+                                    <Col sm="7">
+                                        <Form.Control
+                                            placeholder="Country"
+                                            style={{ width: "350px" }}
+                                            type="text"
+                                            value={form.country}
+                                            name="Country"
+                                            onChange={handleChange}
+                                        />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Col} >
+                                    <Form.Label column sm="5">
+                                        City:
+                                     </Form.Label>
+                                    <Col sm="7">
+                                        <Form.Control
+                                            placeholder="City"
+                                            style={{ width: "350px" }}
+                                            type="text"
+                                            value={form.city}
+                                            name="City"
+                                            onChange={handleChange}
+                                        />
+                                    </Col>
+                                </Form.Group>
+                            </Form.Row>
                         </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column sm="4">
-                            Location:
-                        </Form.Label>
-                        <Col sm="8">
-                            <Form.Control
-                                style={{ width: "400px", marginLeft: "25px" }}
-                                type="text"
-                                placeholder={edit.idUser.country}
-                                value={form.country}
-                                name="country"
-                                onChange={handleChange}
-                            />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column sm="4">
-                            Province:
-                        </Form.Label>
-                        <Col sm="8">
-                            <Form.Control
-                                style={{ width: "400px", marginLeft: "25px" }}
-                                type="text"
-                                placeholder={edit.idUser.province}
-                                value={form.province}
-                                name="province"
-                                onChange={handleChange}
-                            />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column sm="5">
-                            City:
-                        </Form.Label>
-                        <Col sm="7">
-                            <Form.Control
-                                style={{ width: "400px", marginLeft: "5px" }}
-                                type="text"
-                                placeholder={edit.idUser.state}
-                                value={form.state}
-                                name="state"
-                                onChange={handleChange}
-                            />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column sm="4">
-                            Zip Code:
-                        </Form.Label>
-                        <Col sm="8">
-                            <Form.Control
-                                style={{ width: "400px", marginLeft: "25px" }}
-                                type="text"
-                                placeholder={edit.idUser.zip_code}
-                                value={form.zip_code}
-                                name="zipcode"
-                                onChange={handleChange}
-                            />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column sm="4">
-                            Address:
-                        </Form.Label>
-                        <Col sm="8">
-                            <Form.Control
-                                style={{ width: "400px", marginLeft: "25px" }}
-                                type="text"
-                                placeholder={edit.idUser.detailAddress}
-                                value={form.detailAddress}
-                                name="detailAddress"
-                                onChange={handleChange}
-                            />
-                        </Col>
-                    </Form.Group>
-                    {/* <Form.Group as={Row} controlId="formPlaintextPassword">
-                            <Form.Label column sm="2">
-                                Location:
-                            </Form.Label>
-                            <Col sm="10">
-                                <Form.Control type="text" placeholder={edit.idUser.country} value={form.country} name="country" onChange={handleChange}/>
+                    </Row>
+                    <Row>
+                        <Form.Group as={Col} >
+                            <Form.Label column sm="5">
+                                Adress:
+                                     </Form.Label>
+                            <Col sm="7">
+                                <Form.Control
+                                    Placeholder="Adress"
+                                    style={{ width: "735px", height: "60px" }}
+                                    type="text"
+                                    value={form.petName}
+                                    name="Breeds"
+                                    onChange={handleChange}
+                                />
                             </Col>
-                        </Form.Group> */}
+                        </Form.Group>
+                    </Row>
                 </Form.Row>
                 <PrimaryButton
                     style={{ margin: "0 40%" }}
