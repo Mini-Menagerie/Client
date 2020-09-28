@@ -1,17 +1,13 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Card, Col, Row } from "react-bootstrap";
-import axios from "axios";
 import { useState, useEffect } from "react";
-import {
-    head,
-    // statusInfo,
-    mainOne,
-    mainBody,
-} from "./StatusRequest.styles";
+import axios from "axios";
 
-const StatusRequest = () => {
-    
+import { head, mainOne, mainBody } from "./Approve.styles";
+
+const ApproveRequest = () => {
+
     let userData = JSON.parse(localStorage.getItem("user"))
 
     const [statusRequest, setStatusRequest] = useState([]);
@@ -22,7 +18,7 @@ const StatusRequest = () => {
         axios
             .get(url)
             .then(function (result) {
-                console.log(result.data.filterReq);
+                console.log(result.data);
                 setStatusRequest(result.data.filterReq);
             })
             .catch(function (error) {
@@ -33,21 +29,21 @@ const StatusRequest = () => {
     return (
         <div>
             <div css={head}>
-                <h2>Adoption Status Request</h2>
-            </div><br />
+                <h2>Approve Request</h2>
+            </div>
             <div>
                 {statusRequest.map((e) => (
                     <div key={statusRequest}>
                         <Card>
                             <Card.Header>
-                                <b>{e.idPet!== undefined && e.idPet.petName}</b> - <span>{e.idBreed !== undefined && e.idBreed.breedName}</span>
+                                <b>{e.idPet.petName}</b> - <span>{e.idPet.idBreed.breedName}</span>
                             </Card.Header>
                             <Card.Body css={mainBody}>
                                 <Row>
                                     <Col css={mainOne}>
                                         <img
-                                            src={e.idPet !== undefined && e.idPet.image}
-                                            alt="broken-image"
+                                            src={e.idPet.image}
+                                            alt="mberrrr"
                                             style={{
                                                 objectFit: "cover",
                                                 height: "200px",
@@ -55,14 +51,14 @@ const StatusRequest = () => {
                                         />
                                     </Col>
                                     <Col>
-                                        <p>Name : {e.idPet !== undefined && e.idPet.petName}</p>
-                                        <p>Breed : {e.idPet !== undefined && e.idPet.idBreed.breedName}</p>
-                                        <p>Age : {e.idPet !== undefined && e.idPet.age}</p>
-                                        <p>Size : {e.idPet !== undefined && e.idPet.size}</p>
+                                        <p>Name : {e.idPet.petName}</p>
+                                        <p>Breed : {e.idPet.idBreed.breedName}</p>
+                                        <p>Age : {e.idPet.age}</p>
+                                        <p>Size : {e.idPet.size}</p>
                                     </Col>
                                     <Col>
-                                        <p>Weight : {e.idPet !== undefined && e.idPet.weight}</p>
-                                        <p>Gender : {e.idPet !== undefined && e.idPet.gender}</p>
+                                        <p>Weight : {e.idPet.weight}</p>
+                                        <p>Gender : {e.idPet.gender}</p>
                                         <br />
                                         <h5>Status: {e.status}</h5>
                                     </Col>
@@ -77,4 +73,4 @@ const StatusRequest = () => {
     );
 };
 
-export default StatusRequest;
+export default ApproveRequest;
