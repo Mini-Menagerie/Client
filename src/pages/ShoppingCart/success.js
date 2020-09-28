@@ -1,16 +1,66 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+
+import axios from '../../helpers/axios'
 
 const Success = () => {
     // const location = useLocation();
     // const sessionId = location.search.replace('?session_id=', '');
+    const [transactionId, setTransactionId] = useState("")
+    const userData = JSON.parse(localStorage.getItem("user"));
+    const [data, setData] = useState([]);
 
+    const getTotalPrice = localStorage.getItem('totalPrice')
     const removeItem = () => localStorage.removeItem("cartProduct")
 
-    useEffect(() => { 
-        removeItem();
+    // const createTransaction = () => {
+    //     return axios.post("transaction/create", {
+    //         idUser: userData.idUser._id,
+    //         totalPrice: getTotalPrice
+    //     });
+    // };
+
+    // const getTransaction = () => {
+    //     return axios.get("transaction");
+    // }
+    const Transaction = async () => {
+        const setTransaction = await axios.post("transaction/create", {
+            idUser: userData.idUser._id,
+            totalPrice: getTotalPrice
+        });
+        let id = userData.idUser._id
+        const getTransaction = await axios.get("transaction");
+        let result = await getTransaction.data.result;
+        let trans = result.filter(item => ( item.idUser._id === id))
+        let latestTrans = trans[trans.length -1]
+        console.log(latestTrans);
+        console.log(latestTrans._id);
+        setTransactionId(latestTrans._id);
+        let cartProduct = JSON.parse(localStorage.getItem('cartProduct'))
+        setTimeout(() => {
+            console.log(transactionId);
+             axios.post("transactionDetails/create", {
+                idTransaction: transactionId,
+                idProduct: cartProduct._id
+            })
+            
+        }, 4000);
+
+    }
+
+    const TransactionDetails = async () => {
+    }
+    // const map = getTransaction.map(item => (item._id))
+    // console.log(map);
+
+    useEffect(() => {
+        // createTransaction();
+        // getTransaction();
+        Transaction();
+        const cart = JSON.parse(localStorage.getItem("cartProduct")) || [];
+        setData(cart);
     }, [])
-    
+
 
     return (
         <div>
