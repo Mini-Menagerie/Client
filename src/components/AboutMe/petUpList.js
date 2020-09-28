@@ -62,7 +62,7 @@ const ListPetUp = ({ petUp }) => {
                         <Card.Body>
                             <Card.Title>
                                 <h4>
-                                    <b></b>
+                                    <b>aa</b>
                                 </h4>
                             </Card.Title>
                             <Card.Text>
