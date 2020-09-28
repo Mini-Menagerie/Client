@@ -22,7 +22,6 @@ const StatusRequest = () => {
         axios
             .get(url)
             .then(function (result) {
-                console.log(result.data.filterReq);
                 setStatusRequest(result.data.filterReq);
             })
             .catch(function (error) {
@@ -76,7 +75,7 @@ const StatusRequest = () => {
                 </div>
             </div>
         );
-    } else if (statusRequest.length == 0) {
+    } else if (statusRequest.length === 0) {
         return(
             <div>
                 <div css={head}>
