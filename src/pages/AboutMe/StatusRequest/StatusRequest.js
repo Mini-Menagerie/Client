@@ -35,25 +35,19 @@ const StatusRequest = () => {
             <div css={head}>
                 <h2>Adoption Status Request</h2>
             </div><br />
-            {/* <div css={statusInfo}>
-                <div>All Request</div>
-                <div>Approved</div>
-                <div>Denied</div>
-                <div>Waiting For Approval</div>
-            </div> */}
             <div>
                 {statusRequest.map((e) => (
                     <div key={statusRequest}>
                         <Card>
                             <Card.Header>
-                                <b>{e.idPet.petName}</b> - <span>{e.idPet.idBreed.breedName}</span>
+                                <b>{e.idPet!== undefined && e.idPet.petName}</b> - <span>{e.idBreed !== undefined && e.idBreed.breedName}</span>
                             </Card.Header>
                             <Card.Body css={mainBody}>
                                 <Row>
                                     <Col css={mainOne}>
                                         <img
-                                            src={e.idPet.image}
-                                            alt="mberrrr"
+                                            src={e.idPet !== undefined && e.idPet.image}
+                                            alt="broken-image"
                                             style={{
                                                 objectFit: "cover",
                                                 height: "200px",
@@ -61,14 +55,14 @@ const StatusRequest = () => {
                                         />
                                     </Col>
                                     <Col>
-                                        <p>Name : {e.idPet.petName}</p>
-                                        <p>Breed : {e.idPet.idBreed.breedName}</p>
-                                        <p>Age : {e.idPet.age}</p>
-                                        <p>Size : {e.idPet.size}</p>
+                                        <p>Name : {e.idPet !== undefined && e.idPet.petName}</p>
+                                        <p>Breed : {e.idPet !== undefined && e.idPet.idBreed.breedName}</p>
+                                        <p>Age : {e.idPet !== undefined && e.idPet.age}</p>
+                                        <p>Size : {e.idPet !== undefined && e.idPet.size}</p>
                                     </Col>
                                     <Col>
-                                        <p>Weight : {e.idPet.weight}</p>
-                                        <p>Gender : {e.idPet.gender}</p>
+                                        <p>Weight : {e.idPet !== undefined && e.idPet.weight}</p>
+                                        <p>Gender : {e.idPet !== undefined && e.idPet.gender}</p>
                                         <br />
                                         <h5>Status: {e.status}</h5>
                                     </Col>
