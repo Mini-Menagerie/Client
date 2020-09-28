@@ -92,7 +92,7 @@ const ShoppingCart = () => {
     let indexToRemove = 1;
     cart.splice(indexToRemove, 1);
     localStorage.setItem("cartProduct", JSON.stringify(cart));
-    window.location.reload ();
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -105,14 +105,14 @@ const ShoppingCart = () => {
         <div>
           {data.map((item) => (
             <Row style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-              <Col xs={7} style={{display: 'flex'}}>
+              <Col xs={7} style={{ display: 'flex' }}>
                 <a
                   href="/#"
                   type="button"
                   className="card-link-secondary small text-uppercase mr-3"
                   onClick={removeProduct}
                 >
-                  <i class="fas fa-trash-alt mr-1"></i> 
+                  <i class="fas fa-trash-alt mr-1"></i>
                 </a>
                 <h6>{item.productName}</h6>
               </Col>
@@ -149,11 +149,8 @@ const ShoppingCart = () => {
             <h6>Total Price: </h6>
           </Col>
           <Col>
-            <h6>Rp. {totalPrice}</h6>
+            <h6>{totalPrice}</h6>
           </Col>
-        </Row>
-
-        <Row style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <Col xs={7}>
             <h6>Handling Fee: </h6>
           </Col>

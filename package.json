@@ -34,7 +34,6 @@
     "sweetalert": "^2.1.2",
     "sweetalert2": "^10.3.3",
     "sweetalert2-react-content": "^3.2.0"
-
   },
   "scripts": {
     "start": "react-scripts start",
