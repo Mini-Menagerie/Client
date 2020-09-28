@@ -1,82 +1,35 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { useState, useEffect } from "react";
-import StripeCheckout from "react-stripe-checkout";
-import axios from "axios";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { loadStripe } from "@stripe/stripe-js";
-import Swal from "sweetalert2";
-import {
-    CardElement,
-    Elements,
-    useStripe,
-    useElements,
-} from "@stripe/react-stripe-js";
+// import { useState, useEffect } from "react";
+// import axios from "axios";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import Swal from 'sweetalert2'
 
 import {
     listCheckoutProduct,
     listCheckoutDetails,
     button,
-    userDetails,
-    payment,
-} from "./Checkout.styles";
+    // userDetails,
+    // payment,
+} from "./ShoppingCart.styles";
 import CartProduct from "../../components/cartItem/cartItem";
 
-const CheckoutForm = () => {
-    const stripe = useStripe();
-    const elements = useElements();
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+const ShoppingCart = () => {
 
-        await stripe.createPaymentMethod({
-            type: "card",
-            card: elements.getElement(CardElement),
-        });
-    };
+    // const [user, setUser] = useState({});
+    // const userLogin = JSON.parse(localStorage.getItem("user"));
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <CardElement />
-            <button type="submit" disabled={!stripe}>
-                Pay
-            </button>
-        </form>
-    );
-};
+    // const getUser = async () => {
+    //     const response = await axios.get(
+    //         `http://localhost:8000/userAccount/${userLogin.id}`
+    //     );
+    //     setUser(response.data.result);
+    // };
 
-const stripePromise = loadStripe(
-    "pk_test_51HUN7sAjKylxkZ24xTuIpYu3NQco33z811UgWTi4ihOvCKIf435HdOw9sGOrii2xvAo3wrrKkl4UHdOx9XJSFJP000su8RU6tk"
-);
-
-const Checkout = () => {
-    async function handleToken(token, addresses) {
-        const response = await axios.post(
-            "https://x6nw5.sse.codesandbox.io/checkout",
-            { token, cart }
-        );
-        const { status } = response.data;
-        if (status === "success") {
-            return <h1>sucess</h1>;
-        } else {
-        }
-    }
-
-    const [user, setUser] = useState({});
-    const userLogin = JSON.parse(localStorage.getItem("user"));
-
-    const getUser = async () => {
-        const response = await axios.get(
-            `http://localhost:8000/userAccount/${userLogin.id}`
-        );
-        setUser(response.data.result);
-    };
-
-    useEffect(() => {
-        getUser();
-
-        //eslint-disable-next-line
-    }, []);
+    // useEffect(() => {
+    //     getUser();
+    // }, []);
 
     const cart = JSON.parse(localStorage.getItem("cartProduct"));
 
@@ -105,7 +58,7 @@ const Checkout = () => {
 
     return (
         <Container>
-            <Row style={{ marginTop: "10px" }}>
+            {/* <Row style={{ marginTop: "10px" }}>
                 <h1>User Details</h1>
             </Row>
             <Row style={{ display: "flex", justifyContent: "space-between" }}>
@@ -149,13 +102,13 @@ const Checkout = () => {
                                 <Form.Control />
                             </Form.Group>
 
-                            {/* <Form.Group as={Col} controlId="formGridState">
+                            <Form.Group as={Col} controlId="formGridState">
                                 <Form.Label>State</Form.Label>
                                 <Form.Control as="select" defaultValue="Choose...">
                                     <option>Choose...</option>
                                     <option>...</option>
                                 </Form.Control>
-                            </Form.Group> */}
+                            </Form.Group>
 
                             <Form.Group as={Col} controlId="formGridZip">
                                 <Form.Label>Zip</Form.Label>
@@ -168,12 +121,7 @@ const Checkout = () => {
                         </div>
                     </Form>
                 </Col>
-                <Col xs={4} css={payment}>
-                    <Elements stripe={stripePromise}>
-                        <CheckoutForm />
-                    </Elements>
-                </Col>
-            </Row>
+            </Row> */}
 
             <Row style={{ display: "flex", justifyContent: "space-between" }}>
                 <Col xs={7} css={listCheckoutProduct}>
@@ -231,18 +179,7 @@ const Checkout = () => {
                             </Col>
                         </Row>
                         <div css={button}>
-                            <StripeCheckout
-                                name="Mini Menagerie Co."
-                                description="Necessities For Your New Friend"
-                                locale="id"
-                                stripeKey="pk_test_51HUN7sAjKylxkZ24xTuIpYu3NQco33z811UgWTi4ihOvCKIf435HdOw9sGOrii2xvAo3wrrKkl4UHdOx9XJSFJP000su8RU6tk"
-                                token={handleToken}
-                                currency="IDR"
-                                amount={(totalPrice + 10000) * 100}
-                                billingAddress
-                                shippingAddress
-                            />
-                            {/* <Button variant="primary">Buy Now</Button> */}
+                            <Button variant="primary">Buy Now</Button>
                         </div>
                     </Col>
                 </Col>
@@ -251,4 +188,4 @@ const Checkout = () => {
     );
 };
 
-export default Checkout;
+export default ShoppingCart;

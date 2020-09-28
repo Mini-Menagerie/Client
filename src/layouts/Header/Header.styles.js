@@ -106,3 +106,7 @@ export const cssAbout = css`
     display: flex;
     align-items: center;
 `;
+
+export const navbarspace = css `
+justify-content: space-between;
+`

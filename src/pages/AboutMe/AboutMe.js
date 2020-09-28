@@ -6,9 +6,12 @@ import { Tabs, Tab, Container } from "react-bootstrap";
 // import { useParams } from "react-router-dom";
 
 import AboutMeTab from "../../components/AboutMe/aboutMeTab";
+import ListPetUp from "../../components/AboutMe/petUpList"
 import { containerWrapper, marginSet } from "./AboutMe.styles";
 import AccountSettings from "../../components/AboutMe/accountSettings";
 import Swal from "sweetalert2";
+import StatusRequest from "./StatusRequest/StatusRequest";
+import AdoptedHistory from "./AdoptedHistory/AdoptedHistory";
 
 const AllProfile = () => {
     const [, setLoading] = useState(true);
@@ -64,8 +67,17 @@ const AllProfile = () => {
                     <Tab eventKey="profile" title="Account Settings">
                         <AccountSettings />
                     </Tab>
-                    <Tab eventKey="contact" title="Pets Up For Adoption">
+                    <Tab eventKey="adopReq" title="Adoption Request">
+                        <StatusRequest />
+                    </Tab>
+                    <Tab eventKey="adopHistory" title="Adopted history">
+                        <AdoptedHistory />
+                    </Tab>
+                    <Tab eventKey="approveReq" title="Approve Request">
                         test 3
+                    </Tab>
+                    <Tab eventKey="contact" title="Pets Up For Adoption">
+                       <ListPetUp/>
                     </Tab>
                     <Tab eventKey="purchasedProduct" title="Purchased Product">
                         {/* <PurchasedProduct /> */}
