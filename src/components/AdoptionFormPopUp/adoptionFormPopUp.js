@@ -1,81 +1,102 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Container, Row, Col, Dropdown, Jumbotron } from "react-bootstrap";
-import axios from "axios";
+import { Button, Col, Modal, Table } from "react-bootstrap";
+import PrimaryButton from '../Button/Button'
+import {useState} from "react";
 
-import AdoptionForm from "../../pages/AdoptionForm/AdoptionForm";
+import {wrapperStyles} from './adoptionFormPopup.styles'
 
-const FormPopUp = ({ data }) => {
+const FormPopUp = () => {
+
+    const [lgShow, setLgShow] = useState(false);
+
     return (
-        <Container fluid>
-            <div>
-                <h1>Form Submission</h1>
-            </div>
-            <div>
-                <Col>
-                    <Row>
-                        <p>1. Duration working outside of your home:</p>
-                    </Row>
-                    <Row>
-                        <p>2. Do you own or rent your home:</p>
-                    </Row>
-                    <Row>
-                        <p>3. Do you have other pets:</p>
-                    </Row>
-                    <Row>
-                        <p>5. Have you ever given up a pet for adoption:</p>
-                    </Row>
-                    <Row>
-                        <p>6. Are there children living in the house:</p>
-                    </Row>
-                    <Row>
-                        <p>7. Do you keep your pets in a cage:</p>
-                    </Row>
-                    <Row>
-                        <p>8. What is your monthly income?</p>
-                    </Row>
-                    <Row>
-                        <p>
-                            9. Finally, tell us why you'd like to adopt this
-                            pet:
-                        </p>
-                    </Row>
-                </Col>
-                <Col>
-                    <Row>
-                        <input
-                            onChange={(event) =>
-                                setWorkingDuration(event.target.value)
-                            }
-                        />
-                    </Row>
-                    <Row>
-                        <p></p>
-                    </Row>
-                    <Row>
-                        <p></p>
-                    </Row>
-                    <Row>
-                        <p></p>
-                    </Row>
-                    <Row>
-                        <p></p>
-                    </Row>
-                    <Row>
-                        <p></p>
-                    </Row>
-                    <Row>
-                        <p></p>
-                    </Row>
-                    <Row>
-                        <p></p>
-                    </Row>
-                    <Row>
-                        <p></p>
-                    </Row>
-                </Col>
-            </div>
-        </Container>
+        <div>
+        <Button onClick={() => setLgShow(true)}>Request Data Form</Button>
+        <Modal
+            size="lg"
+            show={lgShow}
+            onHide={() => setLgShow(false)}
+            aria-labelledby="example-modal-sizes-title-lg"
+        >
+            <Modal.Header closeButton>
+                <Modal.Title id="example-modal-sizes-title-lg">
+                    Form Request
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body css={wrapperStyles}>
+                <div>
+                    <h1>Form Submission</h1>
+                </div>
+                <div>
+                    <Col xs={12}>
+                        <Table style={{ borderStyle: "hidden" }}>
+                            <tbody>
+                                <tr style={{ borderStyle: "hidden" }}>
+                                    <td>1. Duration working outside of your home:</td>
+                                    <td>
+                                    {/* ENDPOINT */}
+                                    </td>
+                                </tr>
+                                <tr style={{ borderStyle: "hidden" }}>
+                                    <td>2. Do You Own Or Rent Your Home:</td>
+                                    <td> {/* ENDPOINT */}</td>
+                                </tr>
+                                <tr style={{ borderStyle: "hidden" }}>
+                                    <td> 3. Have You Ever Given Pets Up For
+                                        Adoption?</td>
+                                    <td>
+                                        {/* ENDPOINT */}
+                                    </td>
+                                </tr>
+                                <tr style={{ borderStyle: "hidden" }}>
+                                    <td>4. Do You Have Small Children in the
+                                        House?</td>
+                                    <td>
+                                        {/* ENDPOINT */}
+                                    </td>
+                                </tr>
+                                <tr style={{ borderStyle: "hidden" }}>
+                                    <td>5. Do You Have Other Pets?</td>
+                                    <td>
+                                        {/* ENDPOINT */}
+                                    </td>
+                                </tr>
+                                <tr style={{ borderStyle: "hidden" }}>
+                                    <td>6. Do You Tend to Keep Your Pets in a
+                                        Cage?</td>
+                                    <td>
+                                        {/* ENDPOINT */}
+                                    </td>
+                                </tr>
+                                <tr style={{ borderStyle: "hidden" }}>
+                                    <td>7. What is Your Monthly Income?</td>
+                                    <td>
+                                        {/* ENDPOINT */}
+                                    </td>
+                                </tr>
+                                <tr style={{ borderStyle: "hidden" }}>
+                                    <td>8. Finally, Tell Us Why You'd Like To
+                                        Adopt this Pet!</td>
+                                    <td>
+                                        {/* ENDPOINT */}
+                                    </td>
+                                </tr>
+                            </tbody>
+                            <div>
+                                <span>
+                                    <PrimaryButton>Approve</PrimaryButton>
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span>
+                                    <PrimaryButton>Deny</PrimaryButton>
+                                </span>
+                            </div>
+                        </Table>
+                    </Col>
+                </div>
+            </Modal.Body>
+        </Modal>
+        </div>
     );
 };
 

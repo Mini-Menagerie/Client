@@ -31,10 +31,9 @@ import {
     buttonLoginStyles,
     rowFormSignUp,
     navSearch,
-    cssAbout,
-    navbarspace
 } from "./Header.styles";
 import Swal from "sweetalert2";
+import swal from "sweetalert";
 
 const Header = () => {
     const productCart = JSON.parse(localStorage.getItem("cartProduct"));
@@ -47,7 +46,6 @@ const Header = () => {
         password: "",
     });
     let user = JSON.parse(localStorage.getItem("user"));
-    let loggedUser = "";
 
     const [formLogin, setFormLogin] = useState({
         email: "",
@@ -100,7 +98,10 @@ const Header = () => {
             } else if (
                 error.message === "Request failed with status code 404"
             ) {
-                alert("Email sudah terdaftar menggunakan email social media");
+                Swal({
+                    title: "Email sudah terdaftar menggunakan email social media!",
+                    icon: "warning",
+                });
                 setShow(false);
             }
         }
@@ -121,19 +122,22 @@ const Header = () => {
                 form
             );
             if (user.status === 200) {
-                alert("Register success");
+                swal("Register success");
                 setShow(false);
             }
         } catch (error) {
             if (error.message === "Request failed with status code 400") {
-                alert("Email sudah terdaftar, gunakan Email lain");
-                setShow(false);
+                Swal({
+                    title: "Email sudah terdaftar, gunakan Email lain",
+                    icon: "warning",
+                });
             } else if (
                 error.message === "Request failed with status code 404"
             ) {
-                alert(
-                    "Email sudah terdaftar melalui Social Media, gunakan Email lain"
-                );
+                Swal({
+                    title: "Email sudah terdaftar melalui Social Media, gunakan Email lain",
+                    icon: "warning",
+                });
                 setShow(false);
             }
         }
@@ -174,7 +178,7 @@ const Header = () => {
 
     const redirect = (event) => {
         event.preventDefault();
-        window.location.replace('/cart');
+        window.location.replace("/cart");
     };
 
     const searchBar = (event) => {

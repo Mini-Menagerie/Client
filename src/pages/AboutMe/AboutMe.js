@@ -12,6 +12,7 @@ import AccountSettings from "../../components/AboutMe/accountSettings";
 import Swal from "sweetalert2";
 import StatusRequest from "./StatusRequest/StatusRequest";
 import AdoptedHistory from "./AdoptedHistory/AdoptedHistory";
+import ApproveRequest from "./ApproveRequest/ApproveRequest";
 
 const AllProfile = () => {
     const [, setLoading] = useState(true);
@@ -74,7 +75,7 @@ const AllProfile = () => {
                         <AdoptedHistory />
                     </Tab>
                     <Tab eventKey="approveReq" title="Approve Request">
-                        test 3
+                        <ApproveRequest />
                     </Tab>
                     <Tab eventKey="contact" title="Pets Up For Adoption">
                        <ListPetUp/>
