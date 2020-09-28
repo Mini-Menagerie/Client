@@ -84,7 +84,7 @@ const ShoppingCart = () => {
 
   console.log(itemPriceX);
 
-  // let totalPrice = itemPriceX.reduce((a, b) => a + b);
+  let totalPrice = itemPriceX.reduce((a, b) => a + b, 0);
 
 
   return (
@@ -126,7 +126,7 @@ const ShoppingCart = () => {
       <Col xs={4} css={paymentDetails}>
         <Row>
           <Col>
-            <h6>Total Price:</h6>
+            <h6>Total Price: {totalPrice}</h6>
           </Col>
         </Row>
         <div css={button} onClick={handleClick} disabled={state.loading}>

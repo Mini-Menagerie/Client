@@ -15,6 +15,7 @@ const AdoptedHistory = () => {
         axios
             .get(url)
             .then(function (result) {
+                console.log(result);
                 setAdoptedHistory(result.data.result);
             })
             .catch(function (error) {
