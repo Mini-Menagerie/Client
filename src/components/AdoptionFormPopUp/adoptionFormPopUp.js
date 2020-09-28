@@ -2,6 +2,7 @@
 import { jsx } from "@emotion/core";
 import { Container, Row, Col, Dropdown, Jumbotron } from "react-bootstrap";
 import axios from "axios";
+import PrimaryButton from '../../components/Button'
 
 import AdoptionForm from "../../pages/AdoptionForm/AdoptionForm";
 
@@ -66,6 +67,14 @@ const FormPopUp = ({ data }) => {
                                     </td>
                                 </tr>
                             </tbody>
+                            <div>
+                                <div>
+                                    <PrimaryButton>Approve</PrimaryButton>
+                                </div>
+                                <div>
+                                    <PrimaryButton>Deny</PrimaryButton>
+                                </div>
+                            </div>
                         </Table>
                     </Col>
             </div>
