@@ -32,6 +32,7 @@ import {
     rowFormSignUp,
     navSearch,
     cssAbout,
+    navbarspace
 } from "./Header.styles";
 import Swal from "sweetalert2";
 
@@ -173,7 +174,7 @@ const Header = () => {
 
     const redirect = (event) => {
         event.preventDefault();
-        window.location.replace("/checkout");
+        window.location.replace('/cart');
     };
 
     const searchBar = (event) => {

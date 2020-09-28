@@ -6,6 +6,7 @@ import { Tabs, Tab, Container } from "react-bootstrap";
 // import { useParams } from "react-router-dom";
 
 import AboutMeTab from "../../components/AboutMe/aboutMeTab";
+import ListPetUp from "../../components/AboutMe/petUpList"
 import { containerWrapper, marginSet } from "./AboutMe.styles";
 import AccountSettings from "../../components/AboutMe/accountSettings";
 import Swal from "sweetalert2";
@@ -77,7 +78,7 @@ const AllProfile = () => {
                         <ApproveRequest />
                     </Tab>
                     <Tab eventKey="contact" title="Pets Up For Adoption">
-                        test 3
+                       <ListPetUp/>
                     </Tab>
                     <Tab eventKey="purchasedProduct" title="Purchased Product">
                         {/* <PurchasedProduct /> */}
