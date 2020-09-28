@@ -41,14 +41,15 @@ const Success = () => {
         }
     }
     const addNewTransactionDetails = async () => {
-        let product = getCart()
-        let idTrans = getIdTrans()
+        let product = await getCart()
+        let idTrans = await getIdTrans()
         let newTransDetail = await axios.post('transactionDetails/create', {
             idTransaction: idTrans,
             idProduct: product
         })
         if(newTransDetail.status === 200){
             console.log('succes to create transaction');
+            localStorage.setItem('id_trans_details', newTransDetail.data.result._id)
             localStorage.removeItem('cartProduct')
             localStorage.removeItem('id_trans')
         }
@@ -59,7 +60,9 @@ const Success = () => {
         getTotalPrice()
         getIdTrans()
         addNewTransaction()
-        addNewTransactionDetails()
+        setTimeout(() => {
+            addNewTransactionDetails()
+        }, 5000);
         
     }, [])
     
