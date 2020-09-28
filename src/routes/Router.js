@@ -12,14 +12,14 @@ import AllPets from '../pages/AllPets/AllPets';
 import PetsDetail from '../pages/PetsDetail/PetsDetail';
 import PetShop from '../pages/PetShop/PetShop';
 import AdoptionForm from '../pages/AdoptionForm/AdoptionForm'
-import StatusRequest from '../pages/StatusRequest/StatusRequest';
-import AdoptedHistory from '../pages/AdoptedHistory/AdoptedHistory';
 import PurchaseHistory from "../pages/PurchaseHistory/PurchaseHistory";
 import ProductDetail from '../pages/ProductDetail/ProductDetail';
-import Checkout from '../pages/Checkout/Checkout';
+import ShoppingCart from '../pages/ShoppingCart/ShoppingCart';
+import SuccessCheckout from '../pages/ShoppingCart/success'
 import SearchPage from '../pages/searchPage/searchPage';
-import AboutMe from '../pages/AboutMe/AboutMe'
-import ShoppingCart from '../pages/ShoppingCart/ShoppingCart'
+import AboutMe from '../pages/AboutMe/AboutMe';
+import AdoptedHistory from '../pages/AboutMe/AdoptedHistory/AdoptedHistory';
+import StatusRequest from '../pages/AboutMe/StatusRequest/StatusRequest';
 import CategoryPet from '../pages/CategoryAllPets/CategoryAllPets';
 import BreedByCategory from '../pages/BreedByCategory/BreedByCategory';
 import PetByBreed from "../pages/PetByBreed/PetByBreed";
@@ -44,7 +44,6 @@ const Router = () => (
                 path={routes.ADOPTEDHISTORY}
                 component={AdoptedHistory}
             />
-            <Route exact path={routes.CHECKOUT} component={Checkout} />
             <Route exact path={routes.PETSHOP} component={PetShop} />
             <Route
                 exact
@@ -52,6 +51,7 @@ const Router = () => (
                 component={ProductDetail}
             />
             <Route exact path={routes.SHOPPINGCART} component={ShoppingCart} />
+            <Route exact path={routes.SUCCESSCHECKOUT} component={SuccessCheckout} />
             <Route exact path={routes.CATEGORYPET} component={CategoryPet} />
             <Route exact path={routes.ABOUTME} component={AboutMe} />
             <Route

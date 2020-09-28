@@ -1,89 +1,37 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { useState, useEffect } from "react";
-import StripeCheckout from "react-stripe-checkout";
-import axios from "axios";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import { loadStripe } from "@stripe/stripe-js";
-import Swal from "sweetalert2";
-import withReactContent from "sweetalert2-react-content";
-import {
-    CardElement,
-    Elements,
-    useStripe,
-    useElements,
-} from "@stripe/react-stripe-js";
+// import { useState, useEffect } from "react";
+// import axios from "axios";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import Swal from 'sweetalert2'
 
 import {
     listCheckoutProduct,
     listCheckoutDetails,
     button,
-    userDetails,
-    payment,
-} from "./Checkout.styles";
+    // userDetails,
+    // payment,
+} from "./ShoppingCart.styles";
 import CartProduct from "../../components/cartItem/cartItem";
 
-const CheckoutForm = () => {
-    const stripe = useStripe();
-    const elements = useElements();
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type: "card",
-            card: elements.getElement(CardElement),
-        });
-    };
+const ShoppingCart = () => {
 
-    return (
-        <form onSubmit={handleSubmit}>
-            <CardElement />
-            <button type="submit" disabled={!stripe}>
-                Pay
-            </button>
-        </form>
-    );
-};
+    // const [user, setUser] = useState({});
+    // const userLogin = JSON.parse(localStorage.getItem("user"));
 
-const stripePromise = loadStripe(
-    "pk_test_51HUN7sAjKylxkZ24xTuIpYu3NQco33z811UgWTi4ihOvCKIf435HdOw9sGOrii2xvAo3wrrKkl4UHdOx9XJSFJP000su8RU6tk"
-);
+    // const getUser = async () => {
+    //     const response = await axios.get(
+    //         `http://localhost:8000/userAccount/${userLogin.id}`
+    //     );
+    //     setUser(response.data.result);
+    // };
 
-const Checkout = () => {
-    async function handleToken(token, addresses) {
-        const response = await axios.post(
-            "https://x6nw5.sse.codesandbox.io/checkout",
-            { token, cart }
-        );
-        const { status } = response.data;
-        if (status === "success") {
-            return <h1>sucess</h1>;
-        } else {
-        }
-    }
-
-    const [user, setUser] = useState({});
-    const userLogin = JSON.parse(localStorage.getItem("user"));
-
-    const getUser = async () => {
-        const response = await axios.get(
-            `http://localhost:8000/userAccount/${userLogin.id}`
-        );
-        setUser(response.data.result);
-    };
-
-    useEffect(() => {
-        getUser();
-
-        //eslint-disable-next-line
-    }, []);
+    // useEffect(() => {
+    //     getUser();
+    // }, []);
 
     const cart = JSON.parse(localStorage.getItem("cartProduct"));
-
-    // if (cart === null) {
-    //     window.alert("sometext");
-    //     window.location.replace('/')
-    // }
 
     if (cart === null) {
         Swal.fire({
@@ -91,53 +39,26 @@ const Checkout = () => {
                 "https://thumbs.gfycat.com/AccurateAgreeableDairycow.webp",
             title: "You dont have any purchases",
             text: "this page will be redirected automatically",
-            timer: 5000,
-            showConfirmButton: false,
             timerProgressBar: true,
-        }).then(function () {
-            window.location.replace("/");
         });
+
+        setTimeout(() => {
+            window.location.replace("/");
+        }, 1000);
     }
 
-    const price = cart.map((item) => {
-        return item.price * item.quantity;
-    });
+    const price =
+        cart.length > 0 &&
+        cart.map((item) => {
+            return item.price * item.quantity;
+        });
 
     let totalPrice = price.reduce((a, b) => a + b);
     let cartProduct = JSON.parse(localStorage.getItem("cartProduct"));
 
-    // if (cart === null) {
-    //     window.location.replace('/')
-    // }
-
-    // const MySwal = withReactContent(Swal)
-
-    // if (cart === null) {
-    //     MySwal.fire({
-    //         title: <p>Hello World</p>,
-    //     }).then((params) => {
-    //         console.log(params, 'params');
-    //         return (
-    //             window.location.replace('/')
-    //         )
-    //     })
-    // }\
-
-    // if (cart === null) {
-    //     Swal.fire({
-    //         title: "Success!",
-    //         text: "Redirecting in 2 seconds.",
-    //         type: "success",
-    //         timer: 2000,
-    //         showConfirmButton: false
-    //       }, function(){
-    //             window.location.href = "/shop";
-    //       });
-    // }
-
     return (
         <Container>
-            <Row style={{ marginTop: "10px" }}>
+            {/* <Row style={{ marginTop: "10px" }}>
                 <h1>User Details</h1>
             </Row>
             <Row style={{ display: "flex", justifyContent: "space-between" }}>
@@ -181,13 +102,13 @@ const Checkout = () => {
                                 <Form.Control />
                             </Form.Group>
 
-                            {/* <Form.Group as={Col} controlId="formGridState">
+                            <Form.Group as={Col} controlId="formGridState">
                                 <Form.Label>State</Form.Label>
                                 <Form.Control as="select" defaultValue="Choose...">
                                     <option>Choose...</option>
                                     <option>...</option>
                                 </Form.Control>
-                            </Form.Group> */}
+                            </Form.Group>
 
                             <Form.Group as={Col} controlId="formGridZip">
                                 <Form.Label>Zip</Form.Label>
@@ -200,12 +121,7 @@ const Checkout = () => {
                         </div>
                     </Form>
                 </Col>
-                <Col xs={4} css={payment}>
-                    <Elements stripe={stripePromise}>
-                        <CheckoutForm />
-                    </Elements>
-                </Col>
-            </Row>
+            </Row> */}
 
             <Row style={{ display: "flex", justifyContent: "space-between" }}>
                 <Col xs={7} css={listCheckoutProduct}>
@@ -263,18 +179,7 @@ const Checkout = () => {
                             </Col>
                         </Row>
                         <div css={button}>
-                            <StripeCheckout
-                                name="Mini Menagerie Co."
-                                description="Necessities For Your New Friend"
-                                locale="id"
-                                stripeKey="pk_test_51HUN7sAjKylxkZ24xTuIpYu3NQco33z811UgWTi4ihOvCKIf435HdOw9sGOrii2xvAo3wrrKkl4UHdOx9XJSFJP000su8RU6tk"
-                                token={handleToken}
-                                currency="IDR"
-                                amount={(totalPrice + 10000) * 100}
-                                billingAddress
-                                shippingAddress
-                            />
-                            {/* <Button variant="primary">Buy Now</Button> */}
+                            <Button variant="primary">Buy Now</Button>
                         </div>
                     </Col>
                 </Col>
@@ -283,4 +188,4 @@ const Checkout = () => {
     );
 };
 
-export default Checkout;
+export default ShoppingCart;
