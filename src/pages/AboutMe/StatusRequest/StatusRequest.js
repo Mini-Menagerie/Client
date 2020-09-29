@@ -22,15 +22,14 @@ const StatusRequest = () => {
         axios
             .get(url)
             .then(function (result) {
-                console.log(result.data.filterReq);
                 setStatusRequest(result.data.filterReq);
             })
             .catch(function (error) {
                 setErrorMessage(error.message);
             });
     }, [setErrorMessage]);
-
-    if (statusRequest == undefined) {
+    
+    if (statusRequest.length > 0) {
         return (
             <div>
                 <div css={head}>
@@ -41,7 +40,7 @@ const StatusRequest = () => {
                         <div key={statusRequest}>
                             <Card>
                                 <Card.Header>
-                                    <b>{e.idPet!== undefined && e.idPet.petName}</b> - <span>{e.idBreed !== undefined && e.idBreed.breedName}</span>
+                                    <b>{e.idPet!== undefined && e.idPet.petName}</b> - <span>{e.idPet !== undefined && e.idPet.idBreed.breedName}</span>
                                 </Card.Header>
                                 <Card.Body css={mainBody}>
                                     <Row>
@@ -76,14 +75,15 @@ const StatusRequest = () => {
                 </div>
             </div>
         );
-    } else {
+    } else if (statusRequest.length === 0) {
         return(
-        <div>
-            <div css={head}>
-                <h2>Adoption Status Request</h2>
-            </div><br />
-            <h1 style={{textAlign:"center"}}>Blank Data</h1>
-        </div>)
+            <div>
+                <div css={head}>
+                    <h2>Adoption Status Request</h2>
+                </div><br />
+                <h1 style={{textAlign:"center"}}>Blank Data</h1>
+            </div>
+        )
     }
     
 };
