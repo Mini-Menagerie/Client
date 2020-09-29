@@ -69,8 +69,7 @@ const ProductDetail = (props) => {
                                     </Row>
                                     <Row>
                                         <p>
-                                            This product less than 10 pcs, Buy
-                                            Now!
+                                            Less than 10 items left, buy now!
                                         </p>
                                     </Row>
                                     <Row css={row_quantity}>
@@ -100,7 +99,7 @@ const ProductDetail = (props) => {
                                 <h4>Product Details</h4>
                                 <Row>
                                     <Col>
-                                        <h6>Description</h6>
+                                        <h6>Description:</h6>
                                     </Col>
                                     <Col xs={9} css={description_col}>
                                         <p>
@@ -179,7 +178,7 @@ const ProductDetail = (props) => {
                                 <h4>Product Details</h4>
                                 <Row>
                                     <Col>
-                                        <h6>Description</h6>
+                                        <h6>Description:</h6>
                                     </Col>
                                     <Col xs={9} css={description_col}>
                                         <p>

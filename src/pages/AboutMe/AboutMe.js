@@ -70,7 +70,7 @@ const AllProfile = () => {
                     <Tab eventKey="adopReq" title="Adoption Request">
                         <StatusRequest />
                     </Tab>
-                    <Tab eventKey="adopHistory" title="Adopted history">
+                    <Tab eventKey="adopHistory" title="Adoption History">
                         <AdoptedHistory />
                     </Tab>
                     <Tab eventKey="approveReq" title="Approve Request">
@@ -79,7 +79,7 @@ const AllProfile = () => {
                     <Tab eventKey="contact" title="Pets Up For Adoption">
                        <ListPetUp/>
                     </Tab>
-                    <Tab eventKey="purchasedProduct" title="Purchased Product">
+                    <Tab eventKey="purchasedProduct" title="Purchase History">
                         {/* <PurchasedProduct /> */}
                     </Tab>
                 </Tabs>

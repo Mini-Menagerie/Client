@@ -51,7 +51,7 @@ const AboutMeTab = ({ profile }) => {
         <Container fluid css={containerWrapper}>
             <div>
                 <h1 css={welcomeText}>
-                    Welcome,{" "}
+                    Welcome,{" "}.
                     {profile.idUser !== undefined && profile.idUser.fullName}{" "}
                 </h1>
             </div>

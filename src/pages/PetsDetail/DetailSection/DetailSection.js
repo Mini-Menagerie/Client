@@ -23,6 +23,8 @@ const DetailSection = ({ petDetails, user }) => {
     return (
         <Row>
             <Col xs={12} md={7} css={detail_section_col}>
+                <h2>{petDetails.petName}</h2>
+                <h2>{petDetails.fee}</h2>
                 <img
                     src={petDetails.image}
                     style={{
@@ -33,8 +35,6 @@ const DetailSection = ({ petDetails, user }) => {
                     }}
                     alt="pet_image"
                 />
-                <h2>{petDetails.petName}</h2>
-                <h2>{petDetails.fee}</h2>
                 <Row css={detail_section_col_left_second_row}>
                     <p>
                         {petDetails.idBreed !== undefined &&

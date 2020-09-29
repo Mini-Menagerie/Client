@@ -29,7 +29,7 @@ const PurchaseHistory = () => {
     return (
         <div>
             <div css={head}>
-                <h2>History Purchase</h2>
+                <h2>Purchase History</h2>
             </div>
             <div css={listInfo}>
                 {purchaseHistory.map((e) => (
