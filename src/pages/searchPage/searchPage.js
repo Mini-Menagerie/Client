@@ -26,7 +26,10 @@ import {
     result,
     petsAvailable,
     displaying,
+    cardCss,
+    marginTop
 } from "./searchPage.styles";
+
 
 const SearchPage = () => {
     const [searchPet, setSearchPet] = useState([]);
@@ -114,14 +117,13 @@ const SearchPage = () => {
                         ></FormControl>
                     </Card>
                 </div>
-                <div></div>
             </div>
             <div css={sortby}>
                 <Card css={sortby}>
                     <Row>
                         <Col css={sortby}>
                             <div className="nameSearch" css={sortby}>
-                                Search Result for {search}
+                                Search Result for: {search}
                             </div>
                         </Col>
                         <Col>
@@ -154,7 +156,7 @@ const SearchPage = () => {
                 </Card>
             </div>
             <Card css={result}>
-                <h5 css={displaying}>Displaying 9 out of 120 results </h5>
+                <h4 css={displaying}>Displaying 9 out of 120 results </h4>
 
                 <div css={petsAvailable}>
                     {loading ? (
@@ -164,12 +166,12 @@ const SearchPage = () => {
                     ) : error ? (
                         <div>{errorMessage}</div>
                     ) : (
-                        <Container>
+                        <Container css={marginTop}>
                             <Row>
                                 {searchPet !== undefined &&
                                     searchPet.length > 0 &&
                                     searchPet.map((item) => (
-                                        <Col md={4}>
+                                        <Col md={4} css={cardCss}>
                                             <Link
                                                 to={`/pets-detail/${item.id}`}
                                             >

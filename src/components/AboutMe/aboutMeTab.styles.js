@@ -9,15 +9,19 @@ margin-top: 50px;
 
 export const containerWrapper = css `
 justify-content: center;
-width: auto,
+width: auto;
+margin-left: 150px;
+margin-right: 150px;
+margin-top: 30px;
 `
 
 export const avatar = css `
-width: 450px;
-height: 300px;
+width: 200px;
+height: 200px;
 object-fit: cover;
 border: 1px solid black;
 margin-bottom: 50px;
+border-radius: 50%;
 `
 
 export const rowMargin2 = css `

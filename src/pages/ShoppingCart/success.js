@@ -86,14 +86,14 @@ const Success = () => {
             </div> */}
 
             <div className="jumbotron text-center">
-                <h1 className="display-3">Your payment succeeded</h1>
-                <p className="lead"><strong>Please check your email</strong> for invoice</p>
+                <h1 className="display-3">Your Payment Is Successful</h1>
+                <p className="lead"><strong>Please Check Your Email</strong> for invoice</p>
                 <hr />
                 <p>
-                    Having trouble? <a href="#">Contact us</a>
+                    Having Trouble? <a href="#">Contact Us</a>
                 </p>
                 <p className="lead">
-                    <a className="btn btn-primary btn-sm" href="/" role="button">Continue to homepage</a>
+                    <a className="btn btn-primary btn-sm" href="/" role="button">Continue To Homepage</a>
                 </p>
             </div>
         </div>

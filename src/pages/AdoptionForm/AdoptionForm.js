@@ -27,7 +27,7 @@ import bird from "../../assets/birdCover.png";
 import swal from "sweetalert";
 
 const AdoptionForm = () => {
-    // const [user, setUser] = useState([]);
+
     const [user, setUser] = useState({
         noHandphone: "",
         detailAddress: "",

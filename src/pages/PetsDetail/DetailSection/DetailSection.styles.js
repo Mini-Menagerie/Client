@@ -36,10 +36,14 @@ export const detail_section_col_left_second_row = css`
     h5 {
         padding-right: 10px;
     }
+    margin-right: 20px;
+    margin-left: 20px;
 `;
 
 export const row_line = css`
     margin-top: -20px;
+    margin-left: 20px;
+    margin-right: 20px;
 `;
 
 export const detail_section_col_right = css`
@@ -69,4 +73,26 @@ export const location = css`
 export const rowMargin3 = css`
     padding-bottom: 20px;
     align-content: center;
+    margin-right: 30px;
+    margin-left: 30px;
+    justify-content: center;
 `;
+
+export const rowmargin = css `
+justify-content: space-between;
+margin-left: 10px;
+margin-right: 10px;
+`
+export const margin2 = css `
+margin-bottom: 20px;
+`
+
+export const detailUser = css `
+text-align: center;
+justify-content: center;
+`
+
+export const text = css `
+margin-right: 20px;
+margin-left: 20px;
+`
