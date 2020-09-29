@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "../../../helpers/axios";
 
@@ -97,9 +97,9 @@ const ApproveRequest = () => {
                                 </Row>
                             </Card.Body>
                             <Card>
-                            <Card.Header>
+                            <div css={border}>
                                 <b>{e.idPet.petName}</b> - <span>{e.idPet.idBreed.breedName}</span>
-                            </Card.Header>
+                            </div>
                             <Card.Body css={mainBody}>
                                 <Row>
                                     <Col css={mainOne}>
