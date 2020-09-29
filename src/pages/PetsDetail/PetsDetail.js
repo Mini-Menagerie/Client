@@ -9,12 +9,8 @@ import DetailSection from "./DetailSection/DetailSection";
 import RecommendedProducts from "../../components/RecommendedProducts/RecommendedProducts";
 import CardPet from "../../components/CardPet/CardPet";
 import { container, container_animal_list } from "./PetsDetail.styles";
-// import logo from "../../assets/logo-mini-menagerie.png";
-// import Axios from "axios";
 
 const PetsDetail = (props) => {
-    // let id = props.match.params
-    // const [carousel, setCarousel] = useState([]);
     const [, setLoading] = useState(true);
     const [, setError] = useState(false);
     const [, setErrorMessage] = useState();
@@ -22,25 +18,7 @@ const PetsDetail = (props) => {
     const [ ,setProduct] = useState([]);
     const [petCards, setPetCards] = useState([]);
     const [user, setUser] = useState({});
-    // function handleClick(id) {
-    //     window.location.replace(`/pets-detail/${id}`);
-    // }
-
-    // const fetchCarousel = () => {
-    //     const url = "http://localhost:8000/";
-    //     axios
-    //         .get(url)
-    //         .then(function (response) {
-    //             // setCarousel(response.data.result);
-    //             setLoading(false);
-    //         })
-    //         .catch(function (error) {
-    //             setError(true);
-    //             console.log(errorMessage);
-    //             setLoading(false);
-    //         });
-    // };
-
+  
 
     let { id } = useParams();
     localStorage.setItem('selectedPet', id)
@@ -107,42 +85,27 @@ const PetsDetail = (props) => {
     }
 
     useEffect(() => {
-        // fetchCarousel();
         fetchDetails();
         fetchProduct();
         fetchUser();
         url();
 
-        // eslint-disable-next-line
+
     }, []);
 
     return (
         <div>
-            {/* Carousel Section */}
-            {/* <Container fluid css={container}>
-                <CarouselSection carousel={carousel} />
-            </Container> */}
-            {/* End of Carousel Section */}
-
-            {/* Detail Section */}
             <Container css={container}>
                 <DetailSection petDetails={details} user={user}/>
             </Container>
-            {/* End of Detail Section */}
-
-            {/* Product List Section */}
             <Container css={container}>
                 <h1>Get Necessities For Your New Best Friend</h1>
                 <RecommendedProducts />
             </Container>
-            {/* End of Product List Section */}
-
-            {/* Animal List Section */}
             <Container css={container_animal_list}>
                 <h1>Pets Available Near You</h1>
                 <CardPet petCards={petCards} />
             </Container>
-            {/* End of Animal List Section */}
         </div>
     );
 };

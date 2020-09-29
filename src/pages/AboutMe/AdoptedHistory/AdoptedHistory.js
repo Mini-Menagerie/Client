@@ -15,6 +15,7 @@ const AdoptedHistory = () => {
         axios
             .get(url)
             .then(function (result) {
+                console.log(result);
                 setAdoptedHistory(result.data.result);
             })
             .catch(function (error) {
@@ -47,7 +48,7 @@ const AdoptedHistory = () => {
                                             <b>{e.petName}</b> -{" "}
                                             <span>{e.breed}</span>
                                             <p>
-                                                Adoption Fee : IDR
+                                                Adoption Fee : Rp.
                                                 {e.idPetUpForAdoption.fee}
                                             </p>
                                         </div>

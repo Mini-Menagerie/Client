@@ -3,7 +3,7 @@ import { jsx } from "@emotion/core";
 import { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 import {
   button,
@@ -23,7 +23,7 @@ const ShoppingCart = () => {
   });
 
   useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem("cartProduct")) || [];
+    const cart = JSON.parse(localStorage.getItem("cartProduct"));
     setData(cart);
   }, [])
 
@@ -31,12 +31,13 @@ const ShoppingCart = () => {
     localStorage.setItem("cartProduct", JSON.stringify(data));
   }, [data]);
 
+
   if (data === null) {
     Swal.fire({
-      imageUrl: 'https://thumbs.gfycat.com/AccurateAgreeableDairycow.webp',
+      // imageUrl: 'https://thumbs.gfycat.com/AccurateAgreeableDairycow.webp',
       title: 'You dont have any purchases',
       text: 'this page will be redirected automatically',
-      timer: 3000,
+      timer: 5000,
       showConfirmButton: false,
       timerProgressBar: true,
     }).then(function () {
@@ -78,14 +79,25 @@ const ShoppingCart = () => {
     }
   };
 
-  let itemPriceX = data.map((item) => {
+  let itemPrice = data.map((item) => {
     return item.price * item.quantity;
   });
 
-  console.log(itemPriceX);
+  let totalPrice = itemPrice.reduce((a, b) => a + b, 0);
+  const setTotalPrice = localStorage.setItem("totalPrice", totalPrice);
+  const HandlingFee = 50000
 
-  // let totalPrice = itemPriceX.reduce((a, b) => a + b);
+  const removeProduct = () => {
+    const cart = JSON.parse(localStorage.getItem("cartProduct"));
+    let indexToRemove = 1;
+    cart.splice(indexToRemove, 1);
+    localStorage.setItem("cartProduct", JSON.stringify(cart));
+    window.location.reload();
+  };
 
+  // useEffect(() => {
+  //   removeProduct();
+  // }, [])
 
   return (
     <Container css={container}>
@@ -93,7 +105,15 @@ const ShoppingCart = () => {
         <div>
           {data.map((item) => (
             <Row style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-              <Col xs={7}>
+              <Col xs={7} style={{ display: 'flex' }}>
+                <a
+                  href="/#"
+                  type="button"
+                  className="card-link-secondary small text-uppercase mr-3"
+                  onClick={removeProduct}
+                >
+                  <i class="fas fa-trash-alt mr-1"></i>
+                </a>
                 <h6>{item.productName}</h6>
               </Col>
               <Col xs={2} css={quantity}>
@@ -124,11 +144,33 @@ const ShoppingCart = () => {
       </Col>
 
       <Col xs={4} css={paymentDetails}>
-        <Row>
+        <Row style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+          <Col xs={7}>
+            <h6>Total Price: </h6>
+          </Col>
           <Col>
-            <h6>Total Price:</h6>
+            <h6>{totalPrice}</h6>
+          </Col>
+          <Col xs={7}>
+            <h6>Handling Fee: </h6>
+          </Col>
+          <Col>
+            <h6>Rp. {HandlingFee}</h6>
           </Col>
         </Row>
+        <div>
+          <hr />
+        </div>
+
+        <Row style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+          <Col xs={7}>
+            <h6 style={{ fontWeight: '600' }}>Final Price: </h6>
+          </Col>
+          <Col>
+            <h6 style={{ fontWeight: '600' }}>Rp. {totalPrice + HandlingFee}</h6>
+          </Col>
+        </Row>
+
         <div css={button} onClick={handleClick} disabled={state.loading}>
           <Button>Checkout Now</Button>
         </div>

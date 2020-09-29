@@ -24,9 +24,10 @@ import dog from "../../assets/dogCover.png";
 import cat from "../../assets/catCover.png";
 import hamster from "../../assets/hamsterCover.png";
 import bird from "../../assets/birdCover.png";
+import swal from "sweetalert";
 
 const AdoptionForm = () => {
-    // const [user, setUser] = useState([]);
+
     const [user, setUser] = useState({
         noHandphone: "",
         detailAddress: "",
@@ -73,7 +74,7 @@ const AdoptionForm = () => {
             .then(
                 axios.spread((form, user) => {
                     if (form.status === 200) {
-                        alert("Your request is being processed");
+                        swal("Your request is being processed");
                         history.goBack();
                     }
                 })

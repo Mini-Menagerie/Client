@@ -1,7 +1,8 @@
 import { css } from "@emotion/core";
+import cover2 from '../../assets/cover2.jpg'
 
 export const wrapperCover = css`
-    background-image: url(https://images.unsplash.com/photo-1442291928580-fb5d0856a8f1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=889&q=80);
+    background-image: url(${cover2});
     background-size: cover;
     background-position: right;
     height: 500px;
@@ -23,11 +24,12 @@ export const search = css`
 export const sortby = css`
     background-color: #209516;
     color: #ffffff;
-    margin: 20px;
     padding: 5px;
     font-weight: 700;
-    font-size: 40px;
+    font-size: 30px;
     border: none !important;
+    padding-left: 20px;
+    padding-right: 20px;
 `;
 
 export const result = css`
@@ -38,6 +40,7 @@ export const margin = css`
 `;
 export const whitecolor = css`
     color: #6c757d;
+    margin-left: 50px;
 
     @media (max-width: 768px) {
         color: #fff;
@@ -45,6 +48,7 @@ export const whitecolor = css`
 `;
 export const card = css`
     padding: 30px;
+    margin-left: 50px;
 `;
 export const buttoncard = css`
     display: flex;
@@ -76,8 +80,7 @@ export const marginbutton = css`
     margin-right: 5px;
 `;
 export const displaying = css`
-    font-weight: 700;
-    font-size: 30px;
+    font-weight: 500;
     margin: 25px 20px;
 `;
 export const centertext = css`
@@ -101,3 +104,10 @@ export const buttonGroup = css`
     justify-content: center;
     margin: 30px 0px;
 `;
+
+export const cardCss = css `
+margin-bottom: 80px;
+`
+export const marginTop = css `
+margin-top: 50px;
+`

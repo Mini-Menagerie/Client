@@ -64,7 +64,7 @@ const ProductDetail = (props) => {
                                     <Row></Row>
                                     <Row>
                                         <p css={priceAndStock}>
-                                            IDR {product.price}
+                                            Rp. {product.price}
                                         </p>
                                     </Row>
                                     <Row>
@@ -145,7 +145,7 @@ const ProductDetail = (props) => {
                                     <Row></Row>
                                     <Row>
                                         <p css={priceAndStock}>
-                                            IDR {product.price}
+                                            Rp. {product.price}
                                         </p>
                                     </Row>
                                     <Row>
@@ -156,7 +156,7 @@ const ProductDetail = (props) => {
                                             <input
                                                 type="number"
                                                 id="quantity"
-                                                placeholder="1"
+                                                placeholder="0"
                                                 name="quantity"
                                                 min="1"
                                                 max="5"
