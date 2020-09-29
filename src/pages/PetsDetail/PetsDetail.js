@@ -9,7 +9,6 @@ import DetailSection from "./DetailSection/DetailSection";
 import RecommendedProducts from "../../components/RecommendedProducts/RecommendedProducts";
 import CardPet from "../../components/CardPet/CardPet";
 import { container, container_animal_list } from "./PetsDetail.styles";
-import { detail_section_col } from "./DetailSection/DetailSection.styles";
 
 const PetsDetail = (props) => {
     const [, setLoading] = useState(true);

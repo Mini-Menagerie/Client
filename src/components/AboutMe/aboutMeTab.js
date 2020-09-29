@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/core";
 import { Col, Row, Container, Modal, Table } from "react-bootstrap";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import PrimaryButton from "../Button/Button";
 import {
@@ -13,7 +13,6 @@ import {
     first,
     welcomeText,
 } from "./aboutMeTab.styles";
-import axios from "axios";
 import EditProfile from "./EditProfile";
 
 const AboutMeTab = ({ profile }) => {

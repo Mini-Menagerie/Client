@@ -4,7 +4,7 @@ import { Card, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "../../../helpers/axios";
 
-import { head, mainOne, mainBody, border, carbodyT } from "./Approve.styles";
+import { head, mainOne, mainBody, border } from "./Approve.styles";
 import FormPopUp from "../../../components/AdoptionFormPopUp/adoptionFormPopUp";
 
 const ApproveRequest = () => {
