@@ -157,7 +157,7 @@ const ProductDetail = (props) => {
                                             <input
                                                 type="number"
                                                 id="quantity"
-                                                placeholder="1"
+                                                placeholder="0"
                                                 name="quantity"
                                                 min="1"
                                                 max="5"

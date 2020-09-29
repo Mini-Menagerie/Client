@@ -19,3 +19,9 @@ export const mainOne = css`
         width: 100%;
     }
 `
+export const border = css`
+    border-top: 2px solid grey;
+`
+export const carbodyT = css`
+    padding-bottom: 0 !important;
+`

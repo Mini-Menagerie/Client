@@ -1,24 +1,41 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Container, Row, Col, Dropdown, Jumbotron } from "react-bootstrap";
-import axios from "axios";
+import { Button, Col, Modal, Table } from "react-bootstrap";
+import PrimaryButton from '../Button/Button'
+import {useState} from "react";
 
-import AdoptionForm from "../../pages/AdoptionForm/AdoptionForm";
+import {wrapperStyles} from './adoptionFormPopup.styles'
 
-const FormPopUp = ({ data }) => {
+const FormPopUp = () => {
+
+    const [lgShow, setLgShow] = useState(false);
+
     return (
-        <Container fluid>
-            <div>
-                <h1>Form Submission</h1>
-            </div>
-            <div>
-            <Col xs={6}>
+        <div>
+        <Button onClick={() => setLgShow(true)}>Request Data Form</Button>
+        <Modal
+            size="lg"
+            show={lgShow}
+            onHide={() => setLgShow(false)}
+            aria-labelledby="example-modal-sizes-title-lg"
+        >
+            <Modal.Header closeButton>
+                <Modal.Title id="example-modal-sizes-title-lg">
+                    Form Request
+                </Modal.Title>
+            </Modal.Header>
+            <Modal.Body css={wrapperStyles}>
+                <div>
+                    <h1>Form Submission</h1>
+                </div>
+                <div>
+                    <Col xs={12}>
                         <Table style={{ borderStyle: "hidden" }}>
                             <tbody>
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td>1. Duration working outside of your home:</td>
                                     <td>
-                                       {/* ENDPOINT */}
+                                    {/* ENDPOINT */}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
@@ -66,10 +83,20 @@ const FormPopUp = ({ data }) => {
                                     </td>
                                 </tr>
                             </tbody>
+                            <div>
+                                <span>
+                                    <PrimaryButton>Approve</PrimaryButton>
+                                </span>&nbsp;&nbsp;&nbsp;&nbsp;
+                                <span>
+                                    <PrimaryButton>Deny</PrimaryButton>
+                                </span>
+                            </div>
                         </Table>
                     </Col>
-            </div>
-        </Container>
+                </div>
+            </Modal.Body>
+        </Modal>
+        </div>
     );
 };
 

@@ -1,63 +1,114 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Col, Row, Container, Form } from "react-bootstrap";
-import axios from "axios";
+import axios from "../../helpers/axios";
 import ReactFilestack from "filestack-react";
 
 import PrimaryButton from "../Button/Button";
 import { useState, useEffect } from "react";
 
 import { upload, uploadPhoto, fs } from "./EditProfile.styles";
+import { EventRounded } from "@material-ui/icons";
+import { form } from "../../pages/AdoptionForm/AdoptionForm.styles";
 
 const AddAdoption = ({ edit, handleClose }) => {
-    console.log(edit);
-
-    const [user, setUser] = useState([]);
-    const [form, setForm] = useState({
-        fullName: "",
-        email: "",
-        noHandphone: "",
-        state: "",
-        province: "",
-        zipcode: "",
-        country: "",
-        detailAddress: "",
-        avatar: "",
+    const [formPet, setFormPet] = useState({
+        idCategoryPet: "",
+        idBreed: "",
+        idUser: "",
+        petName: "",
+        gender: "",
+        age: "",
+        weight: "",
+        size: "",
+        location: "",
+        about: "",
+        image: "",
+        fee: "",
     });
 
-    let userData = JSON.parse(localStorage.getItem("user"));
+    const [petCategory, setPetCategory] = useState([]);
+    const [breed, setBreed] = useState([]);
+    const getCategory = async () => {
+        let category = await axios.get("categoryPet");
+        if (category.status === 200) {
+            let categoryPet = category.data.result.map((item) => {
+                let dataCategory = {
+                    id: item._id,
+                    categoryName: item.categoryName,
+                };
+                return dataCategory;
+            });
+            setPetCategory(categoryPet);
+        }
+    };
+    const getBreed = async () => {
+        let breeds = await axios.get("breed");
+        let dataBreeds = breeds.data.result.map((item) => {
+            let tes = {
+                id: item.idCategoryPet._id,
+                idBreed: item._id,
+                categoryName: item.idCategoryPet.categoryName,
+                breedName: item.breedName,
+            };
+            return tes;
+        });
+        setBreed(dataBreeds);
+    };
+    const getUser = async () => {
+        let dataUser = await JSON.parse(localStorage.getItem("user"));
+        let idUser = dataUser.idUser._id;
+        return idUser;
+    };
 
-    const fetchProfile = async () => {
-        let response = await axios.get(
-            `http://localhost:8000/users/${userData.idUser._id}` //if let id=userData.id then ${id}
-        ); //endpoint
-        console.log(response);
-        setUser(response.data.result);
+    const addNewPet = async (event) => {
+        event.preventDefault()
+        let idUser = await getUser()
+        const newPet = await axios.post('pet/create', {
+            idCategoryPet: formPet.idCategoryPet,
+            idBreed: formPet.idBreed,
+            idUser: idUser,
+            petName: formPet.petName,
+            gender: formPet.gender,
+            age: formPet.age,
+            weight: formPet.weight,
+            size: formPet.size,
+            location: formPet.location,
+            about: formPet.about,
+            image: formPet.image,
+            fee: formPet.fee
+        })
+        if(newPet.status === 200){
+            const newPetForAdoption = await axios.post('petUpForAdoption/create', {
+                idUser: idUser,
+                idPet: newPet.data.result._id,
+                fee: formPet.fee,
+                status: "Available"
+            })
+            if(newPetForAdoption.status === 200){
+                alert('Success')
+                console.log(newPetForAdoption);
+            }
+        }
     };
 
     const handleChange = (event) => {
-        setForm({
-            ...form,
+        setFormPet({
+            ...formPet,
             [event.target.name]: event.target.value,
         });
     };
-    console.log(userData.idUser, "id user woi");
-    const handleEditProfile = async (event) => {
-        event.preventDefault();
-        return axios
-            .put(`http://localhost:8000/users/${userData.idUser._id}`, form)
-            .then(() => window.location.reload());
-    };
 
     useEffect(() => {
-        fetchProfile();
-
-        //eslint-disable-next-line
+        getCategory();
+        getBreed();
+        getUser();
     }, []);
+    
 
     return (
         <div>
-            <Form onSubmit={handleEditProfile}>
+            <Form onSubmit={addNewPet}>
                 <Form.Row>
                     <div css={fs}>
                         <ReactFilestack
@@ -74,143 +125,226 @@ const AddAdoption = ({ edit, handleClose }) => {
                                 </div>
                             )}
                             onSuccess={(res) =>
-                                setForm({
-                                    ...form,
-                                    avatar: res.filesUploaded[0].url,
+                                setFormPet({
+                                    ...formPet,
+                                    image: res.filesUploaded[0].url,
                                 })
                             }
                         />
                     </div>
+                    <Row
+                        style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <Col>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label column sm="5">
+                                        Pet Name:
+                                    </Form.Label>
+                                    <Col sm="7">
+                                        <Form.Control
+                                            placeholder=" Pet Name"
+                                            style={{ width: "350px" }}
+                                            type="text"
+                                            value={formPet.petName}
+                                            name="petName"
+                                            onChange={handleChange}
+                                        />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <Form.Label column sm="5">
+                                        Fee:
+                                    </Form.Label>
+                                    <Col sm="7">
+                                        <Form.Control
+                                            placeholder="Rp. "
+                                            style={{ width: "350px" }}
+                                            type="text"
+                                            value={formPet.fee}
+                                            name="fee"
+                                            onChange={handleChange}
+                                        />
+                                    </Col>
+                                </Form.Group>
+                            </Form.Row>
+                        </Col>
+                    </Row>
+                    <Row
+                        style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <Col>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label column sm="5">
+                                        Category Pet:
+                                    </Form.Label>
+                                    
+                                        <Col sm="7">
+                                            <Form.Control
+                                                style={{ width: "350px" }}
+                                                onChange={handleChange}
+                                                name="idCategoryPet"
+                                                onClick=""
+                                                as="select"
+                                                defaultValue="Category Pet"
+                                            >{petCategory.map(item => {
+                                               return <option value={item.id}>{item.categoryName}</option>
+                                            })}
+                                            </Form.Control>
+                                        </Col>
+                                    
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <Form.Label column sm="5">
+                                        Breeds:
+                                    </Form.Label>
+                                    <Col sm="7">
+                                        <Form.Control
+                                            style={{ width: "350px" }}
+                                            onChange={handleChange}
+                                            onClick=""
+                                            as="select"
+                                            defaultValue="idBreed"
+                                            name="idBreed"
+                                        > 
 
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column sm="5">
-                            Name:
-                        </Form.Label>
-                        <Col sm="7">
-                            <Form.Control
-                                style={{ width: "400px" }}
-                                type="text"
-                                placeholder={
-                                    edit.idUser !== undefined &&
-                                    edit.idUser.fullName
-                                }
-                                value={form.fullName}
-                                name="fullName"
-                                onChange={handleChange}
-                            />
+                                         {
+                                            breed.filter(item => {
+                                                return item.id === formPet.idCategoryPet
+                                            }).map(items => {
+                                                return <option value={items.idBreed}>{items.breedName}</option>
+                                            })   
+                                        }
+                                         
+                                        </Form.Control>
+                                    </Col>
+                                </Form.Group>
+                            </Form.Row>
                         </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column sm="5">
-                            Email:
-                        </Form.Label>
-                        <Col sm="7">
-                            <Form.Control
-                                style={{ width: "400px" }}
-                                type="text"
-                                placeholder={edit.email}
-                                value={edit.email}
-                            />
+                    </Row>
+                    <Row
+                        style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <Col>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label column sm="5">
+                                        Location:
+                                    </Form.Label>
+                                    <Col sm="7">
+                                        <Form.Control
+                                            placeholder="Location"
+                                            style={{ width: "350px" }}
+                                            type="text"
+                                            value={formPet.location}
+                                            name="location"
+                                            onChange={handleChange}
+                                        />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <Form.Label column sm="5">
+                                        Gender:
+                                    </Form.Label>
+                                    <Col sm="7">
+                                        <Form.Control
+                                            placeholder="Gender"
+                                            style={{ width: "350px" }}
+                                            type="text"
+                                            value={formPet.gender}
+                                            name="gender"
+                                            onChange={handleChange}
+                                        />
+                                    </Col>
+                                </Form.Group>
+                            </Form.Row>
                         </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column sm="4">
-                            Phone Number:
-                        </Form.Label>
-                        <Col sm="8">
-                            <Form.Control
-                                style={{ width: "400px", marginLeft: "14px" }}
-                                type="text"
-                                placeholder={edit.idUser.noHandphone}
-                                value={form.noHandphone}
-                                name="noHandphone"
-                                onChange={handleChange}
-                            />
+                    </Row>
+                    <Row
+                        style={{
+                            display: "flex",
+                            justifyContent: "space-between",
+                        }}
+                    >
+                        <Col>
+                            <Form.Row>
+                                <Form.Group as={Col}>
+                                    <Form.Label column sm="5">
+                                        Age :
+                                    </Form.Label>
+                                    <Col sm="7">
+                                        <Form.Control
+                                            placeholder="Age"
+                                            style={{ width: "350px" }}
+                                            type="text"
+                                            value={formPet.age}
+                                            name="age"
+                                            onChange={handleChange}
+                                        />
+                                    </Col>
+                                </Form.Group>
+                                <Form.Group as={Col}>
+                                    <Form.Label column sm="5">
+                                        Weight :
+                                    </Form.Label>
+                                    <Col sm="7">
+                                        <Form.Control
+                                            placeholder="Weight"
+                                            style={{ width: "350px" }}
+                                            type="text"
+                                            value={formPet.weight}
+                                            name="weight"
+                                            onChange={handleChange}
+                                        />
+                                    </Col>
+                                </Form.Group>
+                            </Form.Row>
                         </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column sm="4">
-                            Location:
-                        </Form.Label>
-                        <Col sm="8">
-                            <Form.Control
-                                style={{ width: "400px", marginLeft: "25px" }}
-                                type="text"
-                                placeholder={edit.idUser.country}
-                                value={form.country}
-                                name="country"
-                                onChange={handleChange}
-                            />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column sm="4">
-                            Province:
-                        </Form.Label>
-                        <Col sm="8">
-                            <Form.Control
-                                style={{ width: "400px", marginLeft: "25px" }}
-                                type="text"
-                                placeholder={edit.idUser.province}
-                                value={form.province}
-                                name="province"
-                                onChange={handleChange}
-                            />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column sm="5">
-                            City:
-                        </Form.Label>
-                        <Col sm="7">
-                            <Form.Control
-                                style={{ width: "400px", marginLeft: "5px" }}
-                                type="text"
-                                placeholder={edit.idUser.state}
-                                value={form.state}
-                                name="state"
-                                onChange={handleChange}
-                            />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column sm="4">
-                            Zip Code:
-                        </Form.Label>
-                        <Col sm="8">
-                            <Form.Control
-                                style={{ width: "400px", marginLeft: "25px" }}
-                                type="text"
-                                placeholder={edit.idUser.zip_code}
-                                value={form.zip_code}
-                                name="zipcode"
-                                onChange={handleChange}
-                            />
-                        </Col>
-                    </Form.Group>
-                    <Form.Group as={Row} controlId="formPlaintextPassword">
-                        <Form.Label column sm="4">
-                            Address:
-                        </Form.Label>
-                        <Col sm="8">
-                            <Form.Control
-                                style={{ width: "400px", marginLeft: "25px" }}
-                                type="text"
-                                placeholder={edit.idUser.detailAddress}
-                                value={form.detailAddress}
-                                name="detailAddress"
-                                onChange={handleChange}
-                            />
-                        </Col>
-                    </Form.Group>
-                    {/* <Form.Group as={Row} controlId="formPlaintextPassword">
-                            <Form.Label column sm="2">
-                                Location:
+                    </Row>
+                    <Row>
+                        <Form.Group as={Col}>
+                            <Form.Label column sm="5">
+                                Size :
                             </Form.Label>
-                            <Col sm="10">
-                                <Form.Control type="text" placeholder={edit.idUser.country} value={form.country} name="country" onChange={handleChange}/>
+                            <Col sm="5">
+                                <Form.Control
+                                    placeholder="Size"
+                                    style={{ width: "735px", height: "60px" }}
+                                    type="text"
+                                    value={formPet.size}
+                                    name="size"
+                                    onChange={handleChange}
+                                />
                             </Col>
-                        </Form.Group> */}
+                        </Form.Group>
+                    </Row>
+                    <Row>
+                        <Form.Group as={Col}>
+                            <Form.Label column sm="5">
+                                About :
+                            </Form.Label>
+                            <Col sm="7">
+                                <Form.Control
+                                    placeholder="About"
+                                    style={{ width: "735px", height: "60px" }}
+                                    type="text"
+                                    value={formPet.about}
+                                    name="about"
+                                    onChange={handleChange}
+                                />
+                            </Col>
+                        </Form.Group>
+                    </Row>
                 </Form.Row>
                 <PrimaryButton
                     style={{ margin: "0 40%" }}

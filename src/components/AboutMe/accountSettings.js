@@ -5,13 +5,14 @@ import { useEffect, useState } from "react";
 import axios from "axios"
 import { EmojiFoodBeverageTwoTone } from "@material-ui/icons";
 
-
 import PrimaryButton from "../../components/Button/Button";
 import {
     margin,
     changePassword,
     boxes
 } from './accountSettings.styles'
+import swal from "sweetalert";
+import Swal from "sweetalert2";
 
 const AccountSettings = ({ account }) => {
 
@@ -63,13 +64,16 @@ const AccountSettings = ({ account }) => {
             )
             .then(result => {
                 if(result.status === 200){ //liat di backend res
-                    alert('Password Changed Succesfully!')
+                    swal('Password Changed Succesfully!')
                 }
             })
             .then(() => window.location.reload())
             .catch(err => {
                 if(err.message === "Request failed with status code 400"){
-                    alert('Wrong Current Password')
+                    Swal({
+                        title:"Wrong Current Password",
+                        icon: "warning",
+                    });
                 }
             })
         )
