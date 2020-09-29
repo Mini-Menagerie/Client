@@ -30,7 +30,8 @@ const DetailSection = ({ petDetails, user }) => {
             <Col xs={12} md={7} css={detail_section_col}>
                 <Row css={rowmargin}>
                 <h2><b>{petDetails.petName}</b></h2>
-                <h2><NumberFormat value={petDetails.fee} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} /></h2>
+                {/* <h2>Rp. {petDetails.fee}</h2> */}
+                <h2><NumberFormat value={petDetails.fee} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></h2>
                 </Row>
                 <img
                     src={petDetails.image}
