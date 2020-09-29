@@ -27,7 +27,9 @@ import {
     petsAvailable,
     displaying,
     cardCss,
-    marginTop
+    marginTop,
+    cardstyle,
+    rowmargin
 } from "./searchPage.styles";
 
 
@@ -161,22 +163,21 @@ const SearchPage = () => {
                 <div css={petsAvailable}>
                     {loading ? (
                         <div className="lds-circle">
-                            <div></div>
                         </div>
                     ) : error ? (
                         <div>{errorMessage}</div>
                     ) : (
-                        <Container css={marginTop}>
-                            <Row>
+                        <Container style={{maxWidth:"100%"}} css={marginTop}>
+                            <Row css={rowmargin}>
                                 {searchPet !== undefined &&
                                     searchPet.length > 0 &&
                                     searchPet.map((item) => (
-                                        <Col md={4} css={cardCss}>
+                                        <Col sm={3} css={cardCss} style={{ maxWidth: "22rem" }}>
                                             <Link
                                                 to={`/pets-detail/${item.id}`}
                                             >
-                                                <Card
-                                                    style={{ width: "18rem" }}
+                                                <Card 
+                                                    style={{ width: "22rem" }} css={cardstyle}
                                                 >
                                                     <Card.Img
                                                         css={img}

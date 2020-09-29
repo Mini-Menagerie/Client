@@ -74,6 +74,8 @@ export const img = css`
     width: 100%;
     height: 15vw;
     object-fit: cover;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
 `;
 export const marginbutton = css`
     width: 100%;
@@ -110,4 +112,21 @@ margin-bottom: 80px;
 `
 export const marginTop = css `
 margin-top: 50px;
+display: flex;
+margin-left: 50px;
+margin-right: 50px;
+justify-content: center;
+`
+
+export const cardstyle = css `
+border-bottom-left-radius: 20px;
+border-bottom-right-radius: 20px;
+border-top-left-radius: 20px;
+border-top-right-radius: 20px;
+`
+
+export const rowmargin = css `
+justify-content: space-between;
+margin-left: 40px;
+margin-right: 60px;
 `
