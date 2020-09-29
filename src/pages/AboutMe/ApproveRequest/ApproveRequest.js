@@ -96,10 +96,10 @@ const ApproveRequest = () => {
                                     </Col>
                                 </Row>
                             </Card.Body>
-                            <Card>
-                            <div css={border}>
+                            <Card.Body>
+                            <Card.Body css={border}>
                                 <b>{e.idPet.petName}</b> - <span>{e.idPet.idBreed.breedName}</span>
-                            </div>
+                            </Card.Body>
                             <Card.Body css={mainBody}>
                                 <Row>
                                     <Col css={mainOne}>
@@ -126,7 +126,7 @@ const ApproveRequest = () => {
                                     </Col>
                                 </Row>
                             </Card.Body>
-                        </Card>
+                        </Card.Body>
                         </Card>
                         <br />
                     </div>

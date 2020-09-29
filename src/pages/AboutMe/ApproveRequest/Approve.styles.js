@@ -20,7 +20,8 @@ export const mainOne = css`
     }
 `
 export const border = css`
-    border-top: 2px solid grey;
+    border-top: 1px solid gray;
+    padding: 0px 10px;
 `
 export const carbodyT = css`
     padding-bottom: 0 !important;
