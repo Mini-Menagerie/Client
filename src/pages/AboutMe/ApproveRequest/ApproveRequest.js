@@ -1,44 +1,105 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../../../helpers/axios";
 
 import { head, mainOne, mainBody, border, carbodyT } from "./Approve.styles";
 import FormPopUp from "../../../components/AdoptionFormPopUp/adoptionFormPopUp";
 
 const ApproveRequest = () => {
+    const [adoption, setAdoption] = useState([]); // petUpforAdoption
+    const [adopter, setAdopter] = useState([]); // formRequest
+    
+    const getUserLogin = () => {
+        let userLogin = JSON.parse(localStorage.getItem('user')); // 5f6b721abd00722311964574
+        let idUser = userLogin.idUser._id;
+        return idUser
+    }
 
-    let userData = JSON.parse(localStorage.getItem("user"))
+    const getPetUpForAdopt = async () => {
+        let idUser = await getUserLogin()
+        let pets = await axios.get('petUpForAdoption')
+        if(pets.status === 200){
+            let filteredPets = pets.data.result.filter(item => {
+                return item.idUser._id === idUser
+            })
+            console.log(filteredPets);
+            setAdoption(filteredPets);
+            localStorage.setItem('pets', JSON.stringify(filteredPets))
+        }
+    }
+    const getAdopter = async () => {
+        const dataPet = await JSON.parse(localStorage.getItem('pets'))
+        let idPet = dataPet !== null && dataPet.map(item => {
+            return item.idPet._id
+        })
+        if(idPet.length > 0){
+            idPet = idPet[0]
+        }
+        return idPet //5f729d64ecc1bc0dd6318de9
+    }
+    const getDataAdopter = async () => {
+        let idPetAdopter = await getAdopter()
 
-    const [statusRequest, setStatusRequest] = useState([]);
-    const [, setErrorMessage] = useState();
+        const adopter = await axios.get('formRequest')
+        if(adopter.status === 200){
+            let filteredAdopter = adopter.data.result.filter(item => item.idPet._id === idPetAdopter)
+            setAdopter(filteredAdopter)
+        }
+    }
 
     useEffect(() => {
-        const url = `http://localhost:8000/formRequest/all/${userData.idUser._id}`;
-        axios
-            .get(url)
-            .then(function (result) {
-                console.log(result.data);
-                setStatusRequest(result.data.filterReq);
-            })
-            .catch(function (error) {
-                setErrorMessage(error.message);
-            });
-    }, [setErrorMessage]);
-
+        getUserLogin()
+        getPetUpForAdopt()
+        getAdopter()
+        getDataAdopter()
+    }, [])
+    console.log(adoption);
     return (
         <div>
+            <div>
             <div css={head}>
                 <h2>Approve Request</h2>
             </div>
-            <div>
-                {statusRequest.map((e) => (
-                    <div key={statusRequest}>
+                {adopter.map((e) => (
+                    <div key={adopter}>
                         <Card>
                             <Card.Header>
-                                <b>{e.idPet.petName}</b> - <span>{e.idPet.idBreed.breedName}</span>
+                                <b>Adopter Data</b> 
                             </Card.Header>
+                            <Card.Body css={mainBody}>
+                                <Row>
+                                    <Col css={mainOne}>
+                                        <img
+                                            src={e.idUser.avatar}
+                                            alt="mberrrr"
+                                            style={{
+                                                objectFit: "cover",
+                                                height: "200px",
+                                            }}
+                                        />
+                                    </Col>
+                                    <Col>
+                                        <p>Full Name : {e.idUser.fullName}</p>
+                                        <p>Email : Email ngga ada di ID user</p>
+                                        <p>Gender : Gender ngga ada di user</p>
+                                        <p>Country : Indonesia </p>
+                                    </Col>
+                                    <Col>
+                                        <p>Province : {e.idUser.province}</p>
+                                        <p>City : {e.idUser.state}</p>
+                                        <p>Zip Code : {e.idUser.zip_code}</p>
+                                        <p>Address : {e.idUser.detailAddress}</p>
+                                        <br />
+                                        <FormPopUp data={adopter} />
+                                    </Col>
+                                </Row>
+                            </Card.Body>
+                            <Card>
+                            <div css={border}>
+                                <b>{e.idPet.petName}</b> - <span>{e.idPet.idBreed.breedName}</span>
+                            </div>
                             <Card.Body css={mainBody}>
                                 <Row>
                                     <Col css={mainOne}>
@@ -65,38 +126,18 @@ const ApproveRequest = () => {
                                     </Col>
                                 </Row>
                             </Card.Body>
-                            <Card.Body css={carbodyT}>
-                              <h5 css={border}>Adopter Data</h5><br/>
-                            </Card.Body>
-                            <Card.Body css={mainBody}>
-                                <Row>
-                                    <Col css={mainOne}>
-                                        <img
-                                            src={e.idPet.image}
-                                            alt="mberrrr"
-                                            style={{
-                                                objectFit: "cover",
-                                                height: "200px",
-                                            }}
-                                        />
-                                    </Col>
-                                    <Col>
-                                        <p>Full Name : {e.idPet.petName}</p>
-                                        <p>Email : {e.idPet.idBreed.breedName}</p>
-                                        <p>Gender : {e.idPet.age}</p>
-                                        <p>Country : {e.idPet.size}</p>
-                                    </Col>
-                                    <Col>
-                                        <p>Province : {e.idPet.weight}</p>
-                                        <p>City : {e.idPet.gender}</p>
-                                        <p>Zip Code : {e.idPet.gender}</p>
-                                        <p>Address : {e.idPet.gender}</p>
-                                        <br />
-                                        <FormPopUp />
-                                    </Col>
-                                </Row>
-                            </Card.Body>
                         </Card>
+                        </Card>
+                        <br />
+                    </div>
+                ))}
+            </div>
+
+           
+            <div>
+                {adopter.map((e) => (
+                    <div key={adopter}>
+                        
                         <br />
                     </div>
                 ))}

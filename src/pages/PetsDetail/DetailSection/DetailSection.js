@@ -2,6 +2,7 @@
 import { jsx } from "@emotion/core";
 import { Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
+import NumberFormat from 'react-number-format';
 
 import {
     detail_section_col,
@@ -10,6 +11,9 @@ import {
     detail_section_col_right_button,
     location,
     rowMargin3,
+    rowmargin,
+    margin2,
+    detailUser, text
 } from "./DetailSection.styles";
 import ColoredLine from "../../../components/ColoredLine";
 import PrimaryButton from "../../../components/Button/Button";
@@ -24,6 +28,11 @@ const DetailSection = ({ petDetails, user }) => {
     return (
         <Row>
             <Col xs={12} md={7} css={detail_section_col}>
+                <Row css={rowmargin}>
+                <h2><b>{petDetails.petName}</b></h2>
+                {/* <h2>Rp. {petDetails.fee}</h2> */}
+                <h2><NumberFormat value={petDetails.fee} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></h2>
+                </Row>
                 <img
                     src={petDetails.image}
                     style={{
@@ -34,8 +43,6 @@ const DetailSection = ({ petDetails, user }) => {
                     }}
                     alt="pet_image"
                 />
-                <h2>{petDetails.petName}</h2>
-                <h2>{petDetails.fee}</h2>
                 <Row css={detail_section_col_left_second_row}>
                     <p>
                         {petDetails.idBreed !== undefined &&
@@ -57,15 +64,16 @@ const DetailSection = ({ petDetails, user }) => {
                 <Row css={row_line}>
                     <ColoredLine color="#000" />
                 </Row>
-                <Row>
+                <Row css={text}>
                     <h2>About</h2>
                 </Row>
-                <Row>
+                <Row css={text}>
                     <p>{petDetails.about}</p>
                 </Row>
             </Col>
             <Col xs={12} md={4} css={detail_section_col}>
-                <h1>
+                <h5>Caregiver:</h5>
+                <h1 css={margin2}>
                     {petDetails.idUser !== undefined &&
                         petDetails.idUser.fullName}
                 </h1>
@@ -93,6 +101,8 @@ const DetailSection = ({ petDetails, user }) => {
                             <i class="fas fa-map-marker-alt fa-2x">
                                 &nbsp; &nbsp;
                             </i>
+                        </Row>
+                        <Row css={detailUser}> 
                             <p>
                                 {petDetails.location} /{" "}
                                 {petDetails.idUser !== undefined &&
@@ -105,6 +115,8 @@ const DetailSection = ({ petDetails, user }) => {
                             <i class="fas fa-envelope-open-text fa-2x">
                                 &nbsp; &nbsp;
                             </i>
+                        </Row>
+                        <Row css={detailUser}>
                             <p>
                                 {petDetails.idUser !== undefined &&
                                     petDetails.idUser.email}

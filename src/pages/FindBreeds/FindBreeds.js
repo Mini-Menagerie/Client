@@ -86,7 +86,7 @@ const FindBreeds = () => {
                 <div css={margin}>
                     <h1 css={whitecolor}>Let Us Help You</h1>
                     <Card css={card}>
-                        <h2 css={whitecolor}>Find The Best Breeds For You</h2>
+                        <h2 css={whitecolor}>Find The Best Breed For You</h2>
                         <Formik
                             initialValues={{ search: "" }}
                             validate={(values) => {
@@ -185,8 +185,8 @@ const FindBreeds = () => {
                     handleSubmit,
                 }) => (
                     <div css={filter}>
-                        <h2 css={centertext}>Filter Breeds</h2>
-                        <p css={centertext}>Size</p>
+                        <h2 css={centertext}>Filter By Breed</h2>
+                        <p css={centertext}>By Size</p>
                         <Form>
                             <div css={buttonGroup}>
                                 <ToggleButtonGroup
@@ -209,7 +209,7 @@ const FindBreeds = () => {
                                     })}
                                 </ToggleButtonGroup>
                             </div>
-                            <p css={centertext}>Gender</p>
+                            <p css={centertext}>By Gender</p>
                             <div
                                 css={buttonGroup}
                                 className="justify-content-md-center"
