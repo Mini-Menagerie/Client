@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Col, Row, Container, Form } from "react-bootstrap";
+import { Col, Row, Form } from "react-bootstrap";
 import axios from "../../helpers/axios";
 import ReactFilestack from "filestack-react";
 
@@ -8,8 +8,6 @@ import PrimaryButton from "../Button/Button";
 import { useState, useEffect } from "react";
 
 import { upload, uploadPhoto, fs } from "./EditProfile.styles";
-import { EventRounded } from "@material-ui/icons";
-import { form } from "../../pages/AdoptionForm/AdoptionForm.styles";
 
 const AddAdoption = ({ edit, handleClose }) => {
     const [formPet, setFormPet] = useState({
