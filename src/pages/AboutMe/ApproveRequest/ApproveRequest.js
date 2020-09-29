@@ -55,7 +55,7 @@ const ApproveRequest = () => {
         getAdopter()
         getDataAdopter()
     }, [])
-    console.log(adopter);
+    console.log(adoption);
     return (
         <div>
             <div>

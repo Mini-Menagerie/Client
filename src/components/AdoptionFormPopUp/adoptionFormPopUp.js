@@ -6,8 +6,10 @@ import {useState} from "react";
 
 import {wrapperStyles} from './adoptionFormPopup.styles'
 
+
 const FormPopUp = ({data}) => {
 console.log(data);
+
     const [lgShow, setLgShow] = useState(false);
 
     return (
@@ -35,6 +37,7 @@ console.log(data);
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td>1. Duration working outside of your home:</td>
                                     <td>
+
                                     {data[0].idUser.workDuration}
                                     </td>
                                 </tr>
