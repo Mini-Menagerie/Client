@@ -23,7 +23,7 @@ const ShoppingCart = () => {
   });
 
   useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem("cartProduct")) || [];
+    const cart = JSON.parse(localStorage.getItem("cartProduct"));
     setData(cart);
   }, [])
 
@@ -32,18 +32,18 @@ const ShoppingCart = () => {
   }, [data]);
 
 
-  // if (data.length <= 0) {
-  //   Swal.fire({
-  //     imageUrl: 'https://thumbs.gfycat.com/AccurateAgreeableDairycow.webp',
-  //     title: 'You dont have any purchases',
-  //     text: 'this page will be redirected automatically',
-  //     timer: 5000,
-  //     showConfirmButton: false,
-  //     timerProgressBar: true,
-  //   }).then(function () {
-  //     window.location.replace('/')
-  //   })
-  // }
+  if (data === null) {
+    Swal.fire({
+      // imageUrl: 'https://thumbs.gfycat.com/AccurateAgreeableDairycow.webp',
+      title: 'You dont have any purchases',
+      text: 'this page will be redirected automatically',
+      timer: 5000,
+      showConfirmButton: false,
+      timerProgressBar: true,
+    }).then(function () {
+      window.location.replace('/')
+    })
+  }
 
   const handleChange = (e, id) => {
     const { value } = e.target;
@@ -95,9 +95,9 @@ const ShoppingCart = () => {
     window.location.reload();
   };
 
-  useEffect(() => {
-    removeProduct();
-  }, [])
+  // useEffect(() => {
+  //   removeProduct();
+  // }, [])
 
   return (
     <Container css={container}>
