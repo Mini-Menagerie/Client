@@ -12,7 +12,7 @@ const FormPopUp = () => {
 
     return (
         <div>
-        <Button onClick={() => setLgShow(true)}>Request Data Form</Button>
+        <PrimaryButton onClick={() => setLgShow(true)}>Request Data Form</PrimaryButton>
         <Modal
             size="lg"
             show={lgShow}
@@ -85,10 +85,10 @@ const FormPopUp = () => {
                             </tbody>
                             <div>
                                 <span>
-                                    <PrimaryButton>Approve</PrimaryButton>
+                                    <Button variant="success">Approve</Button>
                                 </span>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <span>
-                                    <PrimaryButton>Deny</PrimaryButton>
+                                    <Button variant="danger">Deny</Button>
                                 </span>
                             </div>
                         </Table>

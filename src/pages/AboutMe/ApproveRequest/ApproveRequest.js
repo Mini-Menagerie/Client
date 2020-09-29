@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Button, Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -14,7 +14,7 @@ const ApproveRequest = () => {
     const [statusRequest, setStatusRequest] = useState([]);
     const [, setErrorMessage] = useState();
 
-    useEffect(() => {
+    const getItem = () => {
         const url = `http://localhost:8000/formRequest/all/${userData.idUser._id}`;
         axios
             .get(url)
@@ -25,6 +25,10 @@ const ApproveRequest = () => {
             .catch(function (error) {
                 setErrorMessage(error.message);
             });
+    }
+
+    useEffect(() => {
+        getItem()
     }, [setErrorMessage]);
 
     return (
