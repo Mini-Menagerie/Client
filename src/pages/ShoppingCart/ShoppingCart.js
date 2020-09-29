@@ -12,6 +12,7 @@ import {
   container,
   quantity
 } from "./ShoppingCart.styles";
+import { replace } from "formik";
 
 const stripePromise = loadStripe("pk_test_51HUN7sAjKylxkZ24d0YxRuxiDVNFIoEAsNmyg8WFxzcExHz1cPsfdouNHOsw3E9SJQpQ19rG2TFByvkQ3MNzAXey00DUfRySaY");
 
@@ -22,13 +23,18 @@ const ShoppingCart = () => {
     error: null,
   });
 
+  const replace = (event) => {
+    event.preventDefault()
+    window.location.replace('/')
+  }
+
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem("cartProduct"));
     setData(cart);
   }, [])
 
   useEffect(() => {
-    localStorage.setItem("cartProduct", JSON.stringify(data));
+    data.length < 1 ? replace() : localStorage.setItem("cartProduct", JSON.stringify(data))
   }, [data]);
 
 
