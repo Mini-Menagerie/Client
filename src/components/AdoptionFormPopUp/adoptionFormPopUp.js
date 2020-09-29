@@ -6,7 +6,9 @@ import {useState} from "react";
 
 import {wrapperStyles} from './adoptionFormPopup.styles'
 
-const FormPopUp = () => {
+
+const FormPopUp = ({data}) => {
+console.log(data);
 
     const [lgShow, setLgShow] = useState(false);
 
@@ -35,51 +37,52 @@ const FormPopUp = () => {
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td>1. Duration working outside of your home:</td>
                                     <td>
-                                    {/* ENDPOINT */}
+
+                                    {data[0].idUser.workDuration}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td>2. Do You Own Or Rent Your Home:</td>
-                                    <td> {/* ENDPOINT */}</td>
+                                    <td> {data[0].idUser.houseStatus}</td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td> 3. Have You Ever Given Pets Up For
                                         Adoption?</td>
                                     <td>
-                                        {/* ENDPOINT */}
+                                    {data[0].idUser.hasGivenPet}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td>4. Do You Have Small Children in the
                                         House?</td>
                                     <td>
-                                        {/* ENDPOINT */}
+                                    {data[0].idUser.hasChildrenAtHouse}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td>5. Do You Have Other Pets?</td>
                                     <td>
-                                        {/* ENDPOINT */}
+                                    {data[0].idUser.otherPet}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td>6. Do You Tend to Keep Your Pets in a
                                         Cage?</td>
                                     <td>
-                                        {/* ENDPOINT */}
+                                    {data[0].idUser.willPetBeCaged}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td>7. What is Your Monthly Income?</td>
                                     <td>
-                                        {/* ENDPOINT */}
+                                    {data[0].idUser.salary}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td>8. Finally, Tell Us Why You'd Like To
                                         Adopt this Pet!</td>
                                     <td>
-                                        {/* ENDPOINT */}
+                                    {data[0].reason}
                                     </td>
                                 </tr>
                             </tbody>

@@ -48,7 +48,7 @@ const AdoptedHistory = () => {
                                             <b>{e.petName}</b> -{" "}
                                             <span>{e.breed}</span>
                                             <p>
-                                                Adoption Fee : IDR
+                                                Adoption Fee : Rp.
                                                 {e.idPetUpForAdoption.fee}
                                             </p>
                                         </div>
