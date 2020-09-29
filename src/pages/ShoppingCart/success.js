@@ -1,6 +1,5 @@
 import axios from '../../helpers/axios';
 import React, { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
 
 const Success = () => {
 
@@ -65,7 +64,7 @@ const Success = () => {
         }, 5000);
         
     }, [])
-    
+
 
     return (
         <div>

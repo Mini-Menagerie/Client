@@ -527,7 +527,7 @@ const Header = () => {
                                     <i className="fas fa-shopping-cart fa-lg"></i>
                                     <Badge pill variant="danger">
                                         {productCart !== undefined &&
-                                            productCart !== null &&
+                                            productCart !== null && productCart !== 0 &&
                                             productCart.length}
                                     </Badge>
                                 </Button>
