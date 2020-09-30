@@ -1,20 +1,17 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Col, Row, Container, Card, Modal } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import AddAdoption from './AddAdoption';
 
 
 import PrimaryButton from "../Button/Button";
 import {
   container,
-  dataPet,
   margin,
   petImage
 } from "./petUpList.styles";
-import axios from "axios";
 
 
 const ListPetUp = ({ petUp }) => {

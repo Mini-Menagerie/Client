@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Col, Row, Container, Form } from "react-bootstrap";
+import { Col, Row, Form } from "react-bootstrap";
 import axios from "axios";
 import ReactFilestack from "filestack-react";
 
@@ -12,7 +12,7 @@ import { upload, uploadPhoto, fs } from "./EditProfile.styles";
 const EditProfile = ({ edit, handleClose }) => {
     console.log(edit);
 
-    const [user, setUser] = useState([]);
+    const [, setUser] = useState([]);
     const [form, setForm] = useState({
         fullName: "",
         email: "",

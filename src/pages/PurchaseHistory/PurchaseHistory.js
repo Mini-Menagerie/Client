@@ -4,19 +4,22 @@ import { Card, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import { head, listInfo, mainOne, dated, desc } from "./AdoptedHistory.styles";
+import { head, listInfo, mainOne, dated, desc } from "./PurchaseHistory.styles";
 
-const AdoptedHistory = () => {
-    const [adoptedHistory, setAdoptedHistory] = useState([]);
+const PurchaseHistory = () => {
+    const [purchaseHistory, setPurchaseHistory] = useState([]);
     const [, setErrorMessage] = useState();
 
     useEffect(() => {
-        const url = "http://localhost:8000/listAdoptionTransaction";
+        const user = JSON.parse(localStorage.getItem("user"));
+        console.log(user.idUser._id);
+
+        const url = `http://localhost:8000/transactionDetails/history/${user.idUser._id}`;
         axios
             .get(url)
             .then(function (result) {
-                console.log(result);
-                setAdoptedHistory(result.data.result);
+                console.log(result.data.result[0].idProduct.image[0]);
+                setPurchaseHistory(result.data.result);
             })
             .catch(function (error) {
                 setErrorMessage(error.message);
@@ -26,30 +29,27 @@ const AdoptedHistory = () => {
     return (
         <div>
             <div css={head}>
-                <h2>Adopted Pet History</h2>
+                <h2>Purchase History</h2>
             </div>
             <div css={listInfo}>
-                {adoptedHistory.map((e) => (
+                {purchaseHistory.map((e) => (
                     <div key={e._id}>
                         <Card>
-                            <Card.Header className="text-center">
-                                <b>{e.idPetUpForAdoption.status}</b>
-                            </Card.Header>
                             <Card.Body>
                                 <div css={dated}>
                                     <span>{e.createdAt}</span>
                                 </div>
                                 <Row>
                                     <Col xs={6} css={mainOne}>
-                                        <img src="" alt="mberrrr" />
+                                        <img src={e.idProduct.image[0].image} alt="mberrrr" />
                                     </Col>
                                     <Col css={desc}>
                                         <div>
-                                            <b>{e.petName}</b> -{" "}
-                                            <span>{e.breed}</span>
+                                            <b>{e.idProduct.productName}</b> -{" "}
+                                            <span>{e.idProduct.categories}</span>
                                             <p>
                                                 Adoption Fee : Rp.
-                                                {e.idPetUpForAdoption.fee}
+                                                {e.idTransaction.totalPrice}
                                             </p>
                                         </div>
                                     </Col>
@@ -64,4 +64,4 @@ const AdoptedHistory = () => {
     );
 };
 
-export default AdoptedHistory;
+export default PurchaseHistory;

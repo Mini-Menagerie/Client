@@ -9,12 +9,8 @@ import DetailSection from "./DetailSection/DetailSection";
 import RecommendedProducts from "../../components/RecommendedProducts/RecommendedProducts";
 import CardPet from "../../components/CardPet/CardPet";
 import { container, container_animal_list } from "./PetsDetail.styles";
-// import logo from "../../assets/logo-mini-menagerie.png";
-// import Axios from "axios";
 
 const PetsDetail = (props) => {
-    // let id = props.match.params
-    // const [carousel, setCarousel] = useState([]);
     const [, setLoading] = useState(true);
     const [, setError] = useState(false);
     const [, setErrorMessage] = useState();
@@ -22,28 +18,13 @@ const PetsDetail = (props) => {
     const [ ,setProduct] = useState([]);
     const [petCards, setPetCards] = useState([]);
     const [user, setUser] = useState({});
-    // function handleClick(id) {
-    //     window.location.replace(`/pets-detail/${id}`);
-    // }
-
-    // const fetchCarousel = () => {
-    //     const url = "http://localhost:8000/";
-    //     axios
-    //         .get(url)
-    //         .then(function (response) {
-    //             // setCarousel(response.data.result);
-    //             setLoading(false);
-    //         })
-    //         .catch(function (error) {
-    //             setError(true);
-    //             console.log(errorMessage);
-    //             setLoading(false);
-    //         });
-    // };
-
+    // const [email, setEmail] = useState({});
+  
 
     let { id } = useParams();
     localStorage.setItem('selectedPet', id)
+
+    // let userLogin = JSON.parse(localStorage.getItem("user"));
 
     const fetchDetails = async () => {
         const url = `http://localhost:8000/pet/${id}`;
@@ -74,21 +55,20 @@ const PetsDetail = (props) => {
             });
     };
 
-    const url = () => {
-        const url = "http://localhost:8000/pet";
-        axios
-            .get(url)
-            .then(function (response) {
-                const limit = response.data.result.slice(0, 4);
-                setPetCards(limit);
-                setLoading(false);
-            })
-            .catch(function (error) {
-                setError(true);
-                setErrorMessage(error.message);
-                setLoading(false);
-            });
-    };
+    //  const userEmail = () => {
+    //     const url = `http://localhost:8000/userAccount/${userLogin.id}`;
+    //     axios
+    //         .get(url)
+    //         .then(function (response) {
+    //             setEmail(response.data.result);
+    //             console.log(response.data.result);
+    //             setLoading(false);
+    //         })
+    //         .catch(function (error) {
+    //             console.log(error.message);
+    //             setErrorMessage(error.message);
+    //             setLoading(false)            });
+    // };
 
     const fetchUser = () => {
         const idUser = details.idUser!==undefined && details.idUser._id
@@ -106,43 +86,46 @@ const PetsDetail = (props) => {
         })
     }
 
+    const url = () => {
+        const url = "http://localhost:8000/pet";
+        axios
+            .get(url)
+            .then(function (response) {
+                const limit = response.data.result.slice(0, 4);
+                setPetCards(limit);
+                setLoading(false);
+            })
+            .catch(function (error) {
+                setError(true);
+                setErrorMessage(error.message);
+                setLoading(false);
+            });
+    };
+
+
     useEffect(() => {
-        // fetchCarousel();
         fetchDetails();
         fetchProduct();
         fetchUser();
         url();
+        // userEmail();
 
-        // eslint-disable-next-line
+
     }, []);
 
     return (
         <div>
-            {/* Carousel Section */}
-            {/* <Container fluid css={container}>
-                <CarouselSection carousel={carousel} />
-            </Container> */}
-            {/* End of Carousel Section */}
-
-            {/* Detail Section */}
             <Container css={container}>
                 <DetailSection petDetails={details} user={user}/>
             </Container>
-            {/* End of Detail Section */}
-
-            {/* Product List Section */}
             <Container css={container}>
                 <h1>Get Necessities For Your New Best Friend</h1>
                 <RecommendedProducts />
             </Container>
-            {/* End of Product List Section */}
-
-            {/* Animal List Section */}
             <Container css={container_animal_list}>
                 <h1>Pets Available Near You</h1>
                 <CardPet petCards={petCards} />
             </Container>
-            {/* End of Animal List Section */}
         </div>
     );
 };

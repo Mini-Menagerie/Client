@@ -101,7 +101,7 @@ const BreedByCategory = () => {
                 <div></div>
             </div>
             <div css={collections}>
-                <h2 css={centertext}>Search Our Collections</h2>
+                <h2 css={centertext}>Search Our Collection</h2>
                 <Carousel responsive={responsive} infinite={true}>
                     {allCollection.length > 0 &&
                         allCollection.map((item) => {
@@ -148,8 +148,8 @@ const BreedByCategory = () => {
                     handleSubmit,
                 }) => (
                     <div css={filter}>
-                        <h2 css={centertext}>Filter Breeds</h2>
-                        <p css={centertext}>Size</p>
+                        <h2 css={centertext}>Filter By Breed</h2>
+                        <p css={centertext}>By Size</p>
                         <Form>
                             <div css={buttonGroup}>
                                 <ToggleButtonGroup
@@ -172,7 +172,7 @@ const BreedByCategory = () => {
                                     })}
                                 </ToggleButtonGroup>
                             </div>
-                            <p css={centertext}>Gender</p>
+                            <p css={centertext}>By Gender</p>
                             <div
                                 css={buttonGroup}
                                 className="justify-content-md-center"

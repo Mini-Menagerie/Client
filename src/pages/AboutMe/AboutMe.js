@@ -20,11 +20,6 @@ const AllProfile = () => {
     const [aboutMe, setAboutMe] = useState([]);
     const [key, setKey] = useState("home");
 
-    // const handleEditProfile = async (e) => {
-    //   let result = await axios.put(`http://localhost:8000/users/${id}`)
-    //   setAboutMe(e.target.value)
-    //put add a pet pop up in pet up for adoption
-
     let userLogin = JSON.parse(localStorage.getItem("user"));
     let token = localStorage.getItem("menagerie");
 
@@ -72,7 +67,7 @@ const AllProfile = () => {
                     <Tab eventKey="adopReq" title="Adoption Request">
                         <StatusRequest />
                     </Tab>
-                    <Tab eventKey="adopHistory" title="Adopted history">
+                    <Tab eventKey="adopHistory" title="Adoption History">
                         <AdoptedHistory />
                     </Tab>
                     <Tab eventKey="approveReq" title="Approve Request">
