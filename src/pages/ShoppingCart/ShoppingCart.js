@@ -45,27 +45,27 @@ const ShoppingCart = () => {
     setData(cart);
   }
 
-  useEffect(() => {
-    getTempCart()
-  }, [])
+  // useEffect(() => {
+  //   getTempCart()
+  // }, [])
 
-  if (data === null || data === []) {
-    window.location.replace('/')
-  }
-  console.log(data);
-
-  useEffect(() => {
-    localStorage.setItem("cartProduct", JSON.stringify(data))
-  }, [data]);
+  // if (data === null || data === []) {
+  //   window.location.replace('/')
+  // }
+  // console.log(data);
 
   // useEffect(() => {
-  //   if (data !== null) {
-  //     window.location.replace('/')
-  //       } else {
-  //     localStorage.setItem("cartProduct", JSON.stringify(data))}
+  //   localStorage.setItem("cartProduct", JSON.stringify(data))
   // }, [data]);
 
-  // console.log(finalData);
+  useEffect( async () => {
+    let data = await getTempCart()
+    if (data !== null) {
+      window.location.replace('/')
+        } else {
+      localStorage.setItem("cartProduct", JSON.stringify(data))}
+  }, []);
+
 
   const handleChange = (e, id) => {
     const { value } = e.target;

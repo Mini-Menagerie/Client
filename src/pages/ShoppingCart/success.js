@@ -1,5 +1,13 @@
+
+/** @jsx jsx */
+import { jsx } from "@emotion/core";
+import { useEffect } from 'react';
 import axios from '../../helpers/axios';
-import React, { useEffect } from 'react';
+import { Button } from 'react-bootstrap';
+
+import {
+    button
+} from "./success.styles";
 
 const Success = () => {
 
@@ -53,6 +61,11 @@ const Success = () => {
             localStorage.removeItem('id_trans')
         }
     }
+    const redirect = () => {
+        window.location.replace('/')
+        localStorage.removeItem('cartProduct')
+        localStorage.removeItem('totalPrice')
+    }
     useEffect(() => {
         getCart()
         getUser()
@@ -75,9 +88,9 @@ const Success = () => {
                 <p>
                     Having trouble? <a href="/">Contact us</a>
                 </p>
-                <p className="lead">
-                    <a className="btn btn-primary btn-sm" href="/" role="button">Continue To Homepage</a>
-                </p>
+                <div css={button}>
+                    <Button onClick={redirect} >Continue To Homepage</Button>
+                </div>
             </div>
         </div>
 
