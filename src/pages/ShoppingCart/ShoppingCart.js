@@ -2,20 +2,37 @@
 import { jsx } from "@emotion/core";
 import { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
-import { Container, Row, Col, Button } from 'react-bootstrap';
-// import Swal from 'sweetalert2';
+import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
+import axios from '../../helpers/axios'
 import {
-  button,
+  buttonCheckoutNow,
+  buttonCheckoutLater,
+  buttonRemove,
   itemDetails,
   paymentDetails,
+  userDetails,
   container,
+  containerDetails,
   quantity
 } from "./ShoppingCart.styles";
 
 const stripePromise = loadStripe("pk_test_51HUN7sAjKylxkZ24d0YxRuxiDVNFIoEAsNmyg8WFxzcExHz1cPsfdouNHOsw3E9SJQpQ19rG2TFByvkQ3MNzAXey00DUfRySaY");
 
 const ShoppingCart = () => {
+  const [user, setUser] = useState({});
+  const userLogin = JSON.parse(localStorage.getItem("user"));
+
+  const getUser = async () => {
+    const response = await axios.get(`userAccount/${userLogin.id}`);
+    setUser(response.data.result);
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
+
   const [data, setData] = useState([]);
   // const [finalData, setFinalData] = useState([]);
   const [state, dispatch] = useState({
@@ -24,20 +41,29 @@ const ShoppingCart = () => {
   });
 
   const getTempCart = () => {
-    const cart = JSON.parse(localStorage.getItem("cartProduct"));
+    const cart = JSON.parse(localStorage.getItem("cartProduct")) || [];
     setData(cart);
-  } 
+  }
 
   useEffect(() => {
     getTempCart()
   }, [])
 
+  if (data === null || data === []) {
+    window.location.replace('/')
+  }
+  console.log(data);
+
   useEffect(() => {
-    if (data !== null) {
-      window.location.replace('/')
-        } else {
-      localStorage.setItem("cartProduct", JSON.stringify(data))}
+    localStorage.setItem("cartProduct", JSON.stringify(data))
   }, [data]);
+
+  // useEffect(() => {
+  //   if (data !== null) {
+  //     window.location.replace('/')
+  //       } else {
+  //     localStorage.setItem("cartProduct", JSON.stringify(data))}
+  // }, [data]);
 
   // console.log(finalData);
 
@@ -54,7 +80,11 @@ const ShoppingCart = () => {
     );
   }
 
-  const handleClick = async (event) => {
+  const handleCheckoutLater = () => {
+    window.location.replace('/')
+  }
+
+  const handleCheckoutNow = async (event) => {
     // Call your backend to create the Checkout session.
     dispatch({ type: 'setLoading', payload: { loading: true } });
     // When the customer clicks on the button, redirect them to Checkout.
@@ -91,86 +121,221 @@ const ShoppingCart = () => {
     window.location.reload();
   };
 
+  const removeCart = () => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, remove it!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem('cartProduct');
+        window.location.replace('/shop');
+        Swal.fire(
+          'Deleted!',
+          'Your file has been deleted.',
+          'success'
+        )
+      }
+    })
+  }
+
   // useEffect(() => {
   //   removeProduct();
   // }, [])
 
   return (
     <Container css={container}>
-      <Col xs={7} css={itemDetails}>
-        <div>
-          {data.map((item) => (
-            <Row style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-              <Col xs={7} style={{ display: 'flex' }}>
-                <a
-                  href="/#"
-                  type="button"
-                  className="card-link-secondary small text-uppercase mr-3"
-                  onClick={removeProduct}
-                >
-                  <i class="fas fa-trash-alt mr-1"></i>
-                </a>
-                <h6>{item.productName}</h6>
-              </Col>
-              <Col xs={2} css={quantity}>
-                <input
-                  key={item._id}
-                  type="number"
-                  placeholder="qty"
-                  min="1"
-                  value={item.quantity}
-                  onChange={(e) => handleChange(e, item._id)}
+      <Row style={{ display: "flex", justifyContent: "space-between" }}>
+        <Col xs={7} css={userDetails}>
+          <Form>
+            <Form.Row>
+              <Form.Group as={Col} controlId="formGridName">
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  value={
+                    user.idUser !== undefined &&
+                    user.idUser.fullName
+                  }
+                  type="text"
+                  placeholder="Enter name"
+                  disabled
                 />
-              </Col>
-              <Col xs={3}>
-                <h6>Rp. {item.price * item.quantity}</h6>
-              </Col>
-            </Row>
-          ))}
-          {/* {data.map((item) => (
+              </Form.Group>
+
+              <Form.Group as={Col} controlId="formGridEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  value={
+                    user.email !== undefined && user.email
+                  }
+                  type="email"
+                  placeholder="Email"
+                  disabled
+                />
+              </Form.Group>
+            </Form.Row>
+
+            <Form.Group controlId="formGridAddress">
+              <Form.Label>Address</Form.Label>
+              <Form.Control
+                  value={
+                    user.idUser !== undefined &&
+                    user.idUser.detailAddress
+                  }
+                  type="text"
+                  placeholder="Address"
+                />
+            </Form.Group>
+
+            <Form.Row>
+              <Form.Group as={Col} controlId="formGridCity">
+                <Form.Label>City</Form.Label>
+                <Form.Control
+                  value={
+                    user.idUser !== undefined &&
+                    user.idUser.state
+                  }
+                  type="text"
+                  placeholder="City"
+                />
+              </Form.Group>
+
+              {/* <Form.Group as={Col} controlId="formGridState">
+                <Form.Label>State</Form.Label>
+                <Form.Control as="select" defaultValue="Choose...">
+                  <option>Choose...</option>
+                  <option>...</option>
+                </Form.Control>
+              </Form.Group> */}
+
+              <Form.Group as={Col} controlId="formGridProvince">
+                <Form.Label>Province</Form.Label>
+                <Form.Control
+                  value={
+                    user.idUser !== undefined &&
+                    user.idUser.province
+                  }
+                  type="text"
+                  placeholder="Province"
+                />
+              </Form.Group>
+            </Form.Row>
+
+            <div css={buttonRemove}>
+              <Button>Save Address</Button>
+            </div>
+          </Form>
+        </Col>
+      </Row>
+
+      <Container css={containerDetails}>
+        <Col xs={7} css={itemDetails}>
+          <div>
+            {data.map((item) => (
+              <Row style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                <Col xs={2}>
+                  <img src={item.image[0].image} alt="product" style={{ width: '100%' }} />
+                </Col>
+                <Col xs={7} style={{ display: 'flex', flexDirection: 'column' }}>
+                  <Row>
+                    <h6>{item.productName}</h6>
+                  </Row>
+                  <Row xs={5} css={quantity}>
+                    <input
+                      key={item._id}
+                      type="number"
+                      placeholder="qty"
+                      min="1"
+                      value={item.quantity}
+                      onChange={(e) => handleChange(e, item._id)}
+                    />
+                  </Row>
+                </Col>
+                <Col xs={3}>
+                  <div>
+                    <h6 style={{ textAlign: 'right' }}>Rp. {item.price * item.quantity}</h6>
+                  </div>
+                  <div style={{ textAlign: 'right' }}>
+                    <a
+                      href="/#"
+                      type="button"
+                      // className="card-link-secondary small text-uppercase mr-3"
+                      onClick={removeProduct}
+                    >
+                      <i class="fas fa-trash-alt mr-1" style={{ color: '#ff6b6b' }}></i>
+                    </a>
+                  </div>
+                </Col>
+
+
+              </Row>
+            ))}
+            {/* {data.map((item) => (
             <div key={item.id}>{item.productName}</div>
           ))} */}
-        </div>
-        <div>
-          <p className="text-primary">
-            <i class="fas fa-info-circle mr-1"></i>
+          </div>
+          <div>
+            <p className="text-primary">
+              <i class="fas fa-info-circle mr-1"></i>
           Do not delay the purchase, adding items to your cart does not mean booking them.
           </p>
-        </div>
-      </Col>
+          </div>
+          <div css={buttonRemove} onClick={removeCart}>
+            <Button>Empty Cart</Button>
+          </div>
+        </Col>
 
-      <Col xs={4} css={paymentDetails}>
-        <Row style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-          <Col xs={7}>
-            <h6>Total Price: </h6>
-          </Col>
-          <Col>
-            <h6>Rp. {totalPrice}</h6>
-          </Col>
-          <Col xs={7}>
-            <h6>Handling Fee: </h6>
-          </Col>
-          <Col>
-            <h6>Rp. {HandlingFee}</h6>
-          </Col>
-        </Row>
-        <div>
-          <hr />
-        </div>
+        <Col xs={4} css={paymentDetails}>
+          <Row style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+            <Col xs={7}>
+              <h6>Total Price: </h6>
+            </Col>
+            <Col xs={2}>
+              <h6>Rp.</h6>
+            </Col>
+            <Col xs={3}>
+              <h6 style={{ textAlign: 'right' }}>{totalPrice}</h6>
+            </Col>
+            <Col xs={7}>
+              <h6>Handling Fee: </h6>
+            </Col>
+            <Col xs={2}>
+              <h6>Rp.</h6>
+            </Col>
+            <Col xs={3}>
+              <h6 style={{ textAlign: 'right' }}>{HandlingFee}</h6>
+            </Col>
+          </Row>
+          <div>
+            <hr />
+          </div>
+          <Row style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+            <Col xs={7}>
+              <h6 style={{ fontWeight: '600' }}>Final Price: </h6>
+            </Col>
+            <Col xs={2}>
+              <h6 style={{ fontWeight: '600' }}>Rp.</h6>
+            </Col>
+            <Col xs={3}>
+              <h6 style={{ fontWeight: '600', textAlign: 'right' }}>{totalPrice + HandlingFee}</h6>
+            </Col>
+          </Row>
+          <Row style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <div css={buttonCheckoutLater} onClick={handleCheckoutNow} disabled={state.loading}>
+              <Button>Checkout Later</Button>
+            </div>
+            <div css={buttonCheckoutNow} onClick={handleCheckoutLater} disabled={state.loading}>
+              <Button>Checkout Now</Button>
+            </div>
+          </Row>
+        </Col>
+      </Container>
 
-        <Row style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-          <Col xs={7}>
-            <h6 style={{ fontWeight: '600' }}>Final Price: </h6>
-          </Col>
-          <Col>
-            <h6 style={{ fontWeight: '600' }}>Rp. {totalPrice + HandlingFee}</h6>
-          </Col>
-        </Row>
 
-        <div css={button} onClick={handleClick} disabled={state.loading}>
-          <Button>Checkout Now</Button>
-        </div>
-      </Col>
     </Container>
   );
 }
