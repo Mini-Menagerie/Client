@@ -2,16 +2,36 @@
 import { jsx } from "@emotion/core";
 import { Button, Col, Modal, Table } from "react-bootstrap";
 import PrimaryButton from '../Button/Button'
-import {useState} from "react";
+import {useState, useEffect} from "react";
 
 import {wrapperStyles} from './adoptionFormPopup.styles'
+import axios from "../../helpers/axios";
 
 
 const FormPopUp = ({data}) => {
-console.log(data);
-
     const [lgShow, setLgShow] = useState(false);
+    const [approve, ] = useState({status: "Approval"})
+    const [deny, ] = useState({status: "Deny"})
 
+    const url = `formRequest/${data._id}`
+
+    const changeApp = () => {
+        axios.put(url, approve)
+        .then(function (result) {
+            console.log(result);
+            window.location.reload()
+        })
+        return approve;
+    }
+
+    const changeDeny = async () => {
+        await axios.put(url, deny)
+        .then(function (result) {
+            console.log(result);
+            window.location.reload()
+        })
+        return deny;
+    }
     return (
          <div>
         <PrimaryButton onClick={() => setLgShow(true)}>Request Data Form</PrimaryButton>
@@ -88,10 +108,10 @@ console.log(data);
                             </tbody>
                             <div>
                                 <span>
-                                    <Button variant="success">Approve</Button>
+                                    <Button variant="success" onClick={changeApp}>Approve</Button>
                                 </span>&nbsp;&nbsp;&nbsp;&nbsp;
                                 <span>
-                                    <Button variant="danger">Deny</Button>
+                                    <Button variant="danger" onClick={changeDeny}>Deny</Button>
                                 </span>
                             </div>
                         </Table>
