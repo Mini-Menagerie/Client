@@ -65,6 +65,7 @@ const BreedByCategory = () => {
 
     const fetchCollection = async () => {
         const url = `${process.env.REACT_APP_API_URL}/pet/category/${category}`;
+        // const url = `${process.env.REACT_APP_API_URL}/petCollection/`;
         const response = await fetch(url);
         const result = await response.json();
 
@@ -108,6 +109,7 @@ const BreedByCategory = () => {
                             return (
                                 <Col key={item._id}>
                                     <Link
+                                        // to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
                                         to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
                                     >
                                         <Card>
