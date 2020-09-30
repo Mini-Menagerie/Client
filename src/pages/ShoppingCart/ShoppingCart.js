@@ -45,26 +45,26 @@ const ShoppingCart = () => {
     setData(cart);
   }
 
-  // useEffect(() => {
-  //   getTempCart()
-  // }, [])
+  useEffect(() => {
+    getTempCart()
+  }, [])
 
-  // if (data === null || data === []) {
-  //   window.location.replace('/')
-  // }
-  // console.log(data);
+  if (data === null || data === []) {
+    window.location.replace('/')
+  }
+  console.log(data);
 
-  // useEffect(() => {
-  //   localStorage.setItem("cartProduct", JSON.stringify(data))
-  // }, [data]);
+  useEffect(() => {
+    localStorage.setItem("cartProduct", JSON.stringify(data))
+  }, [data]);
 
-  useEffect( async () => {
-    let data = await getTempCart()
-    if (data !== null) {
-      window.location.replace('/')
-        } else {
-      localStorage.setItem("cartProduct", JSON.stringify(data))}
-  }, []);
+  // useEffect( async () => {
+  //   let data = await getTempCart()
+  //   if (data !== null) {
+  //     window.location.replace('/')
+  //       } else {
+  //     localStorage.setItem("cartProduct", JSON.stringify(data))}
+  // }, []);
 
 
   const handleChange = (e, id) => {
