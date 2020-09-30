@@ -130,3 +130,7 @@ justify-content: space-between;
 margin-left: 40px;
 margin-right: 60px;
 `
+
+export const lineHeight = css `
+line-height: normal;
+`

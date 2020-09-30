@@ -107,7 +107,7 @@ const CategoryPet = () => {
                     </h4>
                 </Card.Title>
                 <Card.Text>
-                  "Fis are friends, not food"
+                  "Fish are friends, not food"
                   </Card.Text>
               </Card.Body>
             </Card>

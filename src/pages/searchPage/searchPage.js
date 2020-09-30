@@ -29,7 +29,8 @@ import {
     cardCss,
     marginTop,
     cardstyle,
-    rowmargin
+    rowmargin,
+    lineHeight
 } from "./searchPage.styles";
 
 
