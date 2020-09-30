@@ -13,6 +13,7 @@ import Swal from "sweetalert2";
 import StatusRequest from "./StatusRequest/StatusRequest";
 import AdoptedHistory from "./AdoptedHistory/AdoptedHistory";
 import ApproveRequest from "./ApproveRequest/ApproveRequest";
+import PurchaseHistory from "./PurchaseHistory/PurchaseHistory"
 
 const AllProfile = () => {
     const [, setLoading] = useState(true);
@@ -75,8 +76,8 @@ const AllProfile = () => {
                     <Tab eventKey="contact" title="Pets Up For Adoption">
                        <ListPetUp/>
                     </Tab>
-                    <Tab eventKey="purchasedProduct" title="Purchase History">
-                        {/* <PurchasedProduct /> */}
+                    <Tab eventKey="purchasedProduct" title="Purchased Product">
+                        <PurchaseHistory />
                     </Tab>
                 </Tabs>
             </div>
