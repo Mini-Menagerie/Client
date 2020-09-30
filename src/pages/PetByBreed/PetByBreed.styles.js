@@ -17,8 +17,11 @@ export const whitecolor = css`
     color: #ffffff;
 `;
 export const card = css`
-    padding: 30px;
-    background-color: darkslategrey;
+    margin: 10px 0;
+
+    @media (max-width: 768px) {
+        margin: 10px;
+    }
 `;
 export const buttoncard = css`
     display: flex;
