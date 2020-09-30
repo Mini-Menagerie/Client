@@ -21,12 +21,15 @@ const ApproveRequest = () => {
         let idUser = await getUserLogin()
         let pets = await axios.get('petUpForAdoption')
         if(pets.status === 200){
-            let filteredPets = pets.data.result.filter(item => {
-                return item.idUser._id === idUser
+            let filteredPets = await pets.data.result.filter(item => {
+                console.log(item);
+                return item.idPet.idUser === idUser
             })
             console.log(filteredPets);
             setAdoption(filteredPets);
             localStorage.setItem('pets', JSON.stringify(filteredPets))
+        } else {
+            setAdoption([])
         }
     }
     const getAdopter = async () => {
@@ -92,7 +95,7 @@ const ApproveRequest = () => {
                                         <p>Zip Code : {e.idUser.zip_code}</p>
                                         <p>Address : {e.idUser.detailAddress}</p>
                                         <br />
-                                        <FormPopUp data={adopter} />
+                                        <FormPopUp data={e} />
                                     </Col>
                                 </Row>
                             </Card.Body>

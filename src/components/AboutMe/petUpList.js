@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/core";
 import { Col, Row, Container, Card, Modal } from "react-bootstrap";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddAdoption from './AddAdoption';
 
 
@@ -31,10 +31,9 @@ const ListPetUp = () => {
     const getPetUpForAdoption = async () => {
         let id = await getUser()
         let result = await axios.get('petUpForAdoption');
-        let datas = await result.data.result.filter(item => item.idUser._id === id)
-        console.log(datas)
+        console.log(result);
+        let datas = await result.data.result.filter(item => item.idPet.idUser._id === id)
         setPetUp(datas)
-
     }
 
     useEffect(() => {

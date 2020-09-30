@@ -60,7 +60,7 @@ const ShoppingCart = () => {
 
   useEffect( async () => {
     let data = await getTempCart()
-    if (data !== null) {
+    if (data === null) {
       window.location.replace('/')
         } else {
       localStorage.setItem("cartProduct", JSON.stringify(data))}

@@ -54,6 +54,7 @@ const Success = () => {
             idTransaction: idTrans,
             idProduct: product
         })
+        console.log(newTransDetail);
         if (newTransDetail.status === 200) {
             console.log('succes to create transaction');
             localStorage.setItem('id_trans_details', newTransDetail.data.result._id)
