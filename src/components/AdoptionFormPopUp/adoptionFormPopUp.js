@@ -13,7 +13,7 @@ console.log(data);
     const [lgShow, setLgShow] = useState(false);
 
     return (
-        <div>
+         <div>
         <PrimaryButton onClick={() => setLgShow(true)}>Request Data Form</PrimaryButton>
         <Modal
             size="lg"
@@ -38,51 +38,51 @@ console.log(data);
                                     <td>1. Duration working outside of your home:</td>
                                     <td>
 
-                                    {data[0].idUser.workDuration}
+                                    {data.idUser.workDuration}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td>2. Do You Own Or Rent Your Home:</td>
-                                    <td> {data[0].idUser.houseStatus}</td>
+                                    <td> {data.idUser.houseStatus}</td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td> 3. Have You Ever Given Pets Up For
                                         Adoption?</td>
                                     <td>
-                                    {data[0].idUser.hasGivenPet}
+                                    {data.idUser.hasGivenPet}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td>4. Do You Have Small Children in the
                                         House?</td>
                                     <td>
-                                    {data[0].idUser.hasChildrenAtHouse}
+                                    {data.idUser.hasChildrenAtHouse}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td>5. Do You Have Other Pets?</td>
                                     <td>
-                                    {data[0].idUser.otherPet}
+                                    {data.idUser.otherPet}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td>6. Do You Tend to Keep Your Pets in a
                                         Cage?</td>
                                     <td>
-                                    {data[0].idUser.willPetBeCaged}
+                                    {data.idUser.willPetBeCaged}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td>7. What is Your Monthly Income?</td>
                                     <td>
-                                    {data[0].idUser.salary}
+                                    {data.idUser.salary}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td>8. Finally, Tell Us Why You'd Like To
                                         Adopt this Pet!</td>
                                     <td>
-                                    {data[0].reason}
+                                    {data.reason}
                                     </td>
                                 </tr>
                             </tbody>
@@ -100,6 +100,7 @@ console.log(data);
             </Modal.Body>
         </Modal>
         </div>
+        
     );
 };
 

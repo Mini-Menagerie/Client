@@ -54,6 +54,7 @@ const ShoppingCart = () => {
   }
   console.log(data);
 
+
   useEffect(() => {
     localStorage.setItem("cartProduct", JSON.stringify(data))
   }, [data]);
@@ -65,6 +66,7 @@ const ShoppingCart = () => {
   //       } else {
   //     localStorage.setItem("cartProduct", JSON.stringify(data))}
   // }, []);
+
 
 
   const handleChange = (e, id) => {
