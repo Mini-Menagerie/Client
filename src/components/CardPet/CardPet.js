@@ -7,6 +7,7 @@ import { margin, petImage } from "./CardPet.styles";
 
 const CardPet = ({ petCards }) => {
     const history = useHistory();
+    console.log(petCards);
 
     const handleClick = (id) => {
         history.push(`/pets-detail/${id}`);

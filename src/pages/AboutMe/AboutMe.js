@@ -64,6 +64,7 @@ const AllProfile = () => {
                     <Tab eventKey="profile" title="Account Settings">
                         <AccountSettings />
                     </Tab>
+                   
                     <Tab eventKey="adopReq" title="Adoption Request">
                         <StatusRequest />
                     </Tab>
