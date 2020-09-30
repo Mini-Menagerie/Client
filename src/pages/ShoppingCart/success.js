@@ -49,6 +49,7 @@ const Success = () => {
     }
     const addNewTransactionDetails = async () => {
         let product = await getCart()
+        console.log(product);
         let idTrans = await getIdTrans()
         let newTransDetail = await axios.post('transactionDetails/create', {
             idTransaction: idTrans,
@@ -58,14 +59,15 @@ const Success = () => {
         if (newTransDetail.status === 200) {
             console.log('succes to create transaction');
             localStorage.setItem('id_trans_details', newTransDetail.data.result._id)
-            localStorage.removeItem('cartProduct')
+            // localStorage.removeItem('cartProduct')
             localStorage.removeItem('id_trans')
         }
     }
     const redirect = () => {
-        window.location.replace('/')
         localStorage.removeItem('cartProduct')
         localStorage.removeItem('totalPrice')
+        localStorage.removeItem('id_trans')
+        window.location.replace('/')
     }
     useEffect(() => {
         getCart()
@@ -75,7 +77,7 @@ const Success = () => {
         addNewTransaction()
         setTimeout(() => {
             addNewTransactionDetails()
-        }, 5000);
+        }, 3000);
 
     }, [addNewTransaction])
 
@@ -90,7 +92,7 @@ const Success = () => {
                     Having trouble? <a href="/">Contact us</a>
                 </p>
                 <div css={button}>
-                    <Button onClick={redirect} >Continue To Homepage</Button>
+                    <Button onClick={redirect}>Continue To Homepage</Button>
                 </div>
             </div>
         </div>
