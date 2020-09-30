@@ -40,9 +40,6 @@ const ListPetUp = () => {
         getPetUpForAdoption()
 
     }, []);
-    console.log('====================================');
-    console.log(petUp);
-    console.log('====================================');
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);

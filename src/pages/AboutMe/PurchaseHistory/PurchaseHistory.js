@@ -13,15 +13,23 @@ const PurchaseHistory = () => {
 
     const getTransactionDetails = async () => {
         const user = JSON.parse(localStorage.getItem("user"));
-        const url = `transactionDetails/history/${user.idUser._id}`
+        let id = user.idUser._id
+
+        const url = `transactionDetails`
         const response = await axios.get(url)
-        setPurchaseHistory(response.data.filterHistory)
+        console.log(response.data)
+        
+        let filteredResponse = await response.data.result.map(item => item).filter(f => {
+            return f.idTransaction.idUser._id === id
+        })
+        console.log(filteredResponse)
+
+        setPurchaseHistory(filteredResponse)
     }
     useEffect(() => {
         getTransactionDetails()
     }, [])
 
-    console.log(purchaseHistory);
 
     return (
         <Container>
@@ -36,7 +44,7 @@ const PurchaseHistory = () => {
                             <OverlayTrigger placement={'left'} overlay={<Tooltip id="tooltip-disabled">Click for transaction details</Tooltip>}>
                                 <Row style={{ display: 'flex' }}>
                                     <Col style={{ paddingRight: '0px' }}>
-                                        <Accordion.Toggle as={Card.Header} eventKey="0" style={{ width: '100%' }}>{value.idTransaction !== null && value.idTransaction !== undefined && value.idTransaction._id}</Accordion.Toggle>
+                                        <Accordion.Toggle as={Card.Header} eventKey="0" style={{ width: '100%' }}>Detail Transaction</Accordion.Toggle>
                                     </Col>
                                     <Col style={{ textAlign: 'right', paddingLeft: '0px' }}>
                                         <Accordion.Toggle as={Card.Header} eventKey="0" style={{ width: '100%' }}>{format(new Date(value.idTransaction !== null && value.idTransaction !== undefined && value.idTransaction.createdAt), 'HH:mm, dd MMMM yyyy')}</Accordion.Toggle>

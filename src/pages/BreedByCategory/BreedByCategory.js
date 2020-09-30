@@ -67,16 +67,18 @@ const BreedByCategory = () => {
         // const url = `${process.env.REACT_APP_API_URL}/pet/category/${category}`;
         // const url = `${process.env.REACT_APP_API_URL}/petdata/collection/${collection}`;
         const url = `${process.env.REACT_APP_API_URL}/petCollection`;
-        console.log(url);
         const response = await fetch(url);
+        
         const result = await response.json();
-
+        console.log('====================================');
+        console.log(result);
+        console.log('====================================');
         function removeDuplicates(originalArray, prop) {
             var newArray = [];
             var lookupObject = {};
 
             for (var i in originalArray) {
-                lookupObject[originalArray[i]["_id"][prop]] =
+                lookupObject[originalArray[i]["collectionName"][prop]] =
                     originalArray[i];
             }
 
