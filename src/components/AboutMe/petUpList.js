@@ -22,7 +22,7 @@ const ListPetUp = () => {
         let id = await getUser();
         let result = await axios.get("petUpForAdoption");
         let datas = await result.data.result.filter(
-            (item) => item.idPet.idUser._id === id
+            (item) => item.idPet.idUser === id
         );
         setPetUp(datas);
     };
@@ -33,6 +33,9 @@ const ListPetUp = () => {
 
         //eslint-disable-next-line
     }, []);
+    console.log("====================================");
+    console.log(petUp);
+    console.log("====================================");
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -80,7 +83,7 @@ const ListPetUp = () => {
                                         </tr>
                                         <tr style={{ borderStyle: "hidden" }}>
                                             <td>Age </td>
-                                            <td>: {item.idPet.age} years</td>
+                                            <td>: {item.idPet.age}</td>
                                         </tr>
                                         <tr style={{ borderStyle: "hidden" }}>
                                             <td>Status </td>

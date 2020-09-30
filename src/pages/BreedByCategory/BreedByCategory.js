@@ -64,7 +64,10 @@ const BreedByCategory = () => {
     };
 
     const fetchCollection = async () => {
-        const url = `${process.env.REACT_APP_API_URL}/pet/category/${category}`;
+        // const url = `${process.env.REACT_APP_API_URL}/pet/category/${category}`;
+        // const url = `${process.env.REACT_APP_API_URL}/petdata/collection/${collection}`;
+        const url = `${process.env.REACT_APP_API_URL}/petCollection`;
+        console.log(url);
         const response = await fetch(url);
         const result = await response.json();
 
@@ -73,7 +76,7 @@ const BreedByCategory = () => {
             var lookupObject = {};
 
             for (var i in originalArray) {
-                lookupObject[originalArray[i]["idBreed"][prop]] =
+                lookupObject[originalArray[i]["_id"][prop]] =
                     originalArray[i];
             }
 
@@ -83,7 +86,7 @@ const BreedByCategory = () => {
             return newArray;
         }
 
-        var uniqueArray = removeDuplicates(result.result, "_id");
+        var uniqueArray = removeDuplicates(result.result, "idCollections");
 
         setAllCollection(uniqueArray);
         setCollection(uniqueArray);
@@ -108,19 +111,20 @@ const BreedByCategory = () => {
                             return (
                                 <Col key={item._id}>
                                     <Link
-                                        to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
+                                        // to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
+                                        to={`petdetail?search=${item.idCollections}`}
                                     >
                                         <Card>
-                                            <Card.Img
+                                            {/* <Card.Img
                                                 variant="top"
                                                 src={item.image[0]}
                                                 style={{
                                                     objectFit: "cover",
                                                     height: "350px",
                                                 }}
-                                            />
+                                            /> */}
                                             <Card.Title css={centertext}>
-                                                {item.idBreed.breedName}
+                                                {item.collectionName}
                                             </Card.Title>
                                         </Card>
                                     </Link>
@@ -237,19 +241,21 @@ const BreedByCategory = () => {
                                     style={{ margin: 10 }}
                                 >
                                     <Link
-                                        to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
+                                        // to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
+                                        to = {`/petCollection`}
                                     >
                                         <Card>
-                                            <Card.Img
+                                            {/* <Card.Img
                                                 variant="top"
                                                 src={item.image[0]}
                                                 style={{
                                                     objectFit: "cover",
                                                     height: "350px",
                                                 }}
-                                            />
+                                            /> */}
                                             <Card.Title css={centertext}>
-                                                {item.idBreed.breedName}
+                                                {/* {item.idBreed.breedName} */}
+                                                {item.collections}
                                             </Card.Title>
                                         </Card>
                                     </Link>
