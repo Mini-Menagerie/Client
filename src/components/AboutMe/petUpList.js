@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/core";
 import { Col, Row, Container, Card, Modal } from "react-bootstrap";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddAdoption from './AddAdoption';
 
 
