@@ -96,6 +96,7 @@ const ShoppingCart = () => {
           price: item.stripe,
           quantity: item.quantity
         })),
+        billingAddressCollection: 'required',
       successUrl: `${window.location.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancelUrl: `${window.location.origin}/cart`,
     });
@@ -149,7 +150,7 @@ const ShoppingCart = () => {
 
   return (
     <Container css={container}>
-      <Row style={{ display: "flex", justifyContent: "space-between" }}>
+      <Container>
         <Col xs={7} css={userDetails}>
           <Form>
             <Form.Row>
@@ -226,11 +227,11 @@ const ShoppingCart = () => {
             </Form.Row>
 
             <div css={buttonRemove}>
-              <Button>Save Address</Button>
+              <Button>Use Address</Button>
             </div>
           </Form>
         </Col>
-      </Row>
+      </Container>
 
       <Container css={containerDetails}>
         <Col xs={7} css={itemDetails}>
@@ -325,10 +326,10 @@ const ShoppingCart = () => {
             </Col>
           </Row>
           <Row style={{ display: 'flex', justifyContent: 'space-around' }}>
-            <div css={buttonCheckoutLater} onClick={handleCheckoutNow} disabled={state.loading}>
+            <div css={buttonCheckoutLater} onClick={handleCheckoutLater} disabled={state.loading}>
               <Button>Checkout Later</Button>
             </div>
-            <div css={buttonCheckoutNow} onClick={handleCheckoutLater} disabled={state.loading}>
+            <div css={buttonCheckoutNow} onClick={handleCheckoutNow} disabled={state.loading}>
               <Button>Checkout Now</Button>
             </div>
           </Row>
