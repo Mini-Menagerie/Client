@@ -29,7 +29,7 @@ const PurchaseHistory = () => {
     return (
         <div>
             <div css={head}>
-                <h2>History Purchase</h2>
+                <h2>Purchase History</h2>
             </div>
             <div css={listInfo}>
                 {purchaseHistory.map((e) => (
@@ -48,7 +48,7 @@ const PurchaseHistory = () => {
                                             <b>{e.idProduct.productName}</b> -{" "}
                                             <span>{e.idProduct.categories}</span>
                                             <p>
-                                                Adoption Fee : IDR
+                                                Adoption Fee : Rp.
                                                 {e.idTransaction.totalPrice}
                                             </p>
                                         </div>

@@ -12,7 +12,6 @@ import AllPets from '../pages/AllPets/AllPets';
 import PetsDetail from '../pages/PetsDetail/PetsDetail';
 import PetShop from '../pages/PetShop/PetShop';
 import AdoptionForm from '../pages/AdoptionForm/AdoptionForm'
-import PurchaseHistory from "../pages/PurchaseHistory/PurchaseHistory";
 import ProductDetail from '../pages/ProductDetail/ProductDetail';
 import ShoppingCart from '../pages/ShoppingCart/ShoppingCart';
 import SuccessCheckout from '../pages/ShoppingCart/success'
@@ -60,11 +59,6 @@ const Router = () => (
                 component={BreedByCategory}
             />
             <Route exact path={routes.PETBYBREED} component={PetByBreed} />
-            <Route
-                exact
-                path={routes.HISTORYPURCHASE}
-                component={PurchaseHistory}
-            />
         </Switch>
     </BrowserRouter>
 );

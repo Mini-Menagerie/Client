@@ -1,7 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Card, Col, Row } from "react-bootstrap";
-import axios from "axios";
+import axios from "../../../helpers/axios";
 import { useState, useEffect } from "react";
 import {
     head,
@@ -12,22 +12,25 @@ import {
 
 const StatusRequest = () => {
     
-    let userData = JSON.parse(localStorage.getItem("user"))
-
+    
     const [statusRequest, setStatusRequest] = useState([]);
     const [, setErrorMessage] = useState();
-
-    useEffect(() => {
-        const url = `http://localhost:8000/formRequest/all/${userData.idUser._id}`;
-        axios
-            .get(url)
+    
+    const getDataForm = () => {
+        const userData = JSON.parse(localStorage.getItem("user"))
+        const url = `formRequest/all/${userData.idUser._id}`;
+        axios.get(url)
             .then(function (result) {
                 setStatusRequest(result.data.filterReq);
             })
             .catch(function (error) {
                 setErrorMessage(error.message);
             });
-    }, [setErrorMessage]);
+    }
+
+    useEffect(() => {
+        getDataForm();
+    }, [])
     
     if (statusRequest.length > 0) {
         return (
@@ -46,10 +49,9 @@ const StatusRequest = () => {
                                     <Row>
                                         <Col css={mainOne}>
                                             <img
-                                                src={e.idPet !== undefined && e.idPet.image}
-                                                alt="broken-image"
+                                                src={e.idPet.image}
+                                                alt="brokenimage"
                                                 style={{
-                                                    objectFit: "cover",
                                                     height: "200px",
                                                 }}
                                             />
