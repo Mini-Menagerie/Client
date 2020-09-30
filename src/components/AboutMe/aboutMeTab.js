@@ -18,9 +18,9 @@ import axios from "axios";
 import EditProfile from "./EditProfile";
 
 const AboutMeTab = ({ profile }) => {
-    console.log(profile);
+    // console.log(profile);
     let userData = JSON.parse(localStorage.getItem("user"));
-    console.log(userData);
+    // console.log(userData);
 
     const [show, setShow] = useState(false);
 

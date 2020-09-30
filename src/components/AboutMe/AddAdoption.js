@@ -4,6 +4,7 @@ import { Col, Row, Container, Form } from "react-bootstrap";
 import axios from "../../helpers/axios";
 import ReactFilestack from "filestack-react";
 
+
 import PrimaryButton from "../Button/Button";
 import { useState, useEffect } from "react";
 
@@ -12,6 +13,7 @@ import { EventRounded } from "@material-ui/icons";
 import { form } from "../../pages/AdoptionForm/AdoptionForm.styles";
 
 const AddAdoption = ({ edit, handleClose }) => {
+    console.log(edit);
     const [formPet, setFormPet] = useState({
         idCategoryPet: "",
         idBreed: "",
@@ -29,10 +31,11 @@ const AddAdoption = ({ edit, handleClose }) => {
 
     const [petCategory, setPetCategory] = useState([]);
     const [breed, setBreed] = useState([]);
-    const getCategory = async () => {
+    
+    const getCategory = async () => { 
         let category = await axios.get("categoryPet");
         if (category.status === 200) {
-            let categoryPet = category.data.result.map((item) => {
+            let categoryPet = category.data.result.map((item) => { 
                 let dataCategory = {
                     id: item._id,
                     categoryName: item.categoryName,
@@ -55,6 +58,7 @@ const AddAdoption = ({ edit, handleClose }) => {
         });
         setBreed(dataBreeds);
     };
+   
     const getUser = async () => {
         let dataUser = await JSON.parse(localStorage.getItem("user"));
         let idUser = dataUser.idUser._id;
@@ -102,7 +106,7 @@ const AddAdoption = ({ edit, handleClose }) => {
     useEffect(() => {
         getCategory();
         getBreed();
-        getUser();
+        getUser();       
     }, []);
     
 
@@ -146,7 +150,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                     </Form.Label>
                                     <Col sm="7">
                                         <Form.Control
-                                            placeholder=" Pet Name"
+                                            placeholder="Pet Name"
                                             style={{ width: "350px" }}
                                             type="text"
                                             value={formPet.petName}
@@ -161,13 +165,15 @@ const AddAdoption = ({ edit, handleClose }) => {
                                     </Form.Label>
                                     <Col sm="7">
                                         <Form.Control
-                                            placeholder="Rp. "
+                                            placeholder="Rp.100.000 "
                                             style={{ width: "350px" }}
                                             type="text"
                                             value={formPet.fee}
                                             name="fee"
+                                            prefix="Rp."
+                                            allowDecimals={true}
                                             onChange={handleChange}
-                                        />
+                                        ></Form.Control>                                       
                                     </Col>
                                 </Form.Group>
                             </Form.Row>
@@ -239,17 +245,20 @@ const AddAdoption = ({ edit, handleClose }) => {
                             <Form.Row>
                                 <Form.Group as={Col}>
                                     <Form.Label column sm="5">
-                                        Location:
+                                        Size:
                                     </Form.Label>
                                     <Col sm="7">
                                         <Form.Control
-                                            placeholder="Location"
+                                            placeholder="Size"
                                             style={{ width: "350px" }}
-                                            type="text"
-                                            value={formPet.location}
-                                            name="location"
+                                            as="select"
+                                            value={formPet.size}
+                                            name="size"
                                             onChange={handleChange}
-                                        />
+                                        ><option value="Small">Small</option>
+                                         <option value="Medium">Medium</option>
+                                         <option value="Large">Large</option>
+                                         </Form.Control>
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Col}>
@@ -260,11 +269,13 @@ const AddAdoption = ({ edit, handleClose }) => {
                                         <Form.Control
                                             placeholder="Gender"
                                             style={{ width: "350px" }}
-                                            type="text"
                                             value={formPet.gender}
                                             name="gender"
+                                            as="select"
                                             onChange={handleChange}
-                                        />
+                                        >    <option value="Female">Female</option>
+                                             <option value="Male">Male</option>
+                                        </Form.Control>   
                                     </Col>
                                 </Form.Group>
                             </Form.Row>
@@ -287,7 +298,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                             placeholder="Age"
                                             style={{ width: "350px" }}
                                             type="text"
-                                            value={formPet.age}
+                                            value={`${formPet.age} years`}
                                             name="age"
                                             onChange={handleChange}
                                         />
@@ -314,17 +325,18 @@ const AddAdoption = ({ edit, handleClose }) => {
                     <Row>
                         <Form.Group as={Col}>
                             <Form.Label column sm="5">
-                                Size :
+                                Location :
                             </Form.Label>
                             <Col sm="5">
                                 <Form.Control
-                                    placeholder="Size"
+                                    placeholder="Location"
                                     style={{ width: "735px", height: "60px" }}
                                     type="text"
-                                    value={formPet.size}
-                                    name="size"
+                                    value={formPet.location}
+                                    name="location"
                                     onChange={handleChange}
-                                />
+                                >
+                                 </Form.Control>
                             </Col>
                         </Form.Group>
                     </Row>
@@ -337,7 +349,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                 <Form.Control
                                     placeholder="About"
                                     style={{ width: "735px", height: "60px" }}
-                                    type="text"
+                                    type="textarea"
                                     value={formPet.about}
                                     name="about"
                                     onChange={handleChange}
