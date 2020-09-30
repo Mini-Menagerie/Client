@@ -14,7 +14,6 @@ const PurchaseHistory = () => {
     const getTransactionDetails = async () => {
         const user = JSON.parse(localStorage.getItem("user"));
         const url = `transactionDetails/history/${user.idUser._id}`
-
         const response = await axios.get(url)
         setPurchaseHistory(response.data.filterHistory)
     }

@@ -300,10 +300,10 @@ const AddAdoption = ({ edit, handleClose }) => {
                                     </Form.Label>
                                     <Col sm="7">
                                         <Form.Control
-                                            placeholder="Age"
+                                            placeholder="Years old"
                                             style={{ width: "350px" }}
                                             type="text"
-                                            value={`${formPet.age} years`}
+                                            value={formPet.age}
                                             name="age"
                                             onChange={handleChange}
                                         />
