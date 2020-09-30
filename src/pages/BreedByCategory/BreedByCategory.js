@@ -78,8 +78,8 @@ const BreedByCategory = () => {
     const fetchBreed = async () => {
         const url = `${process.env.REACT_APP_API_URL}/pet/category/${category}`;
         const response = await fetch(url);
-        const result = await response.json();
 
+        const result = await response.json();
         function removeDuplicates(originalArray, prop) {
             var newArray = [];
             var lookupObject = {};

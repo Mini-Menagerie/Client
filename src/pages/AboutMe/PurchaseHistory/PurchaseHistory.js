@@ -21,14 +21,23 @@ const PurchaseHistory = () => {
 
     const getTransactionDetails = async () => {
         const user = JSON.parse(localStorage.getItem("user"));
-        const url = `transactionDetails/history/${user.idUser._id}`;
-        const response = await axios.get(url);
-        setPurchaseHistory(response.data.filterHistory);
-    };
+        let id = user.idUser._id
 
+        const url = `transactionDetails`
+        const response = await axios.get(url)
+        console.log(response.data)
+        
+        let filteredResponse = await response.data.result.map(item => item).filter(f => {
+            return f.idTransaction.idUser._id === id
+        })
+        console.log(filteredResponse)
+
+        setPurchaseHistory(filteredResponse)
+    }
     useEffect(() => {
-        getTransactionDetails();
-    }, []);
+        getTransactionDetails()
+    }, [])
+
 
     return (
         <Container>
@@ -40,26 +49,10 @@ const PurchaseHistory = () => {
                 {purchaseHistory.map((value) => (
                     <Accordion style={{ width: "100%", marginBottom: "10px" }}>
                         <Card>
-                            <OverlayTrigger
-                                placement={"left"}
-                                overlay={
-                                    <Tooltip id="tooltip-disabled">
-                                        Click for transaction details
-                                    </Tooltip>
-                                }
-                            >
-                                <Row style={{ display: "flex" }}>
-                                    <Col style={{ paddingRight: "0px" }}>
-                                        <Accordion.Toggle
-                                            as={Card.Header}
-                                            eventKey="0"
-                                            style={{ width: "100%" }}
-                                        >
-                                            {value.idTransaction !== null &&
-                                                value.idTransaction !==
-                                                    undefined &&
-                                                value.idTransaction._id}
-                                        </Accordion.Toggle>
+                            <OverlayTrigger placement={'left'} overlay={<Tooltip id="tooltip-disabled">Click for transaction details</Tooltip>}>
+                                <Row style={{ display: 'flex' }}>
+                                    <Col style={{ paddingRight: '0px' }}>
+                                        <Accordion.Toggle as={Card.Header} eventKey="0" style={{ width: '100%' }}>Detail Transaction</Accordion.Toggle>
                                     </Col>
                                     <Col
                                         style={{

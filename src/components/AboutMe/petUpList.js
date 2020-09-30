@@ -33,9 +33,6 @@ const ListPetUp = () => {
 
         //eslint-disable-next-line
     }, []);
-    console.log("====================================");
-    console.log(petUp);
-    console.log("====================================");
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
