@@ -13,16 +13,12 @@ import Swal from "sweetalert2";
 import StatusRequest from "./StatusRequest/StatusRequest";
 import AdoptedHistory from "./AdoptedHistory/AdoptedHistory";
 import ApproveRequest from "./ApproveRequest/ApproveRequest";
+import PurchaseHistory from "./PurchaseHistory/PurchaseHistory"
 
 const AllProfile = () => {
     const [, setLoading] = useState(true);
     const [aboutMe, setAboutMe] = useState([]);
     const [key, setKey] = useState("home");
-
-    // const handleEditProfile = async (e) => {
-    //   let result = await axios.put(`http://localhost:8000/users/${id}`)
-    //   setAboutMe(e.target.value)
-    //put add a pet pop up in pet up for adoption
 
     let userLogin = JSON.parse(localStorage.getItem("user"));
     let token = localStorage.getItem("menagerie");
@@ -72,7 +68,7 @@ const AllProfile = () => {
                     <Tab eventKey="adopReq" title="Adoption Request">
                         <StatusRequest />
                     </Tab>
-                    <Tab eventKey="adopHistory" title="Adopted history">
+                    <Tab eventKey="adopHistory" title="Adoption History">
                         <AdoptedHistory />
                     </Tab>
                     <Tab eventKey="approveReq" title="Approve Request">
@@ -82,7 +78,7 @@ const AllProfile = () => {
                        <ListPetUp/>
                     </Tab>
                     <Tab eventKey="purchasedProduct" title="Purchased Product">
-                        {/* <PurchasedProduct /> */}
+                        <PurchaseHistory />
                     </Tab>
                 </Tabs>
             </div>

@@ -1,14 +1,14 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Col, Row, Container, Card, Modal } from "react-bootstrap";
-import { useHistory } from "react-router-dom";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import AddAdoption from './AddAdoption';
 
 
 import PrimaryButton from "../Button/Button";
 import {
+
     container,
     button,
     margin,
@@ -16,6 +16,7 @@ import {
     row
 } from "./petUpList.styles";
 import axios from "../../helpers/axios";
+
 
 
 const ListPetUp = () => {

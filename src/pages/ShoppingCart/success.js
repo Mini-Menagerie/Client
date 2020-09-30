@@ -1,5 +1,13 @@
+
+/** @jsx jsx */
+import { jsx } from "@emotion/core";
+import { useEffect } from 'react';
 import axios from '../../helpers/axios';
-import React, { useEffect } from 'react';
+import { Button } from 'react-bootstrap';
+
+import {
+    button
+} from "./success.styles";
 
 const Success = () => {
 
@@ -19,7 +27,7 @@ const Success = () => {
     }
     const getTotalPrice = () => {
         const cart = JSON.parse(localStorage.getItem('cartProduct'))
-        let totalPrice = cart.map(item => parseInt(item.price)).reduce((a,b) => a+b, 0)
+        let totalPrice = cart.map(item => parseInt(item.price)).reduce((a, b) => a + b, 0)
         return totalPrice
     }
     const getIdTrans = () => {
@@ -34,7 +42,7 @@ const Success = () => {
             idUser: userId,
             totalPrice: totalPrice
         })
-        if(newTrans.status === 200){
+        if (newTrans.status === 200) {
             console.log('success to add new transaction');
             localStorage.setItem('id_trans', newTrans.data.result._id)
         }
@@ -46,14 +54,19 @@ const Success = () => {
             idTransaction: idTrans,
             idProduct: product
         })
-        if(newTransDetail.status === 200){
+        if (newTransDetail.status === 200) {
             console.log('succes to create transaction');
             localStorage.setItem('id_trans_details', newTransDetail.data.result._id)
             localStorage.removeItem('cartProduct')
             localStorage.removeItem('id_trans')
         }
     }
-    useEffect(() => { 
+    const redirect = () => {
+        window.location.replace('/')
+        localStorage.removeItem('cartProduct')
+        localStorage.removeItem('totalPrice')
+    }
+    useEffect(() => {
         getCart()
         getUser()
         getTotalPrice()
@@ -62,39 +75,22 @@ const Success = () => {
         setTimeout(() => {
             addNewTransactionDetails()
         }, 5000);
-        
-    }, [])
+
+    }, [addNewTransaction])
 
 
     return (
         <div>
-
-            {/* <div className="sr-main">
-                <header className="sr-header">
-                    <div className="sr-header__logo"></div>
-                </header>
-                <div className="sr-payment-summary completed-view">
-                    <h1>Your payment succeeded</h1>
-                    <h4>Checkout Session ID:</h4>
-                </div>
-                <div className="sr-section completed-view">
-                    <div className="sr-callout">
-                        <pre>{sessionId}</pre>
-                    </div>
-                    <Link to="/">Back to Homepage</Link>
-                </div>
-            </div> */}
-
             <div className="jumbotron text-center">
-                <h1 className="display-3">Your payment succeeded</h1>
-                <p className="lead"><strong>Please check your email</strong> for invoice</p>
+                <h1 className="display-3">Your Payment Is Successful</h1>
+                <p className="lead"><strong>Please Check Your Email</strong> for invoice</p>
                 <hr />
                 <p>
-                    Having trouble? <a href="#">Contact us</a>
+                    Having trouble? <a href="/">Contact us</a>
                 </p>
-                <p className="lead">
-                    <a className="btn btn-primary btn-sm" href="/" role="button">Continue to homepage</a>
-                </p>
+                <div css={button}>
+                    <Button onClick={redirect} >Continue To Homepage</Button>
+                </div>
             </div>
         </div>
 

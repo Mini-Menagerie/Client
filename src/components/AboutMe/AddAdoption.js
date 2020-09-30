@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Col, Row, Container, Form } from "react-bootstrap";
+import { Col, Row, Form } from "react-bootstrap";
 import axios from "../../helpers/axios";
 import ReactFilestack from "filestack-react";
 
@@ -9,8 +9,6 @@ import PrimaryButton from "../Button/Button";
 import { useState, useEffect } from "react";
 
 import { upload, uploadPhoto, fs } from "./EditProfile.styles";
-import { EventRounded } from "@material-ui/icons";
-import { form } from "../../pages/AdoptionForm/AdoptionForm.styles";
 
 const AddAdoption = ({ edit, handleClose }) => {
     console.log(edit);
@@ -29,10 +27,16 @@ const AddAdoption = ({ edit, handleClose }) => {
         fee: "",
     });
 
+
+    let userData = JSON.parse(localStorage.getItem("user"));
+    console.log(userData);
+
     const [petCategory, setPetCategory] = useState([]);
     const [breed, setBreed] = useState([]);
-    
-    const getCategory = async () => { 
+
+
+    const getCategory = async () => {
+
         let category = await axios.get("categoryPet");
         if (category.status === 200) {
             let categoryPet = category.data.result.map((item) => { 
@@ -45,6 +49,7 @@ const AddAdoption = ({ edit, handleClose }) => {
             setPetCategory(categoryPet);
         }
     };
+  
     const getBreed = async () => {
         let breeds = await axios.get("breed");
         let dataBreeds = breeds.data.result.map((item) => {
@@ -324,6 +329,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                     </Row>
                     <Row>
                         <Form.Group as={Col}>
+
                             <Form.Label column sm="5">
                                 Location :
                             </Form.Label>
@@ -343,6 +349,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                     <Row>
                         <Form.Group as={Col}>
                             <Form.Label column sm="5">
+
                                 About :
                             </Form.Label>
                             <Col sm="7">
@@ -356,6 +363,19 @@ const AddAdoption = ({ edit, handleClose }) => {
                                 />
                             </Col>
                         </Form.Group>
+                        <Form.Group as={Col}>
+                            <Form.Label column sm="5">
+                                Email :
+                            </Form.Label>
+                            <Col sm="7">
+                                <Form.Control
+                                    type="email"
+                                    placeholder={userData.email}
+                                    value={userData.email}
+                                    disabled
+                                />
+                            </Col>
+                        </Form.Group>               
                     </Row>
                 </Form.Row>
                 <PrimaryButton

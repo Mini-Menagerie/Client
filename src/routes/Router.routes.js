@@ -14,6 +14,5 @@ export default {
     SUCCESSCHECKOUT: "/success",
     CATEGORYPET: "/category-pet",
     PETBYBREED: "/all-breeds/category/:category/:breed",
-    BREEDBYCATEGORY: "/all-breeds/category/:category",
-    HISTORYPURCHASE: "/history-purchase",
+    BREEDBYCATEGORY: "/all-breeds/category/:category"
 };
