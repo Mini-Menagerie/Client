@@ -3,7 +3,7 @@ import { jsx } from "@emotion/core";
 import { useState, useEffect } from 'react';
 import { loadStripe } from '@stripe/stripe-js';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
 
 import {
   button,
@@ -12,43 +12,34 @@ import {
   container,
   quantity
 } from "./ShoppingCart.styles";
-import { replace } from "formik";
 
 const stripePromise = loadStripe("pk_test_51HUN7sAjKylxkZ24d0YxRuxiDVNFIoEAsNmyg8WFxzcExHz1cPsfdouNHOsw3E9SJQpQ19rG2TFByvkQ3MNzAXey00DUfRySaY");
 
 const ShoppingCart = () => {
   const [data, setData] = useState([]);
+  // const [finalData, setFinalData] = useState([]);
   const [state, dispatch] = useState({
     loading: false,
     error: null,
   });
 
-  const replace = () => {
-    window.location.replace('/')
-  }
-
-  useEffect(() => {
+  const getTempCart = () => {
     const cart = JSON.parse(localStorage.getItem("cartProduct"));
     setData(cart);
+  } 
+
+  useEffect(() => {
+    getTempCart()
   }, [])
 
   useEffect(() => {
-    data.length < 1 ? replace() : localStorage.setItem("cartProduct", JSON.stringify(data))
+    if (data !== null) {
+      window.location.replace('/')
+        } else {
+      localStorage.setItem("cartProduct", JSON.stringify(data))}
   }, [data]);
 
-
-  // if (data === null) {
-  //   Swal.fire({
-  //     // imageUrl: 'https://thumbs.gfycat.com/AccurateAgreeableDairycow.webp',
-  //     title: 'You dont have any purchases',
-  //     text: 'this page will be redirected automatically',
-  //     timer: 5000,
-  //     showConfirmButton: false,
-  //     timerProgressBar: true,
-  //   }).then(function () {
-  //     window.location.replace('/')
-  //   })
-  // }
+  // console.log(finalData);
 
   const handleChange = (e, id) => {
     const { value } = e.target;
@@ -154,7 +145,7 @@ const ShoppingCart = () => {
             <h6>Total Price: </h6>
           </Col>
           <Col>
-            <h6>{totalPrice}</h6>
+            <h6>Rp. {totalPrice}</h6>
           </Col>
           <Col xs={7}>
             <h6>Handling Fee: </h6>
