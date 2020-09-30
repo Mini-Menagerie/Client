@@ -27,9 +27,7 @@ const AddAdoption = ({ edit, handleClose }) => {
         fee: "",
     });
 
-
     let userData = JSON.parse(localStorage.getItem("user"));
-    console.log(userData);
 
     const [petCategory, setPetCategory] = useState([]);
     const [breed, setBreed] = useState([]);
@@ -49,7 +47,7 @@ const AddAdoption = ({ edit, handleClose }) => {
             setPetCategory(categoryPet);
         }
     };
-  
+
     const getBreed = async () => {
         let breeds = await axios.get("breed");
         let dataBreeds = breeds.data.result.map((item) => {
@@ -71,9 +69,9 @@ const AddAdoption = ({ edit, handleClose }) => {
     };
 
     const addNewPet = async (event) => {
-        event.preventDefault()
-        let idUser = await getUser()
-        const newPet = await axios.post('pet/create', {
+        event.preventDefault();
+        let idUser = await getUser();
+        const newPet = await axios.post("pet/create", {
             idCategoryPet: formPet.idCategoryPet,
             idBreed: formPet.idBreed,
             idUser: idUser,
@@ -85,18 +83,20 @@ const AddAdoption = ({ edit, handleClose }) => {
             location: formPet.location,
             about: formPet.about,
             image: formPet.image,
-            fee: formPet.fee
-        })
-        if(newPet.status === 200){
-            const newPetForAdoption = await axios.post('petUpForAdoption/create', {
-                idUser: idUser,
-                idPet: newPet.data.result._id,
-                fee: formPet.fee,
-                status: "Available"
-            })
-            if(newPetForAdoption.status === 200){
-                alert('Success')
-                console.log(newPetForAdoption);
+            fee: formPet.fee,
+        });
+        if (newPet.status === 200) {
+            const newPetForAdoption = await axios.post(
+                "petUpForAdoption/create",
+                {
+                    idUser: idUser,
+                    idPet: newPet.data.result._id,
+                    fee: formPet.fee,
+                    status: "Available",
+                }
+            );
+            if (newPetForAdoption.status === 200) {
+                alert("Success");
             }
         }
     };
@@ -113,7 +113,6 @@ const AddAdoption = ({ edit, handleClose }) => {
         getBreed();
         getUser();       
     }, []);
-    
 
     return (
         <div>
@@ -196,21 +195,25 @@ const AddAdoption = ({ edit, handleClose }) => {
                                     <Form.Label column sm="5">
                                         Category Pet:
                                     </Form.Label>
-                                    
-                                        <Col sm="7">
-                                            <Form.Control
-                                                style={{ width: "350px" }}
-                                                onChange={handleChange}
-                                                name="idCategoryPet"
-                                                onClick=""
-                                                as="select"
-                                                defaultValue="Category Pet"
-                                            >{petCategory.map(item => {
-                                               return <option value={item.id}>{item.categoryName}</option>
+
+                                    <Col sm="7">
+                                        <Form.Control
+                                            style={{ width: "350px" }}
+                                            onChange={handleChange}
+                                            name="idCategoryPet"
+                                            onClick=""
+                                            as="select"
+                                            defaultValue="Category Pet"
+                                        >
+                                            {petCategory.map((item) => {
+                                                return (
+                                                    <option value={item.id}>
+                                                        {item.categoryName}
+                                                    </option>
+                                                );
                                             })}
-                                            </Form.Control>
-                                        </Col>
-                                    
+                                        </Form.Control>
+                                    </Col>
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label column sm="5">
@@ -224,16 +227,25 @@ const AddAdoption = ({ edit, handleClose }) => {
                                             as="select"
                                             defaultValue="idBreed"
                                             name="idBreed"
-                                        > 
-
-                                         {
-                                            breed.filter(item => {
-                                                return item.id === formPet.idCategoryPet
-                                            }).map(items => {
-                                                return <option value={items.idBreed}>{items.breedName}</option>
-                                            })   
-                                        }
-                                         
+                                        >
+                                            {breed
+                                                .filter((item) => {
+                                                    return (
+                                                        item.id ===
+                                                        formPet.idCategoryPet
+                                                    );
+                                                })
+                                                .map((items) => {
+                                                    return (
+                                                        <option
+                                                            value={
+                                                                items.idBreed
+                                                            }
+                                                        >
+                                                            {items.breedName}
+                                                        </option>
+                                                    );
+                                                })}
                                         </Form.Control>
                                     </Col>
                                 </Form.Group>
@@ -329,7 +341,6 @@ const AddAdoption = ({ edit, handleClose }) => {
                     </Row>
                     <Row>
                         <Form.Group as={Col}>
-
                             <Form.Label column sm="5">
                                 Location :
                             </Form.Label>
@@ -349,7 +360,6 @@ const AddAdoption = ({ edit, handleClose }) => {
                     <Row>
                         <Form.Group as={Col}>
                             <Form.Label column sm="5">
-
                                 About :
                             </Form.Label>
                             <Col sm="7">
@@ -375,7 +385,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                     disabled
                                 />
                             </Col>
-                        </Form.Group>               
+                        </Form.Group>
                     </Row>
                 </Form.Row>
                 <PrimaryButton

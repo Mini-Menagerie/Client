@@ -2,113 +2,72 @@
 import { jsx } from "@emotion/core";
 import { Col, Row, Container, Form } from "react-bootstrap";
 import { useEffect, useState } from "react";
-import axios from "axios"
-import { EmojiFoodBeverageTwoTone } from "@material-ui/icons";
+import axios from "axios";
 
 import PrimaryButton from "../../components/Button/Button";
-import {
-    margin,
-    changePassword,
-    boxes
-} from './accountSettings.styles'
+import { margin, changePassword } from "./accountSettings.styles";
 import swal from "sweetalert";
 import Swal from "sweetalert2";
 
 const AccountSettings = ({ account }) => {
-
     const [email, setEmail] = useState();
-    const [password,setPassword] = useState({
+    const [password, setPassword] = useState({
         passwordLama: "",
-        passwordBaru: ""
+        passwordBaru: "",
     });
     const [form, setForm] = useState({
-        email: ""
+        email: "",
     });
 
-    let userData = JSON.parse(localStorage.getItem("user"))
+    let userData = JSON.parse(localStorage.getItem("user"));
 
     const fetchData = async () => {
         let response = await axios.get(
             `http://localhost:8000/userAccount/${userData.id}` //if let id=userData.id then ${id}
         ); //endpoint
-            setEmail(response.data.result.email)
-        // setForm({
-        //     email: response.data.result.email,
-        //     password: response.data.result.password
-
-        // })
+        setEmail(response.data.result.email);
     };
-
-    // const comparePassword = () => {
-    //     if()
-    // }
 
     const handleEditAccount = async (event) => {
         event.preventDefault();
-        return (
-            axios.put(
-                `http://localhost:8000/userAccountEmail/${userData.id}`, form
-            )
-            // .then(result => console.log(result))
-            .then(result => setEmail(result.data.result.email))
+        return axios
+            .put(`http://localhost:8000/userAccountEmail/${userData.id}`, form)
+            .then((result) => setEmail(result.data.result.email))
             .then(() => window.location.reload())
-            .catch(err => console.log(err))
-        )
-    }
+            .catch((err) => console.log(err));
+    };
 
     const handleEditPassword = async (event) => {
         event.preventDefault();
-        return (
-            axios.put(
-                `http://localhost:8000/userAccountPassword/${userData.id}`, password
+        return axios
+            .put(
+                `http://localhost:8000/userAccountPassword/${userData.id}`,
+                password
             )
-            .then(result => {
-                if(result.status === 200){ //liat di backend res
-                    swal('Password Changed Succesfully!')
+            .then((result) => {
+                if (result.status === 200) {
+                    //liat di backend res
+                    swal("Password Changed Succesfully!");
                 }
             })
             .then(() => window.location.reload())
-            .catch(err => {
-                if(err.message === "Request failed with status code 400"){
+            .catch((err) => {
+                if (err.message === "Request failed with status code 400") {
                     Swal({
-                        title:"Wrong Current Password",
+                        title: "Wrong Current Password",
                         icon: "warning",
                     });
                 }
-            })
-        )
-    }
+            });
+    };
 
     const handleChangePassword = (event) => {
-        event.preventDefault()
+        event.preventDefault();
         setPassword({
             ...password,
-            [event.target.name]: event.target.value
-        })
-    }
-
-    // const handleConfirmOldPassword = (event) => {
-    //     if(event.target.value !== password.passwordLama) {
-    //         alert("Wrong Current Password")
-    //     } else {
-    //         handleConfirmNewPassword()
-    //         //lanjut ke (handleconfirmNewPassword)
-    //     }
-    // }
-
-    // handleConfirmOldPassword = () => {
-    //     await bcrypt.compare(currentPassword, )
-    // if(!handleConfirmOldPassword){
-    //     alert("Wrong Current Password")
-    // } else {
-
-    // }}
-
-//    const handleConfirmNewPassword = (event) => {
-//         if(event.target.value !== password.passwordBaru) {
-//             alert("Passwords Don't Match")
-//         } 
-//     }
+            [event.target.name]: event.target.value,
+        });
+    };
 
     const handleChange = (event) => {
         setForm({
@@ -119,59 +78,64 @@ const AccountSettings = ({ account }) => {
 
     useEffect(() => {
         fetchData();
-    })
+    });
 
     return (
         <Container fluid css={margin}>
             <div>
                 <Col xs={8}>
-                <Form onSubmit={handleEditAccount}>
-                    <Row>
-                        <Form.Group controlId="formGridAddress1">
-                            <Form.Label>Email: {email}</Form.Label>
-                        </Form.Group>
-                    </Row>
-                    <Row>
-                        <h5>Change Email:</h5>
-                    </Row>
-                    <Row>
-                        <Form.Group controlId="formGridAddress1">
-                                <Form.Control 
-                                    placeholder="New Email" name="email" value={form.email} onChange={handleChange}
-                                />
-                        </Form.Group>
-                    </Row>
-                    <Row>
-                        <PrimaryButton type="submit">Update Email</PrimaryButton>
-                    </Row>
-                </Form>
-                <Form onSubmit={handleEditPassword}>
-                    <Row css={changePassword}>
-                        <h5>Change Password:</h5>
-                    </Row>
-                    <Row>
-                        <Form.Group controlId="formBasicPassword">
+                    <Form onSubmit={handleEditAccount}>
+                        <Row>
+                            <Form.Group controlId="formGridAddress1">
+                                <Form.Label>Email: {email}</Form.Label>
+                            </Form.Group>
+                        </Row>
+                        <Row>
+                            <h5>Change Email:</h5>
+                        </Row>
+                        <Row>
+                            <Form.Group controlId="formGridAddress1">
                                 <Form.Control
-                                    placeholder="Current Password" name="passwordLama" onChange={handleChangePassword}
+                                    placeholder="New Email"
+                                    name="email"
+                                    value={form.email}
+                                    onChange={handleChange}
                                 />
-                        </Form.Group>
-                    </Row>
-                    <Row>
-                        <Form.Group controlId="formBasicPassword">
+                            </Form.Group>
+                        </Row>
+                        <Row>
+                            <PrimaryButton type="submit">
+                                Update Email
+                            </PrimaryButton>
+                        </Row>
+                    </Form>
+                    <Form onSubmit={handleEditPassword}>
+                        <Row css={changePassword}>
+                            <h5>Change Password:</h5>
+                        </Row>
+                        <Row>
+                            <Form.Group controlId="formBasicPassword">
                                 <Form.Control
-                                    placeholder="New Password" name="passwordBaru" onChange={handleChangePassword}
+                                    placeholder="Current Password"
+                                    name="passwordLama"
+                                    onChange={handleChangePassword}
                                 />
-                        </Form.Group>
-                    </Row>
-                    {/* <Row>
-                        <Form.Group controlId="formBasicPassword">
+                            </Form.Group>
+                        </Row>
+                        <Row>
+                            <Form.Group controlId="formBasicPassword">
                                 <Form.Control
-                                    placeholder="Confirm Password" name="confirmNewPassword"
-                        </Form.Group>
-                    </Row> */}
-                    <Row>
-                        <PrimaryButton type="submit">Update Password</PrimaryButton>
-                    </Row>
+                                    placeholder="New Password"
+                                    name="passwordBaru"
+                                    onChange={handleChangePassword}
+                                />
+                            </Form.Group>
+                        </Row>
+                        <Row>
+                            <PrimaryButton type="submit">
+                                Update Password
+                            </PrimaryButton>
+                        </Row>
                     </Form>
                 </Col>
             </div>

@@ -16,10 +16,6 @@ import {
 import EditProfile from "./EditProfile";
 
 const AboutMeTab = ({ profile }) => {
-    // console.log(profile);
-    let userData = JSON.parse(localStorage.getItem("user"));
-    // console.log(userData);
-
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -70,18 +66,24 @@ const AboutMeTab = ({ profile }) => {
                         <Table style={{ borderStyle: "hidden" }}>
                             <tbody>
                                 <tr style={{ borderStyle: "hidden" }}>
-                                    <td><b>Name:</b></td>
+                                    <td>
+                                        <b>Name:</b>
+                                    </td>
                                     <td>
                                         {profile.idUser !== undefined &&
                                             profile.idUser.fullName}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
-                                    <td><b>Email:</b></td>
+                                    <td>
+                                        <b>Email:</b>
+                                    </td>
                                     <td>{profile.email}</td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
-                                    <td><b>Phone Number:</b></td>
+                                    <td>
+                                        <b>Phone Number:</b>
+                                    </td>
                                     <td>
                                         {profile.idUser !== undefined &&
                                             profile.idUser.noHandphone}
@@ -98,21 +100,27 @@ const AboutMeTab = ({ profile }) => {
                         <Table style={{ borderStyle: "hidden" }}>
                             <tbody>
                                 <tr style={{ borderStyle: "hidden" }}>
-                                    <td><b>Location:</b></td>
+                                    <td>
+                                        <b>Location:</b>
+                                    </td>
                                     <td>
                                         {profile.idUser !== undefined &&
                                             profile.idUser.country}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
-                                    <td><b>Location:</b></td>
+                                    <td>
+                                        <b>Location:</b>
+                                    </td>
                                     <td>
                                         {profile.idUser !== undefined &&
                                             profile.idUser.province}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
-                                    <td><b>City:</b></td>
+                                    <td>
+                                        <b>City:</b>
+                                    </td>
                                 </tr>
                             </tbody>
                         </Table>
@@ -121,14 +129,18 @@ const AboutMeTab = ({ profile }) => {
                         <Table style={{ borderStyle: "hidden" }}>
                             <tbody>
                                 <tr style={{ borderStyle: "hidden" }}>
-                                    <td><b>Zip Code:</b></td>
+                                    <td>
+                                        <b>Zip Code:</b>
+                                    </td>
                                     <td>
                                         {profile.idUser !== undefined &&
                                             profile.idUser.zip_code}
                                     </td>
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
-                                    <td><b>Address:</b></td>
+                                    <td>
+                                        <b>Address:</b>
+                                    </td>
                                     <td>
                                         {profile.idUser !== undefined &&
                                             profile.idUser.detailAddress}
