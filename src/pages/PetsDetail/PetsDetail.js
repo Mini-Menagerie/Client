@@ -15,16 +15,12 @@ const PetsDetail = (props) => {
     const [, setError] = useState(false);
     const [, setErrorMessage] = useState();
     const [details, setDetails] = useState({});
-    const [ ,setProduct] = useState([]);
+    const [, setProduct] = useState([]);
     const [petCards, setPetCards] = useState([]);
     const [user, setUser] = useState({});
-    // const [email, setEmail] = useState({});
-  
 
     let { id } = useParams();
-    localStorage.setItem('selectedPet', id)
-
-    // let userLogin = JSON.parse(localStorage.getItem("user"));
+    localStorage.setItem("selectedPet", id);
 
     const fetchDetails = async () => {
         const url = `http://localhost:8000/pet/${id}`;
@@ -55,36 +51,20 @@ const PetsDetail = (props) => {
             });
     };
 
-    //  const userEmail = () => {
-    //     const url = `http://localhost:8000/userAccount/${userLogin.id}`;
-    //     axios
-    //         .get(url)
-    //         .then(function (response) {
-    //             setEmail(response.data.result);
-    //             console.log(response.data.result);
-    //             setLoading(false);
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error.message);
-    //             setErrorMessage(error.message);
-    //             setLoading(false)            });
-    // };
-
     const fetchUser = () => {
-        const idUser = details.idUser!==undefined && details.idUser._id
-        const url =`http://localhost:8000/users/${idUser}`
-        axios.get(url)
-        .then(function (response) {
-            setUser(response.data.result)
-            console.log(response.data.result);
-            setLoading(false)
-        })
-        .catch(function(error) {
-            console.log(error.message);
-            setErrorMessage(error.message);
-            setLoading(false)
-        })
-    }
+        const idUser = details.idUser !== undefined && details.idUser._id;
+        const url = `http://localhost:8000/users/${idUser}`;
+        axios
+            .get(url)
+            .then(function (response) {
+                setUser(response.data.result);
+                setLoading(false);
+            })
+            .catch(function (error) {
+                setErrorMessage(error.message);
+                setLoading(false);
+            });
+    };
 
     const url = () => {
         const url = "http://localhost:8000/pet";
@@ -102,21 +82,19 @@ const PetsDetail = (props) => {
             });
     };
 
-
     useEffect(() => {
         fetchDetails();
         fetchProduct();
         fetchUser();
         url();
-        // userEmail();
 
-
+        //eslint-disable-next-line
     }, []);
 
     return (
         <div>
             <Container css={container}>
-                <DetailSection petDetails={details} user={user}/>
+                <DetailSection petDetails={details} user={user} />
             </Container>
             <Container css={container}>
                 <h1>Get Necessities For Your New Best Friend</h1>

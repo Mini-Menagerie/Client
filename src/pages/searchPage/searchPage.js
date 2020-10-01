@@ -30,9 +30,7 @@ import {
     marginTop,
     cardstyle,
     rowmargin,
-    lineHeight
 } from "./searchPage.styles";
-
 
 const SearchPage = () => {
     const [searchPet, setSearchPet] = useState([]);
@@ -55,7 +53,6 @@ const SearchPage = () => {
         axios
             .get(url)
             .then(function (response) {
-                console.log(response);
                 setSearchPet(response.data.result);
                 setLoading(false);
             })
@@ -71,7 +68,6 @@ const SearchPage = () => {
         axios
             .get(url)
             .then(function (response) {
-                console.log(response);
                 setSearchPet(response.data.result);
                 setLoading(false);
             })
@@ -92,7 +88,6 @@ const SearchPage = () => {
         axios
             .get(url)
             .then(function (response) {
-                console.log(response);
                 setSearchPet(response.data.data);
                 setLoading(false);
             })
@@ -163,22 +158,26 @@ const SearchPage = () => {
 
                 <div css={petsAvailable}>
                     {loading ? (
-                        <div className="lds-circle">
-                        </div>
+                        <div className="lds-circle"></div>
                     ) : error ? (
                         <div>{errorMessage}</div>
                     ) : (
-                        <Container style={{maxWidth:"100%"}} css={marginTop}>
+                        <Container style={{ maxWidth: "100%" }} css={marginTop}>
                             <Row css={rowmargin}>
                                 {searchPet !== undefined &&
                                     searchPet.length > 0 &&
                                     searchPet.map((item) => (
-                                        <Col sm={3} css={cardCss} style={{ maxWidth: "22rem" }}>
+                                        <Col
+                                            sm={3}
+                                            css={cardCss}
+                                            style={{ maxWidth: "22rem" }}
+                                        >
                                             <Link
                                                 to={`/pets-detail/${item.id}`}
                                             >
-                                                <Card 
-                                                    style={{ width: "22rem" }} css={cardstyle}
+                                                <Card
+                                                    style={{ width: "22rem" }}
+                                                    css={cardstyle}
                                                 >
                                                     <Card.Img
                                                         css={img}

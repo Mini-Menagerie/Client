@@ -76,13 +76,11 @@ const Header = () => {
             );
 
             if (user.status === 200) {
-                console.log(user.status);
                 Swal.fire({
                     title: "Sukses!",
                     text: "Login berhasil!",
                     icon: "success",
                 });
-                // console.log(user);
                 localStorage.setItem("menagerie", user.data.token);
                 localStorage.setItem("user", JSON.stringify(user.data.user));
                 setShow(false);
@@ -99,7 +97,8 @@ const Header = () => {
                 error.message === "Request failed with status code 404"
             ) {
                 Swal({
-                    title: "Email sudah terdaftar menggunakan email social media!",
+                    title:
+                        "Email sudah terdaftar menggunakan email social media!",
                     icon: "warning",
                 });
                 setShow(false);
@@ -135,7 +134,8 @@ const Header = () => {
                 error.message === "Request failed with status code 404"
             ) {
                 Swal({
-                    title: "Email sudah terdaftar melalui Social Media, gunakan Email lain",
+                    title:
+                        "Email sudah terdaftar melalui Social Media, gunakan Email lain",
                     icon: "warning",
                 });
                 setShow(false);
@@ -527,7 +527,8 @@ const Header = () => {
                                     <i className="fas fa-shopping-cart fa-lg"></i>
                                     <Badge pill variant="danger">
                                         {productCart !== undefined &&
-                                            productCart !== null && productCart !== 0 &&
+                                            productCart !== null &&
+                                            productCart !== 0 &&
                                             productCart.length}
                                     </Badge>
                                 </Button>

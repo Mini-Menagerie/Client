@@ -27,7 +27,6 @@ import bird from "../../assets/birdCover.png";
 import swal from "sweetalert";
 
 const AdoptionForm = () => {
-
     const [user, setUser] = useState({
         noHandphone: "",
         detailAddress: "",
@@ -44,10 +43,9 @@ const AdoptionForm = () => {
         salary: "",
     });
     const [reason, setReason] = useState("");
-    let idPet = localStorage.getItem('selectedPet')
+    let idPet = localStorage.getItem("selectedPet");
 
     const userData = JSON.parse(localStorage.getItem("user"));
-    console.log(userData);
     let id = userData.idUser._id;
 
     const fetchDataUser = async () => {
@@ -96,7 +94,6 @@ const AdoptionForm = () => {
 
         //eslint-disable-next-line
     }, []);
-   
 
     return (
         <div css={adoptionWrapper}>

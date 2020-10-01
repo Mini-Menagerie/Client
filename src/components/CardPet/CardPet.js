@@ -15,8 +15,8 @@ const CardPet = ({ petCards }) => {
     return (
         <Row>
             {petCards.map((e) => (
-                <Col md={3} css={margin}>
-                    <Card css={petImage}  onClick={() => handleClick(e._id)}>
+                <Col md={3} css={margin} key={e._id}>
+                    <Card css={petImage} onClick={() => handleClick(e._id)}>
                         <Card.Img variant="top" src={e.image} />
                         <Card.Body>
                             <Card.Title>
