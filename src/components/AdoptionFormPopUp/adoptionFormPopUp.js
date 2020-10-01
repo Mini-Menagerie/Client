@@ -5,10 +5,30 @@ import PrimaryButton from "../Button/Button";
 import { useState } from "react";
 
 import { wrapperStyles } from "./adoptionFormPopup.styles";
+import axios from "../../helpers/axios";
 
 const FormPopUp = ({ data }) => {
     const [lgShow, setLgShow] = useState(false);
+    const [approve] = useState({ status: "Approval" });
+    const [deny] = useState({ status: "Deny" });
 
+    const url = `formRequest/${data._id}`;
+
+    const changeApp = () => {
+        axios.put(url, approve).then(function (result) {
+            console.log(result);
+            window.location.reload();
+        });
+        return approve;
+    };
+
+    const changeDeny = async () => {
+        await axios.put(url, deny).then(function (result) {
+            console.log(result);
+            window.location.reload();
+        });
+        return deny;
+    };
     return (
         <div>
             <PrimaryButton onClick={() => setLgShow(true)}>
@@ -88,13 +108,21 @@ const FormPopUp = ({ data }) => {
                                 </tbody>
                                 <div>
                                     <span>
-                                        <Button variant="success">
+                                        <Button
+                                            variant="success"
+                                            onClick={changeApp}
+                                        >
                                             Approve
                                         </Button>
                                     </span>
                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                     <span>
-                                        <Button variant="danger">Deny</Button>
+                                        <Button
+                                            variant="danger"
+                                            onClick={changeDeny}
+                                        >
+                                            Deny
+                                        </Button>
                                     </span>
                                 </div>
                             </Table>
