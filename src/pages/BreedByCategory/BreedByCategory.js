@@ -105,8 +105,7 @@ const BreedByCategory = () => {
         fetchBreed();
 
         //eslint-disable-next-line
-    }, []);
-
+    }, []);   
     return (
         <div>
             <div css={wrapperCover}>

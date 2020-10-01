@@ -8,7 +8,7 @@ import { head, mainOne, mainBody, border } from "./Approve.styles";
 import FormPopUp from "../../../components/AdoptionFormPopUp/adoptionFormPopUp";
 
 const ApproveRequest = () => {
-    const [, setAdoption] = useState([]); // petUpforAdoption
+    const [adoption, setAdoption] = useState([]); // petUpforAdoption
     const [adopter, setAdopter] = useState([]); // formRequest
 
     const getUserLogin = () => {
@@ -22,10 +22,8 @@ const ApproveRequest = () => {
         let pets = await axios.get("petUpForAdoption");
         if (pets.status === 200) {
             let filteredPets = await pets.data.result.filter((item) => {
-                console.log(item);
                 return item.idPet.idUser === idUser;
             });
-            console.log(filteredPets);
             setAdoption(filteredPets);
             localStorage.setItem("pets", JSON.stringify(filteredPets));
         } else {
@@ -56,7 +54,6 @@ const ApproveRequest = () => {
             setAdopter(filteredAdopter);
         }
     };
-
     useEffect(() => {
         getUserLogin();
         getPetUpForAdopt();
@@ -65,7 +62,8 @@ const ApproveRequest = () => {
 
         //eslint-disable-next-line
     }, []);
-
+    console.log(adoption)
+    console.log(adopter)
     return (
         <div>
             <div>
