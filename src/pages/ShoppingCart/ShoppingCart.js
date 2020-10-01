@@ -41,7 +41,7 @@ const ShoppingCart = () => {
   });
 
   const getTempCart = () => {
-    const cart = JSON.parse(localStorage.getItem("cartProduct")) || [];
+    const cart = JSON.parse(localStorage.getItem("cartProduct"));
     setData(cart);
   }
 
@@ -49,14 +49,18 @@ const ShoppingCart = () => {
     getTempCart()
   }, [])
 
-  if (data === null || data === []) {
+  if (data === null) {
     window.location.replace('/')
   }
   console.log(data);
 
+  const setFinalCart = () => {
+    localStorage.setItem("cartProduct", JSON.stringify(data))
+  }
+
 
   useEffect(() => {
-    localStorage.setItem("cartProduct", JSON.stringify(data))
+    setFinalCart()
   }, [data]);
 
   // useEffect( async () => {
