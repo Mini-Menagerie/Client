@@ -178,7 +178,66 @@ const Header = () => {
 
     const redirect = (event) => {
         event.preventDefault();
-        window.location.replace("/cart");
+        const cart = JSON.parse(localStorage.getItem("cartProduct"));
+        const userLogin = JSON.parse(localStorage.getItem("user"));
+        let timerInterval
+        if (cart === null) {
+            Swal.fire({
+                title: 'Your cart still empty!',
+                text: 'Please shop first',
+                timer: 3000,
+                timerProgressBar: true,
+                willOpen: () => {
+                    timerInterval = setInterval(() => {
+                        const content = Swal.getContent()
+                        if (content) {
+                            const b = content.querySelector('b')
+                            if (b) {
+                                b.textContent = Swal.getTimerLeft()
+                            }
+                        }
+                    }, 100)
+                },
+                onClose: () => {
+                    clearInterval(timerInterval)
+                    window.location.replace("/shop")
+                }
+            }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+            })
+        } else if (userLogin === null) {
+            Swal.fire({
+                title: 'You are not login',
+                text: 'Please login or register first',
+                timer: 3000,
+                timerProgressBar: true,
+                willOpen: () => {
+                    timerInterval = setInterval(() => {
+                        const content = Swal.getContent()
+                        if (content) {
+                            const b = content.querySelector('b')
+                            if (b) {
+                                b.textContent = Swal.getTimerLeft()
+                            }
+                        }
+                    }, 100)
+                },
+                onClose: () => {
+                    clearInterval(timerInterval)
+                    window.location.replace("/shop")
+                }
+            }).then((result) => {
+                /* Read more about handling dismissals below */
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    console.log('I was closed by the timer')
+                }
+            })
+        } else {
+            window.location.replace("/cart");
+        }
     };
 
     const searchBar = (event) => {
