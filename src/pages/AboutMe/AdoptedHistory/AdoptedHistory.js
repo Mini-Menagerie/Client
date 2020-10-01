@@ -15,6 +15,7 @@ const AdoptedHistory = () => {
         axios
             .get(url)
             .then(function (result) {
+                console.log(result);
                 setAdoptedHistory(result.data.result);
             })
             .catch(function (error) {
@@ -32,15 +33,15 @@ const AdoptedHistory = () => {
                     <div key={e._id}>
                         <Card>
                             <Card.Header className="text-center">
-                                <b>{e.idPetUpForAdoption.status}</b>
+                                <b>{e.status}</b>
                             </Card.Header>
                             <Card.Body>
                                 <div css={dated}>
-                                    <span>{e.createdAt}</span>
+                                    <span>{e.updatedAt}</span>
                                 </div>
                                 <Row>
                                     <Col xs={6} css={mainOne}>
-                                        <img src="" alt="mberrrr" />
+                                        <img src={e.idPetUpForAdoption.idPet.image} alt="mberrrr" />
                                     </Col>
                                     <Col css={desc}>
                                         <div>
@@ -48,7 +49,7 @@ const AdoptedHistory = () => {
                                             <span>{e.breed}</span>
                                             <p>
                                                 Adoption Fee : Rp.
-                                                {e.idPetUpForAdoption.fee}
+                                            <b>{e.idPetUpForAdoption.fee}</b>
                                             </p>
                                         </div>
                                     </Col>
