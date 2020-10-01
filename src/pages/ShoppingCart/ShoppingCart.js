@@ -37,25 +37,20 @@ const ShoppingCart = () => {
         //eslint-disable-next-line
     }, []);
 
-  const getTempCart = () => {
-    const cart = JSON.parse(localStorage.getItem("cartProduct"));
-    setData(cart);
-  }
+    const [data, setData] = useState([]);
+    const [state, dispatch] = useState({
+        loading: false,
+        error: null,
+    });
 
-  useEffect(() => {
-    getTempCart()
-  }, [])
+    const getTempCart = () => {
+        const cart = JSON.parse(localStorage.getItem("cartProduct")) || [];
+        setData(cart);
+    };
 
-  console.log(data);
-
-  const setFinalCart = () => {
-    localStorage.setItem("cartProduct", JSON.stringify(data))
-  }
-
-  useEffect(() => {
-    setFinalCart()
-  }, [data]);
-
+    useEffect(() => {
+        getTempCart();
+    }, []);
 
     if (data === null || data === []) {
         window.location.replace("/");
