@@ -3,54 +3,46 @@ import { jsx } from "@emotion/core";
 import { Col, Row, Container, Card, Modal } from "react-bootstrap";
 
 import { useState, useEffect } from "react";
-import AddAdoption from './AddAdoption';
-
+import AddAdoption from "./AddAdoption";
 
 import PrimaryButton from "../Button/Button";
-import {
-
-    container,
-    button,
-    margin,
-    petImage,
-    row
-} from "./petUpList.styles";
+import { container, button, margin, petImage, row } from "./petUpList.styles";
 import axios from "../../helpers/axios";
 
-
-
 const ListPetUp = () => {
-    let petData = JSON.parse(localStorage.getItem("pet"))
+    // let petData = JSON.parse(localStorage.getItem("pet"));
     const [petUp, setPetUp] = useState([]);
 
     const getUser = () => {
-        let userLogin = JSON.parse(localStorage.getItem('user'))
-        let idUser = userLogin.idUser._id
-        return idUser
-    }
+        let userLogin = JSON.parse(localStorage.getItem("user"));
+        let idUser = userLogin.idUser._id;
+        return idUser;
+    };
     const getPetUpForAdoption = async () => {
-        let id = await getUser()
-        let result = await axios.get('petUpForAdoption');
-        let datas = await result.data.result.filter(item => item.idPet.idUser === id)
-        setPetUp(datas)
-    }
+        let id = await getUser();
+        let result = await axios.get("petUpForAdoption");
+        let datas = await result.data.result.filter(
+            (item) => item.idPet.idUser === id
+        );
+        setPetUp(datas);
+    };
 
     useEffect(() => {
-        getUser()
-        getPetUpForAdoption()
+        getUser();
+        getPetUpForAdoption();
 
+        //eslint-disable-next-line
     }, []);
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-
     return (
         <Container css={container}>
             <PrimaryButton onClick={handleShow} css={button}>
                 Add a Pet
-          </PrimaryButton>
+            </PrimaryButton>
             <Modal
                 show={show}
                 centered
@@ -64,45 +56,45 @@ const ListPetUp = () => {
                     </Modal.Header>
 
                     <Modal.Body className="modal-body modal-md">
-                        <AddAdoption
-                            handleClose={handleClose}
-                        />
+                        <AddAdoption handleClose={handleClose} />
                     </Modal.Body>
                 </Modal.Dialog>
             </Modal>
             <Row css={row}>
-                {petUp.map(item => {
-                    return <Col md={3} css={margin}>
-                        <Card css={petImage}  >
-                            <Card.Img src={item.idPet.image[0]} variant="top" />
-                            <Card.Body>
-                                <Card.Title>
-                                    <h4>
-                                        {item.idPet.petName}
-                                    </h4>
-                                </Card.Title>
-                                <Card.Text>
-                                    <tr style={{ borderStyle: "hidden" }}>
-                                        <td>Fee </td>
-                                        <td>: Rp.{item.idPet.fee}</td>
-                                    </tr>
-                                    <tr style={{ borderStyle: "hidden" }}>                                             
-                                        <td>Age </td>
-                                        <td>: {item.idPet.age}</td>
-                                    </tr>
-                                    <tr style={{ borderStyle: "hidden" }}>
-                                        <td>Status </td>
-                                        <td style={{fontWeight:"700"}}>: {item.status} </td>
-                                    </tr>
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
+                {petUp.map((item) => {
+                    return (
+                        <Col md={3} css={margin}>
+                            <Card css={petImage}>
+                                <Card.Img
+                                    src={item.idPet.image[0]}
+                                    variant="top"
+                                />
+                                <Card.Body>
+                                    <Card.Title>
+                                        <h4>{item.idPet.petName}</h4>
+                                    </Card.Title>
+                                    <Card.Text>
+                                        <tr style={{ borderStyle: "hidden" }}>
+                                            <td>Fee </td>
+                                            <td>: Rp.{item.idPet.fee}</td>
+                                        </tr>
+                                        <tr style={{ borderStyle: "hidden" }}>
+                                            <td>Age </td>
+                                            <td>: {item.idPet.age}</td>
+                                        </tr>
+                                        <tr style={{ borderStyle: "hidden" }}>
+                                            <td>Status </td>
+                                            <td style={{ fontWeight: "700" }}>
+                                                : {item.status}{" "}
+                                            </td>
+                                        </tr>
+                                    </Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    );
                 })}
             </Row>
-
-
-
         </Container>
     );
 };

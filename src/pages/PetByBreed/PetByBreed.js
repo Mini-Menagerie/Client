@@ -20,6 +20,7 @@ import {
     centertext,
     filter,
     buttonGroup,
+    card,
 } from "./PetByBreed.styles";
 
 const PetByBreed = () => {
@@ -161,12 +162,7 @@ const PetByBreed = () => {
                     {collection.length > 0 &&
                         collection.map((item) => {
                             return (
-                                <Col
-                                    xs={12}
-                                    md={4}
-                                    key={item._id}
-                                    style={{ margin: 10 }}
-                                >
+                                <Col xs={12} md={4} key={item._id} css={card}>
                                     <Link
                                         to={`/pets-detail/${
                                             item.id !== undefined
