@@ -49,16 +49,15 @@ const ShoppingCart = () => {
     getTempCart()
   }, [])
 
-  if (data === null) {
-    alert("Your cart is still empty, please shop first")
-    window.location.replace('/shop')
-  }
+  // if (data === null) {
+  //   alert("Your cart is still empty, please shop first")
+  //   window.location.replace('/shop')
+  // }
   console.log(data);
 
   const setFinalCart = () => {
     localStorage.setItem("cartProduct", JSON.stringify(data))
   }
-
 
   useEffect(() => {
     setFinalCart()
