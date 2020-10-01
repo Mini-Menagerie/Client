@@ -50,7 +50,8 @@ const ShoppingCart = () => {
   }, [])
 
   if (data === null) {
-    window.location.replace('/')
+    alert("Your cart is still empty, please shop first")
+    window.location.replace('/shop')
   }
   console.log(data);
 
