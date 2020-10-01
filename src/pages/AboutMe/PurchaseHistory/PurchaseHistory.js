@@ -41,7 +41,7 @@ const PurchaseHistory = () => {
                 {purchaseHistory.map(value => (
                     <Accordion style={{ width: '100%', marginBottom: '10px' }}>
                         <Card>
-                            <OverlayTrigger placement={'left'} overlay={<Tooltip id="tooltip-disabled">Click for transaction details</Tooltip>}>
+                            <OverlayTrigger placement={'left'} overlay={<Tooltip id="tooltip-disabled">Click for details</Tooltip>}>
                                 <Row style={{ display: 'flex' }}>
                                     <Col style={{ paddingRight: '0px' }}>
                                         <Accordion.Toggle as={Card.Header} eventKey="0" style={{ width: '100%' }}>Detail Transaction</Accordion.Toggle>
