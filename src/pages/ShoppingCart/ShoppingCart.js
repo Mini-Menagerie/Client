@@ -63,15 +63,6 @@ const ShoppingCart = () => {
     setFinalCart()
   }, [data]);
 
-  // useEffect( async () => {
-  //   let data = await getTempCart()
-  //   if (data !== null) {
-  //     window.location.replace('/')
-  //       } else {
-  //     localStorage.setItem("cartProduct", JSON.stringify(data))}
-  // }, []);
-
-
 
   const handleChange = (e, id) => {
     const { value } = e.target;
