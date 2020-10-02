@@ -9,7 +9,6 @@ import { head, mainOne, dated, desc, listInfo } from "./AdoptedHistory.styles";
 const AdoptedHistory = () => {
     const [adoptedHistory, setAdoptedHistory] = useState([]);
     const [, setErrorMessage] = useState();
-<<<<<<< HEAD
 
     const getListAdoption = async () => {
         const userData = await JSON.parse(localStorage.getItem("user"));
@@ -18,14 +17,6 @@ const AdoptedHistory = () => {
             .get(url)
             .then(function (result) {
                 console.log(result);
-=======
-    let userData = JSON.parse(localStorage.getItem('user'))
-    useEffect(() => {
-        const url = `http://localhost:8000/listAdoptionTransaction/history/${userData.idUser._id}`;
-        axios
-            .get(url)
-            .then(function (result) {
->>>>>>> af9ab94604c81eb2086113d4986d834abf73ce68
                 setAdoptedHistory(result.data.filterReq);
             })
             .catch(function (error) {
