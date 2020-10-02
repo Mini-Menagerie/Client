@@ -7,7 +7,6 @@ import { Tabs, Tab, Container } from "react-bootstrap";
 
 import AboutMeTab from "../../components/AboutMe/aboutMeTab";
 import ListPetUp from "../../components/AboutMe/petUpList"
-import { containerWrapper, marginSet } from "./AboutMe.styles";
 import AccountSettings from "../../components/AboutMe/accountSettings";
 import Swal from "sweetalert2";
 import StatusRequest from "./StatusRequest/StatusRequest";
@@ -51,8 +50,7 @@ const AllProfile = () => {
     }, []);
 
     return (
-        <Container fluid css={containerWrapper}>
-            <div css={marginSet}>
+        <Container>
                 <Tabs
                     id="controlled-tab-example"
                     activeKey={key}
@@ -81,7 +79,6 @@ const AllProfile = () => {
                         <PurchaseHistory />
                     </Tab>
                 </Tabs>
-            </div>
         </Container>
     );
 };

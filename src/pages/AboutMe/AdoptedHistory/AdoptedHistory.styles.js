@@ -10,7 +10,7 @@ export const head = css`
     }
 `
 export const listInfo = css`
-    margin: 20px 90px;
+    margin: 20px 0px;
 `
 export const dated = css`
     border-bottom: 1px solid #B8BBBB;

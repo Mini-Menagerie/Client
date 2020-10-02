@@ -2,27 +2,31 @@
 import { jsx } from "@emotion/core";
 import { Card, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import axios from "../../../helpers/axios";
 
-import { head, listInfo, mainOne, dated, desc } from "./AdoptedHistory.styles";
+import { head, mainOne, dated, desc, listInfo } from "./AdoptedHistory.styles";
 
 const AdoptedHistory = () => {
     const [adoptedHistory, setAdoptedHistory] = useState([]);
     const [, setErrorMessage] = useState();
 
-    useEffect(() => {
-        const url = "http://localhost:8000/listAdoptionTransaction";
+    const getListAdoption = async () => {
+        const userData = await JSON.parse(localStorage.getItem("user"));
+        const url = `listAdoptionTransaction/history/${userData.idUser._id}`;
         axios
             .get(url)
             .then(function (result) {
                 console.log(result);
-                setAdoptedHistory(result.data.result);
+                setAdoptedHistory(result.data.filterReq);
             })
             .catch(function (error) {
                 setErrorMessage(error.message);
             });
-    }, [setErrorMessage]);
-    console.log(adoptedHistory);
+    }
+
+    useEffect(() => {
+        getListAdoption()
+    }, []);
 
     return (
         <div>
@@ -52,6 +56,8 @@ const AdoptedHistory = () => {
                                                 Adoption Fee : Rp.
                                             <b>{e.idPetUpForAdoption.fee}</b>
                                             </p>
+                                            <p>Owner Pet : {e.ownerPetName}</p>
+                                            <p>Adopter Pet : {e.adopterPetName}</p>
                                         </div>
                                     </Col>
                                 </Row>
