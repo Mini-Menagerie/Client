@@ -9,14 +9,13 @@ import { head, listInfo, mainOne, dated, desc } from "./AdoptedHistory.styles";
 const AdoptedHistory = () => {
     const [adoptedHistory, setAdoptedHistory] = useState([]);
     const [, setErrorMessage] = useState();
-
+    let userData = JSON.parse(localStorage.getItem('user'))
     useEffect(() => {
-        const url = "http://localhost:8000/listAdoptionTransaction";
+        const url = `http://localhost:8000/listAdoptionTransaction/history/${userData.idUser._id}`;
         axios
             .get(url)
             .then(function (result) {
-                console.log(result);
-                setAdoptedHistory(result.data.result);
+                setAdoptedHistory(result.data.filterReq);
             })
             .catch(function (error) {
                 setErrorMessage(error.message);
@@ -42,7 +41,7 @@ const AdoptedHistory = () => {
                                 </div>
                                 <Row>
                                     <Col xs={6} css={mainOne}>
-                                        <img src={e.idPetUpForAdoption.idPet.image} alt="mberrrr" />
+                                        <img src={e.idPetUpForAdoption !== null && e.idPetUpForAdoption.idPet.image} alt="mberrrr" />
                                     </Col>
                                     <Col css={desc}>
                                         <div>
@@ -50,7 +49,7 @@ const AdoptedHistory = () => {
                                             <span>{e.breed}</span>
                                             <p>
                                                 Adoption Fee : Rp.
-                                            <b>{e.idPetUpForAdoption.fee}</b>
+                                            <b>{e.idPetUpForAdoption !== null && e.idPetUpForAdoption.fee}</b>
                                             </p>
                                         </div>
                                     </Col>

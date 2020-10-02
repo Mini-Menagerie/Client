@@ -20,6 +20,7 @@ const StatusRequest = () => {
         const userData = await JSON.parse(localStorage.getItem("user"));
         const url = `formRequest/all/${userData.idUser._id}`;
         let datas = await axios.get(url)
+        console.log(datas);
         let results = datas.data.filterReq
         setStatusRequest(results)
         return results
