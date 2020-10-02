@@ -14,6 +14,7 @@ import PrimaryButton from "../../../components/Button/Button";
 const StatusRequest = () => {
     const [statusRequest, setStatusRequest] = useState([]);
     const [, setErrorMessage] = useState();
+    const [petForAdopt, setPetForAdopt] = useState()
 
     const getDataForm = async () => {
         const userData = await JSON.parse(localStorage.getItem("user"));
@@ -22,16 +23,23 @@ const StatusRequest = () => {
             .get(url)
             .then(function (result) {
                 setStatusRequest(result.data.filterReq);
-                
             })
             .catch(function (error) {
                 setErrorMessage(error.message);
             });
     };
+
+    const getIdPetForAdoption = async () => {
+        const userData = await JSON.parse(localStorage.getItem("user"));
+        let result = await axios.get(`petUpForAdoption/all/${userData.idUser._id}`);
+        let data = result.data.filterPetUp;
+        setPetForAdopt(data)
+        return data
+    }
+
     const newAdoptionTransaction = async () => {
-        console.log(statusRequest);
         let adoptTrans = await axios.post("listAdoptionTransaction/create", {
-                idPetUpForAdoption: statusRequest[0]._id,
+                idPetUpForAdoption: petForAdopt[0]._id,
                 petName: statusRequest[0].idPet.petName,
                 petCategory: statusRequest[0].idPet.idBreed.idCategoryPet.categoryName,
                 breed: statusRequest[0].idPet.idBreed.breedName,
@@ -52,8 +60,13 @@ const StatusRequest = () => {
 
     useEffect(() => {
         getDataForm();
+        getIdPetForAdoption()
+        
     }, []);
-    console.log(statusRequest)
+    console.log(statusRequest);
+
+  
+
     if (statusRequest.length > 0) {
         return (
             <div>
