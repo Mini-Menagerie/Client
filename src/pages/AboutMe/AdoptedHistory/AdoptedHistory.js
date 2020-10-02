@@ -46,7 +46,7 @@ const AdoptedHistory = () => {
                                 </div>
                                 <Row>
                                     <Col xs={6} css={mainOne}>
-                                        <img src={e.idPetUpForAdoption !== null && e.idPetUpForAdoption.idPet.image} alt="mberrrr" />
+                                        <img src={e.idPetUpForAdoption.idPet.image} alt="mberrrr" />
                                     </Col>
                                     <Col css={desc}>
                                         <div>
@@ -54,7 +54,7 @@ const AdoptedHistory = () => {
                                             <span>{e.breed}</span>
                                             <p>
                                                 Adoption Fee : Rp.
-                                            <b>{e.idPetUpForAdoption !== null && e.idPetUpForAdoption.fee}</b>
+                                            <b>{e.idPetUpForAdoption.fee}</b>
                                             </p>
                                             <p>Owner Pet : {e.ownerPetName}</p>
                                             <p>Adopter Pet : {e.adopterPetName}</p>
