@@ -22,6 +22,7 @@ const AdoptedHistory = () => {
                 setErrorMessage(error.message);
             });
     }, [setErrorMessage]);
+    console.log(adoptedHistory);
 
     return (
         <div>
