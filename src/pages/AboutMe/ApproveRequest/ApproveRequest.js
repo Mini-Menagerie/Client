@@ -49,8 +49,9 @@ const ApproveRequest = () => {
         const adopter = await axios.get("formRequest");
         if (adopter.status === 200) {
             let filteredAdopter = adopter.data.result.filter(
-                (item) => item.idPet._id === idPetAdopter
+                (item) => item.idPet._id === idPetAdopter && item.status !== "Approval"
             );
+            console.log(filteredAdopter);
             setAdopter(filteredAdopter);
         }
     };
