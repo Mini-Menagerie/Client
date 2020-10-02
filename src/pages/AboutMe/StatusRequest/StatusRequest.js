@@ -39,9 +39,9 @@ const StatusRequest = () => {
 
     const newAdoptionTransaction = async () => {
         let data = await getIdPetForAdoption()
-        console.log(data);
         let adoptTrans = await axios.post("listAdoptionTransaction/create", {
                 idPetUpForAdoption: data,
+                idUser: statusRequest[0].idUser._id,
                 petName: statusRequest[0].idPet.petName,
                 petCategory: statusRequest[0].idPet.idBreed.idCategoryPet.categoryName,
                 breed: statusRequest[0].idPet.idBreed.breedName,
@@ -65,9 +65,6 @@ const StatusRequest = () => {
         getIdPetForAdoption()
         
     }, []);
-    console.log(statusRequest);
-
-  
 
     if (statusRequest.length > 0) {
         return (
