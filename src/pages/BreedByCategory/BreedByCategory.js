@@ -13,6 +13,7 @@ import {
     Col,
     ToggleButton,
     ToggleButtonGroup,
+    Container,
 } from "react-bootstrap";
 
 import {
@@ -22,11 +23,12 @@ import {
     centertext,
     filter,
     buttonGroup,
+    card,
 } from "./BreedByCategory.styles";
 
 const BreedByCategory = () => {
     const [collection, setCollection] = useState([]);
-    const [allCollection, setAllCollection] = useState([]);
+    const [breed, setBreed] = useState([]);
     const { category } = useParams();
 
     const size = [
@@ -64,10 +66,20 @@ const BreedByCategory = () => {
     };
 
     const fetchCollection = async () => {
-        const url = `${process.env.REACT_APP_API_URL}/pet/category/${category}`;
+        // const url = `${process.env.REACT_APP_API_URL}/pet/category/${category}`;
+        // const url = `${process.env.REACT_APP_API_URL}/petdata/collection/${collection}`;
+        const url = `${process.env.REACT_APP_API_URL}/petCollection`;
         const response = await fetch(url);
         const result = await response.json();
 
+        setCollection(result.result);
+    };
+
+    const fetchBreed = async () => {
+        const url = `${process.env.REACT_APP_API_URL}/pet/category/${category}`;
+        const response = await fetch(url);
+
+        const result = await response.json();
         function removeDuplicates(originalArray, prop) {
             var newArray = [];
             var lookupObject = {};
@@ -85,16 +97,15 @@ const BreedByCategory = () => {
 
         var uniqueArray = removeDuplicates(result.result, "_id");
 
-        setAllCollection(uniqueArray);
-        setCollection(uniqueArray);
+        setBreed(uniqueArray);
     };
 
     useEffect(() => {
         fetchCollection();
+        fetchBreed();
 
         //eslint-disable-next-line
-    }, []);
-
+    }, []);   
     return (
         <div>
             <div css={wrapperCover}>
@@ -103,24 +114,25 @@ const BreedByCategory = () => {
             <div css={collections}>
                 <h2 css={centertext}>Search Our Collection</h2>
                 <Carousel responsive={responsive} infinite={true}>
-                    {allCollection.length > 0 &&
-                        allCollection.map((item) => {
+                    {collection.length > 0 &&
+                        collection.map((item) => {
                             return (
                                 <Col key={item._id}>
                                     <Link
-                                        to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
+                                        // to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
+                                        to={`petdetail?search=${item.idCollections}`}
                                     >
                                         <Card>
-                                            <Card.Img
+                                            {/* <Card.Img
                                                 variant="top"
                                                 src={item.image[0]}
                                                 style={{
                                                     objectFit: "cover",
                                                     height: "350px",
                                                 }}
-                                            />
+                                            /> */}
                                             <Card.Title css={centertext}>
-                                                {item.idBreed.breedName}
+                                                {item.collectionName}
                                             </Card.Title>
                                         </Card>
                                     </Link>
@@ -226,37 +238,39 @@ const BreedByCategory = () => {
                 )}
             </Formik>
             <div css={collections}>
-                <Row>
-                    {collection.length > 0 &&
-                        collection.map((item) => {
-                            return (
-                                <Col
-                                    xs={12}
-                                    md={4}
-                                    key={item._id}
-                                    style={{ margin: 10 }}
-                                >
-                                    <Link
-                                        to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
+                <Container fluid>
+                    <Row>
+                        {breed.length > 0 &&
+                            breed.map((item) => {
+                                return (
+                                    <Col
+                                        xs={12}
+                                        md={4}
+                                        key={item._id}
+                                        css={card}
                                     >
-                                        <Card>
-                                            <Card.Img
-                                                variant="top"
-                                                src={item.image[0]}
-                                                style={{
-                                                    objectFit: "cover",
-                                                    height: "350px",
-                                                }}
-                                            />
-                                            <Card.Title css={centertext}>
-                                                {item.idBreed.breedName}
-                                            </Card.Title>
-                                        </Card>
-                                    </Link>
-                                </Col>
-                            );
-                        })}
-                </Row>
+                                        <Link
+                                            to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
+                                        >
+                                            <Card>
+                                                <Card.Img
+                                                    variant="top"
+                                                    src={item.image[0]}
+                                                    style={{
+                                                        objectFit: "cover",
+                                                        height: "350px",
+                                                    }}
+                                                />
+                                                <Card.Title css={centertext}>
+                                                    {item.idBreed.breedName}
+                                                </Card.Title>
+                                            </Card>
+                                        </Link>
+                                    </Col>
+                                );
+                            })}
+                    </Row>
+                </Container>
             </div>
         </div>
     );

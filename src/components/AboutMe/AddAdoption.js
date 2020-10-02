@@ -4,12 +4,14 @@ import { Col, Row, Form } from "react-bootstrap";
 import axios from "../../helpers/axios";
 import ReactFilestack from "filestack-react";
 
+
 import PrimaryButton from "../Button/Button";
 import { useState, useEffect } from "react";
 
 import { upload, uploadPhoto, fs } from "./EditProfile.styles";
 
 const AddAdoption = ({ edit, handleClose }) => {
+    console.log(edit);
     const [formPet, setFormPet] = useState({
         idCategoryPet: "",
         idBreed: "",
@@ -25,17 +27,17 @@ const AddAdoption = ({ edit, handleClose }) => {
         fee: "",
     });
 
-
     let userData = JSON.parse(localStorage.getItem("user"));
-    console.log(userData);
 
     const [petCategory, setPetCategory] = useState([]);
     const [breed, setBreed] = useState([]);
 
+
     const getCategory = async () => {
+
         let category = await axios.get("categoryPet");
         if (category.status === 200) {
-            let categoryPet = category.data.result.map((item) => {
+            let categoryPet = category.data.result.map((item) => { 
                 let dataCategory = {
                     id: item._id,
                     categoryName: item.categoryName,
@@ -45,7 +47,7 @@ const AddAdoption = ({ edit, handleClose }) => {
             setPetCategory(categoryPet);
         }
     };
-  
+
     const getBreed = async () => {
         let breeds = await axios.get("breed");
         let dataBreeds = breeds.data.result.map((item) => {
@@ -59,6 +61,7 @@ const AddAdoption = ({ edit, handleClose }) => {
         });
         setBreed(dataBreeds);
     };
+   
     const getUser = async () => {
         let dataUser = await JSON.parse(localStorage.getItem("user"));
         let idUser = dataUser.idUser._id;
@@ -66,9 +69,9 @@ const AddAdoption = ({ edit, handleClose }) => {
     };
 
     const addNewPet = async (event) => {
-        event.preventDefault()
-        let idUser = await getUser()
-        const newPet = await axios.post('pet/create', {
+        event.preventDefault();
+        let idUser = await getUser();
+        const newPet = await axios.post("pet/create", {
             idCategoryPet: formPet.idCategoryPet,
             idBreed: formPet.idBreed,
             idUser: idUser,
@@ -80,18 +83,20 @@ const AddAdoption = ({ edit, handleClose }) => {
             location: formPet.location,
             about: formPet.about,
             image: formPet.image,
-            fee: formPet.fee
-        })
-        if(newPet.status === 200){
-            const newPetForAdoption = await axios.post('petUpForAdoption/create', {
-                idUser: idUser,
-                idPet: newPet.data.result._id,
-                fee: formPet.fee,
-                status: "Available"
-            })
-            if(newPetForAdoption.status === 200){
-                alert('Success')
-                console.log(newPetForAdoption);
+            fee: formPet.fee,
+        });
+        if (newPet.status === 200) {
+            const newPetForAdoption = await axios.post(
+                "petUpForAdoption/create",
+                {
+                    idUser: idUser,
+                    idPet: newPet.data.result._id,
+                    fee: formPet.fee,
+                    status: "Available",
+                }
+            );
+            if (newPetForAdoption.status === 200) {
+                alert("Success");
             }
         }
     };
@@ -106,9 +111,8 @@ const AddAdoption = ({ edit, handleClose }) => {
     useEffect(() => {
         getCategory();
         getBreed();
-        getUser();
+        getUser();       
     }, []);
-    
 
     return (
         <div>
@@ -150,7 +154,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                     </Form.Label>
                                     <Col sm="7">
                                         <Form.Control
-                                            placeholder=" Pet Name"
+                                            placeholder="Pet Name"
                                             style={{ width: "350px" }}
                                             type="text"
                                             value={formPet.petName}
@@ -165,13 +169,15 @@ const AddAdoption = ({ edit, handleClose }) => {
                                     </Form.Label>
                                     <Col sm="7">
                                         <Form.Control
-                                            placeholder="Rp. "
+                                            placeholder="Rp.100.000 "
                                             style={{ width: "350px" }}
                                             type="text"
                                             value={formPet.fee}
                                             name="fee"
+                                            prefix="Rp."
+                                            allowDecimals={true}
                                             onChange={handleChange}
-                                        />
+                                        ></Form.Control>                                       
                                     </Col>
                                 </Form.Group>
                             </Form.Row>
@@ -189,21 +195,25 @@ const AddAdoption = ({ edit, handleClose }) => {
                                     <Form.Label column sm="5">
                                         Category Pet:
                                     </Form.Label>
-                                    
-                                        <Col sm="7">
-                                            <Form.Control
-                                                style={{ width: "350px" }}
-                                                onChange={handleChange}
-                                                name="idCategoryPet"
-                                                onClick=""
-                                                as="select"
-                                                defaultValue="Category Pet"
-                                            >{petCategory.map(item => {
-                                               return <option value={item.id}>{item.categoryName}</option>
+
+                                    <Col sm="7">
+                                        <Form.Control
+                                            style={{ width: "350px" }}
+                                            onChange={handleChange}
+                                            name="idCategoryPet"
+                                            onClick=""
+                                            as="select"
+                                            defaultValue="Category Pet"
+                                        >
+                                            {petCategory.map((item) => {
+                                                return (
+                                                    <option value={item.id}>
+                                                        {item.categoryName}
+                                                    </option>
+                                                );
                                             })}
-                                            </Form.Control>
-                                        </Col>
-                                    
+                                        </Form.Control>
+                                    </Col>
                                 </Form.Group>
                                 <Form.Group as={Col}>
                                     <Form.Label column sm="5">
@@ -217,16 +227,25 @@ const AddAdoption = ({ edit, handleClose }) => {
                                             as="select"
                                             defaultValue="idBreed"
                                             name="idBreed"
-                                        > 
-
-                                         {
-                                            breed.filter(item => {
-                                                return item.id === formPet.idCategoryPet
-                                            }).map(items => {
-                                                return <option value={items.idBreed}>{items.breedName}</option>
-                                            })   
-                                        }
-                                         
+                                        >
+                                            {breed
+                                                .filter((item) => {
+                                                    return (
+                                                        item.id ===
+                                                        formPet.idCategoryPet
+                                                    );
+                                                })
+                                                .map((items) => {
+                                                    return (
+                                                        <option
+                                                            value={
+                                                                items.idBreed
+                                                            }
+                                                        >
+                                                            {items.breedName}
+                                                        </option>
+                                                    );
+                                                })}
                                         </Form.Control>
                                     </Col>
                                 </Form.Group>
@@ -243,17 +262,20 @@ const AddAdoption = ({ edit, handleClose }) => {
                             <Form.Row>
                                 <Form.Group as={Col}>
                                     <Form.Label column sm="5">
-                                        Location:
+                                        Size:
                                     </Form.Label>
                                     <Col sm="7">
                                         <Form.Control
-                                            placeholder="Location"
+                                            placeholder="Size"
                                             style={{ width: "350px" }}
-                                            type="text"
-                                            value={formPet.location}
-                                            name="location"
+                                            as="select"
+                                            value={formPet.size}
+                                            name="size"
                                             onChange={handleChange}
-                                        />
+                                        ><option value="Small">Small</option>
+                                         <option value="Medium">Medium</option>
+                                         <option value="Large">Large</option>
+                                         </Form.Control>
                                     </Col>
                                 </Form.Group>
                                 <Form.Group as={Col}>
@@ -264,11 +286,13 @@ const AddAdoption = ({ edit, handleClose }) => {
                                         <Form.Control
                                             placeholder="Gender"
                                             style={{ width: "350px" }}
-                                            type="text"
                                             value={formPet.gender}
                                             name="gender"
+                                            as="select"
                                             onChange={handleChange}
-                                        />
+                                        >    <option value="Female">Female</option>
+                                             <option value="Male">Male</option>
+                                        </Form.Control>   
                                     </Col>
                                 </Form.Group>
                             </Form.Row>
@@ -288,7 +312,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                     </Form.Label>
                                     <Col sm="7">
                                         <Form.Control
-                                            placeholder="Age"
+                                            placeholder="Years old"
                                             style={{ width: "350px" }}
                                             type="text"
                                             value={formPet.age}
@@ -317,33 +341,32 @@ const AddAdoption = ({ edit, handleClose }) => {
                     </Row>
                     <Row>
                         <Form.Group as={Col}>
-
                             <Form.Label column sm="5">
-                                Size :
+                                Location :
                             </Form.Label>
                             <Col sm="5">
                                 <Form.Control
-                                    placeholder="Size"
+                                    placeholder="Location"
                                     style={{ width: "735px", height: "60px" }}
                                     type="text"
-                                    value={formPet.size}
-                                    name="size"
+                                    value={formPet.location}
+                                    name="location"
                                     onChange={handleChange}
-                                />
+                                >
+                                 </Form.Control>
                             </Col>
                         </Form.Group>
                     </Row>
                     <Row>
                         <Form.Group as={Col}>
                             <Form.Label column sm="5">
-
                                 About :
                             </Form.Label>
                             <Col sm="7">
                                 <Form.Control
                                     placeholder="About"
                                     style={{ width: "735px", height: "60px" }}
-                                    type="text"
+                                    type="textarea"
                                     value={formPet.about}
                                     name="about"
                                     onChange={handleChange}
@@ -362,7 +385,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                     disabled
                                 />
                             </Col>
-                        </Form.Group>               
+                        </Form.Group>
                     </Row>
                 </Form.Row>
                 <PrimaryButton

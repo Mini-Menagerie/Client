@@ -12,13 +12,11 @@ const PurchaseHistory = () => {
 
     useEffect(() => {
         const user = JSON.parse(localStorage.getItem("user"));
-        console.log(user.idUser._id);
 
         const url = `http://localhost:8000/transactionDetails/history/${user.idUser._id}`;
         axios
             .get(url)
             .then(function (result) {
-                console.log(result.data.result[0].idProduct.image[0]);
                 setPurchaseHistory(result.data.result);
             })
             .catch(function (error) {
@@ -41,12 +39,17 @@ const PurchaseHistory = () => {
                                 </div>
                                 <Row>
                                     <Col xs={6} css={mainOne}>
-                                        <img src={e.idProduct.image[0].image} alt="mberrrr" />
+                                        <img
+                                            src={e.idProduct.image[0].image}
+                                            alt="mberrrr"
+                                        />
                                     </Col>
                                     <Col css={desc}>
                                         <div>
                                             <b>{e.idProduct.productName}</b> -{" "}
-                                            <span>{e.idProduct.categories}</span>
+                                            <span>
+                                                {e.idProduct.categories}
+                                            </span>
                                             <p>
                                                 Adoption Fee : Rp.
                                                 {e.idTransaction.totalPrice}

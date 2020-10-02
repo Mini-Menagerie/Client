@@ -28,6 +28,7 @@ const AllProfile = () => {
         await axios
             .get(url)
             .then(function (response) {
+                console.log(response.data.result);
                 setAboutMe(response.data.result);
                 setLoading(false);
             })
@@ -64,6 +65,7 @@ const AllProfile = () => {
                     <Tab eventKey="profile" title="Account Settings">
                         <AccountSettings />
                     </Tab>
+                   
                     <Tab eventKey="adopReq" title="Adoption Request">
                         <StatusRequest />
                     </Tab>

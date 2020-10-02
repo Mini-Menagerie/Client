@@ -34,14 +34,13 @@ const ShoppingCart = () => {
   }, []);
 
   const [data, setData] = useState([]);
-  // const [finalData, setFinalData] = useState([]);
   const [state, dispatch] = useState({
     loading: false,
     error: null,
   });
 
   const getTempCart = () => {
-    const cart = JSON.parse(localStorage.getItem("cartProduct")) || [];
+    const cart = JSON.parse(localStorage.getItem("cartProduct"));
     setData(cart);
   }
 
@@ -49,23 +48,13 @@ const ShoppingCart = () => {
     getTempCart()
   }, [])
 
-  if (data === null || data === []) {
-    window.location.replace('/')
+  const setFinalCart = () => {
+    localStorage.setItem("cartProduct", JSON.stringify(data))
   }
-  console.log(data);
 
   useEffect(() => {
-    localStorage.setItem("cartProduct", JSON.stringify(data))
+    setFinalCart()
   }, [data]);
-
-  // useEffect(() => {
-  //   if (data !== null) {
-  //     window.location.replace('/')
-  //       } else {
-  //     localStorage.setItem("cartProduct", JSON.stringify(data))}
-  // }, [data]);
-
-  // console.log(finalData);
 
   const handleChange = (e, id) => {
     const { value } = e.target;
@@ -96,6 +85,7 @@ const ShoppingCart = () => {
           price: item.stripe,
           quantity: item.quantity
         })),
+        billingAddressCollection: 'required',
       successUrl: `${window.location.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancelUrl: `${window.location.origin}/cart`,
     });
@@ -149,7 +139,7 @@ const ShoppingCart = () => {
 
   return (
     <Container css={container}>
-      <Row style={{ display: "flex", justifyContent: "space-between" }}>
+      <Container>
         <Col xs={7} css={userDetails}>
           <Form>
             <Form.Row>
@@ -226,11 +216,11 @@ const ShoppingCart = () => {
             </Form.Row>
 
             <div css={buttonRemove}>
-              <Button>Save Address</Button>
+              <Button>Use Address</Button>
             </div>
           </Form>
         </Col>
-      </Row>
+      </Container>
 
       <Container css={containerDetails}>
         <Col xs={7} css={itemDetails}>
@@ -325,10 +315,10 @@ const ShoppingCart = () => {
             </Col>
           </Row>
           <Row style={{ display: 'flex', justifyContent: 'space-around' }}>
-            <div css={buttonCheckoutLater} onClick={handleCheckoutNow} disabled={state.loading}>
+            <div css={buttonCheckoutLater} onClick={handleCheckoutLater} disabled={state.loading}>
               <Button>Checkout Later</Button>
             </div>
-            <div css={buttonCheckoutNow} onClick={handleCheckoutLater} disabled={state.loading}>
+            <div css={buttonCheckoutNow} onClick={handleCheckoutNow} disabled={state.loading}>
               <Button>Checkout Now</Button>
             </div>
           </Row>

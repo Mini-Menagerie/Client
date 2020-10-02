@@ -10,8 +10,6 @@ import { useState, useEffect } from "react";
 import { upload, uploadPhoto, fs } from "./EditProfile.styles";
 
 const EditProfile = ({ edit, handleClose }) => {
-    console.log(edit);
-
     const [, setUser] = useState([]);
     const [form, setForm] = useState({
         fullName: "",
@@ -31,7 +29,6 @@ const EditProfile = ({ edit, handleClose }) => {
         let response = await axios.get(
             `http://localhost:8000/users/${userData.idUser._id}` //if let id=userData.id then ${id}
         ); //endpoint
-        console.log(response);
         setUser(response.data.result);
     };
 
@@ -41,7 +38,7 @@ const EditProfile = ({ edit, handleClose }) => {
             [event.target.name]: event.target.value,
         });
     };
-    console.log(userData.idUser, "id user woi");
+
     const handleEditProfile = async (event) => {
         event.preventDefault();
         return axios
