@@ -121,6 +121,10 @@ const AboutMeTab = ({ profile }) => {
                                     <td>
                                         <b>City:</b>
                                     </td>
+                                    <td>
+                                        {profile.idUser !== undefined &&
+                                            profile.idUser.state}
+                                    </td>
                                 </tr>
                             </tbody>
                         </Table>
