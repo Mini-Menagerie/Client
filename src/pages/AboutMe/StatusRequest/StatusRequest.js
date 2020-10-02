@@ -19,27 +19,28 @@ const StatusRequest = () => {
     const getDataForm = async () => {
         const userData = await JSON.parse(localStorage.getItem("user"));
         const url = `formRequest/all/${userData.idUser._id}`;
-        await axios
-            .get(url)
-            .then(function (result) {
-                setStatusRequest(result.data.filterReq);
-            })
-            .catch(function (error) {
-                setErrorMessage(error.message);
-            });
+        let datas = await axios.get(url)
+        let results = datas.data.filterReq
+        setStatusRequest(results)
+        return results
     };
 
     const getIdPetForAdoption = async () => {
-        const userData = await JSON.parse(localStorage.getItem("user"));
-        let result = await axios.get(`petUpForAdoption/all/${userData.idUser._id}`);
-        let data = result.data.filterPetUp;
-        setPetForAdopt(data)
-        return data
+        let user = await getDataForm()
+        let result = await axios.get(`petUpForAdoption`);
+        let data = result.data.result;
+        let idPetFromUserForm = user[0].idPet._id
+        let filterData = data.filter(item => item.idPet._id === idPetFromUserForm)
+        let resultData = filterData[0]._id
+        setPetForAdopt(filterData[0]._id)
+        return resultData
     }
 
     const newAdoptionTransaction = async () => {
+        let data = await getIdPetForAdoption()
+        console.log(data);
         let adoptTrans = await axios.post("listAdoptionTransaction/create", {
-                idPetUpForAdoption: petForAdopt[0]._id,
+                idPetUpForAdoption: data,
                 petName: statusRequest[0].idPet.petName,
                 petCategory: statusRequest[0].idPet.idBreed.idCategoryPet.categoryName,
                 breed: statusRequest[0].idPet.idBreed.breedName,
