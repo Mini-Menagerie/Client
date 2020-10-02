@@ -20,6 +20,7 @@ const StatusRequest = () => {
         const userData = await JSON.parse(localStorage.getItem("user"));
         const url = `formRequest/all/${userData.idUser._id}`;
         let datas = await axios.get(url)
+        console.log(datas);
         let results = datas.data.filterReq
         setStatusRequest(results)
         return results
@@ -29,10 +30,10 @@ const StatusRequest = () => {
         let user = await getDataForm()
         let result = await axios.get(`petUpForAdoption`);
         let data = result.data.result;
-        let idPetFromUserForm = user[0].idPet._id
+        let idPetFromUserForm = user[0] !== undefined && user[0].idPet._id
         let filterData = data.filter(item => item.idPet._id === idPetFromUserForm)
-        let resultData = filterData[0]._id
-        setPetForAdopt(filterData[0]._id)
+        let resultData = filterData[0] !== undefined && filterData[0]._id
+        setPetForAdopt(filterData[0] !== undefined && filterData[0]._id)
         return resultData
     }
 
