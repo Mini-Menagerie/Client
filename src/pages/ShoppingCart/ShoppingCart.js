@@ -31,6 +31,8 @@ const ShoppingCart = () => {
 
   useEffect(() => {
     getUser();
+
+    //eslint-disable-next-line
   }, []);
 
   const [data, setData] = useState([]);
@@ -54,7 +56,9 @@ const ShoppingCart = () => {
 
   useEffect(() => {
     setFinalCart()
-  }, [data]);
+
+    //eslint-disable-next-line
+  }, []);
 
   const handleChange = (e, id) => {
     const { value } = e.target;
@@ -100,7 +104,7 @@ const ShoppingCart = () => {
   });
 
   let totalPrice = itemPrice.reduce((a, b) => a + b, 0);
-  const setTotalPrice = localStorage.setItem("totalPrice", totalPrice);
+  // const setTotalPrice = localStorage.setItem("totalPrice", totalPrice);
   const HandlingFee = 50000
 
   const removeProduct = () => {

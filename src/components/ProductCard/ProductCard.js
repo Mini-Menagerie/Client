@@ -44,7 +44,10 @@ const ProductCard = ({ products, loading, ...props }) => {
                             <p css={product_name}>{value.productName}</p>
                             <p css={product_price}>Rp {value.price}</p>
                             <ActionButton
-                                onClick={() => props.addToCart(value._id)}
+                                onClick={() => {
+                                    props.addToCart(value._id);
+                                    window.scrollTo(0, 0);
+                                }}
                             />
                         </Card.Body>
                     </Card>

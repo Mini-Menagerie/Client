@@ -13,8 +13,7 @@ import PrimaryButton from "../../../components/Button/Button";
 
 const StatusRequest = () => {
     const [statusRequest, setStatusRequest] = useState([]);
-    const [, setErrorMessage] = useState();
-    const [petForAdopt, setPetForAdopt] = useState()
+    const [, setPetForAdopt] = useState()
 
     const getDataForm = async () => {
         const userData = await JSON.parse(localStorage.getItem("user"));
@@ -63,7 +62,7 @@ const StatusRequest = () => {
     useEffect(() => {
         getDataForm();
         getIdPetForAdoption()
-        
+        // eslint-disable-next-line
     }, []);
 
     if (statusRequest.length > 0) {

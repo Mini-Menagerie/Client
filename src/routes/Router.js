@@ -1,27 +1,26 @@
-import React from 'react'
-import { Global } from '@emotion/core';
-import {
-  Route, Switch, BrowserRouter,
-} from 'react-router-dom';
+import React from "react";
+import { Global } from "@emotion/core";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
 
-import routes from './Router.routes';
-import LandingPage from '../pages/LandingPage/LandingPage';
-import globalStyles from '../styles/Global';
-import FindBreeds from '../pages/FindBreeds/FindBreeds';
-import AllPets from '../pages/AllPets/AllPets';
-import PetsDetail from '../pages/PetsDetail/PetsDetail';
-import PetShop from '../pages/PetShop/PetShop';
-import AdoptionForm from '../pages/AdoptionForm/AdoptionForm'
-import ProductDetail from '../pages/ProductDetail/ProductDetail';
-import ShoppingCart from '../pages/ShoppingCart/ShoppingCart';
-import SuccessCheckout from '../pages/ShoppingCart/success'
-import SearchPage from '../pages/searchPage/searchPage';
-import AboutMe from '../pages/AboutMe/AboutMe';
-import AdoptedHistory from '../pages/AboutMe/AdoptedHistory/AdoptedHistory';
-import StatusRequest from '../pages/AboutMe/StatusRequest/StatusRequest';
-import CategoryPet from '../pages/CategoryAllPets/CategoryAllPets';
-import BreedByCategory from '../pages/BreedByCategory/BreedByCategory';
+import routes from "./Router.routes";
+import LandingPage from "../pages/LandingPage/LandingPage";
+import globalStyles from "../styles/Global";
+import FindBreeds from "../pages/FindBreeds/FindBreeds";
+import AllPets from "../pages/AllPets/AllPets";
+import PetsDetail from "../pages/PetsDetail/PetsDetail";
+import PetShop from "../pages/PetShop/PetShop";
+import AdoptionForm from "../pages/AdoptionForm/AdoptionForm";
+import ProductDetail from "../pages/ProductDetail/ProductDetail";
+import ShoppingCart from "../pages/ShoppingCart/ShoppingCart";
+import SuccessCheckout from "../pages/ShoppingCart/success";
+import SearchPage from "../pages/searchPage/searchPage";
+import AboutMe from "../pages/AboutMe/AboutMe";
+import AdoptedHistory from "../pages/AboutMe/AdoptedHistory/AdoptedHistory";
+import StatusRequest from "../pages/AboutMe/StatusRequest/StatusRequest";
+import CategoryPet from "../pages/CategoryAllPets/CategoryAllPets";
+import BreedByCategory from "../pages/BreedByCategory/BreedByCategory";
 import PetByBreed from "../pages/PetByBreed/PetByBreed";
+import PetCollection from "../pages/PetCollection/PetCollection";
 
 const Router = () => (
     <BrowserRouter>
@@ -50,7 +49,11 @@ const Router = () => (
                 component={ProductDetail}
             />
             <Route exact path={routes.SHOPPINGCART} component={ShoppingCart} />
-            <Route exact path={routes.SUCCESSCHECKOUT} component={SuccessCheckout} />
+            <Route
+                exact
+                path={routes.SUCCESSCHECKOUT}
+                component={SuccessCheckout}
+            />
             <Route exact path={routes.CATEGORYPET} component={CategoryPet} />
             <Route exact path={routes.ABOUTME} component={AboutMe} />
             <Route
@@ -59,6 +62,11 @@ const Router = () => (
                 component={BreedByCategory}
             />
             <Route exact path={routes.PETBYBREED} component={PetByBreed} />
+            <Route
+                exact
+                path={routes.PETCOLLECTION}
+                component={PetCollection}
+            />
         </Switch>
     </BrowserRouter>
 );
