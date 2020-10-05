@@ -108,6 +108,11 @@ export const breedsLogo = css`
     width: 30px;
     filter: brightness(0) invert(1);
     font-size: 12px;
+    &:hover {
+        outline: none;
+        background-color: #22891a;
+        box-shadow: none;
+    }
 `;
 
 export const petsAvailableText = css`
@@ -200,7 +205,7 @@ export const arrowIcon = css`
 export const shop = css`
     display: flex;
     justify-content: space-between;
-    margin-top: 100px;
+    margin-top: 50px;
     flex-wrap: wrap;
 
     @media (max-width: 768px) {
@@ -300,3 +305,19 @@ export const centerMenu = css`
         flex-wrap: wrap;
     }
 `;
+
+export const itemdrop = css `
+`
+
+export const breedtest = css `
+`
+
+export const breedsLogos = css `
+&:hover {
+    outline: none;
+    background-color: #22b216;
+    box-shadow: none;
+    color: white;
+}
+color: white;
+`

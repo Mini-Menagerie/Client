@@ -9,7 +9,6 @@ export const wrapperCover = css`
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
 `;
 
 export const search = css`
@@ -127,8 +126,7 @@ border-top-right-radius: 20px;
 
 export const rowmargin = css `
 justify-content: space-between;
-margin-left: 40px;
-margin-right: 60px;
+
 `
 
 export const lineHeight = css `

@@ -21,7 +21,13 @@ import {
     filter,
     buttonGroup,
     card,
+    image,
+    cards,
+    marginText,
+    marginText2,
+    letUs
 } from "./PetCollection.styles";
+
 
 const PetCollection = () => {
     const [collection, setCollection] = useState([]);
@@ -61,110 +67,20 @@ const PetCollection = () => {
     return (
         <div>
             <div css={wrapperCover}>
-                <div></div>
+                <div css={letUs}>
+                    <p style={{fontWeight:"700",fontSize:"50px"}}>You're Looking For: 
+                    <br>
+                    {/* siberian (searchbyKeyword) */}
+                    </br></p>
+                </div>
             </div>
-            <Formik
-                initialValues={{ size: "", gender: "", alphabet: "" }}
-                onSubmit={async (values) => {
-                    const url = `${process.env.REACT_APP_API_URL}/pet/breed/${category}/${breed}/filter?size=${values.size}&gender=${values.gender}&alphabet=${values.alphabet}`;
-                    const response = await fetch(url);
-                    const result = await response.json();
-
-                    setCollection(result.result);
-                }}
-            >
-                {({
-                    values,
-                    errors,
-                    touched,
-                    handleChange,
-                    handleBlur,
-                    handleSubmit,
-                }) => (
-                    <div css={filter}>
-                        <h2 css={centertext}>Filter By Breed</h2>
-                        <p css={centertext}>By Size</p>
-                        <Form>
-                            <div css={buttonGroup}>
-                                <ToggleButtonGroup
-                                    css={widthButton}
-                                    name="size"
-                                    type="radio"
-                                    value={values.size}
-                                >
-                                    {size.map((radio, idx) => {
-                                        return (
-                                            <ToggleButton
-                                                key={idx}
-                                                onChange={handleChange}
-                                                value={radio.value}
-                                                variant="success"
-                                            >
-                                                {radio.name}
-                                            </ToggleButton>
-                                        );
-                                    })}
-                                </ToggleButtonGroup>
-                            </div>
-                            <p css={centertext}>By Gender</p>
-                            <div
-                                css={buttonGroup}
-                                className="justify-content-md-center"
-                            >
-                                <ToggleButtonGroup
-                                    css={widthButton}
-                                    name="gender"
-                                    type="radio"
-                                    value={values.gender}
-                                >
-                                    {gender.map((radio, idx) => (
-                                        <ToggleButton
-                                            key={idx}
-                                            variant="success"
-                                            value={radio.value}
-                                            onChange={handleChange}
-                                        >
-                                            {radio.name}
-                                        </ToggleButton>
-                                    ))}
-                                </ToggleButtonGroup>
-                            </div>
-                            <p css={centertext}>Find By Alphabetical Order</p>
-                            <div css={buttonGroup}>
-                                <ToggleButtonGroup
-                                    css={widthButton}
-                                    name="alphabet"
-                                    type="radio"
-                                    value={values.gender}
-                                >
-                                    {alphabet.map((radio, idx) => (
-                                        <ToggleButton
-                                            key={idx}
-                                            variant="success"
-                                            name="alphabet"
-                                            value={radio.value}
-                                            onChange={handleChange}
-                                        >
-                                            {radio.name}
-                                        </ToggleButton>
-                                    ))}
-                                </ToggleButtonGroup>
-                            </div>
-                            <Row className="justify-content-center">
-                                <Button type="submit" variant="success">
-                                    Filter Result
-                                </Button>
-                            </Row>
-                        </Form>
-                    </div>
-                )}
-            </Formik>
+         
             <div css={collections}>
                 <Row>
                     {collection.length > 0 &&
                         collection.map((item) => {
                             return (
-                                <Col xs={12} md={4} key={item._id} css={card}>
+                                <Col md={3} key={item._id} css={card}>
                                     <Link
                                         to={`/pets-detail/${
                                             item.id !== undefined
@@ -172,21 +88,19 @@ const PetCollection = () => {
                                                 : item._id
                                         }`}
                                     >
-                                        <Card>
+                                        <Card css={cards}>
                                             <Card.Img
+                                            css={image}
                                                 variant="top"
                                                 src={item.image[0]}
-                                                style={{
-                                                    objectFit: "cover",
-                                                    height: "200px",
-                                                }}
+                                              
                                             />
-                                            <Card.Title css={centertext}>
+                                            <Card.Title style={{fontWeight:"bold", fontSize:"1.5rem"}} css={marginText}>
                                                 {item.petName}
                                             </Card.Title>
-                                            <Card.Text css={centertext}>
-                                                {item.breed}
-                                                <br />
+                                            <Card.Text css={marginText2}>
+                                                {item.idBreed.breedName}
+                                                <br/>
                                                 {item.gender}, {item.age} Years
                                                 Old
                                                 <br />
