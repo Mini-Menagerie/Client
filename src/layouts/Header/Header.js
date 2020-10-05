@@ -227,7 +227,7 @@ const Header = () => {
                 },
                 onClose: () => {
                     clearInterval(timerInterval)
-                    window.location.replace("/shop")
+                    window.location.replace("/")
                 }
             }).then((result) => {
                 /* Read more about handling dismissals below */

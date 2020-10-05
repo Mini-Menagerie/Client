@@ -60,8 +60,9 @@ const Success = () => {
                 "id_trans_details",
                 newTransDetail.data.result._id
             );
-            // localStorage.removeItem('cartProduct')
+            localStorage.removeItem('cartProduct')
             localStorage.removeItem("id_trans");
+            localStorage.removeItem("totalPrice");
         }
     };
     const redirect = () => {
