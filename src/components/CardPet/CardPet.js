@@ -11,6 +11,7 @@ const CardPet = ({ petCards }) => {
 
     const handleClick = (id) => {
         history.push(`/pets-detail/${id}`);
+        window.scrollTo(0,0);
     };
     return (
         <Row>

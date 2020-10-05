@@ -13,13 +13,13 @@ import PrimaryButton from "../../../components/Button/Button";
 
 const StatusRequest = () => {
     const [statusRequest, setStatusRequest] = useState([]);
-    const [, setErrorMessage] = useState();
-    const [petForAdopt, setPetForAdopt] = useState()
+    const [, setPetForAdopt] = useState()
 
     const getDataForm = async () => {
         const userData = await JSON.parse(localStorage.getItem("user"));
         const url = `formRequest/all/${userData.idUser._id}`;
         let datas = await axios.get(url)
+        console.log(datas);
         let results = datas.data.filterReq
         setStatusRequest(results)
         return results
@@ -38,9 +38,9 @@ const StatusRequest = () => {
 
     const newAdoptionTransaction = async () => {
         let data = await getIdPetForAdoption()
-        console.log(data);
         let adoptTrans = await axios.post("listAdoptionTransaction/create", {
                 idPetUpForAdoption: data,
+                idUser: statusRequest[0].idUser._id,
                 petName: statusRequest[0].idPet.petName,
                 petCategory: statusRequest[0].idPet.idBreed.idCategoryPet.categoryName,
                 breed: statusRequest[0].idPet.idBreed.breedName,
@@ -62,11 +62,8 @@ const StatusRequest = () => {
     useEffect(() => {
         getDataForm();
         getIdPetForAdoption()
-        
+        // eslint-disable-next-line
     }, []);
-    console.log(statusRequest);
-
-  
 
     if (statusRequest.length > 0) {
         return (

@@ -18,7 +18,6 @@ import {
 import subLogo from "../../assets/signUp.png";
 
 const Footer = () => {
-    const token = localStorage.getItem("menagerie");
 
     return (
         <Container fluid={true} style={{ padding: "0" }}>
@@ -63,36 +62,30 @@ const Footer = () => {
                         <p css={footer}>Pet Care Videos</p>
                         <p css={footer}>Helping Pets</p>
                     </Col>
-                    {
-                        token == null ? (
-                            <Col md={2}>
-                                <div css={subWrapper}>
-                                    <div>
-                                        <div
-                                            style={{
-                                                textAlign: "center",
-                                            }}
-                                        >
-                                            <img
-                                                src={subLogo}
-                                                css={subsLogo}
-                                                alt="subLogo"
-                                                style={{ width: "50px" }}
-                                            />
-                                        </div>
-                                        <p css={subText}>
-                                            Sign up for our newsletter<br></br>
-                                            to get the latest update on pet<br></br>
-                                            adoption & rescues!
-                                        </p>
-                                        <PrimaryButton>Sign Up</PrimaryButton>
+                        <Col md={2}>
+                            <div css={subWrapper}>
+                                <div>
+                                    <div
+                                        style={{
+                                            textAlign: "center",
+                                        }}
+                                    >
+                                        <img
+                                            src={subLogo}
+                                            css={subsLogo}
+                                            alt="subLogo"
+                                            style={{ width: "50px" }}
+                                        />
                                     </div>
+                                    <p css={subText}>
+                                        Sign up for our newsletter<br></br>
+                                        to get the latest update on pet<br></br>
+                                        adoption & rescues!
+                                    </p>
+                                    <PrimaryButton>Sign Up</PrimaryButton>
                                 </div>
-                            </Col>
-                        ) : (
-                            <Col md={2}></Col>
-                        )
-                    }
+                            </div>
+                        </Col>
                 </Row>
             </div>
             <div css={wrapperStyles2}>
