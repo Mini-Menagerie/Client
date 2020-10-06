@@ -93,6 +93,7 @@ const PetShop = () => {
                 </Row>
                 <div>
                 <Row style={{alignItems:"center"}}>
+                 
                         <p>Sort by</p>
                         <Form.Group as={Col} controlId="formGridSort">
                             <Form.Control as="select" defaultValue="Newest" onChange={handleChangeSort} onClick={getSort} style={{width:"120px"}}>
@@ -101,6 +102,8 @@ const PetShop = () => {
                                 <option value="price-asc">Price (Low to High)</option>
                             </Form.Control>
                         </Form.Group>
+                    
+                   
                         <p>Filter by</p>
                         <Form.Group as={Col} controlId="formGridFilter">
                             <Form.Control as="select" defaultValue="Newest" onChange={handleChangeFilter} onClick={getFilter} style={{width:"150px"}}>
@@ -110,6 +113,7 @@ const PetShop = () => {
                                 <option value="vitdrugs">Vitamin</option>
                             </Form.Control>
                         </Form.Group>
+                    
                 </Row>
                 </div>
             </Container>

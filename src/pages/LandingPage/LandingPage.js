@@ -265,7 +265,7 @@ const LandingPage = () => {
                 </form>
             </div>
             <div css={petsAvailableText}>
-                <h2>Pets Available for Adoption Near You</h2>
+                <h2 style={{fontSize:"40px", fontWeight:"500"}}>Pets Available for Adoption Near You</h2>
             </div>
             <div css={petsAvailable}>
                 <CardPet petCards={petCards} />
