@@ -29,7 +29,8 @@ import {
     cards,
     cover,
     textTitle,
-    toggle
+    toggle,
+    wrapperCover1
 } from "./BreedByCategory.styles";
 
 const BreedByCategory = () => {
@@ -148,13 +149,15 @@ const BreedByCategory = () => {
     }, []);
     return (
         <div>
-            <div css={wrapperCover}>
+            <div css={category === "dog" ? wrapperCover : wrapperCover1}>
                 <div css={cover}>
+                
                     <p style={{fontWeight:"600", fontSize:"50px", color:"white"}}>Let Us Help You!</p>
                   
                     <Card css={cards}>
                         <Row style={{alignItems:"center"}}>
-                         <input style={{border:"none", outline:"none"}}
+                            <form>
+                                 <input style={{border:"none", outline:"none"}}
                                     type="text"
                                     css={cards}
                                     placeholder="Enter Breed Name"
@@ -168,10 +171,9 @@ const BreedByCategory = () => {
                                 >
                                     <i className="fas fa-search fa-2x"></i>
                                 </button>
+                            </form>
                                 </Row>
-                              
                     </Card>
-                    
                 </div>
             </div>
             <div css={collections}>
@@ -193,7 +195,7 @@ const BreedByCategory = () => {
                         })}
                 </Carousel>
             </div>
-            <Formik
+            {/* <Formik
                 initialValues={{ size: "", gender: "", alphabet: "" }}
                 onSubmit={async (values) => {
                     const url = `${process.env.REACT_APP_API_URL}/pet/breed/${category}/filter?size=${values.size}&gender=${values.gender}&alphabet=${values.alphabet}`;
@@ -291,9 +293,12 @@ const BreedByCategory = () => {
                         </Form>
                     </div>
                 )}
-            </Formik>
+            </Formik> */}
             <div css={collections}>
                 <Container fluid>
+                    <div>
+                        <h1 style={{textAlign:"center", fontWeight:"600", color:"#464646", fontSize:"50px"}}>All Breeds</h1>
+                    </div>
                     <Row>
                         {breed.length > 0 &&
                             breed.map((item) => {
@@ -307,7 +312,7 @@ const BreedByCategory = () => {
                                         <Link
                                             to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
                                         >
-                                            <Card style={{borderRadius:"20px", margin:"30px"}}>
+                                            <Card style={{borderRadius:"20px", margin:"30px", marginTop:"50px"}}>
                                                 <Card.Img
                                                     variant="top"
                                                     src={item.image[0]}
@@ -318,7 +323,7 @@ const BreedByCategory = () => {
                                                         borderTopRightRadius:"20px"
                                                     }}
                                                 />
-                                                <Card.Title css={centertext}>
+                                                <Card.Title css={centertext} style={{color:"#46464"}}>
                                                     {item.idBreed.breedName}
                                                 </Card.Title>
                                             </Card>

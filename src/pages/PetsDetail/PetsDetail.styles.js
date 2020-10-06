@@ -14,4 +14,5 @@ h1 {
     text-align: center;
     padding-bottom: 40px;
 }
+max-width: 80%;
 `

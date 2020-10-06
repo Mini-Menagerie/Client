@@ -60,6 +60,8 @@ const DetailSection = ({ petDetails, user }) => {
                     <p>{petDetails.age} Years Old</p>
                     <h5>&bull;</h5>
                     <p>{petDetails.size}</p>
+                    <h5>&bull;</h5>
+                    <p>{petDetails.weight}</p>
                 </Row>
                 <Row css={row_line}>
                     <ColoredLine color="#000" />
@@ -73,10 +75,10 @@ const DetailSection = ({ petDetails, user }) => {
             </Col>
             <Col xs={12} md={4} css={detail_section_col}>
                 <h5>Caregiver:</h5>
-                <h1 css={margin2}>
+                <h2 css={margin2}>
                     {petDetails.idUser !== undefined &&
                         petDetails.idUser.fullName}
-                </h1>
+                </h2>
                 <h5>Pet Location</h5>
                 <Row style={{justifyContent:"center"}}>
                     <iframe
