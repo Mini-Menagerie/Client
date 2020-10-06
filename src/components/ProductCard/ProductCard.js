@@ -29,7 +29,7 @@ const ProductCard = ({ products, loading, ...props }) => {
                 return (
                     <Card
                         key={value._id}
-                        style={{ width: "16rem", marginBottom: "15px" }}
+                        style={{ width: "16rem", marginBottom: "80px" }}
                     >
                         <div style={{ padding: "10px" }}>
                             <Link to={`/product/${value._id}`}>

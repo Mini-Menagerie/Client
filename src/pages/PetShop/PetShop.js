@@ -9,7 +9,8 @@ import ProductCard from '../../components/ProductCard/ProductCard';
 import {
     container,
     head_bg,
-    sortFilter
+    sortFilter,
+    shopText,
 } from './PetShop.styles'
 import head_bg_img from '../../assets/bg-shop.jpg'  
 
@@ -76,7 +77,11 @@ const PetShop = () => {
             {/* Head Background */}
             <Container fluid css={container}>
                 <Row>
-                    <img css={head_bg} src={head_bg_img} alt="banner" />
+                    <img style={{position:"relative", textAlign:"center"}} css={head_bg} src={head_bg_img} alt="banner" />
+                    <div css={shopText}>
+                        Buy Necessities For <br/> Your New Best Friend
+                        <p style={{fontSize:"30px", fontWeight:"500"}}>at Mini Menagerie One Stop Shop!</p>
+                    </div>
                 </Row>
             </Container>
             {/* End of Head Background */}
@@ -84,31 +89,29 @@ const PetShop = () => {
             {/* Product List */}
             <Container css={container}>
                 <Row>
-                    <Col xs={6} style={{display: 'flex', alignItems: 'center'}}>
                         <p>{products.length} results</p>
-                    </Col>
-                    <Col css={sortFilter}>
+                </Row>
+                <div>
+                <Row style={{alignItems:"center"}}>
                         <p>Sort by</p>
                         <Form.Group as={Col} controlId="formGridSort">
-                            <Form.Control as="select" defaultValue="Newest" onChange={handleChangeSort} onClick={getSort}>
+                            <Form.Control as="select" defaultValue="Newest" onChange={handleChangeSort} onClick={getSort} style={{width:"120px"}}>
                                 <option value="createdAt-desc">Newest</option>
                                 <option value="price-desc">Price (High to Low)</option>
                                 <option value="price-asc">Price (Low to High)</option>
                             </Form.Control>
                         </Form.Group>
-                    </Col>
-                    <Col css={sortFilter}>
                         <p>Filter by</p>
                         <Form.Group as={Col} controlId="formGridFilter">
-                            <Form.Control as="select" defaultValue="Newest" onChange={handleChangeFilter} onClick={getFilter}>
+                            <Form.Control as="select" defaultValue="Newest" onChange={handleChangeFilter} onClick={getFilter} style={{width:"150px"}}>
                                 <option value="catfood">Cat Food</option>
                                 <option value="dogfood">Dog Food</option>
                                 <option value="acc">Accessories</option>
                                 <option value="vitdrugs">Vitamin</option>
                             </Form.Control>
                         </Form.Group>
-                    </Col>
                 </Row>
+                </div>
             </Container>
 
             <Container css={container}>
