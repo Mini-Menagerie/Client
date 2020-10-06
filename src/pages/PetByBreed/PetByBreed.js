@@ -14,14 +14,18 @@ import {
 } from "react-bootstrap";
 
 import {
-    wrapperCover,
-    widthButton,
-    collections,
-    centertext,
-    filter,
+    toggle,
     buttonGroup,
+    centertext,
+    widthButton,
+    wrapperCover,
+    collections,
+    filter,
     card,
-} from "./PetByBreed.styles";
+    wrapperCover1,
+    cardcss,
+    cardcss1
+} from "../BreedByCategory/BreedByCategory.styles"
 
 const PetByBreed = () => {
     const [collection, setCollection] = useState([]);
@@ -59,7 +63,9 @@ const PetByBreed = () => {
     return (
         <div>
             <div css={wrapperCover}>
-                <div></div>
+                <div>
+                    <h1 style={{color:"white", paddingLeft:"80px", fontWeight:"500"}}>You're Looking For : <br/><p style={{fontSize:"50px", fontWeight:"600"}}>{breed}</p></h1>
+                </div>
             </div>
             <Formik
                 initialValues={{ size: "", gender: "", alphabet: "" }}
@@ -80,10 +86,10 @@ const PetByBreed = () => {
                     handleSubmit,
                 }) => (
                     <div css={filter}>
-                        <h2 css={centertext}>Filter By Breed</h2>
-                        <p css={centertext}>By Size</p>
+                        <h2 style={{fontWeight:"600", textAlign:"center", color:"#494949", paddingBottom:"20px"}}>Filter By Breed</h2>
+                        <p style={{fontSize:"20px", textAlign:"center", color:"#494949"}}>By Size</p>
                         <Form>
-                            <div css={buttonGroup}>
+                        <div css={buttonGroup}>
                                 <ToggleButtonGroup
                                     css={widthButton}
                                     name="size"
@@ -93,6 +99,7 @@ const PetByBreed = () => {
                                     {size.map((radio, idx) => {
                                         return (
                                             <ToggleButton
+                                                css={toggle}
                                                 key={idx}
                                                 onChange={handleChange}
                                                 value={radio.value}
@@ -104,7 +111,7 @@ const PetByBreed = () => {
                                     })}
                                 </ToggleButtonGroup>
                             </div>
-                            <p css={centertext}>By Gender</p>
+                            <p style={{fontSize:"20px", textAlign:"center", color:"#494949"}}>By Gender</p>
                             <div
                                 css={buttonGroup}
                                 className="justify-content-md-center"
@@ -117,6 +124,7 @@ const PetByBreed = () => {
                                 >
                                     {gender.map((radio, idx) => (
                                         <ToggleButton
+                                            css={toggle}
                                             key={idx}
                                             variant="success"
                                             value={radio.value}
@@ -127,7 +135,7 @@ const PetByBreed = () => {
                                     ))}
                                 </ToggleButtonGroup>
                             </div>
-                            <p css={centertext}>Find By Alphabetical Order</p>
+                            <p style={{fontSize:"20px", textAlign:"center", color:"#494949"}}>Find By Alphabetical Order</p>
                             <div css={buttonGroup}>
                                 <ToggleButtonGroup
                                     css={widthButton}
@@ -137,6 +145,7 @@ const PetByBreed = () => {
                                 >
                                     {alphabet.map((radio, idx) => (
                                         <ToggleButton
+                                        css={toggle}
                                             key={idx}
                                             variant="success"
                                             name="alphabet"
@@ -149,7 +158,7 @@ const PetByBreed = () => {
                                 </ToggleButtonGroup>
                             </div>
                             <Row className="justify-content-center">
-                                <Button type="submit" variant="success">
+                                <Button type="submit" variant="success" style={{marginTop:"50px", fontSize:"20px"}}>
                                     Filter Result
                                 </Button>
                             </Row>
@@ -162,36 +171,38 @@ const PetByBreed = () => {
                     {collection.length > 0 &&
                         collection.map((item) => {
                             return (
-                                <Col xs={12} md={4} key={item._id} css={card}>
-                                    <Link
-                                        to={`/pets-detail/${
-                                            item.id !== undefined
-                                                ? item.id
-                                                : item._id
-                                        }`}
-                                    >
-                                        <Card>
-                                            <Card.Img
-                                                variant="top"
-                                                src={item.image[0]}
-                                                style={{
-                                                    objectFit: "cover",
-                                                    height: "200px",
-                                                }}
-                                            />
-                                            <Card.Title css={centertext}>
-                                                {item.petName}
-                                            </Card.Title>
-                                            <Card.Text css={centertext}>
-                                                {item.breed}
-                                                <br />
-                                                {item.gender}, {item.age} Years
-                                                Old
-                                                <br />
-                                                {item.location}
-                                            </Card.Text>
-                                        </Card>
-                                    </Link>
+                                <Col
+                                xs={12}
+                                md={4}
+                                key={item._id}
+                                css={card}
+                            >
+                                <Link
+                                    to={`/all-breeds/category/${category}/${item.idBreed}`}
+                                >
+                                    <Card style={{borderRadius:"20px", width:"25rem"}}>
+                                        <Card.Img
+                                            variant="top"
+                                            src={item.image[0]}
+                                            style={{
+                                                objectFit: "cover",
+                                                height: "350px",
+                                                borderTopLeftRadius:"20px",
+                                                borderTopRightRadius:"20px"
+                                            }}
+                                        />
+                                        <Card.Title css={cardcss1}>
+                                            <h4>
+                                                <b>{item.petName}</b>
+                                            </h4>
+                                        </Card.Title>
+                                        <Card.Text css={cardcss}>
+                                            {item.gender}, {item.age} Years Old
+                                            <br />
+                                            {item.location}
+                                        </Card.Text>
+                                    </Card>
+                                </Link>
                                 </Col>
                             );
                         })}
