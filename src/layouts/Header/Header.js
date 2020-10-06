@@ -296,7 +296,9 @@ const Header = () => {
                                 <input
                                     type="text"
                                     css={searchText}
-                                    placeholder="Search For Your Future Best Friend"
+
+                                    placeholder="Search by category, location, breed or collection"
+
                                     style={{ backgroundColor: "#f5f5f5" }}
                                     onChange={handleSearch}
                                     value={search}
@@ -563,7 +565,7 @@ const Header = () => {
                                 <input
                                     type="text"
                                     css={searchText}
-                                    placeholder="Search your future best friend"
+                                    placeholder="Search by category, location, breed or collection"
                                     style={{
                                         maxWidth: "70%",
                                         backgroundColor: "#f5f5f5",
