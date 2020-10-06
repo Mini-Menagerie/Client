@@ -211,7 +211,7 @@ const Header = () => {
         } else if (userLogin === null) {
             Swal.fire({
                 title: 'You Are Not Logged In',
-                text: 'Please Login Or Register',
+                text: 'Please Login or Register',
                 timer: 3000,
                 timerProgressBar: true,
                 willOpen: () => {

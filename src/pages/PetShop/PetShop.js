@@ -2,7 +2,7 @@
 import { jsx } from "@emotion/core";
 import { useEffect, useState } from "react";
 import { Container, Row, Col, Form } from "react-bootstrap";
-import axios from "axios";
+import axios from "../../helpers/axios"
 
 import Pagination from '../../components/Pagination'
 import ProductCard from '../../components/ProductCard/ProductCard';
@@ -12,27 +12,26 @@ import {
     sortFilter,
     shopText,
 } from './PetShop.styles'
-import head_bg_img from '../../assets/bg-shop.jpg'  
+import head_bg_img from '../../assets/bg-shop.jpg'
 
 const PetShop = () => {
     const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [sort, setSort] = useState('');
     const [filter, setFilter] = useState('');
     const [currentProduct, setCurrentPage] = useState(1);
-    const [productsPerPage] = useState(8);
+    const [productsPerPage] = useState(9);
 
     useEffect(() => {
-        let url = "http://localhost:8000/product";
         const getProducts = async () => {
             setLoading(true);
-            const response = await axios.get(url);
+            const response = await axios.get("/product");
             localStorage.setItem(
                 "products",
                 JSON.stringify(response.data.result)
             );
             setProducts(response.data.result);
-            setLoading(false);
+            setTimeout(() => setLoading(false), 3000);
         };
 
         getProducts();
@@ -89,32 +88,32 @@ const PetShop = () => {
             {/* Product List */}
             <Container css={container}>
                 <Row>
-                        <p>{products.length} results</p>
+                    <p>{products.length} results</p>
                 </Row>
                 <div>
-                <Row style={{alignItems:"center"}}>
-                 
+                    <Row style={{ alignItems: "center" }}>
+
                         <p>Sort by</p>
                         <Form.Group as={Col} controlId="formGridSort">
-                            <Form.Control as="select" defaultValue="Newest" onChange={handleChangeSort} onClick={getSort} style={{width:"120px"}}>
+                            <Form.Control as="select" defaultValue="Newest" onChange={handleChangeSort} onClick={getSort} style={{ width: "120px" }}>
                                 <option value="createdAt-desc">Newest</option>
                                 <option value="price-desc">Price (High to Low)</option>
                                 <option value="price-asc">Price (Low to High)</option>
                             </Form.Control>
                         </Form.Group>
-                    
-                   
+
+
                         <p>Filter by</p>
                         <Form.Group as={Col} controlId="formGridFilter">
-                            <Form.Control as="select" defaultValue="Newest" onChange={handleChangeFilter} onClick={getFilter} style={{width:"150px"}}>
+                            <Form.Control as="select" defaultValue="Newest" onChange={handleChangeFilter} onClick={getFilter} style={{ width: "150px" }}>
                                 <option value="catfood">Cat Food</option>
                                 <option value="dogfood">Dog Food</option>
                                 <option value="acc">Accessories</option>
                                 <option value="vitdrugs">Vitamin</option>
                             </Form.Control>
                         </Form.Group>
-                    
-                </Row>
+
+                    </Row>
                 </div>
             </Container>
 
