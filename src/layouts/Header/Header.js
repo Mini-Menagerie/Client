@@ -77,8 +77,8 @@ const Header = () => {
 
             if (user.status === 200) {
                 Swal.fire({
-                    title: "Sukses!",
-                    text: "Login berhasil!",
+                    title: "Success!",
+                    text: "You've Logged In Successfully",
                     icon: "success",
                 });
                 localStorage.setItem("menagerie", user.data.token);
@@ -98,7 +98,7 @@ const Header = () => {
             ) {
                 Swal({
                     title:
-                        "Email sudah terdaftar menggunakan email social media!",
+                        "Email is Already Registered Via Social Media",
                     icon: "warning",
                 });
                 setShow(false);
@@ -127,7 +127,7 @@ const Header = () => {
         } catch (error) {
             if (error.message === "Request failed with status code 400") {
                 Swal({
-                    title: "Email sudah terdaftar, gunakan Email lain",
+                    title: "This Email Account Already Exists",
                     icon: "warning",
                 });
             } else if (
@@ -135,7 +135,7 @@ const Header = () => {
             ) {
                 Swal({
                     title:
-                        "Email sudah terdaftar melalui Social Media, gunakan Email lain",
+                        "Email is Already Registered Via Social Media, Please Use Another Email or Login",
                     icon: "warning",
                 });
                 setShow(false);
@@ -183,8 +183,8 @@ const Header = () => {
         let timerInterval
         if (cart === null) {
             Swal.fire({
-                title: 'Your cart still empty!',
-                text: 'Please shop first',
+                title: 'Your Cart is Still Empty!',
+                text: 'Add an Item(s) to Your Cart',
                 timer: 3000,
                 timerProgressBar: true,
                 willOpen: () => {
@@ -210,8 +210,8 @@ const Header = () => {
             })
         } else if (userLogin === null) {
             Swal.fire({
-                title: 'You are not login',
-                text: 'Please login or register first',
+                title: 'You Are Not Logged In',
+                text: 'Please Login Or Register',
                 timer: 3000,
                 timerProgressBar: true,
                 willOpen: () => {
@@ -296,7 +296,9 @@ const Header = () => {
                                 <input
                                     type="text"
                                     css={searchText}
+
                                     placeholder="Search by category, location, breed or collection"
+
                                     style={{ backgroundColor: "#f5f5f5" }}
                                     onChange={handleSearch}
                                     value={search}
@@ -490,21 +492,21 @@ const Header = () => {
                                             variant="primary"
                                             onClick={handleGoogleLogin}
                                         >
-                                            Signup with Google
+                                            Sign Up with Google
                                         </Button>
                                         <Button
                                             css={buttonLoginStyles}
                                             variant="primary"
                                             onClick={handleFacebookLogin}
                                         >
-                                            Signup with Facebook
+                                            Sign Up with Facebook
                                         </Button>
                                         <Button
                                             css={buttonLoginStyles}
                                             variant="primary"
                                             onClick={handleShowFormSignUp}
                                         >
-                                            Signup with Email
+                                            Sign Up with Email
                                         </Button>
                                         <p css={buttonLoginStyles}>
                                             Already have an account?
@@ -770,24 +772,24 @@ const Header = () => {
                                             variant="primary"
                                             onClick={handleGoogleLogin}
                                         >
-                                            Signup with Google
+                                            Sign Up with Google
                                         </Button>
                                         <Button
                                             css={buttonLoginStyles}
                                             variant="primary"
                                             onClick={handleFacebookLogin}
                                         >
-                                            Signup with Facebook
+                                            Sign Up with Facebook
                                         </Button>
                                         <Button
                                             css={buttonLoginStyles}
                                             variant="primary"
                                             onClick={handleShowFormSignUp}
                                         >
-                                            Signup with Email
+                                            Sign Up with Email
                                         </Button>
                                         <p css={buttonLoginStyles}>
-                                            Already have an account?
+                                            Already Have an Account?
                                             <Button onClick={handleLoginModal}>
                                                 Log In
                                             </Button>

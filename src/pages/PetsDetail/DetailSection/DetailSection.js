@@ -21,6 +21,7 @@ import Swal from "sweetalert2";
 
 const DetailSection = ({ petDetails, user }) => {
     const history = useHistory();
+    window.scrollTo(0,0);
     const handleClick = () => {
         history.push(`/adoption-form`);
     };

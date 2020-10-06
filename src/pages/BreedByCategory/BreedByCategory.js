@@ -5,6 +5,7 @@ import Carousel from "react-multi-carousel";
 import { Formik, Form } from "formik";
 import { useParams, Link } from "react-router-dom";
 import "react-multi-carousel/lib/styles.css";
+import axios from "axios";
 
 import {
     Card,
@@ -14,6 +15,7 @@ import {
     ToggleButton,
     ToggleButtonGroup,
     Container,
+    FormControl,
 } from "react-bootstrap";
 
 import {
@@ -24,12 +26,40 @@ import {
     filter,
     buttonGroup,
     card,
+    cards,
+    cover,
+    textTitle,
+    toggle
 } from "./BreedByCategory.styles";
 
 const BreedByCategory = () => {
     const [collection, setCollection] = useState([]);
+    const [searchPet, setSearchPet] = useState([]);
     const [breed, setBreed] = useState([]);
     const { category } = useParams();
+    const [search, setSearch] = useState("");
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(false);
+    const [errorMessage, setErrorMessage] = useState();
+
+    const handleChange = (event) => {
+        setSearch(event.target.value);
+    };
+
+    const getSearch = () => {
+        const url = `http://localhost:8000/petdetail/?search=${search}`;
+        axios
+            .get(url)
+            .then(function (response) {
+                setSearchPet(response.data.result);
+                setLoading(false);
+            })
+            .catch(function (error) {
+                setError(true);
+                setErrorMessage(error.message);
+                setLoading(false);
+            });
+    };
 
     const size = [
         { name: "Small", value: "Small" },
@@ -99,20 +129,52 @@ const BreedByCategory = () => {
 
         setBreed(uniqueArray);
     };
+    
+        const searchBar = () => {localStorage.getItem("search");
+        const url =
+            searchBar !== null
+                ? `${process.env.REACT_APP_API_URL}/petdetail/?search=${searchBar}`
+                : `${process.env.REACT_APP_API_URL}/pet`;
+
+        axios
+            .get(url)
+            .then(function (response) {
+                setSearchPet(response.data.data);
+                setLoading(false);
+            })
+            .catch(function (error) {
+                setError(true);
+                setErrorMessage(error.message);
+                setLoading(false);
+            });
+        }
 
     useEffect(() => {
         fetchCollection();
         fetchBreed();
-
+        searchBar();
         //eslint-disable-next-line
     }, []);
     return (
         <div>
             <div css={wrapperCover}>
-                <div></div>
+                <div css={cover}>
+                    <p style={{fontWeight:"600", fontSize:"50px", color:"white"}}>Let Us Help You!</p>
+                    <Card css={cards}>
+                        <FormControl
+                            onChange={handleChange}
+                            onKeyUp={getSearch}
+                            name="search"
+                            value={search}
+                            type="text"
+                            placeholder="e.g. Golden Retriever"
+                            className="mr-sm-2"
+                        ></FormControl>
+                    </Card>
+                </div>
             </div>
             <div css={collections}>
-                <h2 css={centertext}>Search Our Collection</h2>
+                <p css={textTitle}>Search Our Collection</p>
                 <Carousel responsive={responsive} infinite={true}>
                     {collection.length > 0 &&
                         collection.map((item) => {
@@ -149,8 +211,8 @@ const BreedByCategory = () => {
                     handleSubmit,
                 }) => (
                     <div css={filter}>
-                        <h2 css={centertext}>Filter By Breed</h2>
-                        <p css={centertext}>By Size</p>
+                        <h2 style={{fontWeight:"600", textAlign:"center", color:"#494949", paddingBottom:"20px"}}>Filter By Breed</h2>
+                        <p style={{fontSize:"20px", textAlign:"center", color:"#494949"}}>By Size</p>
                         <Form>
                             <div css={buttonGroup}>
                                 <ToggleButtonGroup
@@ -162,6 +224,7 @@ const BreedByCategory = () => {
                                     {size.map((radio, idx) => {
                                         return (
                                             <ToggleButton
+                                                css={toggle}
                                                 key={idx}
                                                 onChange={handleChange}
                                                 value={radio.value}
@@ -173,7 +236,7 @@ const BreedByCategory = () => {
                                     })}
                                 </ToggleButtonGroup>
                             </div>
-                            <p css={centertext}>By Gender</p>
+                            <p style={{fontSize:"20px", textAlign:"center", color:"#494949"}}>By Gender</p>
                             <div
                                 css={buttonGroup}
                                 className="justify-content-md-center"
@@ -186,6 +249,7 @@ const BreedByCategory = () => {
                                 >
                                     {gender.map((radio, idx) => (
                                         <ToggleButton
+                                            css={toggle}
                                             key={idx}
                                             variant="success"
                                             value={radio.value}
@@ -196,7 +260,7 @@ const BreedByCategory = () => {
                                     ))}
                                 </ToggleButtonGroup>
                             </div>
-                            <p css={centertext}>Find By Alphabetical Order</p>
+                            <p style={{fontSize:"20px", textAlign:"center", color:"#494949"}}>Find By Alphabetical Order</p>
                             <div css={buttonGroup}>
                                 <ToggleButtonGroup
                                     css={widthButton}
@@ -206,6 +270,7 @@ const BreedByCategory = () => {
                                 >
                                     {alphabet.map((radio, idx) => (
                                         <ToggleButton
+                                        css={toggle}
                                             key={idx}
                                             variant="success"
                                             name="alphabet"
@@ -218,7 +283,7 @@ const BreedByCategory = () => {
                                 </ToggleButtonGroup>
                             </div>
                             <Row className="justify-content-center">
-                                <Button type="submit" variant="success">
+                                <Button type="submit" variant="success" style={{marginTop:"50px", fontSize:"20px"}}>
                                     Filter Result
                                 </Button>
                             </Row>
