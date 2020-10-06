@@ -4,6 +4,7 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import MoonLoader from "react-spinners/MoonLoader";
+import NumberFormat from 'react-number-format';
 
 import { addToCart } from "../../redux/actions/addToCart";
 import {
@@ -29,7 +30,7 @@ const ProductCard = ({ products, loading, ...props }) => {
                 return (
                     <Card
                         key={value._id}
-                        style={{ width: "16rem", marginBottom: "15px" }}
+                        style={{ width: "20rem", marginBottom: "80px", marginLeft:"5px", marginRight:"5px", borderRadius:"10px"}}
                     >
                         <div style={{ padding: "10px" }}>
                             <Link to={`/product/${value._id}`}>
@@ -41,8 +42,8 @@ const ProductCard = ({ products, loading, ...props }) => {
                             </Link>
                         </div>
                         <Card.Body>
-                            <p css={product_name}>{value.productName}</p>
-                            <p css={product_price}>Rp {value.price}</p>
+                            <p css={product_name} style={{minHeight:"0px"}}>{value.productName}</p>
+                            <p css={product_price}><NumberFormat value={value.price}dswq displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></p>
                             <ActionButton
                                 onClick={() => {
                                     props.addToCart(value._id);

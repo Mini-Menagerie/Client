@@ -1,7 +1,8 @@
 import { css } from "@emotion/core";
+import cover from '../../assets/dogCover.jpg'
 
 export const wrapperCover = css`
-    background-image: url(https://images.unsplash.com/photo-1472491235688-bdc81a63246e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60);
+    background-image: url(${cover});
     background-size: cover;
     background-position: center;
     height: 500px;
@@ -17,7 +18,10 @@ export const whitecolor = css`
     color: #ffffff;
 `;
 export const card = css`
-    margin: 10px 0;
+    margin-bottom: 25px;
+    &: hover {
+        cursor: pointer;
+    }
 
     @media (max-width: 768px) {
         margin: 10px;
@@ -38,6 +42,7 @@ export const marginbutton = css`
 export const collections = css`
     padding: 80px 25px;
     justify-content: center;
+    margin: 20px 80px;
 `;
 export const centertext = css`
     text-align: center;
@@ -60,3 +65,30 @@ export const buttonGroup = css`
     justify-content: center;
     margin: 30px 0px;
 `;
+ 
+export const image = css `
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+`
+
+export const cards = css `
+width: 380px;
+padding-bottom: 20px;
+border-radius: 20px;
+`
+export const marginText = css `
+padding-left: 15px;
+padding-top: 20px;
+`
+
+export const marginText2 = css `
+padding-left: 15px;
+`
+
+export const letUs = css `
+color: white;
+padding-left: 50px;
+`

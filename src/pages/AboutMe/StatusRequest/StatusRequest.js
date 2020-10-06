@@ -9,11 +9,10 @@ import {
     mainOne,
     mainBody,
 } from "./StatusRequest.styles";
-import PrimaryButton from "../../../components/Button/Button";
 
 const StatusRequest = () => {
     const [statusRequest, setStatusRequest] = useState([]);
-    const [, setPetForAdopt] = useState()
+    // const [, setPetForAdopt] = useState()
 
     const getDataForm = async () => {
         const userData = await JSON.parse(localStorage.getItem("user"));
@@ -21,47 +20,25 @@ const StatusRequest = () => {
         let datas = await axios.get(url)
         console.log(datas);
         let results = datas.data.filterReq
-        setStatusRequest(results)
+        let filtered = datas.data.filterReq.filter(e => e.status !== "COMPLETED")
+        setStatusRequest(results !== undefined && filtered)
         return results
     };
 
-    const getIdPetForAdoption = async () => {
-        let user = await getDataForm()
-        let result = await axios.get(`petUpForAdoption`);
-        let data = result.data.result;
-        let idPetFromUserForm = user[0] !== undefined && user[0].idPet._id
-        let filterData = data.filter(item => item.idPet._id === idPetFromUserForm)
-        let resultData = filterData[0] !== undefined && filterData[0]._id
-        setPetForAdopt(filterData[0] !== undefined && filterData[0]._id)
-        return resultData
-    }
-
-    const newAdoptionTransaction = async () => {
-        let data = await getIdPetForAdoption()
-        let adoptTrans = await axios.post("listAdoptionTransaction/create", {
-                idPetUpForAdoption: data,
-                idUser: statusRequest[0].idUser._id,
-                petName: statusRequest[0].idPet.petName,
-                petCategory: statusRequest[0].idPet.idBreed.idCategoryPet.categoryName,
-                breed: statusRequest[0].idPet.idBreed.breedName,
-                ownerPetName: statusRequest[0].idPet.idUser.fullName,
-                adopterPetName: statusRequest[0].idUser.fullName ,
-                status: "COMPLETED",
-            }
-        );
-        if (adoptTrans.status === 200) {
-            console.log("success to create a new adoption transaction");
-            console.log(adoptTrans);
-        }
-    };
-    const handleSubmitTrans = (event) => {
-        event.preventDefault();
-        newAdoptionTransaction();
-    };
+    // const getIdPetForAdoption = async () => {
+    //     let user = await getDataForm()
+    //     let result = await axios.get(`petUpForAdoption`);
+    //     let data = result.data.result;
+    //     let idPetFromUserForm = user[0] !== undefined && user[0].idPet._id
+    //     let filterData = data.filter(item => item.idPet._id === idPetFromUserForm)
+    //     let resultData = filterData[0] !== undefined && filterData[0]._id
+    //     setPetForAdopt(filterData[0] !== undefined && filterData[0]._id)
+    //     return resultData
+    // }
 
     useEffect(() => {
         getDataForm();
-        getIdPetForAdoption()
+        // getIdPetForAdoption()
         // eslint-disable-next-line
     }, []);
 
@@ -132,21 +109,7 @@ const StatusRequest = () => {
                                                     e.idPet.gender}
                                             </p>
                                             <br />
-                                            {e.status !== "Approval" ? (
-                                                <h5>Status: {e.status}</h5>
-                                            ) : (
-                                                <div>
-                                                    <h5>Status: {e.status}</h5>{" "}
-                                                    <br />
-                                                    <PrimaryButton
-                                                        onClick={
-                                                            handleSubmitTrans
-                                                        }
-                                                    >
-                                                        Complete
-                                                    </PrimaryButton>
-                                                </div>
-                                            )}
+                                            <h5>Status: {e.status}</h5>
                                         </Col>
                                     </Row>
                                 </Card.Body>

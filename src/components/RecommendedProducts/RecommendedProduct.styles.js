@@ -61,8 +61,6 @@ export const info_quantity = css`
 `;
 
 export const margin = css`
-    // margin: 40px 20px;
-    // width: 100%;
     padding: 0;
     margin-top: 30px;
 `;

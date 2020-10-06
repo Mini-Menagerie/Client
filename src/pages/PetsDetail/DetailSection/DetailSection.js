@@ -21,16 +21,16 @@ import Swal from "sweetalert2";
 
 const DetailSection = ({ petDetails, user }) => {
     const history = useHistory();
+    window.scrollTo(0,0);
     const handleClick = () => {
         history.push(`/adoption-form`);
     };
 
     return (
         <Row>
-            <Col xs={12} md={7} css={detail_section_col}>
+            <Col xs={12} md={7} css={detail_section_col} style={{borderRadius:"15px"}}>
                 <Row css={rowmargin}>
                 <h2><b>{petDetails.petName}</b></h2>
-                {/* <h2>Rp. {petDetails.fee}</h2> */}
                 <h2><NumberFormat value={petDetails.fee} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></h2>
                 </Row>
                 <img
@@ -78,7 +78,7 @@ const DetailSection = ({ petDetails, user }) => {
                         petDetails.idUser.fullName}
                 </h1>
                 <h5>Pet Location</h5>
-                <Row>
+                <Row style={{justifyContent:"center"}}>
                     <iframe
                         scrolling="no"
                         title="map"
@@ -86,7 +86,7 @@ const DetailSection = ({ petDetails, user }) => {
                         marginwidth="0"
                         id="gmap_canvas"
                         src="https://maps.google.com/maps?width=400&amp;height=200&amp;hl=en&amp;q=%20marina%20bay+()&amp;t=&amp;z=12&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-                        width="400"
+                        width="370"
                         height="200"
                         frameborder="0"
                     ></iframe>{" "}
@@ -125,7 +125,7 @@ const DetailSection = ({ petDetails, user }) => {
                     </Col>
                     <Col xs={12} css={detail_section_col_right_button}>
                         {JSON.parse(localStorage.getItem("user") !== null) ? (
-                            <PrimaryButton onClick={() => handleClick()}>
+                            <PrimaryButton onClick={() => handleClick()} style={{marginTop:"20px"}}>
                                 Ask for Adoption
                             </PrimaryButton>
 

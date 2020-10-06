@@ -97,7 +97,7 @@ const SearchPage = () => {
                 setLoading(false);
             });
     }, []);
-
+    console.log(searchPet);
     return (
         <div>
             <div css={wrapperCover}>
@@ -189,14 +189,14 @@ const SearchPage = () => {
                                                             {item.petName}
                                                         </Card.Title>
                                                         <Card.Text>
+                                                            {item.breed}
+                                                            <br/>
                                                             {item.gender},{" "}
+                                                           
                                                             {item.age} Years Old
-                                                        </Card.Text>
-                                                        <Card.Text>
-                                                            {item.about}
-                                                        </Card.Text>
-                                                        <Card.Text>
+                                                            <br/>
                                                             {item.location}
+
                                                         </Card.Text>
                                                     </Card.Body>
                                                 </Card>

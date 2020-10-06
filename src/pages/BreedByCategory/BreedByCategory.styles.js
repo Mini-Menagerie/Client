@@ -1,7 +1,9 @@
 import { css } from "@emotion/core";
+import cover2 from '../../assets/dogCover3.jpg'
+import dogpaw from '../../assets/dogpaw.jpg'
 
 export const wrapperCover = css`
-    background-image: url(https://images.unsplash.com/photo-1472491235688-bdc81a63246e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60);
+    background-image: url(${cover2});
     background-size: cover;
     background-position: center;
     height: 500px;
@@ -30,6 +32,7 @@ export const buttoncard = css`
 `;
 export const widthButton = css`
     width: 100%;
+    margin-bottom: 50px;
 `;
 export const marginbutton = css`
     width: 100%;
@@ -47,19 +50,38 @@ export const centertext = css`
 `;
 export const filter = css`
     padding: 80px 25px;
-    background: rgb(2, 0, 36);
-    background: linear-gradient(
-        180deg,
-        rgba(2, 0, 36, 1) 0%,
-        rgba(9, 9, 121, 1) 0%,
-        rgba(215, 212, 212, 1) 0%,
-        rgba(250, 250, 250, 1) 0%,
-        rgba(255, 255, 255, 1) 0%,
-        rgba(62, 231, 133, 1) 63%,
-        rgba(0, 255, 182, 1) 100%
-    );
+    background-image: url(${dogpaw});
+    background-size: cover;
+    background-position: bottom;
+    margin-top: 100px;
 `;
 export const buttonGroup = css`
     justify-content: center;
-    margin: 30px 0px;
+    margin-right: 200px;
+    margin-left: 200px;
 `;
+
+export const cards = css`
+    padding: 20px 30px;
+    border-radius: 15px;
+    max-width: 87%;
+`
+
+export const cover = css `
+margin-left: 100px;
+`
+
+export const textTitle = css `
+font-size: 50px;
+font-weight: 600;
+text-align: center;
+color: #494949;
+padding-bottom: 20px;
+`
+export const toggle = css `
+padding-top: 15px;
+padding-bottom: 15px;
+border-right: 2px solid white;
+border-left: 2px solid white;
+font-size: 20px;
+`

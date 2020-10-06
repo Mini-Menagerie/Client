@@ -35,7 +35,8 @@ import {
     goToShop,
     colStyles,
     centerMenu,
-    searchLoc
+    searchLoc,
+    breedsLogos
 } from "./LandingPage.styles";
 
 import fish from "../../assets/fish.png";
@@ -193,7 +194,7 @@ const LandingPage = () => {
                                 <Dropdown.Menu css={dropdownMenu}>
                                     <Dropdown.Item
                                         href="#/action-1"
-                                        css={breedsLogo}
+                                        css={breedsLogos}
                                     >
                                         <img
                                             src={rabbit}
@@ -204,7 +205,7 @@ const LandingPage = () => {
                                     </Dropdown.Item>
                                     <Dropdown.Item
                                         href="#/action-2"
-                                        css={breedsLogo}
+                                        css={breedsLogos}
                                     >
                                         <img
                                             src={hamster}
@@ -215,7 +216,7 @@ const LandingPage = () => {
                                     </Dropdown.Item>
                                     <Dropdown.Item
                                         href="#/action-2"
-                                        css={breedsLogo}
+                                        css={breedsLogos}
                                     >
                                         <img
                                             src={bird}
@@ -226,7 +227,7 @@ const LandingPage = () => {
                                     </Dropdown.Item>
                                     <Dropdown.Item
                                         href="#/action-2"
-                                        css={breedsLogo}
+                                        css={breedsLogos}
                                     >
                                         <img
                                             src={fish}
@@ -237,7 +238,7 @@ const LandingPage = () => {
                                     </Dropdown.Item>
                                     <Dropdown.Item
                                         href="#/action-2"
-                                        css={breedsLogo}
+                                        css={breedsLogos}
                                     >
                                         <img
                                             src={horse}
@@ -248,7 +249,7 @@ const LandingPage = () => {
                                     </Dropdown.Item>
                                     <Dropdown.Item
                                         href="#/action-2"
-                                        css={breedsLogo}
+                                        css={breedsLogos}
                                     >
                                         <img
                                             src={sheep}
@@ -264,7 +265,7 @@ const LandingPage = () => {
                 </form>
             </div>
             <div css={petsAvailableText}>
-                <h2>Pets Available for Adoption Near You</h2>
+                <h2 style={{fontSize:"40px", fontWeight:"500"}}>Pets Available for Adoption Near You</h2>
             </div>
             <div css={petsAvailable}>
                 <CardPet petCards={petCards} />
