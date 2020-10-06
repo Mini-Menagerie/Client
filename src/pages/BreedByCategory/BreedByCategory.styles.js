@@ -62,8 +62,10 @@ export const buttonGroup = css`
 `;
 
 export const cards = css`
-    padding: 30px;
-`;
+    padding: 20px 30px;
+    border-radius: 15px;
+    max-width: 87%;
+`
 
 export const cover = css `
 margin-left: 100px;
@@ -74,6 +76,7 @@ font-size: 50px;
 font-weight: 600;
 text-align: center;
 color: #494949;
+padding-bottom: 20px;
 `
 export const toggle = css `
 padding-top: 15px;

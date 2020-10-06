@@ -41,7 +41,7 @@ const BreedByCategory = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
-
+    
     const handleChange = (event) => {
         setSearch(event.target.value);
     };
@@ -129,30 +129,21 @@ const BreedByCategory = () => {
 
         setBreed(uniqueArray);
     };
-    
-        const searchBar = () => {localStorage.getItem("search");
-        const url =
-            searchBar !== null
-                ? `${process.env.REACT_APP_API_URL}/petdetail/?search=${searchBar}`
-                : `${process.env.REACT_APP_API_URL}/pet`;
 
-        axios
-            .get(url)
-            .then(function (response) {
-                setSearchPet(response.data.data);
-                setLoading(false);
-            })
-            .catch(function (error) {
-                setError(true);
-                setErrorMessage(error.message);
-                setLoading(false);
-            });
-        }
+    const searchBar = (event) => {
+        event.preventDefault();
 
+        localStorage.setItem("search", search);
+        window.location.href = "/search-page";
+    };
+
+    const handleSearch = (event) => {
+        setSearch(event.target.value);
+    };
     useEffect(() => {
         fetchCollection();
         fetchBreed();
-        searchBar();
+   
         //eslint-disable-next-line
     }, []);
     return (
@@ -160,17 +151,27 @@ const BreedByCategory = () => {
             <div css={wrapperCover}>
                 <div css={cover}>
                     <p style={{fontWeight:"600", fontSize:"50px", color:"white"}}>Let Us Help You!</p>
+                  
                     <Card css={cards}>
-                        <FormControl
-                            onChange={handleChange}
-                            onKeyUp={getSearch}
-                            name="search"
-                            value={search}
-                            type="text"
-                            placeholder="e.g. Golden Retriever"
-                            className="mr-sm-2"
-                        ></FormControl>
+                        <Row style={{alignItems:"center"}}>
+                         <input style={{border:"none", outline:"none"}}
+                                    type="text"
+                                    css={cards}
+                                    placeholder="Enter Breed Name"
+                                    onChange={handleSearch}
+                                    value={search}
+                                ></input>
+                                <button
+                                    type="submit"
+                                    onClick={searchBar}
+                                    style={{border:"none", backgroundColor:"#FFF", color:"#8E8B8B", outline:"none"}}
+                                >
+                                    <i className="fas fa-search fa-2x"></i>
+                                </button>
+                                </Row>
+                              
                     </Card>
+                    
                 </div>
             </div>
             <div css={collections}>
@@ -306,13 +307,15 @@ const BreedByCategory = () => {
                                         <Link
                                             to={`/all-breeds/category/${category}/${item.idBreed.breedName}`}
                                         >
-                                            <Card>
+                                            <Card style={{borderRadius:"20px", margin:"30px"}}>
                                                 <Card.Img
                                                     variant="top"
                                                     src={item.image[0]}
                                                     style={{
                                                         objectFit: "cover",
                                                         height: "350px",
+                                                        borderTopLeftRadius:"20px",
+                                                        borderTopRightRadius:"20px"
                                                     }}
                                                 />
                                                 <Card.Title css={centertext}>
