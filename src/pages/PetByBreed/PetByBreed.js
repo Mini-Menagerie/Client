@@ -202,6 +202,7 @@ const PetByBreed = () => {
                                             {item.location}
                                         </Card.Text>
                                     </Card>
+                                    
                                 </Link>
                                 </Col>
                             );

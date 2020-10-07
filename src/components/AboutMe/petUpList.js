@@ -4,6 +4,7 @@ import { Col, Row, Container, Card, Modal } from "react-bootstrap";
 
 import { useState, useEffect } from "react";
 import AddAdoption from "./AddAdoption";
+import NumberFormat from 'react-number-format';
 
 import PrimaryButton from "../Button/Button";
 import { container, button, margin, petImage, row } from "./petUpList.styles";
@@ -76,7 +77,7 @@ const ListPetUp = () => {
                                     <Card.Text>
                                         <tr style={{ borderStyle: "hidden" }}>
                                             <td>Fee </td>
-                                            <td>: Rp.{item.idPet.fee}</td>
+                                            <td>: <NumberFormat value={item.idPet.fee} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></td>
                                         </tr>
                                         <tr style={{ borderStyle: "hidden" }}>
                                             <td>Age </td>
