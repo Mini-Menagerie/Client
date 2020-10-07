@@ -15,8 +15,8 @@ const Loading = () => {
     const PaymentLoading = () => {
         let timerInterval
         Swal.fire({
-            title: 'Please wait a moment',
-            text: 'you will be redirected soon',
+            title: 'Please Wait a Moment',
+            text: 'You Will Be Redirected Soon',
             imageUrl: 'https://i.ibb.co/y5GR4Rn/cc-payment.png',
             timer: 5000,
             timerProgressBar: true,

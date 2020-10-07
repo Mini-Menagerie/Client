@@ -37,8 +37,8 @@ const ShoppingCart = () => {
         Swal.fire({
             imageUrl:
                 "https://thumbs.gfycat.com/AccurateAgreeableDairycow.webp",
-            title: "You dont have any purchases",
-            text: "this page will be redirected automatically",
+            title: "You Dont Have Any Purchases",
+            text: "This Page Will Be Redirected Automatically",
             timerProgressBar: true,
         });
 
