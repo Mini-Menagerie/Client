@@ -166,9 +166,8 @@ const PetShop = () => {
                                 <option value="vitdrugs">Vitamin</option>
                             </Form.Control>
                         </Form.Group>
-
+                        </Col>
                     </Row>
-                </div>
             </Container>
 
             <Container css={container}>
