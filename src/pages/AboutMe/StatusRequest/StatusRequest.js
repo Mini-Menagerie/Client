@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Button, Row } from "react-bootstrap";
+import { loadStripe } from '@stripe/stripe-js';
 import axios from "../../../helpers/axios";
 import { useState, useEffect } from "react";
 import {
@@ -8,10 +9,17 @@ import {
     // statusInfo,
     mainOne,
     mainBody,
+    buttonPayNow
 } from "./StatusRequest.styles";
+
+const stripePromise = loadStripe("pk_test_51HUN7sAjKylxkZ24d0YxRuxiDVNFIoEAsNmyg8WFxzcExHz1cPsfdouNHOsw3E9SJQpQ19rG2TFByvkQ3MNzAXey00DUfRySaY");
 
 const StatusRequest = () => {
     const [statusRequest, setStatusRequest] = useState([]);
+    const [state, dispatch] = useState({
+        loading: false,
+        error: null,
+    });
     // const [, setPetForAdopt] = useState()
 
     const getDataForm = async () => {
@@ -24,6 +32,11 @@ const StatusRequest = () => {
         setStatusRequest(results !== undefined && filtered)
         return results
     };
+
+    const handleCheckout = (item) => {
+        localStorage.setItem("adoptform", JSON.stringify(item))
+        window.location.replace("/adoptcart")
+    }
 
     // const getIdPetForAdoption = async () => {
     //     let user = await getDataForm()
@@ -108,8 +121,44 @@ const StatusRequest = () => {
                                                 {e.idPet !== undefined &&
                                                     e.idPet.gender}
                                             </p>
+                                            <p>
+                                                Fee:{"Rp "}
+                                                {e.idPet !== undefined && e.idPet.fee}
+                                            </p>
                                             <br />
-                                            <h5>Status: {e.status}</h5>
+                                            {e.status === "Waiting for Payment" ? (
+                                                <div>
+                                                    <h5>Status: {e.status}</h5>{" "}
+                                                    <br />
+                                                    <div css={buttonPayNow}
+                                                        onClick={() => handleCheckout(e)}
+                                                        disabled={state.loading}>
+                                                        <Button>Checkout Now</Button>
+                                                    </div>
+                                                </div>
+                                            ) :
+                                                e.status === "Payment Fee is Complete" ? (
+                                                    <div>
+                                                        <h5>Status: {e.status}</h5>{" "}
+                                                        <br />
+                                                        <div css={buttonPayNow}
+                                                            // onClick={handlePayment}
+                                                            disabled={state.loading}>
+                                                            <Button>COMPLETE ADOPTION</Button>
+                                                        </div>
+                                                    </div>
+                                                ) :
+                                                    (
+                                                        <div>
+                                                            <h5>Status: {e.status}</h5>
+                                                            <br />
+                                                            {/* <div css={buttonPayNow}
+                                                                // onClick={handlePayment}
+                                                                disabled={state.loading}>
+                                                                <Button>Complete</Button>
+                                                            </div> */}
+                                                        </div>
+                                                    )}
                                         </Col>
                                     </Row>
                                 </Card.Body>

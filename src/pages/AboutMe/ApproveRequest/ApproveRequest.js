@@ -21,6 +21,7 @@ const ApproveRequest = () => {
     const getPetUpForAdopt = async () => {
         let idUser = await getUserLogin();
         let pets = await axios.get("petUpForAdoption");
+        console.log(pets);
         if (pets.status === 200) {
             let filteredPets = await pets.data.result.filter((item) => {
                 return item.idPet.idUser === idUser;
@@ -44,6 +45,7 @@ const ApproveRequest = () => {
         }
         return idPet; //5f729d64ecc1bc0dd6318de9
     };
+
     const getDataAdopter = async () => {
         let idPetAdopter = await getAdopter();
 
@@ -56,54 +58,58 @@ const ApproveRequest = () => {
             setAdopter(filteredAdopter);
         }
     };
+
     const newAdoptionTransaction = () => {
         axios.post("listAdoptionTransaction/create", {
-                idPetUpForAdoption: adoption[0]._id,
-                idUser: adoption[0].idUser._id,
-                petName: adoption[0].idPet.petName,
-                petCategory: adoption[0].idPet.idCategoryPet,
-                breed: adopter[0].idPet.idBreed.breedName,
-                ownerPetName: adoption[0].idUser.fullName,
-                adopterPetName: adopter[0].idUser.fullName,
-                status: "COMPLETED",
-            }
+            idPetUpForAdoption: adoption[0]._id,
+            idUser: adoption[0].idUser._id,
+            petName: adoption[0].idPet.petName,
+            petCategory: adoption[0].idPet.idCategoryPet,
+            breed: adopter[0].idPet.idBreed.breedName,
+            ownerPetName: adoption[0].idUser.fullName,
+            adopterPetName: adopter[0].idUser.fullName,
+            status: "COMPLETED",
+        }
         );
         axios.post("listAdoptionTransaction/create", {
-                idPetUpForAdoption: adoption[0]._id,
-                idUser: adopter[0].idUser._id,
-                petName: adoption[0].idPet.petName,
-                petCategory: adoption[0].idPet.idCategoryPet,
-                breed: adopter[0].idPet.idBreed.breedName,
-                ownerPetName: adoption[0].idUser.fullName,
-                adopterPetName: adopter[0].idUser.fullName,
-                status: "COMPLETED",
-            }
+            idPetUpForAdoption: adoption[0]._id,
+            idUser: adopter[0].idUser._id,
+            petName: adoption[0].idPet.petName,
+            petCategory: adoption[0].idPet.idCategoryPet,
+            breed: adopter[0].idPet.idBreed.breedName,
+            ownerPetName: adoption[0].idUser.fullName,
+            adopterPetName: adopter[0].idUser.fullName,
+            status: "COMPLETED",
+        }
         );
     };
+
     const multipleUpdate = () => {
-        axios.put(`petUpForAdoption/${adoption[0]._id}` ,{
+        axios.put(`petUpForAdoption/${adoption[0]._id}`, {
             status: "COMPLETED",
         });
-        axios.put(`formRequest/${adopter[0]._id}` ,{
+        axios.put(`formRequest/${adopter[0]._id}`, {
             status: "COMPLETED",
         });
     }
+
     const handleSubmitTrans = (event) => {
         event.preventDefault();
         newAdoptionTransaction();
         multipleUpdate();
         window.location.reload();
     };
+
     useEffect(() => {
         getUserLogin();
         getPetUpForAdopt();
         getAdopter();
         getDataAdopter();
-
-        //eslint-disable-next-line
     }, []);
+
     console.log(adoption)
     console.log(adopter)
+    
     return (
         <div>
             <div>
@@ -142,7 +148,7 @@ const ApproveRequest = () => {
                                             Address : {e.idUser.detailAddress}
                                         </p>
                                         <br />
-                                        <FormPopUp data={e} />
+                                        {e.status === "Waiting for Payment" ? <div></div> : <FormPopUp data={e} />}
                                     </Col>
                                 </Row>
                             </Card.Body>
@@ -176,21 +182,18 @@ const ApproveRequest = () => {
                                             <p>Weight : {e.idPet.weight}</p>
                                             <p>Gender : {e.idPet.gender}</p>
                                             <br />
-                                            {e.status !== "Approval" ? (
-                                                <h5>Status: {e.status}</h5>
-                                            ) : (
+                                            {e.status === "Payment Fee is Complete" ? (
                                                 <div>
                                                     <h5>Status: {e.status}</h5>{" "}
                                                     <br />
-                                                    <PrimaryButton
-                                                        onClick={
-                                                            handleSubmitTrans
-                                                        }
-                                                    >
-                                                        Complete
-                                                    </PrimaryButton>
+                                                    <PrimaryButton onClick={handleSubmitTrans}>Complete</PrimaryButton>
                                                 </div>
-                                            )}
+                                            ) : (
+                                                    <div>
+                                                        <h5>Status: {e.status}</h5>{" "}
+                                                        <br />
+                                                    </div>
+                                                )}
                                         </Col>
                                     </Row>
                                 </Card.Body>

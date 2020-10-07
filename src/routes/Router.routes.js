@@ -10,10 +10,12 @@ export default {
     PRODUCTDETAIL: "/product/:id",
     SEARCHPAGE: "/search-page",
     ABOUTME: "/about-me",
-    SHOPPINGCART: "/cart",
-    PAYMENTLOADING: "/payment",
     CATEGORYPET: "/category-pet",
     PETBYBREED: "/all-breeds/category/:category/:breed",
     BREEDBYCATEGORY: "/all-breeds/category/:category",
-    PETCOLLECTION: "/pet-collection/:idCollection"
+    PETCOLLECTION: "/pet-collection/:idCollection",
+    SHOPPINGCART: "/cart",
+    ADOPTIONFEECART: "/adoptcart",
+    CARTPAYMENTLOADING: "/payment",
+    ADOPTIONFEEPAYMENTLOADING: "/adoptpayment"
 };
