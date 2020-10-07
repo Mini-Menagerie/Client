@@ -3,6 +3,7 @@ import { jsx } from "@emotion/core";
 import { useState, useEffect } from "react";
 import { Formik, Form } from "formik";
 import { useParams, Link } from "react-router-dom";
+import Skeleton from 'react-loading-skeleton';
 
 import {
     Card,
@@ -50,7 +51,6 @@ const PetByBreed = () => {
         const url = `${process.env.REACT_APP_API_URL}/petdetail/?category=${category}&search=${breed}`;
         const response = await fetch(url);
         const result = await response.json();
-
         setCollection(result.data);
     };
 
@@ -60,6 +60,7 @@ const PetByBreed = () => {
         //eslint-disable-next-line
     }, []);
 
+    console.log(collection)
     return (
         <div>
             <div css={wrapperCover}>
@@ -104,6 +105,7 @@ const PetByBreed = () => {
                                                 onChange={handleChange}
                                                 value={radio.value}
                                                 variant="success"
+                                                onClick={() => {}}
                                             >
                                                 {radio.name}
                                             </ToggleButton>
@@ -145,7 +147,7 @@ const PetByBreed = () => {
                                 >
                                     {alphabet.map((radio, idx) => (
                                         <ToggleButton
-                                        css={toggle}
+                                            css={toggle}
                                             key={idx}
                                             variant="success"
                                             name="alphabet"
@@ -158,7 +160,7 @@ const PetByBreed = () => {
                                 </ToggleButtonGroup>
                             </div>
                             <Row className="justify-content-center">
-                                <Button type="submit" variant="success" style={{marginTop:"50px", fontSize:"20px"}}>
+                                <Button type="submit" onClick={() => {}} variant="success" style={{marginTop:"50px", fontSize:"20px"}}>
                                     Filter Result
                                 </Button>
                             </Row>
@@ -168,8 +170,9 @@ const PetByBreed = () => {
             </Formik>
             <div css={collections}>
                 <Row>
-                    {collection.length > 0 &&
-                        collection.map((item) => {
+                    {
+                        collection.length ? (
+                            collection.map((item) => {
                             return (
                                 <Col
                                 xs={12}
@@ -206,7 +209,13 @@ const PetByBreed = () => {
                                 </Link>
                                 </Col>
                             );
-                        })}
+                        })
+                        ) : (
+                            <div>
+                                <p>Loading...</p>
+                            </div>
+                        )
+                    }
                 </Row>
             </div>
         </div>
