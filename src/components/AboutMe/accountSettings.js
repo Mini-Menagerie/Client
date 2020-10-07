@@ -6,7 +6,6 @@ import axios from "axios";
 
 import PrimaryButton from "../../components/Button/Button";
 import { margin, changePassword } from "./accountSettings.styles";
-import swal from "sweetalert";
 import Swal from "sweetalert2";
 
 const AccountSettings = ({ account }) => {
@@ -47,13 +46,13 @@ const AccountSettings = ({ account }) => {
             .then((result) => {
                 if (result.status === 200) {
                     //liat di backend res
-                    swal("Password Changed Succesfully!");
+                    Swal.fire("Password Changed Succesfully!");
                 }
             })
             .then(() => window.location.reload())
             .catch((err) => {
                 if (err.message === "Request failed with status code 400") {
-                    Swal({
+                    Swal.fire({
                         title: "Wrong Current Password",
                         icon: "warning",
                     });

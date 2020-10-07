@@ -114,15 +114,10 @@ const Loading = () => {
             addNewTransactionDetails();
         }, 3000);
 
-    }, [addNewTransaction]);
+    }, [addNewTransaction, PaymentLoading, addNewTransactionDetails]);
 
-    // useEffect(() => {
-    //     PaymentLoading();
-    // }, []);
     return (
-        <div>
-
-        </div>
+        <div></div>
     )
 }
 

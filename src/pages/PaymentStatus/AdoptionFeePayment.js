@@ -114,20 +114,11 @@ const AdoptionFeePayment = () => {
         })
     }
 
-
-    // useEffect(() => {
-    //     PaymentLoading();
-    //     successPayment();
-    // }, [successPayment]);
-
     useEffect(() => {
         PaymentLoading();
-        
-    }, []);
+    }, [PaymentLoading]);
     return (
-        <div>
-
-        </div>
+        <div></div>
     )
 }
 

@@ -18,7 +18,7 @@ export const card_img = css`
 export const product_list = css`
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
 
     @media (max-width: 768px) {
         justify-content: center;
