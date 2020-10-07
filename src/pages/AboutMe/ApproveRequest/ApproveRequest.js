@@ -4,7 +4,7 @@ import { Card, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "../../../helpers/axios";
 
-import { head, mainOne, mainBody, border } from "./Approve.styles";
+import { head, mainBody, border } from "./Approve.styles";
 import FormPopUp from "../../../components/AdoptionFormPopUp/adoptionFormPopUp";
 import PrimaryButton from "../../../components/Button/Button";
 
@@ -24,7 +24,7 @@ const ApproveRequest = () => {
         console.log(pets);
         if (pets.status === 200) {
             let filteredPets = await pets.data.result.filter((item) => {
-                return item.idPet.idUser === idUser;
+                return item.idPet !== null && item.idPet.idUser === idUser
             });
             setAdoption(filteredPets);
             localStorage.setItem("pets", JSON.stringify(filteredPets));
@@ -52,7 +52,7 @@ const ApproveRequest = () => {
         const adopter = await axios.get("formRequest");
         if (adopter.status === 200) {
             let filteredAdopter = adopter.data.result.filter(
-                (item) => item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "COMPLETED"
+                (item) => item.idPet !== null && item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "COMPLETED"
             );
             console.log(filteredAdopter);
             setAdopter(filteredAdopter);
@@ -124,7 +124,7 @@ const ApproveRequest = () => {
                             </Card.Header>
                             <Card.Body css={mainBody}>
                                 <Row>
-                                    <Col css={mainOne}>
+                                    <Col>
                                         <img
                                             src={e.idUser.avatar}
                                             alt="mberrrr"
@@ -159,7 +159,7 @@ const ApproveRequest = () => {
                                 </Card.Body>
                                 <Card.Body css={mainBody}>
                                     <Row>
-                                        <Col css={mainOne}>
+                                        <Col>
                                             <img
                                                 src={e.idPet.image}
                                                 alt="mberrrr"

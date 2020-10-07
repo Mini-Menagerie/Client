@@ -39,6 +39,7 @@ const SearchPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
+    const searchBar = localStorage.getItem("search");
 
     const handleChange = (event) => {
         setSearch(event.target.value);
@@ -79,7 +80,6 @@ const SearchPage = () => {
     };
 
     useEffect(() => {
-        const searchBar = localStorage.getItem("search");
         const url =
             searchBar !== null
                 ? `${process.env.REACT_APP_API_URL}/petdetail/?search=${searchBar}`
@@ -154,7 +154,7 @@ const SearchPage = () => {
                 </Card>
             </div>
             <Card css={result}>
-                <h4 css={displaying}>Displaying 9 out of 120 results </h4>
+                <h4 css={displaying}>Displaying "{searchBar}" </h4>
 
                 <div css={petsAvailable}>
                     {loading ? (

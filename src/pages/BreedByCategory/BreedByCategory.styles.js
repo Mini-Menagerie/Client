@@ -15,7 +15,7 @@ export const wrapperCover = css`
 `;
 
 export const wrapperCover1 = css`
-    background-color: url(${catcover});
+    background-image: url(${catcover});
     background-size: cover;
     background-position: center;
     height: 500px;
