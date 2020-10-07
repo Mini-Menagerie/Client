@@ -178,7 +178,7 @@ const PetByBreed = () => {
                                 css={card}
                             >
                                 <Link
-                                    to={`/all-breeds/category/${category}/${item.idBreed}`}
+                                    to={`/pets-detail/${item.id}`}
                                 >
                                     <Card style={{borderRadius:"20px", width:"25rem"}}>
                                         <Card.Img

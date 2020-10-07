@@ -110,7 +110,7 @@ const AboutMeTab = ({ profile }) => {
                                 </tr>
                                 <tr style={{ borderStyle: "hidden" }}>
                                     <td>
-                                        <b>Location:</b>
+                                        <b>Province:</b>
                                     </td>
                                     <td>
                                         {profile.idUser !== undefined &&

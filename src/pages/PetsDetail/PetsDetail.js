@@ -12,7 +12,7 @@ import { container, container_animal_list } from "./PetsDetail.styles";
 
 import {
     shopText, buyNecessities, dogfood2, dogfood1,
-    profits, goToShop, shop
+    profits, goToShop, shop, 
 } from '../LandingPage/LandingPage.styles'
 import dogfood from "../../assets/dogfood.png";
 
@@ -104,6 +104,7 @@ const PetsDetail = (props) => {
             </Container>
             <Container style={{maxWidth: "80%", marginBottom:"50px"}}>
             <div css={shopText}>
+                <div>
                 <h1 css={buyNecessities}>
                     <img src={dogfood} css={dogfood1} alt="icon" />
                     &nbsp;&nbsp;&nbsp; Buy Necessities For Your New Friend
@@ -114,6 +115,7 @@ const PetsDetail = (props) => {
                     100% of profits goes to selected animal shelter,<br></br>
                     help out a friend.
                 </p>
+                </div>
             </div>
             <div css={goToShop}>
                 <h5><Link to="/shop" >Go To Shop &#62;</Link></h5>
