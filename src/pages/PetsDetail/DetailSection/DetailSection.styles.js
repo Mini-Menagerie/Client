@@ -85,6 +85,7 @@ margin-right: 10px;
 `
 export const margin2 = css `
 margin-bottom: 20px;
+text-align: center;
 `
 
 export const detailUser = css `

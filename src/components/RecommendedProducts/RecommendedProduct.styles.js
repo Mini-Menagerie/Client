@@ -11,7 +11,7 @@ export const container = css`
 
 export const row_quantity = css`
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
 `;
 export const button = css`
