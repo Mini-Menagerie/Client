@@ -12,7 +12,7 @@ import PetShop from "../pages/PetShop/PetShop";
 import AdoptionForm from "../pages/AdoptionForm/AdoptionForm";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
 import ShoppingCart from "../pages/ShoppingCart/ShoppingCart";
-import SuccessCheckout from "../pages/ShoppingCart/success";
+import PaymentLoading from "../pages/ShoppingCart/payment";
 import SearchPage from "../pages/searchPage/searchPage";
 import AboutMe from "../pages/AboutMe/AboutMe";
 import AdoptedHistory from "../pages/AboutMe/AdoptedHistory/AdoptedHistory";
@@ -51,8 +51,8 @@ const Router = () => (
             <Route exact path={routes.SHOPPINGCART} component={ShoppingCart} />
             <Route
                 exact
-                path={routes.SUCCESSCHECKOUT}
-                component={SuccessCheckout}
+                path={routes.PAYMENTLOADING}
+                component={PaymentLoading}
             />
             <Route exact path={routes.CATEGORYPET} component={CategoryPet} />
             <Route exact path={routes.ABOUTME} component={AboutMe} />

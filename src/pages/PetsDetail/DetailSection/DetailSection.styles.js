@@ -10,7 +10,7 @@ export const h5 = css`
 
 export const detail_section_col = css`
     border-style: dashed;
-    padding: 20px;
+    padding: 30px;
     border: solid 2px #e3e3e3;
     border-radius: 0.35rem;
     margin: 10px 20px;
@@ -85,6 +85,7 @@ margin-right: 10px;
 `
 export const margin2 = css `
 margin-bottom: 20px;
+text-align: center;
 `
 
 export const detailUser = css `

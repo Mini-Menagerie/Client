@@ -31,8 +31,6 @@ const ShoppingCart = () => {
 
   useEffect(() => {
     getUser();
-
-    //eslint-disable-next-line
   }, []);
 
   const [data, setData] = useState([]);
@@ -49,10 +47,6 @@ const ShoppingCart = () => {
   useEffect(() => {
     getTempCart()
   }, [])
-
-  // useEffect(() => {
-  //   localStorage.setItem("cartProduct", JSON.stringify(data));
-  // }, [data]);
 
   const setFinalCart = () => {
     localStorage.setItem("cartProduct", JSON.stringify(data))
@@ -91,8 +85,7 @@ const ShoppingCart = () => {
           price: item.stripe,
           quantity: item.quantity
         })),
-      billingAddressCollection: 'required',
-      successUrl: `${window.location.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+      successUrl: `${window.location.origin}/payment?session_id={CHECKOUT_SESSION_ID}`,
       cancelUrl: `${window.location.origin}/cart`,
     });
     if (error) {
@@ -109,7 +102,6 @@ const ShoppingCart = () => {
   // const setTotalPrice = localStorage.setItem("totalPrice", totalPrice);
   const HandlingFee = 50000
 
-  
   const removeProduct = indexToRemove => {
     let cart = JSON.parse(localStorage.getItem("cartProduct"));
     if (cart.length > 1) {
@@ -121,7 +113,6 @@ const ShoppingCart = () => {
       window.location.replace('/shop')
     }
   };
-  // console.log(cart.length);
 
   const removeCart = () => {
     Swal.fire({

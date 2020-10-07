@@ -60,7 +60,7 @@ export const searchLoc = css`
 `;
 
 export const underCoverSearch = css`
-    margin-top: 30px;
+    margin-top: 50px;
     color: #ffffff;
     font-size: 12px;
 `;
@@ -108,18 +108,23 @@ export const breedsLogo = css`
     width: 30px;
     filter: brightness(0) invert(1);
     font-size: 12px;
+    &:hover {
+        outline: none;
+        background-color: #22891a;
+        box-shadow: none;
+    }
 `;
 
 export const petsAvailableText = css`
     text-align: center;
     margin-top: 100px;
-    margin-bottom: 80px;
+    margin-bottom: 50px;
     color: #464646;
 `;
 
 export const petsAvailable = css`
-    margin: 100px;
-
+    margin-right:100px;
+    margin-left:100px;
     @media (max-width: 768px) {
         margin: 0 20px;
     }
@@ -200,7 +205,7 @@ export const arrowIcon = css`
 export const shop = css`
     display: flex;
     justify-content: space-between;
-    margin-top: 100px;
+    margin-top: 20px;
     flex-wrap: wrap;
 
     @media (max-width: 768px) {
@@ -300,3 +305,19 @@ export const centerMenu = css`
         flex-wrap: wrap;
     }
 `;
+
+export const itemdrop = css `
+`
+
+export const breedtest = css `
+`
+
+export const breedsLogos = css `
+&:hover {
+    outline: none;
+    background-color: #22b216;
+    box-shadow: none;
+    color: white;
+}
+color: white;
+`
