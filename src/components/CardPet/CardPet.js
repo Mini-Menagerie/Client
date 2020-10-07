@@ -25,7 +25,7 @@ const CardPet = ({ petCards }) => {
                                 </h4>
                             </Card.Title>
                             <Card.Text>
-                                {e.idBreed.breedName}
+                                {e.idPet.idBreed.breedName}
                                 <br />
                                 {e.gender}, {e.age} Years Old
                                 <br />

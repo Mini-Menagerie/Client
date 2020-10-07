@@ -97,11 +97,12 @@ const LandingPage = () => {
     };
 
     const url = () => {
-        const url = "http://localhost:8000/pet";
+        const url = "http://localhost:8000/petupforadoption";
         axios
             .get(url)
             .then(function (response) {
-                const limit = response.data.result.slice(0, 4);
+                const data = response.data.result.filter(item => item.status === "Available" && item.idPet !== null && item.idPet.idBreed !== null);
+                const limit = data.slice(0, 4);
                 setPetCards(limit);
                 setLoading(false);
             })
