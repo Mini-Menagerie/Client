@@ -9,17 +9,18 @@ import axios from "../../helpers/axios";
 
 const FormPopUp = ({ data }) => {
     const [lgShow, setLgShow] = useState(false);
-    const [approve] = useState({ status: "Approval" });
+    // const [approve] = useState({ status: "Approval" });
     const [deny] = useState({ status: "Deny" });
+    const [waiting] = useState({ status: "Waiting for Payment" });
 
     const url = `formRequest/${data._id}`;
 
-    const changeApp = () => {
-        axios.put(url, approve).then(function (result) {
+    const changeWaiting = () => {
+        axios.put(url, waiting).then(function (result) {
             console.log(result);
             window.location.reload();
         });
-        return approve;
+        return waiting;
     };
 
     const changeDeny = async () => {
@@ -110,7 +111,7 @@ const FormPopUp = ({ data }) => {
                                     <span>
                                         <Button
                                             variant="success"
-                                            onClick={changeApp}
+                                            onClick={changeWaiting}
                                         >
                                             Approve
                                         </Button>

@@ -11,8 +11,6 @@ import PetsDetail from "../pages/PetsDetail/PetsDetail";
 import PetShop from "../pages/PetShop/PetShop";
 import AdoptionForm from "../pages/AdoptionForm/AdoptionForm";
 import ProductDetail from "../pages/ProductDetail/ProductDetail";
-import ShoppingCart from "../pages/ShoppingCart/ShoppingCart";
-import PaymentLoading from "../pages/ShoppingCart/payment";
 import SearchPage from "../pages/searchPage/searchPage";
 import AboutMe from "../pages/AboutMe/AboutMe";
 import AdoptedHistory from "../pages/AboutMe/AdoptedHistory/AdoptedHistory";
@@ -21,6 +19,10 @@ import CategoryPet from "../pages/CategoryAllPets/CategoryAllPets";
 import BreedByCategory from "../pages/BreedByCategory/BreedByCategory";
 import PetByBreed from "../pages/PetByBreed/PetByBreed";
 import PetCollection from "../pages/PetCollection/PetCollection";
+import ShoppingCart from "../pages/Cart/ShoppingCart/ShoppingCart";
+import AdoptionFeeCart from "../pages/Cart/AdoptionFeeCart/AdoptionFeeCart";
+import CartPaymentLoading from "../pages/PaymentStatus/ShopPayment";
+import AdoptionFeePaymentLoading from "../pages/PaymentStatus/AdoptionFeePayment";
 
 const Router = () => (
     <BrowserRouter>
@@ -48,12 +50,6 @@ const Router = () => (
                 path={routes.PRODUCTDETAIL}
                 component={ProductDetail}
             />
-            <Route exact path={routes.SHOPPINGCART} component={ShoppingCart} />
-            <Route
-                exact
-                path={routes.PAYMENTLOADING}
-                component={PaymentLoading}
-            />
             <Route exact path={routes.CATEGORYPET} component={CategoryPet} />
             <Route exact path={routes.ABOUTME} component={AboutMe} />
             <Route
@@ -67,6 +63,15 @@ const Router = () => (
                 path={routes.PETCOLLECTION}
                 component={PetCollection}
             />
+            <Route exact path={routes.ADOPTIONFEEPAYMENTLOADING} component={AdoptionFeePaymentLoading} />
+            <Route exact path={routes.SHOPPINGCART} component={ShoppingCart} />
+            <Route
+                exact
+                path={routes.CARTPAYMENTLOADING}
+                component={CartPaymentLoading}
+            />
+            <Route exact path={routes.ADOPTIONFEECART} component={AdoptionFeeCart} />
+            <Route exact path={routes.ADOPTIONFEEPAYMENTLOADING} component={AdoptionFeePaymentLoading} />
         </Switch>
     </BrowserRouter>
 );

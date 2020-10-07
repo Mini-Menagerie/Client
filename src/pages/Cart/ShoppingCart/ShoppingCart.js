@@ -5,7 +5,7 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 
-import axios from '../../helpers/axios'
+import axios from '../../../helpers/axios'
 import {
   buttonCheckoutNow,
   buttonCheckoutLater,
