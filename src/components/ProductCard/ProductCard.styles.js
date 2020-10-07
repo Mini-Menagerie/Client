@@ -14,14 +14,7 @@ export const card_img = css`
     height: 200px;
     object-fit: cover;
 `;
-export const loading_css = css`
-    display: flex;
-    flex-direction: center;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    min-height: 50vh;
-`;
+
 export const product_list = css`
     display: flex;
     flex-wrap: wrap;

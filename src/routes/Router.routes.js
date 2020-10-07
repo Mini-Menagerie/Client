@@ -11,9 +11,9 @@ export default {
     SEARCHPAGE: "/search-page",
     ABOUTME: "/about-me",
     SHOPPINGCART: "/cart",
-    SUCCESSCHECKOUT: "/success",
+    PAYMENTLOADING: "/payment",
     CATEGORYPET: "/category-pet",
     PETBYBREED: "/all-breeds/category/:category/:breed",
     BREEDBYCATEGORY: "/all-breeds/category/:category",
-    PETCOLLECTION: "/pet-collection/:idCollection",
+    PETCOLLECTION: "/pet-collection/:idCollection"
 };
