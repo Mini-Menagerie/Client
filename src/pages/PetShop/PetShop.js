@@ -16,9 +16,10 @@ import head_bg_img from '../../assets/bg-shop.jpg'
 
 const PetShop = () => {
     const [products, setProducts] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [sort, setSort] = useState('');
-    const [filter, setFilter] = useState('');
+    const [loading, setLoading] = useState(false);
+    const [sort, setSort] = useState('newest');
+    const [filter, setFilter] = useState('all');
+
     const [currentProduct, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(9);
 
@@ -54,21 +55,72 @@ const PetShop = () => {
     }
 
     const getSort = async () => {
-        const variableSort = sort.split('-')
-        let url = `http://localhost:8000/product/sort/?variable=${variableSort[0]}&by=${variableSort[1]}`
-        const response = await axios.get(url)
-        setProducts(response.data.result)
+        if(sort === "newest" && filter === "all") {
+            let url = `http://localhost:8000/product`;
+            const response = await axios.get(url)
+            setProducts(response.data.result)
+        }else if(sort === "newest" && filter === "catfood") {
+            let url = `http://localhost:8000/product/filter?search=${filter}`;
+            const response = await axios.get(url)
+            setProducts(response.data.result)
+        }else if(sort === "newest" && filter === "dogfood") {
+            let url = `http://localhost:8000/product/filter?search=${filter}`;
+            const response = await axios.get(url)
+            setProducts(response.data.result)
+        }else if(sort === "newest" && filter === "acc") {
+            let url = `http://localhost:8000/product/filter?search=${filter}`;
+            const response = await axios.get(url)
+            setProducts(response.data.result)
+        }else if(sort === "newest" && filter === "vitdrugs") {
+            let url = `http://localhost:8000/product/filter?search=${filter}`;
+            const response = await axios.get(url)
+            setProducts(response.data.result)
+        }else if(sort === "price-desc" && filter === "all") {
+            let url = `http://localhost:8000/sortProductHighToLow`;
+            const response = await axios.get(url)
+            setProducts(response.data.sorted)
+        }else if(sort === "price-desc" && filter === "catfood") {
+            let url = `http://localhost:8000/sortProductHighToLow?filter=${filter}`;
+            const response = await axios.get(url)
+            setProducts(response.data.sorted)
+        }else if(sort === "price-desc" && filter === "dogfood") {
+            let url = `http://localhost:8000/sortProductHighToLow?filter=${filter}`;
+            const response = await axios.get(url)
+            setProducts(response.data.sorted)
+        }else if(sort === "price-desc" && filter === "acc") {
+            let url = `http://localhost:8000/sortProductHighToLow?filter=${filter}`;
+            const response = await axios.get(url)
+            setProducts(response.data.sorted)
+        }else if(sort === "price-desc" && filter === "vitdrugs") {
+            let url = `http://localhost:8000/sortProductHighToLow?filter=${filter}`;
+            const response = await axios.get(url)
+            setProducts(response.data.sorted)
+        }else if(sort === "price-asc" && filter === "all") {
+            let url = `http://localhost:8000/sortProductLowToHigh`;
+            const response = await axios.get(url)
+            setProducts(response.data.sorted)
+        }else if(sort === "price-asc" && filter === "catfood") {
+            let url = `http://localhost:8000/sortProductLowToHigh?filter=${filter}`;
+            const response = await axios.get(url)
+            setProducts(response.data.sorted)
+        }else if(sort === "price-asc" && filter === "dogfood") {
+            let url = `http://localhost:8000/sortProductLowToHigh?filter=${filter}`;
+            const response = await axios.get(url)
+            setProducts(response.data.sorted)
+        }else if(sort === "price-asc" && filter === "acc") {
+            let url = `http://localhost:8000/sortProductLowToHigh?filter=${filter}`;
+            const response = await axios.get(url)
+            setProducts(response.data.sorted)
+        }else if(sort === "price-asc" && filter === "vitdrugs") {
+            let url = `http://localhost:8000/sortProductLowToHigh?filter=${filter}`;
+            const response = await axios.get(url)
+            setProducts(response.data.sorted)
+        }
     }
 
     //handle filter product
     const handleChangeFilter = (event) => {
         setFilter(event.target.value)
-    }
-
-    const getFilter = async () => {
-        let url = `http://localhost:8000/product/filter/?variable=${filter}`
-        const response = await axios.get(url)
-        setProducts(response.data.result)
     }
 
     return (
@@ -87,16 +139,15 @@ const PetShop = () => {
 
             {/* Product List */}
             <Container css={container}>
-                <Row>
-                    <p>{products.length} results</p>
-                </Row>
-                <div>
-                    <Row style={{ alignItems: "center" }}>
 
+                <Row style={{alignItems: 'center'}}>
+                    <p>{products.length} results</p>
+                    <Col css={sortFilter}>
                         <p>Sort by</p>
                         <Form.Group as={Col} controlId="formGridSort">
-                            <Form.Control as="select" defaultValue="Newest" onChange={handleChangeSort} onClick={getSort} style={{ width: "120px" }}>
-                                <option value="createdAt-desc">Newest</option>
+                            <Form.Control as="select" defaultValue="Newest" onChange={handleChangeSort} onClick={getSort}>
+                                <option value="newest">Newest</option>
+
                                 <option value="price-desc">Price (High to Low)</option>
                                 <option value="price-asc">Price (Low to High)</option>
                             </Form.Control>
@@ -105,7 +156,10 @@ const PetShop = () => {
 
                         <p>Filter by</p>
                         <Form.Group as={Col} controlId="formGridFilter">
-                            <Form.Control as="select" defaultValue="Newest" onChange={handleChangeFilter} onClick={getFilter} style={{ width: "150px" }}>
+
+                            <Form.Control as="select" defaultValue="Newest" onChange={handleChangeFilter} onClick={getSort}>
+                                <option value="all">All</option>
+
                                 <option value="catfood">Cat Food</option>
                                 <option value="dogfood">Dog Food</option>
                                 <option value="acc">Accessories</option>
