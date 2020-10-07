@@ -23,7 +23,7 @@ const ApproveRequest = () => {
         let pets = await axios.get("petUpForAdoption");
         if (pets.status === 200) {
             let filteredPets = await pets.data.result.filter((item) => {
-                return item.idPet.idUser === idUser;
+                return item.idPet !== null && item.idPet.idUser === idUser
             });
             setAdoption(filteredPets);
             localStorage.setItem("pets", JSON.stringify(filteredPets));
@@ -50,7 +50,7 @@ const ApproveRequest = () => {
         const adopter = await axios.get("formRequest");
         if (adopter.status === 200) {
             let filteredAdopter = adopter.data.result.filter(
-                (item) => item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "COMPLETED"
+                (item) => item.idPet !== null && item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "COMPLETED"
             );
             console.log(filteredAdopter);
             setAdopter(filteredAdopter);
