@@ -5,8 +5,6 @@ import axios from "../../../helpers/axios";
 import { useState, useEffect } from "react";
 import {
     head,
-    // statusInfo,
-    mainOne,
     mainBody,
 } from "./StatusRequest.styles";
 
@@ -66,12 +64,13 @@ const StatusRequest = () => {
                                 </Card.Header>
                                 <Card.Body css={mainBody}>
                                     <Row>
-                                        <Col css={mainOne}>
+                                        <Col>
                                             <img
                                                 src={e.idPet.image}
                                                 alt="brokenimage"
                                                 style={{
                                                     height: "200px",
+                                                    backgroundSize: "cover",
                                                 }}
                                             />
                                         </Col>

@@ -4,7 +4,7 @@ import { Card, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "../../../helpers/axios";
 
-import { head, mainOne, mainBody, border } from "./Approve.styles";
+import { head, mainBody, border } from "./Approve.styles";
 import FormPopUp from "../../../components/AdoptionFormPopUp/adoptionFormPopUp";
 import PrimaryButton from "../../../components/Button/Button";
 
@@ -118,7 +118,7 @@ const ApproveRequest = () => {
                             </Card.Header>
                             <Card.Body css={mainBody}>
                                 <Row>
-                                    <Col css={mainOne}>
+                                    <Col>
                                         <img
                                             src={e.idUser.avatar}
                                             alt="mberrrr"
@@ -142,7 +142,7 @@ const ApproveRequest = () => {
                                             Address : {e.idUser.detailAddress}
                                         </p>
                                         <br />
-                                        <FormPopUp data={e} />
+                                        {e.status !== "Approval" ? (<FormPopUp data={e} />) : (<div></div>)}
                                     </Col>
                                 </Row>
                             </Card.Body>
@@ -153,7 +153,7 @@ const ApproveRequest = () => {
                                 </Card.Body>
                                 <Card.Body css={mainBody}>
                                     <Row>
-                                        <Col css={mainOne}>
+                                        <Col>
                                             <img
                                                 src={e.idPet.image}
                                                 alt="mberrrr"

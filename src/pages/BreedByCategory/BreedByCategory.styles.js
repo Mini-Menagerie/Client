@@ -1,6 +1,7 @@
 import { css } from "@emotion/core";
 import cover2 from '../../assets/dogCover3.jpg'
 import dogpaw from '../../assets/dogpaw.jpg'
+import catcover from '../../assets/catCover.jpg'
 
 export const wrapperCover = css`
     background-image: url(${cover2});
@@ -12,6 +13,18 @@ export const wrapperCover = css`
     align-items: center;
     justify-content: space-between;
 `;
+
+export const wrapperCover1 = css`
+    background-image: url(${catcover});
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
 export const margin = css`
     margin: 30px;
 `;
@@ -41,6 +54,8 @@ export const marginbutton = css`
 export const collections = css`
     padding: 80px 25px;
     justify-content: center;
+    margin-right: 100px;
+    margin-left: 100px;
 `;
 export const centertext = css`
     text-align: center;
@@ -62,7 +77,7 @@ export const buttonGroup = css`
 `;
 
 export const cards = css`
-    padding: 20px 30px;
+    padding: 10px 30px;
     border-radius: 15px;
     max-width: 87%;
 `
@@ -84,4 +99,14 @@ padding-bottom: 15px;
 border-right: 2px solid white;
 border-left: 2px solid white;
 font-size: 20px;
+`
+
+export const cardcss = css `
+padding-left: 20px;
+padding-bottom: 20px;
+`
+
+export const cardcss1 = css `
+padding-left: 20px;
+padding-top: 15px;
 `

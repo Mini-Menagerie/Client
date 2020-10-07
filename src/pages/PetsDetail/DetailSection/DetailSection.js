@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Carousel } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import NumberFormat from 'react-number-format';
 
@@ -33,16 +33,44 @@ const DetailSection = ({ petDetails, user }) => {
                 <h2><b>{petDetails.petName}</b></h2>
                 <h2><NumberFormat value={petDetails.fee} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></h2>
                 </Row>
-                <img
-                    src={petDetails.image}
-                    style={{
-                        width: "100%",
-                        height: "500px",
-                        objectFit: "cover",
-                        marginBottom: "30px",
-                    }}
-                    alt="pet_image"
-                />
+                <Carousel>
+                    <Carousel.Item>
+                        <img
+                       src={petDetails.image !==undefined && petDetails.image[0]}
+                       style={{
+                           width: "100%",
+                           height: "500px",
+                           objectFit: "cover",
+                           marginBottom: "30px",
+                       }}
+                       alt="pet_image"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                        src={petDetails.image !==undefined && petDetails.image[1]}
+                        style={{
+                            width: "100%",
+                            height: "500px",
+                            objectFit: "cover",
+                            marginBottom: "30px",
+                        }}
+                        alt="pet_image"
+                        />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img
+                        src={petDetails.image !==undefined && petDetails.image[2]}
+                        style={{
+                            width: "100%",
+                            height: "500px",
+                            objectFit: "cover",
+                            marginBottom: "30px",
+                        }}
+                        alt="pet_image"
+                        />
+                    </Carousel.Item>
+                </Carousel>
                 <Row css={detail_section_col_left_second_row}>
                     <p>
                         {petDetails.idBreed !== undefined &&
@@ -60,6 +88,8 @@ const DetailSection = ({ petDetails, user }) => {
                     <p>{petDetails.age} Years Old</p>
                     <h5>&bull;</h5>
                     <p>{petDetails.size}</p>
+                    <h5>&bull;</h5>
+                    <p>{petDetails.weight}</p>
                 </Row>
                 <Row css={row_line}>
                     <ColoredLine color="#000" />
@@ -73,10 +103,10 @@ const DetailSection = ({ petDetails, user }) => {
             </Col>
             <Col xs={12} md={4} css={detail_section_col}>
                 <h5>Caregiver:</h5>
-                <h1 css={margin2}>
+                <h2 css={margin2}>
                     {petDetails.idUser !== undefined &&
                         petDetails.idUser.fullName}
-                </h1>
+                </h2>
                 <h5>Pet Location</h5>
                 <Row style={{justifyContent:"center"}}>
                     <iframe
