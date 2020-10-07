@@ -205,6 +205,9 @@ const AddAdoption = ({ edit, handleClose }) => {
                                             as="select"
                                             defaultValue="Category Pet"
                                         >
+                                            <option selected>
+                                                Select
+                                            </option>
                                             {petCategory.map((item) => {
                                                 return (
                                                     <option value={item.id}>
@@ -228,6 +231,9 @@ const AddAdoption = ({ edit, handleClose }) => {
                                             defaultValue="idBreed"
                                             name="idBreed"
                                         >
+                                            <option selected>
+                                                Select
+                                            </option>
                                             {breed
                                                 .filter((item) => {
                                                     return (
@@ -272,7 +278,8 @@ const AddAdoption = ({ edit, handleClose }) => {
                                             value={formPet.size}
                                             name="size"
                                             onChange={handleChange}
-                                        ><option value="Small">Small</option>
+                                        ><option selected>Select</option>
+                                         <option value="Small">Small</option>
                                          <option value="Medium">Medium</option>
                                          <option value="Large">Large</option>
                                          </Form.Control>
@@ -290,7 +297,8 @@ const AddAdoption = ({ edit, handleClose }) => {
                                             name="gender"
                                             as="select"
                                             onChange={handleChange}
-                                        >    <option value="Female">Female</option>
+                                        >    <option selected>Select</option>
+                                             <option value="Female">Female</option>
                                              <option value="Male">Male</option>
                                         </Form.Control>   
                                     </Col>
