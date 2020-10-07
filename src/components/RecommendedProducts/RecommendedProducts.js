@@ -25,7 +25,7 @@ const RecommendedProducts = (props) => {
     const currentProducts = shuffled.slice(0, 6);
 
     return (
-        <Container css={margin} style={{maxWidth:"100%"}}>
+        <Container css={margin} style={{maxWidth:"70%"}}>
             <ProductCard products={currentProducts} />
         </Container>
     );
