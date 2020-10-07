@@ -147,6 +147,7 @@ const BreedByCategory = () => {
    
         //eslint-disable-next-line
     }, []);
+    console.log(category);
     return (
         <div>
             <div css={category === "dog" ? wrapperCover : wrapperCover1}>
@@ -167,7 +168,7 @@ const BreedByCategory = () => {
                                 <button
                                     type="submit"
                                     onClick={searchBar}
-                                    style={{border:"none", backgroundColor:"#FFF", color:"#8E8B8B", outline:"none"}}
+                                    style={{border:"none", backgroundColor:"#FFF", color:"#8E8B8B", outline:"none", verticalAlign:"middle"}}
                                 >
                                     <i className="fas fa-search fa-2x"></i>
                                 </button>
