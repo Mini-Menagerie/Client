@@ -18,7 +18,8 @@ const StatusRequest = () => {
         loading: false,
         error: null,
     });
-    // const [, setPetForAdopt] = useState()
+    const [adoption, setAdoption] = useState([]); // petUpforAdoption
+    const [adopter, setAdopter] = useState([]); // formRequest
 
     const getDataForm = async () => {
         const userData = await JSON.parse(localStorage.getItem("user"));
@@ -36,6 +37,96 @@ const StatusRequest = () => {
         window.location.replace("/adoptcart")
     }
 
+    const getUserLogin = () => {
+        let userLogin = JSON.parse(localStorage.getItem("user")); // 5f6b721abd00722311964574
+        let idUser = userLogin.idUser._id;
+        return idUser;
+    };
+
+    const getPetUpForAdopt = async () => {
+        let idUser = await getUserLogin();
+        let pets = await axios.get("petUpForAdoption");
+        console.log(pets);
+        if (pets.status === 200) {
+            let filteredPets = await pets.data.result.filter((item) => {
+                return item.idPet !== null && item.idPet.idUser === idUser
+            });
+            console.log(filteredPets)
+            setAdoption(filteredPets);
+            localStorage.setItem("pets", JSON.stringify(filteredPets));
+        } else {
+            setAdoption([]);
+        }
+    };
+    console.log(adoption);
+
+    const getAdopter = async () => {
+        const dataPet = await JSON.parse(localStorage.getItem("pets"));
+        let idPet =
+            dataPet !== null &&
+            dataPet.map((item) => {
+                return item.idPet._id;
+            });
+        if (idPet.length > 0) {
+            idPet = idPet[0];
+        }
+        return idPet; //5f729d64ecc1bc0dd6318de9
+    };
+
+    const getDataAdopter = async () => {
+        let idPetAdopter = await getAdopter();
+
+        const adopter = await axios.get("formRequest");
+        if (adopter.status === 200) {
+            let filteredAdopter = adopter.data.result.filter(
+                (item) => item.idPet !== null && item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "COMPLETED"
+            );
+            console.log(filteredAdopter);
+            setAdopter(filteredAdopter);
+        }
+    };
+
+    const newAdoptionTransaction = () => {
+        axios.post("listAdoptionTransaction/create", {
+            idPetUpForAdoption: adoption[0]._id,
+            idUser: adoption[0].idUser._id,
+            petName: adoption[0].idPet.petName,
+            petCategory: adoption[0].idPet.idCategoryPet,
+            breed: adopter[0].idPet.idBreed.breedName,
+            ownerPetName: adoption[0].idUser.fullName,
+            adopterPetName: adopter[0].idUser.fullName,
+            status: "COMPLETED",
+        }
+        );
+        axios.post("listAdoptionTransaction/create", {
+            idPetUpForAdoption: adoption[0]._id,
+            idUser: adopter[0].idUser._id,
+            petName: adoption[0].idPet.petName,
+            petCategory: adoption[0].idPet.idCategoryPet,
+            breed: adopter[0].idPet.idBreed.breedName,
+            ownerPetName: adoption[0].idUser.fullName,
+            adopterPetName: adopter[0].idUser.fullName,
+            status: "COMPLETED",
+        }
+        );
+    };
+
+    const multipleUpdate = () => {
+        axios.put(`petUpForAdoption/${adoption[0]._id}`, {
+            status: "COMPLETED",
+        });
+        axios.put(`formRequest/${adopter[0]._id}`, {
+            status: "COMPLETED",
+        });
+    }
+
+    const handleSubmitTrans = (event) => {
+        event.preventDefault();
+        newAdoptionTransaction();
+        multipleUpdate();
+        window.location.reload();
+    };
+
     // const getIdPetForAdoption = async () => {
     //     let user = await getDataForm()
     //     let result = await axios.get(`petUpForAdoption`);
@@ -49,8 +140,10 @@ const StatusRequest = () => {
 
     useEffect(() => {
         getDataForm();
-        // getIdPetForAdoption()
-        // eslint-disable-next-line
+        getUserLogin();
+        getPetUpForAdopt();
+        getAdopter();
+        getDataAdopter();
     }, []);
 
     if (statusRequest.length > 0) {
@@ -141,9 +234,9 @@ const StatusRequest = () => {
                                                         <h5>Status: {e.status}</h5>{" "}
                                                         <br />
                                                         <div css={buttonPayNow}
-                                                            // onClick={handlePayment}
+                                                            onClick={handleSubmitTrans}
                                                             disabled={state.loading}>
-                                                            <Button>COMPLETE ADOPTION</Button>
+                                                            <Button>Complete Adoption</Button>
                                                         </div>
                                                     </div>
                                                 ) :

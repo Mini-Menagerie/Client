@@ -148,7 +148,7 @@ const ApproveRequest = () => {
                                             Address : {e.idUser.detailAddress}
                                         </p>
                                         <br />
-                                        {e.status === "Waiting for Payment" ? <div></div> : <FormPopUp data={e} />}
+                                        {e.status === "Waiting for Payment" ? <div></div> : e.status === "Payment Fee is Complete" ? <div></div> : <FormPopUp data={e} />}
                                     </Col>
                                 </Row>
                             </Card.Body>
@@ -186,7 +186,8 @@ const ApproveRequest = () => {
                                                 <div>
                                                     <h5>Status: {e.status}</h5>{" "}
                                                     <br />
-                                                    <PrimaryButton onClick={handleSubmitTrans}>Complete</PrimaryButton>
+                                                    <h5>Waiting for Complete Adoption</h5>
+                                                    {/* <PrimaryButton onClick={handleSubmitTrans}>Complete Adoption</PrimaryButton> */}
                                                 </div>
                                             ) : (
                                                     <div>
