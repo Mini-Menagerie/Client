@@ -111,6 +111,7 @@ const BreedByCategory = () => {
         const response = await fetch(url);
 
         const result = await response.json();
+        console.log(result);
         function removeDuplicates(originalArray, prop) {
             var newArray = [];
             var lookupObject = {};

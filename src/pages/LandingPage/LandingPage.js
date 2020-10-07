@@ -150,7 +150,7 @@ const LandingPage = () => {
                 <h2 css={h2}>Provide For Those Who Needs It.</h2>
                 <p css={p}>Save A Live Today</p>
                 <Link to="/category-pet" css={linkTo}>
-                    <PrimaryButton type="submit">Start Searching</PrimaryButton>
+                    <PrimaryButton type="submit" onClick={() => {}}>Start Searching</PrimaryButton>
                 </Link>
             </div>
             <div css={underCoverSearch}>

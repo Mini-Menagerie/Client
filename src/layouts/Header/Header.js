@@ -33,7 +33,6 @@ import {
     navSearch,
 } from "./Header.styles";
 import Swal from "sweetalert2";
-import swal from "sweetalert";
 
 const Header = () => {
     const productCart = JSON.parse(localStorage.getItem("cartProduct"));
@@ -96,7 +95,7 @@ const Header = () => {
             } else if (
                 error.message === "Request failed with status code 404"
             ) {
-                Swal({
+                Swal.fire({
                     title:
                         "Email is Already Registered Via Social Media",
                     icon: "warning",
@@ -121,19 +120,19 @@ const Header = () => {
                 form
             );
             if (user.status === 200) {
-                swal("Register success");
+                Swal.fire("Register success");
                 setShow(false);
             }
         } catch (error) {
             if (error.message === "Request failed with status code 400") {
-                Swal({
+                Swal.fire({
                     title: "This Email Account Already Exists",
                     icon: "warning",
                 });
             } else if (
                 error.message === "Request failed with status code 404"
             ) {
-                Swal({
+                Swal.fire({
                     title:
                         "Email is Already Registered Via Social Media, Please Use Another Email or Login",
                     icon: "warning",
@@ -580,7 +579,7 @@ const Header = () => {
                                 >
                                     <i className="fas fa-search"></i>
                                 </button>
-                                <Button
+                                <button
                                     type="submit"
                                     onClick={redirect}
                                     css={cart}
@@ -592,7 +591,7 @@ const Header = () => {
                                             productCart !== 0 &&
                                             productCart.length}
                                     </Badge>
-                                </Button>
+                                </button>
                             </form>
                         </div>
                         <div>
