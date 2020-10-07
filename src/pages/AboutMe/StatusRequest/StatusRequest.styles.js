@@ -24,8 +24,3 @@ export const mainBody = css`
     display: flex;
     justify-content: space-around;
 `
-export const mainOne = css`
-    img {
-        width: 100%;
-    }
-`

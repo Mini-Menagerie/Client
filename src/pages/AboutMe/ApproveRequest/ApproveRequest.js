@@ -4,8 +4,9 @@ import { Card, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import axios from "../../../helpers/axios";
 
-import { head, mainOne, mainBody, border } from "./Approve.styles";
+import { head, mainBody, border } from "./Approve.styles";
 import FormPopUp from "../../../components/AdoptionFormPopUp/adoptionFormPopUp";
+import PrimaryButton from "../../../components/Button/Button";
 
 const ApproveRequest = () => {
     const [adoption, setAdoption] = useState([]); // petUpforAdoption
@@ -49,11 +50,49 @@ const ApproveRequest = () => {
         const adopter = await axios.get("formRequest");
         if (adopter.status === 200) {
             let filteredAdopter = adopter.data.result.filter(
-                (item) => item.idPet._id === idPetAdopter && item.status !== "Approval"
+                (item) => item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "COMPLETED"
             );
             console.log(filteredAdopter);
             setAdopter(filteredAdopter);
         }
+    };
+    const newAdoptionTransaction = () => {
+        axios.post("listAdoptionTransaction/create", {
+                idPetUpForAdoption: adoption[0]._id,
+                idUser: adoption[0].idUser._id,
+                petName: adoption[0].idPet.petName,
+                petCategory: adoption[0].idPet.idCategoryPet,
+                breed: adopter[0].idPet.idBreed.breedName,
+                ownerPetName: adoption[0].idUser.fullName,
+                adopterPetName: adopter[0].idUser.fullName,
+                status: "COMPLETED",
+            }
+        );
+        axios.post("listAdoptionTransaction/create", {
+                idPetUpForAdoption: adoption[0]._id,
+                idUser: adopter[0].idUser._id,
+                petName: adoption[0].idPet.petName,
+                petCategory: adoption[0].idPet.idCategoryPet,
+                breed: adopter[0].idPet.idBreed.breedName,
+                ownerPetName: adoption[0].idUser.fullName,
+                adopterPetName: adopter[0].idUser.fullName,
+                status: "COMPLETED",
+            }
+        );
+    };
+    const multipleUpdate = () => {
+        axios.put(`petUpForAdoption/${adoption[0]._id}` ,{
+            status: "COMPLETED",
+        });
+        axios.put(`formRequest/${adopter[0]._id}` ,{
+            status: "COMPLETED",
+        });
+    }
+    const handleSubmitTrans = (event) => {
+        event.preventDefault();
+        newAdoptionTransaction();
+        multipleUpdate();
+        window.location.reload();
     };
     useEffect(() => {
         getUserLogin();
@@ -79,7 +118,7 @@ const ApproveRequest = () => {
                             </Card.Header>
                             <Card.Body css={mainBody}>
                                 <Row>
-                                    <Col css={mainOne}>
+                                    <Col>
                                         <img
                                             src={e.idUser.avatar}
                                             alt="mberrrr"
@@ -103,7 +142,7 @@ const ApproveRequest = () => {
                                             Address : {e.idUser.detailAddress}
                                         </p>
                                         <br />
-                                        <FormPopUp data={e} />
+                                        {e.status !== "Approval" ? (<FormPopUp data={e} />) : (<div></div>)}
                                     </Col>
                                 </Row>
                             </Card.Body>
@@ -114,7 +153,7 @@ const ApproveRequest = () => {
                                 </Card.Body>
                                 <Card.Body css={mainBody}>
                                     <Row>
-                                        <Col css={mainOne}>
+                                        <Col>
                                             <img
                                                 src={e.idPet.image}
                                                 alt="mberrrr"
@@ -137,7 +176,21 @@ const ApproveRequest = () => {
                                             <p>Weight : {e.idPet.weight}</p>
                                             <p>Gender : {e.idPet.gender}</p>
                                             <br />
-                                            <h5>Status: {e.status}</h5>
+                                            {e.status !== "Approval" ? (
+                                                <h5>Status: {e.status}</h5>
+                                            ) : (
+                                                <div>
+                                                    <h5>Status: {e.status}</h5>{" "}
+                                                    <br />
+                                                    <PrimaryButton
+                                                        onClick={
+                                                            handleSubmitTrans
+                                                        }
+                                                    >
+                                                        Complete
+                                                    </PrimaryButton>
+                                                </div>
+                                            )}
                                         </Col>
                                     </Row>
                                 </Card.Body>

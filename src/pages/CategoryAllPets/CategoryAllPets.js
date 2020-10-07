@@ -7,7 +7,7 @@ import { Card, Row, Col } from 'react-bootstrap';
 
 import {
   wrapperCover, tagline, centerText, petImage, margin, category,
-  whitecolor, sortby, center
+  whitecolor, sortby, center, 
 } from './CategoryAllPets.style'
 
 
@@ -16,19 +16,17 @@ const CategoryPet = () => {
 
   return (
     <div>
-      <div>
         <div css={wrapperCover}>
-          <div css={tagline}>
-            <h1 css={whitecolor}>Not sure what you're looking for?</h1>
-            <h4 css={whitecolor}>Take a look around the categories below!</h4>
-          </div>
+          <div css={whitecolor} style={{paddingTop:"200px"}}>
+            <h1 style={{fontWeight:"700"}}>Not sure what you're looking for?</h1>
+            <h4 style={{fontWeight:"500"}}>Take a look around the categories below!</h4>
+            </div>
         </div>
         <div css={sortby}>
           <h1 css={centerText}>
             ALL CATEGORIES
               </h1>
         </div>
-      </div>
       <div >
         <Row css={category}>
           <Col md={3} css={margin} key="">

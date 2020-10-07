@@ -31,8 +31,6 @@ const ShoppingCart = () => {
 
   useEffect(() => {
     getUser();
-
-    //eslint-disable-next-line
   }, []);
 
   const [data, setData] = useState([]);
@@ -56,9 +54,7 @@ const ShoppingCart = () => {
 
   useEffect(() => {
     setFinalCart()
-
-    //eslint-disable-next-line
-  }, []);
+  }, [data]);
 
   const handleChange = (e, id) => {
     const { value } = e.target;
@@ -89,8 +85,7 @@ const ShoppingCart = () => {
           price: item.stripe,
           quantity: item.quantity
         })),
-        billingAddressCollection: 'required',
-      successUrl: `${window.location.origin}/success?session_id={CHECKOUT_SESSION_ID}`,
+      successUrl: `${window.location.origin}/payment?session_id={CHECKOUT_SESSION_ID}`,
       cancelUrl: `${window.location.origin}/cart`,
     });
     if (error) {
@@ -107,17 +102,21 @@ const ShoppingCart = () => {
   // const setTotalPrice = localStorage.setItem("totalPrice", totalPrice);
   const HandlingFee = 50000
 
-  const removeProduct = () => {
-    const cart = JSON.parse(localStorage.getItem("cartProduct"));
-    let indexToRemove = 1;
-    cart.splice(indexToRemove, 1);
-    localStorage.setItem("cartProduct", JSON.stringify(cart));
-    window.location.reload();
+  const removeProduct = indexToRemove => {
+    let cart = JSON.parse(localStorage.getItem("cartProduct"));
+    if (cart.length > 1) {
+      cart.splice(indexToRemove, 1)
+      localStorage.setItem("cartProduct", JSON.stringify(cart));
+      window.location.reload();
+    } else {
+      localStorage.removeItem("cartProduct")
+      window.location.replace('/shop')
+    }
   };
 
   const removeCart = () => {
     Swal.fire({
-      title: 'Are you sure?',
+      title: 'Are you sure??',
       text: "You won't be able to revert this!",
       icon: 'warning',
       showCancelButton: true,
@@ -136,10 +135,6 @@ const ShoppingCart = () => {
       }
     })
   }
-
-  // useEffect(() => {
-  //   removeProduct();
-  // }, [])
 
   return (
     <Container css={container}>
@@ -176,13 +171,13 @@ const ShoppingCart = () => {
             <Form.Group controlId="formGridAddress">
               <Form.Label>Address</Form.Label>
               <Form.Control
-                  value={
-                    user.idUser !== undefined &&
-                    user.idUser.detailAddress
-                  }
-                  type="text"
-                  placeholder="Address"
-                />
+                value={
+                  user.idUser !== undefined &&
+                  user.idUser.detailAddress
+                }
+                type="text"
+                placeholder="Address"
+              />
             </Form.Group>
 
             <Form.Row>
@@ -197,15 +192,6 @@ const ShoppingCart = () => {
                   placeholder="City"
                 />
               </Form.Group>
-
-              {/* <Form.Group as={Col} controlId="formGridState">
-                <Form.Label>State</Form.Label>
-                <Form.Control as="select" defaultValue="Choose...">
-                  <option>Choose...</option>
-                  <option>...</option>
-                </Form.Control>
-              </Form.Group> */}
-
               <Form.Group as={Col} controlId="formGridProvince">
                 <Form.Label>Province</Form.Label>
                 <Form.Control
@@ -229,7 +215,7 @@ const ShoppingCart = () => {
       <Container css={containerDetails}>
         <Col xs={7} css={itemDetails}>
           <div>
-            {data.map((item) => (
+            {data.map((item, index) => (
               <Row style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                 <Col xs={2}>
                   <img src={item.image[0].image} alt="product" style={{ width: '100%' }} />
@@ -254,14 +240,14 @@ const ShoppingCart = () => {
                     <h6 style={{ textAlign: 'right' }}>Rp. {item.price * item.quantity}</h6>
                   </div>
                   <div style={{ textAlign: 'right' }}>
-                    <a
+                    {/* <a
                       href="/#"
                       type="button"
-                      // className="card-link-secondary small text-uppercase mr-3"
-                      onClick={removeProduct}
-                    >
-                      <i class="fas fa-trash-alt mr-1" style={{ color: '#ff6b6b' }}></i>
-                    </a>
+                      className="card-link-secondary small text-uppercase mr-3"
+                      
+                    > */}
+                    <i class="fas fa-trash-alt mr-1" style={{ color: '#ff6b6b' }} onClick={() => removeProduct(index)}></i>
+                    {/* </a> */}
                   </div>
                 </Col>
 

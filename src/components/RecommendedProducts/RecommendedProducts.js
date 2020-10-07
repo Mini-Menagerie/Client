@@ -22,10 +22,10 @@ const RecommendedProducts = (props) => {
     const shuffled = products.sort(() => 0.5 - Math.random());
 
     // Get sub-array of first n elements after shuffled
-    const currentProducts = shuffled.slice(0, 4);
+    const currentProducts = shuffled.slice(0, 6);
 
     return (
-        <Container css={margin}>
+        <Container css={margin} style={{maxWidth:"100%"}}>
             <ProductCard products={currentProducts} />
         </Container>
     );

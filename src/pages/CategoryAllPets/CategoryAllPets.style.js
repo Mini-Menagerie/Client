@@ -1,13 +1,15 @@
 import { css } from '@emotion/core';
-import cover from '../../assets/category.jpg';
+import cover from '../../assets/categoryCover.jpg';
 
 
 export const wrapperCover = css `
     background-image: url(${cover});
     background-size: cover;
-    object-fit: contain;
-    height: 600px;
+    background-position: bottom;
+    height: 500px;
     width: 100%;
+    align-items: center;
+    display-flex;
 `
 export const search = css `
     background-color: #a885ff;
@@ -26,7 +28,7 @@ export const sortby = css `
     font-size: 40px;
     border: none !important;
     weight: 100%;
-    height: 200px;
+   
       
 `
 export const result =css `
@@ -34,8 +36,8 @@ export const result =css `
     border: none !important;
 `
 export const centerText = css `
-  padding-left: 40px;
-  padding-top: 70px;
+  padding-top: 30px;
+  padding-bottom: 30px;
   font-weight: 700;
   color: #ffffff;
 `
@@ -43,10 +45,10 @@ export const whitecolor = css `
   padding-left: 40px;
   font-weight: 700;
   color: #ffffff;
+
 `
 export const tagline = css `
-    padding-top:350px;
-    
+  align-content: center;
 `
 export const margin = css`
     margin-bottom: 25px;
@@ -67,7 +69,7 @@ export const center = css`
 export const petImage = css`
     & > img {
         width: 100%;
-        height: 500px;
+        height: 350px;
         object-fit: cover;
         border-top-right-radius: 20px;
         border-top-left-radius: 20px;

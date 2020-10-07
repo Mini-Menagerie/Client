@@ -2,6 +2,7 @@
 import { jsx } from "@emotion/core";
 import { Card, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
+import format from "date-fns/format";
 import axios from "../../../helpers/axios";
 
 import { head, mainOne, dated, desc, listInfo } from "./AdoptedHistory.styles";
@@ -42,7 +43,9 @@ const AdoptedHistory = () => {
                             </Card.Header>
                             <Card.Body>
                                 <div css={dated}>
-                                    <span>{e.updatedAt}</span>
+                                    <span>
+                                        {format(new Date(e.updatedAt), "HH:mm, dd MMMM yyyy")}
+                                    </span>
                                 </div>
                                 <Row>
                                     <Col xs={6} css={mainOne}>
