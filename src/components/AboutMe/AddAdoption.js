@@ -120,7 +120,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                 <Form.Row>
                     <div css={fs}>
                         <ReactFilestack
-                            apikey={"AugqfuGzTQouENQs5OOe2z"}
+                            apikey={"AXQPEAHiQTeMTIKzisgugz"}
                             customRender={({ onPick }) => (
                                 <div css={uploadPhoto}>
                                     <PrimaryButton

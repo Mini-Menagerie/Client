@@ -120,6 +120,11 @@ const Header = () => {
                 form
             );
             if (user.status === 200) {
+                // const verify = await axios.post(
+                //     "http://localhost:8000/verification/get-activation-email",
+                //     user.data.result._id
+                // );
+                // console.log(verify)
                 Swal.fire("Register success");
                 setShow(false);
             }
