@@ -4,6 +4,7 @@ import { Card, Col, Row } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import format from "date-fns/format";
 import axios from "../../../helpers/axios";
+import NumberFormat from 'react-number-format';
 
 import { head, mainOne, dated, desc, listInfo } from "./AdoptedHistory.styles";
 
@@ -31,7 +32,7 @@ const AdoptedHistory = () => {
     return (
         <div>
             <div css={head}>
-                <h2>Adopted Pet History</h2>
+                <h3>Adopted Pet History</h3>
             </div>
             <div css={listInfo}>
                 {adoptedHistory.map((e) => (
@@ -55,8 +56,9 @@ const AdoptedHistory = () => {
                                             <b>{e.petName}</b> -{" "}
                                             <span>{e.breed}</span>
                                             <p>
-                                                Adoption Fee : Rp.
-                                            <b>{e.idPetUpForAdoption !== null && e.idPetUpForAdoption.fee}</b>
+                                                Adoption Fee : {" "}
+                                              <b><NumberFormat value={e.idPetUpForAdoption !== null && e.idPetUpForAdoption.fee} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} /></b> 
+                                            {/* <b>{e.idPetUpForAdoption !== null && e.idPetUpForAdoption.fee}</b> */}
                                             </p>
                                             <p>Owner Pet : {e.ownerPetName}</p>
                                             <p>Adopter Pet : {e.adopterPetName}</p>

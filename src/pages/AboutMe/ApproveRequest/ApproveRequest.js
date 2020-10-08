@@ -105,7 +105,7 @@ const ApproveRequest = () => {
         <div>
             <div>
                 <div css={head}>
-                    <h2>Approve Request</h2>
+                    <h3>Approve Request</h3>
                 </div>
                 {adopter.map((e) => (
                     <div key={adopter}>

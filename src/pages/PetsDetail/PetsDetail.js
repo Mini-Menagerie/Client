@@ -58,7 +58,7 @@ const PetsDetail = () => {
             <Container css={container} style={{maxWidth:"70%"}}>
                 {
                     loading ? (
-                        <p>Loading...</p>
+                        <p>Loading Content, Please Wait...</p>
                     ) : (
                         <DetailSection petDetails={details} user={user} />
                     )

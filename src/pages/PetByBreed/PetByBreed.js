@@ -12,6 +12,7 @@ import {
     Col,
     ToggleButton,
     ToggleButtonGroup,
+    Container
 } from "react-bootstrap";
 
 import {
@@ -23,7 +24,8 @@ import {
     filter,
     card,
     cardcss,
-    cardcss1
+    cardcss1,
+    wrapperCover1
 } from "../BreedByCategory/BreedByCategory.styles"
 
 const PetByBreed = () => {
@@ -62,7 +64,7 @@ const PetByBreed = () => {
 
     return (
         <div>
-            <div css={wrapperCover}>
+            <div css={category === "dog" ? wrapperCover : wrapperCover1}>
                 <div>
                     <h1 style={{ color: "white", paddingLeft: "80px", fontWeight: "500" }}>You're Looking For : <br /><p style={{ fontSize: "50px", fontWeight: "600" }}>{breed}</p></h1>
                 </div>
@@ -213,7 +215,7 @@ const PetByBreed = () => {
                             })
                         ) : (
                                 <div>
-                                    <p>Loading...</p>
+                                    <p>Loading Content, Please Wait...</p>
                                 </div>
                             )
                     }

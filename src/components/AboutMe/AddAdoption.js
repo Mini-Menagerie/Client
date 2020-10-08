@@ -95,7 +95,7 @@ const AddAdoption = ({ edit }) => {
                     idUser: idUser,
                     idPet: newPet.data.result._id,
                     fee: formPet.fee,
-                    status: "Available",
+                    status: " Available",
                 }
             );
             if (newPetForAdoption.status === 200) {

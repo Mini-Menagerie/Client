@@ -8,8 +8,7 @@ export const margin = css`
     }
 `;
 export const container = css`
-    margin: 40px;
-    
+    margin-top: 30ox;
 `;
 export const row = css`
     display: flex;
@@ -22,6 +21,7 @@ export const button = css`
     width: 1100px;
     margin-bottom: 50px;
     font-size: 25px;
+    margin-top: 30px;
 `;
 export const petImage = css`
     & > img {

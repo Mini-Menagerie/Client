@@ -9,6 +9,9 @@ import {
     buttonPayNow
 } from "./StatusRequest.styles";
 import Swal from "sweetalert2";
+import NumberFormat from 'react-number-format';
+
+import search from '../../../assets/search.png'
 
 const StatusRequest = () => {
     const [statusRequest, setStatusRequest] = useState([]);
@@ -168,7 +171,7 @@ const StatusRequest = () => {
         return (
             <div>
                 <div css={head}>
-                    <h2>Adoption Status Request</h2>
+                    <h3>Adoption Status Request</h3>
                 </div>
                 <br />
                 <div>
@@ -232,8 +235,9 @@ const StatusRequest = () => {
                                                     e.idPet.gender}
                                             </p>
                                             <p>
-                                                Fee:{"Rp "}
-                                                {e.idPet !== undefined && e.idPet.fee}
+                                                Fee: {" "}
+                                                <NumberFormat value={e.idPet !== undefined && e.idPet.fee} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} />
+                                                {/* {e.idPet !== undefined && e.idPet.fee} */}
                                             </p>
                                             <br />
                                             {e.status === "Waiting for Payment" ? (
@@ -283,10 +287,19 @@ const StatusRequest = () => {
         return (
             <div>
                 <div css={head}>
-                    <h2>Adoption Status Request</h2>
+                    <h3>Adoption Status Request</h3>
                 </div>
-                <br />
-                <h1 style={{ textAlign: "center" }}>Blank Data</h1>
+                <div style={{justifyContent:"center", display:"flex", flexDirection:"column", alignItems:"center", marginTop:"0px"}}>
+                <img
+                    src={search}
+                    alt="searchimage"
+                    style={{
+                    width:"300px",
+                    marginTop:"30px"
+                }}
+                />
+                    <h3 style={{ textAlign: "center", color:"#464646" }}>Oops..You Haven't Made Any Requests Yet!</h3>
+                </div>
             </div>
         );
     }
