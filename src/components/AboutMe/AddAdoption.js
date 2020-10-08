@@ -3,6 +3,9 @@ import { jsx } from "@emotion/core";
 import { Col, Row, Form } from "react-bootstrap";
 import axios from "../../helpers/axios";
 import ReactFilestack from "filestack-react";
+import Swal from "sweetalert";
+import { useHistory } from "react-router-dom";
+
 
 
 import PrimaryButton from "../Button/Button";
@@ -10,7 +13,7 @@ import { useState, useEffect } from "react";
 
 import { upload, uploadPhoto, fs } from "./EditProfile.styles";
 
-const AddAdoption = ({ edit, handleClose }) => {
+const AddAdoption = ({ edit }) => {
     console.log(edit);
     const [formPet, setFormPet] = useState({
         idCategoryPet: "",
@@ -31,7 +34,7 @@ const AddAdoption = ({ edit, handleClose }) => {
 
     const [petCategory, setPetCategory] = useState([]);
     const [breed, setBreed] = useState([]);
-
+    const history = useHistory();
 
     const getCategory = async () => {
 
@@ -96,7 +99,8 @@ const AddAdoption = ({ edit, handleClose }) => {
                 }
             );
             if (newPetForAdoption.status === 200) {
-                alert("Success");
+                Swal("Your pet is ready for adoopted");
+                history.goBack();
             }
         }
     };
@@ -107,6 +111,8 @@ const AddAdoption = ({ edit, handleClose }) => {
             [event.target.name]: event.target.value,
         });
     };
+    const [show, setShow] = useState(false);
+    const handleClose = () => setShow(false);
 
     useEffect(() => {
         getCategory();
@@ -160,6 +166,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                             value={formPet.petName}
                                             name="petName"
                                             onChange={handleChange}
+                                            required
                                         />
                                     </Col>
                                 </Form.Group>
@@ -177,6 +184,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                             prefix="Rp."
                                             allowDecimals={true}
                                             onChange={handleChange}
+                                            required
                                         ></Form.Control>                                       
                                     </Col>
                                 </Form.Group>
@@ -204,6 +212,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                             onClick=""
                                             as="select"
                                             defaultValue="Category Pet"
+                                            required
                                         >
                                             <option selected>
                                                 Select
@@ -230,6 +239,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                             as="select"
                                             defaultValue="idBreed"
                                             name="idBreed"
+                                            required
                                         >
                                             <option selected>
                                                 Select
@@ -278,6 +288,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                             value={formPet.size}
                                             name="size"
                                             onChange={handleChange}
+                                            required
                                         ><option selected>Select</option>
                                          <option value="Small">Small</option>
                                          <option value="Medium">Medium</option>
@@ -297,6 +308,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                             name="gender"
                                             as="select"
                                             onChange={handleChange}
+                                            required
                                         >    <option selected>Select</option>
                                              <option value="Female">Female</option>
                                              <option value="Male">Male</option>
@@ -326,6 +338,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                             value={formPet.age}
                                             name="age"
                                             onChange={handleChange}
+                                            required
                                         />
                                     </Col>
                                 </Form.Group>
@@ -341,6 +354,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                             value={formPet.weight}
                                             name="weight"
                                             onChange={handleChange}
+                                            required
                                         />
                                     </Col>
                                 </Form.Group>
@@ -360,6 +374,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                     value={formPet.location}
                                     name="location"
                                     onChange={handleChange}
+                                    required
                                 >
                                  </Form.Control>
                             </Col>
@@ -378,6 +393,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                     value={formPet.about}
                                     name="about"
                                     onChange={handleChange}
+                                    required
                                 />
                             </Col>
                         </Form.Group>
@@ -390,7 +406,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                                     type="email"
                                     placeholder={userData.email}
                                     value={userData.email}
-                                    disabled
+                                    disabled                            
                                 />
                             </Col>
                         </Form.Group>
