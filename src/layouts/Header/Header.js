@@ -75,6 +75,7 @@ const Header = () => {
             );
 
             if (user.status === 200) {
+                console.log(user)
                 Swal.fire({
                     title: "Success!",
                     text: "You've Logged In Successfully",
@@ -88,7 +89,7 @@ const Header = () => {
         } catch (error) {
             if (error.message === "Request failed with status code 400") {
                 Swal.fire({
-                    title: "Gagal!",
+                    title: "Akun kamu belum terdaftar atau password salah",
                     icon: "warning",
                 });
                 setShow(false);
@@ -124,7 +125,7 @@ const Header = () => {
                 //     "http://localhost:8000/verification/get-activation-email",
                 //     user.data.result._id
                 // );
-                // console.log(verify)
+                console.log(user.data.result._id)
                 Swal.fire("Register success");
                 setShow(false);
             }
@@ -356,6 +357,7 @@ const Header = () => {
                                                     name="email"
                                                     onChange={handleLogin}
                                                     value={formLogin.email}
+                                                    required
                                                 />
                                             </Col>
                                         </Row>
@@ -367,6 +369,7 @@ const Header = () => {
                                                     name="password"
                                                     onChange={handleLogin}
                                                     value={formLogin.password}
+                                                    required
                                                 />
                                             </Col>
                                         </Row>
@@ -430,6 +433,7 @@ const Header = () => {
                                                         placeholder="Full Name"
                                                         name="fullName"
                                                         value={form.fullName}
+                                                        required
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -443,6 +447,7 @@ const Header = () => {
                                                         placeholder="Email"
                                                         name="email"
                                                         value={form.email}
+                                                        required
                                                         onChange={
                                                             handleInputChange
                                                         }
@@ -456,6 +461,7 @@ const Header = () => {
                                                         placeholder="Password"
                                                         name="password"
                                                         value={form.password}
+                                                        required
                                                         onChange={
                                                             handleInputChange
                                                         }
