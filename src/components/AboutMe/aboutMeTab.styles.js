@@ -19,7 +19,6 @@ export const avatar = css `
 width: 200px;
 height: 200px;
 object-fit: cover;
-border: 1px solid black;
 margin-bottom: 50px;
 border-radius: 50%;
 `

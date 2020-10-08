@@ -24,7 +24,7 @@ import dog from "../../assets/dogCover.png";
 import cat from "../../assets/catCover.png";
 import hamster from "../../assets/hamsterCover.png";
 import bird from "../../assets/birdCover.png";
-import Swal from "sweetalert";
+import Swal from "sweetalert2";
 
 const AdoptionForm = () => {
     const [user, setUser] = useState({

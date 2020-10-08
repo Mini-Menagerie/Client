@@ -53,14 +53,20 @@ const AboutMeTab = ({ profile }) => {
 
                 <Row css={rowMargin}>
                     <Col xs={6}>
-                        <img
-                            css={avatar}
-                            src={
-                                profile.idUser !== undefined &&
-                                profile.idUser.avatar
-                            }
-                            alt="avatar"
-                        />
+                        {
+                            profile.idUser ? (
+                                <img
+                                    css={avatar}
+                                    src={
+                                        profile.idUser !== undefined &&
+                                        profile.idUser.avatar
+                                    }
+                                    alt="avatar"
+                                />
+                            ) : (
+                                <p>Loading...</p>
+                            )
+                        }
                     </Col>
                     <Col xs={6}>
                         <Table style={{ borderStyle: "hidden" }}>
