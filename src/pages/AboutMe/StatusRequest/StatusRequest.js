@@ -1,7 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { Card, Col, Button, Row } from "react-bootstrap";
-import { loadStripe } from '@stripe/stripe-js';
 import axios from "../../../helpers/axios";
 import { useState, useEffect } from "react";
 import {
@@ -10,11 +9,9 @@ import {
     buttonPayNow
 } from "./StatusRequest.styles";
 
-const stripePromise = loadStripe("pk_test_51HUN7sAjKylxkZ24d0YxRuxiDVNFIoEAsNmyg8WFxzcExHz1cPsfdouNHOsw3E9SJQpQ19rG2TFByvkQ3MNzAXey00DUfRySaY");
-
 const StatusRequest = () => {
     const [statusRequest, setStatusRequest] = useState([]);
-    const [state, dispatch] = useState({
+    const [state] = useState({
         loading: false,
         error: null,
     });
@@ -25,7 +22,6 @@ const StatusRequest = () => {
         const userData = await JSON.parse(localStorage.getItem("user"));
         const url = `formRequest/all/${userData.idUser._id}`;
         let datas = await axios.get(url)
-        console.log(datas);
         let results = datas.data.filterReq
         let filtered = datas.data.filterReq.filter(e => e.status !== "COMPLETED")
         setStatusRequest(results !== undefined && filtered)
@@ -58,7 +54,6 @@ const StatusRequest = () => {
             setAdoption([]);
         }
     };
-    console.log(adoption);
 
     const getAdopter = async () => {
         const dataPet = await JSON.parse(localStorage.getItem("pets"));
@@ -79,9 +74,8 @@ const StatusRequest = () => {
         const adopter = await axios.get("formRequest");
         if (adopter.status === 200) {
             let filteredAdopter = adopter.data.result.filter(
-                (item) => item.idPet !== null && item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "COMPLETED"
+                (item) => item.idPet !== null && item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "Completed"
             );
-            console.log(filteredAdopter);
             setAdopter(filteredAdopter);
         }
     };
@@ -95,7 +89,7 @@ const StatusRequest = () => {
             breed: adopter[0].idPet.idBreed.breedName,
             ownerPetName: adoption[0].idUser.fullName,
             adopterPetName: adopter[0].idUser.fullName,
-            status: "COMPLETED",
+            status: "Completed",
         }
         );
         axios.post("listAdoptionTransaction/create", {
@@ -106,17 +100,17 @@ const StatusRequest = () => {
             breed: adopter[0].idPet.idBreed.breedName,
             ownerPetName: adoption[0].idUser.fullName,
             adopterPetName: adopter[0].idUser.fullName,
-            status: "COMPLETED",
+            status: "Completed",
         }
         );
     };
 
     const multipleUpdate = () => {
         axios.put(`petUpForAdoption/${adoption[0]._id}`, {
-            status: "COMPLETED",
+            status: "Completed",
         });
         axios.put(`formRequest/${adopter[0]._id}`, {
-            status: "COMPLETED",
+            status: "Completed",
         });
     }
 
@@ -144,6 +138,8 @@ const StatusRequest = () => {
         getPetUpForAdopt();
         getAdopter();
         getDataAdopter();
+
+        //eslint-disable-next-line
     }, []);
 
     if (statusRequest.length > 0) {

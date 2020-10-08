@@ -2,80 +2,70 @@
 import { jsx } from "@emotion/core";
 import { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
-import { Formik, Form } from "formik";
 import { useParams, Link } from "react-router-dom";
 import "react-multi-carousel/lib/styles.css";
-import axios from "axios";
 
 import {
     Card,
-    Button,
     Row,
     Col,
-    ToggleButton,
-    ToggleButtonGroup,
-    Container,
-    FormControl,
+    Container
 } from "react-bootstrap";
 
 import {
     wrapperCover,
-    widthButton,
     collections,
     centertext,
-    filter,
-    buttonGroup,
     card,
     cards,
     cover,
     textTitle,
-    toggle,
     wrapperCover1
 } from "./BreedByCategory.styles";
 
 const BreedByCategory = () => {
     const [collection, setCollection] = useState([]);
-    const [searchPet, setSearchPet] = useState([]);
+    // const [setSearchPet] = useState([]);
     const [breed, setBreed] = useState([]);
     const { category } = useParams();
     const [search, setSearch] = useState("");
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState();
+    // const [setLoading] = useState(true);
+    // const [setError] = useState(false);
+    // const [setErrorMessage] = useState();
     
-    const handleChange = (event) => {
-        setSearch(event.target.value);
-    };
+    // const handleChange = (event) => {
+    //     setSearch(event.target.value);
+    // };
 
-    const getSearch = () => {
-        const url = `http://localhost:8000/petdetail/?search=${search}`;
-        axios
-            .get(url)
-            .then(function (response) {
-                setSearchPet(response.data.result);
-                setLoading(false);
-            })
-            .catch(function (error) {
-                setError(true);
-                setErrorMessage(error.message);
-                setLoading(false);
-            });
-    };
+    // const getSearch = () => {
+    //     const url = `http://localhost:8000/petdetail/?search=${search}`;
+    //     axios
+    //         .get(url)
+    //         .then(function (response) {
+    //             setSearchPet(response.data.result);
+    //             setLoading(false);
+    //         })
+    //         .catch(function (error) {
+    //             setError(true);
+    //             setErrorMessage(error.message);
+    //             setLoading(false);
+    //         });
+    // };
 
-    const size = [
-        { name: "Small", value: "Small" },
-        { name: "Medium", value: "Medium" },
-        { name: "Large", value: "Large" },
-        { name: "Extra Large", value: "ExtraLarge" },
-    ];
-    const gender = [
-        { name: "Female", value: "Female" },
-        { name: "Male", value: "Male" },
-    ];
-    const alphabet = [
-        { name: "Ascending Order", value: "asc" },
-        { name: "Descending Order", value: "desc" },
-    ];
+    // const size = [
+    //     { name: "Small", value: "Small" },
+    //     { name: "Medium", value: "Medium" },
+    //     { name: "Large", value: "Large" },
+    //     { name: "Extra Large", value: "ExtraLarge" },
+    // ];
+    // const gender = [
+    //     { name: "Female", value: "Female" },
+    //     { name: "Male", value: "Male" },
+    // ];
+    // const alphabet = [
+    //     { name: "Ascending Order", value: "asc" },
+    //     { name: "Descending Order", value: "desc" },
+    // ];
 
     const responsive = {
         superLargeDesktop: {
@@ -102,7 +92,6 @@ const BreedByCategory = () => {
         const url = `${process.env.REACT_APP_API_URL}/petCollection`;
         const response = await fetch(url);
         const result = await response.json();
-        console.log(result)
         setCollection(result.result);
     };
 
@@ -111,7 +100,6 @@ const BreedByCategory = () => {
         const response = await fetch(url);
 
         const result = await response.json();
-        console.log(result);
         function removeDuplicates(originalArray, prop) {
             var newArray = [];
             var lookupObject = {};
@@ -148,7 +136,7 @@ const BreedByCategory = () => {
    
         //eslint-disable-next-line
     }, []);
-    console.log(category);
+    
     return (
         <div>
             <div css={category === "dog" ? wrapperCover : wrapperCover1}>

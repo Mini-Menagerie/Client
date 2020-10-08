@@ -35,7 +35,7 @@ const StatusRequest = () => {
                                     <Col css={mainOne}>
                                         <img
                                             src={e.idPet.image}
-                                            alt="mberrrr"
+                                            alt="pet image"
                                         />
                                     </Col>
                                     <Col>

@@ -1702,11 +1702,6 @@
     "@svgr/plugin-svgo" "^4.3.1"
     loader-utils "^1.2.3"
 
-"@sweetalert2/theme-bootstrap-4@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@sweetalert2/theme-bootstrap-4/-/theme-bootstrap-4-4.0.0.tgz#9b23af72b429050e086f29ef9d477624529efbfb"
-  integrity sha512-ZU0sYNpo783ihs4VHWRswYkwQQ/g+T5dI8c19RhDigHoIXHS6GXqic6atsP1BmVHPbq/LvFJTpgoRJQU3/SMCQ==
-
 "@testing-library/dom@*":
   version "7.24.2"
   resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-7.24.2.tgz#6d2b7dd21efbd5358b98c2777fc47c252f3ae55e"
@@ -11282,10 +11277,10 @@ sweetalert2-react-content@^3.2.0:
   resolved "https://registry.yarnpkg.com/sweetalert2-react-content/-/sweetalert2-react-content-3.2.0.tgz#fbbd219177901ef639b8b685c467e35ff8f28770"
   integrity sha512-Zd75ZZZh7byFHIppsBl04NrIpqQUyjIazBrCb6NwZIDi7Uv7gbvTGO5+yJqgAzjrY29lXOUOyLmY2riKoc69Pg==
 
-sweetalert2@^10.3.3:
-  version "10.3.3"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-10.3.3.tgz#4a19270619fac1d4394dd733221b2dbeeb7d3951"
-  integrity sha512-TFndpC3gKR98zOsItkOVkxOKnJTPf+TDLyejVMMlLxU9h+LZOvVIDFxtdWzJXYvq5GgN2L5YuPzu9P+xpE2hdw==
+sweetalert2@^10.3.5:
+  version "10.3.5"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-10.3.5.tgz#e5a10ad789163e85ec6031a413b08b20e5aae0a4"
+  integrity sha512-8XBQvW2frWVn0Xs80qyraRXcb3Mg/aKG+9sdVPlzViDIYJfLhMeda3pRuyGzyvrPXbBQ3KRjs+66xKH3kz8/og==
 
 sweetalert@^2.1.2:
   version "2.1.2"
