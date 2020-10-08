@@ -16,13 +16,11 @@ import {
 import {
     toggle,
     buttonGroup,
-    centertext,
     widthButton,
     wrapperCover,
     collections,
     filter,
     card,
-    wrapperCover1,
     cardcss,
     cardcss1
 } from "../BreedByCategory/BreedByCategory.styles"

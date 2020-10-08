@@ -6,7 +6,7 @@ import axios from "../../../helpers/axios";
 
 import { head, mainBody, border } from "./Approve.styles";
 import FormPopUp from "../../../components/AdoptionFormPopUp/adoptionFormPopUp";
-import PrimaryButton from "../../../components/Button/Button";
+// import PrimaryButton from "../../../components/Button/Button";
 
 const ApproveRequest = () => {
     const [adoption, setAdoption] = useState([]); // petUpforAdoption
@@ -21,7 +21,6 @@ const ApproveRequest = () => {
     const getPetUpForAdopt = async () => {
         let idUser = await getUserLogin();
         let pets = await axios.get("petUpForAdoption");
-        console.log(pets);
         if (pets.status === 200) {
             let filteredPets = await pets.data.result.filter((item) => {
                 return item.idPet !== null && item.idPet.idUser === idUser
@@ -54,61 +53,52 @@ const ApproveRequest = () => {
             let filteredAdopter = adopter.data.result.filter(
                 (item) => item.idPet !== null && item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "COMPLETED"
             );
-            console.log(filteredAdopter);
             setAdopter(filteredAdopter);
         }
     };
 
-    const newAdoptionTransaction = () => {
-        axios.post("listAdoptionTransaction/create", {
-            idPetUpForAdoption: adoption[0]._id,
-            idUser: adoption[0].idUser._id,
-            petName: adoption[0].idPet.petName,
-            petCategory: adoption[0].idPet.idCategoryPet,
-            breed: adopter[0].idPet.idBreed.breedName,
-            ownerPetName: adoption[0].idUser.fullName,
-            adopterPetName: adopter[0].idUser.fullName,
-            status: "COMPLETED",
-        }
-        );
-        axios.post("listAdoptionTransaction/create", {
-            idPetUpForAdoption: adoption[0]._id,
-            idUser: adopter[0].idUser._id,
-            petName: adoption[0].idPet.petName,
-            petCategory: adoption[0].idPet.idCategoryPet,
-            breed: adopter[0].idPet.idBreed.breedName,
-            ownerPetName: adoption[0].idUser.fullName,
-            adopterPetName: adopter[0].idUser.fullName,
-            status: "COMPLETED",
-        }
-        );
-    };
+    // const newAdoptionTransaction = () => {
+    //     axios.post("listAdoptionTransaction/create", {
+    //         idPetUpForAdoption: adoption[0]._id,
+    //         idUser: adoption[0].idUser._id,
+    //         petName: adoption[0].idPet.petName,
+    //         petCategory: adoption[0].idPet.idCategoryPet,
+    //         breed: adopter[0].idPet.idBreed.breedName,
+    //         ownerPetName: adoption[0].idUser.fullName,
+    //         adopterPetName: adopter[0].idUser.fullName,
+    //         status: "COMPLETED",
+    //     }
+    //     );
+    //     axios.post("listAdoptionTransaction/create", {
+    //         idPetUpForAdoption: adoption[0]._id,
+    //         idUser: adopter[0].idUser._id,
+    //         petName: adoption[0].idPet.petName,
+    //         petCategory: adoption[0].idPet.idCategoryPet,
+    //         breed: adopter[0].idPet.idBreed.breedName,
+    //         ownerPetName: adoption[0].idUser.fullName,
+    //         adopterPetName: adopter[0].idUser.fullName,
+    //         status: "COMPLETED",
+    //     }
+    //     );
+    // };
 
-    const multipleUpdate = () => {
-        axios.put(`petUpForAdoption/${adoption[0]._id}`, {
-            status: "COMPLETED",
-        });
-        axios.put(`formRequest/${adopter[0]._id}`, {
-            status: "COMPLETED",
-        });
-    }
-
-    const handleSubmitTrans = (event) => {
-        event.preventDefault();
-        newAdoptionTransaction();
-        multipleUpdate();
-        window.location.reload();
-    };
+    // const multipleUpdate = () => {
+    //     axios.put(`petUpForAdoption/${adoption[0]._id}`, {
+    //         status: "COMPLETED",
+    //     });
+    //     axios.put(`formRequest/${adopter[0]._id}`, {
+    //         status: "COMPLETED",
+    //     });
+    // }
 
     useEffect(() => {
         getUserLogin();
         getPetUpForAdopt();
         getAdopter();
         getDataAdopter();
+        
+        //eslint-disable-next-line
     }, []);
-
-    console.log(adoption)
-    console.log(adopter)
     
     return (
         <div>

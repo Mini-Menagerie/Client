@@ -31,6 +31,8 @@ const ShoppingCart = () => {
 
   useEffect(() => {
     getUser();
+
+    //eslint-disable-next-line
   }, []);
 
   const [data, setData] = useState([]);
@@ -54,6 +56,8 @@ const ShoppingCart = () => {
 
   useEffect(() => {
     setFinalCart()
+
+    //eslint-disable-next-line
   }, [data]);
 
   const handleChange = (e, id) => {

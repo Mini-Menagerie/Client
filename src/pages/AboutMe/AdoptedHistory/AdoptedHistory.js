@@ -17,7 +17,6 @@ const AdoptedHistory = () => {
         axios
             .get(url)
             .then(function (result) {
-                console.log(result);
                 setAdoptedHistory(result.data.filterReq);
             })
             .catch(function (error) {
@@ -28,6 +27,8 @@ const AdoptedHistory = () => {
     useEffect(() => {
         getListAdoption()
     }, []);
+
+    console.log(adoptedHistory);
 
     return (
         <div>

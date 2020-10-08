@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import axios from "../../helpers/axios"
 
 const Loading = () => {
-        const redirect = () => {
+    const redirect = () => {
         localStorage.removeItem("cartProduct");
         localStorage.removeItem("totalPrice");
         localStorage.removeItem("id_trans");
@@ -52,12 +52,14 @@ const Loading = () => {
         console.log(product);
         return product;
     };
+
     const getUser = () => {
         const user = JSON.parse(localStorage.getItem("user"));
         const userId = user.idUser._id;
         console.log(userId);
         return userId;
     };
+
     const getTotalPrice = () => {
         const cart = JSON.parse(localStorage.getItem("cartProduct"));
         let totalPrice = cart
@@ -65,6 +67,7 @@ const Loading = () => {
             .reduce((a, b) => a + b, 0);
         return totalPrice;
     };
+
     const getIdTrans = () => {
         const id_trans = localStorage.getItem("id_trans");
         return id_trans;
@@ -82,6 +85,7 @@ const Loading = () => {
             localStorage.setItem("id_trans", newTrans.data.result._id);
         }
     };
+
     const addNewTransactionDetails = async () => {
         let product = await getCart();
         console.log(product);
@@ -114,11 +118,9 @@ const Loading = () => {
             addNewTransactionDetails();
         }, 3000);
 
-    }, [addNewTransaction]);
+        //eslint-disable-next-line
+    }, []);
 
-    // useEffect(() => {
-    //     PaymentLoading();
-    // }, []);
     return (
         <div>
 

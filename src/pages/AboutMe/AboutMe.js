@@ -27,7 +27,6 @@ const AllProfile = () => {
         await axios
             .get(url)
             .then(function (response) {
-                console.log(response.data.result);
                 setAboutMe(response.data.result);
                 setLoading(false);
             })
