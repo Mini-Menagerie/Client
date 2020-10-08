@@ -17,7 +17,7 @@ import {
 } from "./Footer.styles";
 import subLogo from "../../assets/signUp.png";
 
-const Footer = ({data}) => {
+const Footer = () => {
     let user = JSON.parse(localStorage.getItem("user"));
     if (user === null) {
         return (
@@ -83,7 +83,7 @@ const Footer = ({data}) => {
                                             to get the latest update on pet<br></br>
                                             adoption & rescues!
                                         </p>
-                                        <PrimaryButton onClick={data}>Sign Up</PrimaryButton>
+                                        <PrimaryButton onClick={() => {}}>Sign Up</PrimaryButton>
                                     </div>
                                 </div>
                             </Col>
