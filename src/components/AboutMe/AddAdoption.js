@@ -3,7 +3,7 @@ import { jsx } from "@emotion/core";
 import { Col, Row, Form } from "react-bootstrap";
 import axios from "../../helpers/axios";
 import ReactFilestack from "filestack-react";
-import Swal from "sweetalert";
+import Swal from "sweetalert2";
 import { useHistory } from "react-router-dom";
 
 
@@ -99,7 +99,10 @@ const AddAdoption = ({ edit }) => {
                 }
             );
             if (newPetForAdoption.status === 200) {
-                Swal("Your pet is ready for adoopted");
+                Swal.fire({
+                    title: "Your request has been sent",
+                    icon: "success",
+                });
                 history.goBack();
             }
         }
