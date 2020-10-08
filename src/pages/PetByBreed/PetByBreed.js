@@ -58,6 +58,8 @@ const PetByBreed = () => {
         //eslint-disable-next-line
     }, []);
 
+    console.log(collection)
+
     return (
         <div>
             <div css={wrapperCover}>

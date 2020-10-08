@@ -63,6 +63,18 @@ const LandingPage = () => {
     const [errorMessage, setErrorMessage] = useState();
     const [petCards, setPetCards] = useState([]);
     const [search, setSearch] = useState("");
+    const [products, setProducts] = useState([]);
+
+    const getProducts = async () => {
+        setLoading(true);
+        const response = await axios.get("/product");
+        localStorage.setItem(
+            "products",
+            JSON.stringify(response.data.result)
+        );
+        setProducts(response.data.result);
+        setTimeout(() => setLoading(false), 3000);
+    };
 
     const fetchPet = () => {
         const url = "http://localhost:8000/pet";
@@ -101,6 +113,7 @@ const LandingPage = () => {
     };
 
     useEffect(() => {
+        getProducts();
         fetchPet();
         url();
 
