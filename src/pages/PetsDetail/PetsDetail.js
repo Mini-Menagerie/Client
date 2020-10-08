@@ -11,7 +11,7 @@ import { container } from "./PetsDetail.styles";
 const PetsDetail = () => {
     const [loading, setLoading] = useState(true);
     // const [error, setError] = useState(false);
-    const [setErrorMessage] = useState();
+    const [errorMessage, setErrorMessage] = useState();
     const [details, setDetails] = useState({});
     const [user, setUser] = useState({});
 
