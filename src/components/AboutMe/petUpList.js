@@ -23,7 +23,7 @@ const ListPetUp = () => {
         let id = await getUser();
         let result = await axios.get("petUpForAdoption");
         let datas = await result.data.result.filter(
-            (item) => item.idPet !== null && item.idPet.idUser === id
+            (item) => item.idPet !== null && item.idPet.idUser._id === id
         );
         setPetUp(datas);
     };
