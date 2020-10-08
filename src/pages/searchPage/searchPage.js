@@ -3,6 +3,7 @@ import { jsx } from "@emotion/core";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Pagination from '../../components/Pagination'
 
 import {
     Card,
@@ -10,7 +11,6 @@ import {
     Row,
     Col,
     Form,
-    Dropdown,
     Container,
 } from "react-bootstrap";
 
@@ -22,10 +22,8 @@ import {
     margin,
     sortby,
     title,
-    widthButton,
     result,
     petsAvailable,
-    displaying,
     cardCss,
     marginTop,
     cardstyle,
@@ -40,6 +38,19 @@ const SearchPage = () => {
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
     const searchBar = localStorage.getItem("search");
+    const [petPerPage] = useState(9);
+    const [currentPet, setCurrentPage] = useState(1);
+
+    //get current products
+    const indexOfLastProduct = currentPet * petPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - petPerPage;
+    const currentPets = searchPet.slice(
+        indexOfFirstProduct,
+        indexOfLastProduct
+    );
+
+    //change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     const handleChange = (event) => {
         setSearch(event.target.value);
@@ -54,7 +65,11 @@ const SearchPage = () => {
         axios
             .get(url)
             .then(function (response) {
-                setSearchPet(response.data.result);
+                const data = response.data.result.filter(item => item.status === 
+                    "Available" && item.idPet !== 
+                    null && item.idPet.idBreed !== 
+                    null);
+                setSearchPet(data);
                 setLoading(false);
             })
             .catch(function (error) {
@@ -69,7 +84,11 @@ const SearchPage = () => {
         axios
             .get(url)
             .then(function (response) {
-                setSearchPet(response.data.result);
+                const data = response.data.result.filter(item => item.status === 
+                    "Available" && item.idPet !== 
+                    null && item.idPet.idBreed !== 
+                    null);
+                setSearchPet(data);
                 setLoading(false);
             })
             .catch(function (error) {
@@ -88,7 +107,11 @@ const SearchPage = () => {
         axios
             .get(url)
             .then(function (response) {
-                setSearchPet(response.data.data);
+                const data = response.data.result.filter(item => item.status === 
+                    "Available" && item.idPet !== 
+                    null && item.idPet.idBreed !== 
+                    null);
+                setSearchPet(data);
                 setLoading(false);
             })
             .catch(function (error) {
@@ -99,7 +122,6 @@ const SearchPage = () => {
             
             //eslint-disable-next-line
     }, []);
-    console.log(searchPet);
     return (
         <div>
             <div css={wrapperCover}>
@@ -123,7 +145,7 @@ const SearchPage = () => {
                     <Row>
                         <Col css={sortby}>
                             <div className="nameSearch" css={sortby}>
-                                Search Result for: {search}
+                                Search Result for: {searchBar}
                             </div>
                         </Col>
                         <Col>
@@ -156,8 +178,6 @@ const SearchPage = () => {
                 </Card>
             </div>
             <Card css={result}>
-                <h4 css={displaying}>Displaying "{searchBar}" </h4>
-
                 <div css={petsAvailable}>
                     {loading ? (
                         <div className="lds-circle"></div>
@@ -166,16 +186,16 @@ const SearchPage = () => {
                     ) : (
                         <Container style={{ maxWidth: "100%" }} css={marginTop}>
                             <Row css={rowmargin}>
-                                {searchPet !== undefined &&
-                                    searchPet.length > 0 &&
-                                    searchPet.map((item) => (
+                                {currentPets !== undefined &&
+                                    currentPets.length > 0 &&
+                                    currentPets.map((item) => (
                                         <Col
                                             sm={3}
                                             css={cardCss}
                                             style={{ maxWidth: "22rem" }}
                                         >
                                             <Link
-                                                to={`/pets-detail/${item.id}`}
+                                                to={`/pets-detail/${item.idPet._id}`}
                                             >
                                                 <Card
                                                     style={{ width: "22rem" }}
@@ -184,20 +204,20 @@ const SearchPage = () => {
                                                     <Card.Img
                                                         css={img}
                                                         variant="top"
-                                                        src={item.image}
+                                                        src={item.idPet.image[0]}
                                                     />
                                                     <Card.Body>
                                                         <Card.Title css={title}>
-                                                            {item.petName}
+                                                            {item.idPet.petName}
                                                         </Card.Title>
                                                         <Card.Text>
-                                                            {item.breed}
+                                                            {item.idPet.idBreed.breedName}
                                                             <br/>
-                                                            {item.gender},{" "}
+                                                            {item.idPet.gender},{" "}
                                                            
-                                                            {item.age} Years Old
+                                                            {item.idPet.age} Years Old
                                                             <br/>
-                                                            {item.location}
+                                                            {item.idPet.location}
 
                                                         </Card.Text>
                                                     </Card.Body>
@@ -209,20 +229,14 @@ const SearchPage = () => {
                         </Container>
                     )}
                 </div>
-
-                <Row
-                    className="justify-content-md-center"
-                    style={{ width: "100%", justifyContent: "center" }}
-                >
-                    <Dropdown.Toggle
-                        variant="light"
-                        id="dropdown-basic"
-                        css={widthButton}
-                    >
-                        Show More Result
-                    </Dropdown.Toggle>
-                </Row>
             </Card>
+            <div>
+                <Pagination
+                    productsPerPage={petPerPage}
+                    totalProducts={searchPet.length}
+                    paginate={paginate}
+                />
+            </div>
         </div>
     );
 };
