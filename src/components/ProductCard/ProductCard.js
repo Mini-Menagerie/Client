@@ -41,13 +41,6 @@ const ProductCard = ({ products, loading, ...props }) => {
                             <Card.Body>
                                 <p css={product_name}>{value.productName}</p>
                                 <p css={product_price}><NumberFormat value={value.price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></p>
-                                {/* <ActionButton
-                                    onClick={() => {
-                                        props.addToCart(value._id);
-                                        window.scrollTo(0, 0);
-                                    }}
-                                /> */}
-
                                 <ActionButton
                                     onClick={() => {
                                         const userLogin = JSON.parse(localStorage.getItem("user"));
