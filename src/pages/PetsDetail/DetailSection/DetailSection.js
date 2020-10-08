@@ -25,13 +25,13 @@ const DetailSection = ({ petDetails, user }) => {
     const handleClick = () => {
         history.push(`/adoption-form`);
     };
-    console.log(petDetails);
+
     return (
         <Row>
             <Col xs={12} md={7} css={detail_section_col} style={{borderRadius:"15px"}}>
                 <Row css={rowmargin}>
                 <h2><b>{petDetails.petName}</b></h2>
-                <h2><NumberFormat value={petDetails.fee} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} /></h2>
+                <h2><NumberFormat value={petDetails.fee} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></h2>
                 </Row>
                 <Carousel>
                     <Carousel.Item>
@@ -48,7 +48,7 @@ const DetailSection = ({ petDetails, user }) => {
                     </Carousel.Item>
                     <Carousel.Item>
                         {
-                            petDetails.image[1] == null ? (
+                            petDetails.image !== undefined && petDetails.image[1] && null ? (
                                 <img
                                 src={petDetails.image !==undefined && petDetails.image[0]}
                                 style={{
@@ -59,45 +59,30 @@ const DetailSection = ({ petDetails, user }) => {
                                 }}
                                 alt="pet_image"
                                  />
-                            ) :( 
-                            <img
-                                src={petDetails.image !==undefined && petDetails.image[1]}
-                                style={{
-                                    width: "100%",
-                                    height: "500px",
-                                    objectFit: "cover",
-                                    marginBottom: "30px",
-                                }}
-                                alt="pet_image"
-                                />)
+                            ) :( <img
+                        src={petDetails.image !==undefined && petDetails.image[1]}
+                        style={{
+                            width: "100%",
+                            height: "500px",
+                            objectFit: "cover",
+                            marginBottom: "30px",
+                        }}
+                        alt="pet_image"
+                        />)
                         }
                        
                     </Carousel.Item>
                     <Carousel.Item>
-                    {
-                            petDetails.image[2] == null ? (
-                                <img
-                                src={petDetails.image !==undefined && petDetails.image[0]}
-                                style={{
-                                    width: "100%",
-                                    height: "500px",
-                                    objectFit: "cover",
-                                    marginBottom: "30px",
-                                }}
-                                alt="pet_image"
-                                 />
-                            ) :( 
-                            <img
-                                src={petDetails.image !==undefined && petDetails.image[2]}
-                                style={{
-                                    width: "100%",
-                                    height: "500px",
-                                    objectFit: "cover",
-                                    marginBottom: "30px",
-                                }}
-                                alt="pet_image"
-                                />)
-                        }
+                        <img
+                        src={petDetails.image !==undefined && petDetails.image[2]}
+                        style={{
+                            width: "100%",
+                            height: "500px",
+                            objectFit: "cover",
+                            marginBottom: "30px",
+                        }}
+                        alt="pet_image"
+                        />
                     </Carousel.Item>
                 </Carousel>
                 <Row css={detail_section_col_left_second_row}>
