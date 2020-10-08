@@ -17,6 +17,7 @@ const StatusRequest = () => {
     });
     const [adoption, setAdoption] = useState([]); // petUpforAdoption
     const [adopter, setAdopter] = useState([]); // formRequest
+    const [idPetF, setIdPetF] = useState();
 
     const getDataForm = async () => {
         const userData = await JSON.parse(localStorage.getItem("user"));
@@ -45,18 +46,14 @@ const StatusRequest = () => {
         console.log(pets);
         if (pets.status === 200) {
             let filteredPets = await pets.data.result.filter((item) => {
-                return item.idPet !== null && item.idPet.idUser === idUser
+                return item.idPet !== null && item.idPet.idUser._id === idUser
             });
-            console.log(filteredPets)
             setAdoption(filteredPets);
-            localStorage.setItem("pets", JSON.stringify(filteredPets));
-        } else {
-            setAdoption([]);
         }
     };
 
     const getAdopter = async () => {
-        const dataPet = await JSON.parse(localStorage.getItem("pets"));
+        const dataPet = await JSON.parse(localStorage.getItem("petsA"));
         let idPet =
             dataPet !== null &&
             dataPet.map((item) => {
@@ -68,48 +65,57 @@ const StatusRequest = () => {
         return idPet; //5f729d64ecc1bc0dd6318de9
     };
 
+    const selectedPet = () => {
+        const data = localStorage.getItem('selectedPet')
+        return data
+    }
+
     const getDataAdopter = async () => {
-        let idPetAdopter = await getAdopter();
+        let idPetAdopter = await selectedPet();
 
         const adopter = await axios.get("formRequest");
         if (adopter.status === 200) {
             let filteredAdopter = adopter.data.result.filter(
-                (item) => item.idPet !== null && item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "Completed"
+                (item) => item.idPet !== null && item.idPet._id === idPetAdopter
             );
-            setAdopter(filteredAdopter);
+           let idPetForAdoption = filteredAdopter[filteredAdopter.length - 1]._id
+           setIdPetF(idPetForAdoption)
+           setAdopter(filteredAdopter[filteredAdopter.length - 1])
+           return idPetForAdoption
         }
     };
 
-    const newAdoptionTransaction = () => {
-        axios.post("listAdoptionTransaction/create", {
-            idPetUpForAdoption: adoption[0]._id,
-            idUser: adoption[0].idUser._id,
-            petName: adoption[0].idPet.petName,
-            petCategory: adoption[0].idPet.idCategoryPet,
-            breed: adopter[0].idPet.idBreed.breedName,
-            ownerPetName: adoption[0].idUser.fullName,
-            adopterPetName: adopter[0].idUser.fullName,
+    const newAdoptionTransaction = async () => {
+        let idPetF = await getDataAdopter()
+        await axios.post("listAdoptionTransaction/create", {
+            idPetUpForAdoption: idPetF,
+            idUser: adopter.idUser._id,
+            petName: adopter.idPet.petName,
+            petCategory: adopter.idPet.idCategoryPet,
+            breed: adopter.idPet.idBreed.breedName,
+            ownerPetName: adopter.idPet.idUser.fullName,
+            adopterPetName: adopter.idUser.fullName,
             status: "Completed",
         }
         );
-        axios.post("listAdoptionTransaction/create", {
-            idPetUpForAdoption: adoption[0]._id,
-            idUser: adopter[0].idUser._id,
-            petName: adoption[0].idPet.petName,
-            petCategory: adoption[0].idPet.idCategoryPet,
-            breed: adopter[0].idPet.idBreed.breedName,
-            ownerPetName: adoption[0].idUser.fullName,
-            adopterPetName: adopter[0].idUser.fullName,
-            status: "Completed",
+        await axios.post("listAdoptionTransaction/create", {
+            idPetUpForAdoption: idPetF,
+            idUser: adopter.idUser._id,
+            petName: adopter.idPet.petName,
+            petCategory: adopter.idPet.idCategoryPet,
+            breed: adopter.idPet.idBreed.breedName,
+            ownerPetName: adopter.idPet.idUser.fullName,
+            adopterPetName: adopter.idUser.fullName,
+            status: "Completed"
         }
         );
     };
 
     const multipleUpdate = () => {
-        axios.put(`petUpForAdoption/${adoption[0]._id}`, {
+        axios.put(`petUpForAdoption/${idPetF}`, {
             status: "Completed",
         });
-        axios.put(`formRequest/${adopter[0]._id}`, {
+        axios.put(`formRequest/${adopter._id}`, {
             status: "Completed",
         });
     }
@@ -141,7 +147,7 @@ const StatusRequest = () => {
 
         //eslint-disable-next-line
     }, []);
-console.log(statusRequest);
+console.log(adopter);
     if (statusRequest.length > 0) {
         return (
             <div>
