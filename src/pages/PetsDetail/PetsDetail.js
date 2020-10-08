@@ -3,15 +3,15 @@ import { jsx } from "@emotion/core";
 import { Container } from "react-bootstrap";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import DetailSection from "./DetailSection/DetailSection";
 import { container } from "./PetsDetail.styles";
 
-const PetsDetail = (props) => {
+const PetsDetail = () => {
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState();
+    // const [error, setError] = useState(false);
+    const [setErrorMessage] = useState();
     const [details, setDetails] = useState({});
     const [user, setUser] = useState({});
 

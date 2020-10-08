@@ -55,13 +55,9 @@ const AdoptionFeePayment = () => {
 
     useEffect(() => {
         PaymentLoading();
-<<<<<<< HEAD
 
         //eslint-disable-next-line
     }, []);
-=======
-    }, [PaymentLoading]);
->>>>>>> 9d87e661656c3d1e07edf8dc40e8a148938129a7
     return (
         <div></div>
     )

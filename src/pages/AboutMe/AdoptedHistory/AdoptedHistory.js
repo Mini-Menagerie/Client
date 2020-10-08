@@ -28,8 +28,6 @@ const AdoptedHistory = () => {
         getListAdoption()
     }, []);
 
-    console.log(adoptedHistory);
-
     return (
         <div>
             <div css={head}>

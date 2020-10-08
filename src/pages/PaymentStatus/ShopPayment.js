@@ -49,14 +49,12 @@ const Loading = () => {
         let product = cart.map((item) => {
             return item._id;
         });
-        console.log(product);
         return product;
     };
 
     const getUser = () => {
         const user = JSON.parse(localStorage.getItem("user"));
         const userId = user.idUser._id;
-        console.log(userId);
         return userId;
     };
 
@@ -88,13 +86,11 @@ const Loading = () => {
 
     const addNewTransactionDetails = async () => {
         let product = await getCart();
-        console.log(product);
         let idTrans = await getIdTrans();
         let newTransDetail = await axios.post("transactionDetails/create", {
             idTransaction: idTrans,
             idProduct: product,
         });
-        console.log(newTransDetail);
         if (newTransDetail.status === 200) {
             console.log("succes to create transaction");
             localStorage.setItem(
@@ -118,12 +114,8 @@ const Loading = () => {
             addNewTransactionDetails();
         }, 3000);
 
-<<<<<<< HEAD
         //eslint-disable-next-line
     }, []);
-=======
-    }, [addNewTransaction, PaymentLoading, addNewTransactionDetails]);
->>>>>>> 9d87e661656c3d1e07edf8dc40e8a148938129a7
 
     return (
         <div></div>

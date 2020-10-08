@@ -103,7 +103,7 @@ const AccountSettings = ({ account }) => {
                             </Form.Group>
                         </Row>
                         <Row>
-                            <PrimaryButton type="submit">
+                            <PrimaryButton type="submit" onClick={() => { }}>
                                 Update Email
                             </PrimaryButton>
                         </Row>
@@ -131,7 +131,7 @@ const AccountSettings = ({ account }) => {
                             </Form.Group>
                         </Row>
                         <Row>
-                            <PrimaryButton type="submit">
+                            <PrimaryButton type="submit" onClick={() => { }}>
                                 Update Password
                             </PrimaryButton>
                         </Row>
