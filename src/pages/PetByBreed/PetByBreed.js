@@ -179,16 +179,16 @@ const PetByBreed = () => {
                                     <Col
                                         xs={12}
                                         md={4}
-                                        key={item.id}
+                                        key={item.idPet._id}
                                         css={card}
                                     >
                                         <Link
-                                            to={`/pets-detail/${item.id}`}
+                                            to={`/pets-detail/${item.idPet._id}`}
                                         >
                                             <Card style={{ borderRadius: "20px", width: "25rem" }}>
                                                 <Card.Img
                                                     variant="top"
-                                                    src={item.image[0]}
+                                                    src={item.idPet.image[0]}
                                                     style={{
                                                         objectFit: "cover",
                                                         height: "350px",
@@ -198,13 +198,13 @@ const PetByBreed = () => {
                                                 />
                                                 <Card.Title css={cardcss1}>
                                                     <h4>
-                                                        <b>{item.petName}</b>
+                                                        <b>{item.idPet.petName}</b>
                                                     </h4>
                                                 </Card.Title>
                                                 <Card.Text css={cardcss}>
-                                                    {item.gender}, {item.age} Years Old
+                                                    {item.idPet.gender}, {item.idPet.age} Years Old
                                             <br />
-                                                    {item.location}
+                                                    {item.idPet.location}
                                                 </Card.Text>
                                             </Card>
                                         </Link>

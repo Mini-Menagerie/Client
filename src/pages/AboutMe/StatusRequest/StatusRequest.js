@@ -141,7 +141,7 @@ const StatusRequest = () => {
 
         //eslint-disable-next-line
     }, []);
-
+console.log(statusRequest);
     if (statusRequest.length > 0) {
         return (
             <div>
@@ -168,7 +168,7 @@ const StatusRequest = () => {
                                     <Row>
                                         <Col>
                                             <img
-                                                src={e.idPet.image}
+                                                src={e.idPet.image[0]}
                                                 alt="brokenimage"
                                                 style={{
                                                     height: "200px",
