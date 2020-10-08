@@ -37,7 +37,7 @@ const AllProfile = () => {
 
     useEffect(() => {
         if (userLogin == null || token == null) {
-            Swal({
+            Swal.fire({
                 title: "Gagal!",
                 text: "Silahkan login dahulu!",
                 icon: "warning",

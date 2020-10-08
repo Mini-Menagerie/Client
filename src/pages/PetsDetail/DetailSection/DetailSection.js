@@ -161,11 +161,7 @@ const DetailSection = ({ petDetails, user }) => {
 
                         ) : ( 
                             <PrimaryButton 
-                                onClick={() => Swal.fire({
-                                    title:"Please Login to Continue", 
-                                    icon:"warning",
-                                })}
-
+                                onClick={() => Swal.fire({title:"Please Login to Continue", icon:"warning",})}
                                 variant="danger"
                             >
                                 Ask for Adoption

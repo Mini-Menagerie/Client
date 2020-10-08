@@ -118,13 +118,15 @@ const Loading = () => {
             addNewTransactionDetails();
         }, 3000);
 
+<<<<<<< HEAD
         //eslint-disable-next-line
     }, []);
+=======
+    }, [addNewTransaction, PaymentLoading, addNewTransactionDetails]);
+>>>>>>> 9d87e661656c3d1e07edf8dc40e8a148938129a7
 
     return (
-        <div>
-
-        </div>
+        <div></div>
     )
 }
 
