@@ -45,16 +45,17 @@ const ApproveRequest = () => {
     };
 
     const getDataAdopter = async () => {
-        let idPetAdopter = await getAdopter();
+        let idPetAdopter = await getUserLogin();
 
         const adopter = await axios.get("formRequest");
-        console.log(idPetAdopter)
-        console.log(adopter);
         if (adopter.status === 200) {
             let filteredAdopter = adopter.data.result.filter(
-                (item) => item.idPet !== null && item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "Completed"
+                // item => console.log(item)
+                (item) => item.idPet.idUser !== null && item.idPet.idUser._id === idPetAdopter
             );
-            setAdopter(filteredAdopter);
+            let filtered = filteredAdopter.filter(item => item.status !== "Completed")
+            console.log(filtered);
+           setAdopter(filtered)
         }
     };
 
