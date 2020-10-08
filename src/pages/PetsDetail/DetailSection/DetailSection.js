@@ -47,28 +47,57 @@ const DetailSection = ({ petDetails, user }) => {
                         />
                     </Carousel.Item>
                     <Carousel.Item>
-                        <img
-                        src={petDetails.image !==undefined && petDetails.image[1]}
-                        style={{
-                            width: "100%",
-                            height: "500px",
-                            objectFit: "cover",
-                            marginBottom: "30px",
-                        }}
-                        alt="pet_image"
-                        />
+                        {
+                            petDetails.image[1] == null ? (
+                                <img
+                                src={petDetails.image !==undefined && petDetails.image[0]}
+                                style={{
+                                    width: "100%",
+                                    height: "500px",
+                                    objectFit: "cover",
+                                    marginBottom: "30px",
+                                }}
+                                alt="pet_image"
+                                 />
+                            ) :( 
+                            <img
+                                src={petDetails.image !==undefined && petDetails.image[1]}
+                                style={{
+                                    width: "100%",
+                                    height: "500px",
+                                    objectFit: "cover",
+                                    marginBottom: "30px",
+                                }}
+                                alt="pet_image"
+                                />)
+                        }
+                       
                     </Carousel.Item>
                     <Carousel.Item>
-                        <img
-                        src={petDetails.image !==undefined && petDetails.image[2]}
-                        style={{
-                            width: "100%",
-                            height: "500px",
-                            objectFit: "cover",
-                            marginBottom: "30px",
-                        }}
-                        alt="pet_image"
-                        />
+                    {
+                            petDetails.image[2] == null ? (
+                                <img
+                                src={petDetails.image !==undefined && petDetails.image[0]}
+                                style={{
+                                    width: "100%",
+                                    height: "500px",
+                                    objectFit: "cover",
+                                    marginBottom: "30px",
+                                }}
+                                alt="pet_image"
+                                 />
+                            ) :( 
+                            <img
+                                src={petDetails.image !==undefined && petDetails.image[2]}
+                                style={{
+                                    width: "100%",
+                                    height: "500px",
+                                    objectFit: "cover",
+                                    marginBottom: "30px",
+                                }}
+                                alt="pet_image"
+                                />)
+                        }
                     </Carousel.Item>
                 </Carousel>
                 <Row css={detail_section_col_left_second_row}>

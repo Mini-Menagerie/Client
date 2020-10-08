@@ -10,6 +10,18 @@ export const wrapperCover = css`
     align-items: center;
     justify-content: space-between;
 `;
+
+export const wrapperCover1 = css`
+    background-image: url(https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1327&q=80);
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+`;
+
 export const margin = css`
     margin: 30px;
 `;
@@ -17,7 +29,7 @@ export const whitecolor = css`
     color: #ffffff;
 `;
 export const card = css`
-    margin: 10px 0;
+    margin: 10px 20px;
 
     @media (max-width: 768px) {
         margin: 10px;

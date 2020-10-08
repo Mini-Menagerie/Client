@@ -12,6 +12,7 @@ import {
     Col,
     ToggleButton,
     ToggleButtonGroup,
+    Container
 } from "react-bootstrap";
 
 import {
@@ -23,7 +24,8 @@ import {
     filter,
     card,
     cardcss,
-    cardcss1
+    cardcss1,
+    wrapperCover1
 } from "../BreedByCategory/BreedByCategory.styles"
 
 const PetByBreed = () => {
@@ -49,6 +51,7 @@ const PetByBreed = () => {
         const url = `${process.env.REACT_APP_API_URL}/petdetail/?category=${category}&search=${breed}`;
         const response = await fetch(url);
         const result = await response.json();
+        console.log(result)
         setCollection(result.result);
     };
 
@@ -60,7 +63,7 @@ const PetByBreed = () => {
 
     return (
         <div>
-            <div css={wrapperCover}>
+            <div css={category === "dog" ? wrapperCover : wrapperCover1}>
                 <div>
                     <h1 style={{ color: "white", paddingLeft: "80px", fontWeight: "500" }}>You're Looking For : <br /><p style={{ fontSize: "50px", fontWeight: "600" }}>{breed}</p></h1>
                 </div>
@@ -177,16 +180,16 @@ const PetByBreed = () => {
                                     <Col
                                         xs={12}
                                         md={4}
-                                        key={item.id}
+                                        key={item.idPet._id}
                                         css={card}
                                     >
                                         <Link
-                                            to={`/pets-detail/${item.id}`}
+                                            to={`/pets-detail/${item.idPet._id}`}
                                         >
                                             <Card style={{ borderRadius: "20px", width: "25rem" }}>
                                                 <Card.Img
                                                     variant="top"
-                                                    src={item.image[0]}
+                                                    src={item.idPet.image[0]}
                                                     style={{
                                                         objectFit: "cover",
                                                         height: "350px",
@@ -196,13 +199,13 @@ const PetByBreed = () => {
                                                 />
                                                 <Card.Title css={cardcss1}>
                                                     <h4>
-                                                        <b>{item.petName}</b>
+                                                        <b>{item.idPet.petName}</b>
                                                     </h4>
                                                 </Card.Title>
                                                 <Card.Text css={cardcss}>
-                                                    {item.gender}, {item.age} Years Old
+                                                    {item.idPet.gender}, {item.idPet.age} Years Old
                                             <br />
-                                                    {item.location}
+                                                    {item.idPet.location}
                                                 </Card.Text>
                                             </Card>
                                         </Link>
@@ -211,7 +214,7 @@ const PetByBreed = () => {
                             })
                         ) : (
                                 <div>
-                                    <p>Loading...</p>
+                                    <p>Loading Content, Please Wait...</p>
                                 </div>
                             )
                     }

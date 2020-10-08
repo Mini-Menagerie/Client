@@ -3,6 +3,7 @@ import { jsx } from "@emotion/core";
 import { Col, Row, Form } from "react-bootstrap";
 import axios from "../../helpers/axios";
 import ReactFilestack from "filestack-react";
+import TextareaAutosize from 'react-textarea-autosize';
 
 
 import PrimaryButton from "../Button/Button";
@@ -92,7 +93,7 @@ const AddAdoption = ({ edit, handleClose }) => {
                     idUser: idUser,
                     idPet: newPet.data.result._id,
                     fee: formPet.fee,
-                    status: "Available",
+                    status: " Available",
                 }
             );
             if (newPetForAdoption.status === 200) {
