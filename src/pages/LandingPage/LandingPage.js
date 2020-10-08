@@ -101,7 +101,10 @@ const LandingPage = () => {
         axios
             .get(url)
             .then(function (response) {
-                const data = response.data.result.filter(item => item.status === "Available" && item.idPet !== null && item.idPet.idBreed !== null);
+                const data = response.data.result.filter(item => item.status === 
+                    "Available" && item.idPet !== 
+                    null && item.idPet.idBreed !== 
+                    null);
                 const limit = data.slice(0, 4);
                 setPetCards(limit);
                 setLoading(false);
