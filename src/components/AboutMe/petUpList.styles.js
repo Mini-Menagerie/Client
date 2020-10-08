@@ -21,7 +21,7 @@ export const button = css`
     justify-content: center;
     width: 1100px;
     margin-bottom: 50px;
-    font-size: 30px;
+    font-size: 25px;
 `;
 export const petImage = css`
     & > img {

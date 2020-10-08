@@ -82,7 +82,7 @@ const Footer = () => {
                                         to get the latest update on pet<br></br>
                                         adoption & rescues!
                                     </p>
-                                    <PrimaryButton>Sign Up</PrimaryButton>
+                                    <PrimaryButton onClick={() => {}}>Sign Up</PrimaryButton>
                                 </div>
                             </div>
                         </Col>

@@ -39,7 +39,7 @@ const ProductCard = ({ products, loading, ...props }) => {
                             </div>
                             <Card.Body>
                                 <p css={product_name}>{value.productName}</p>
-                                <p css={product_price}><NumberFormat value={value.price} dswq displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></p>
+                                <p css={product_price}><NumberFormat value={value.price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></p>
                                 <ActionButton
                                     onClick={() => {
                                         props.addToCart(value._id);

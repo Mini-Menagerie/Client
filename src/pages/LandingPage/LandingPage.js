@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Container, Row, Col, Dropdown, Jumbotron } from "react-bootstrap";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import Skeleton from 'react-loading-skeleton';
 
 import PrimaryButton from "../../components/Button/Button";
 import {
@@ -60,7 +61,6 @@ const LandingPage = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
-    const [, setProduct] = useState([]);
     const [petCards, setPetCards] = useState([]);
     const [search, setSearch] = useState("");
 
@@ -80,28 +80,13 @@ const LandingPage = () => {
             });
     };
 
-    const fetchProduct = () => {
-        const url = "http://localhost:8000/product";
-        axios
-            .get(url)
-            .then(function (response) {
-                const limit = response.data.result.slice(0, 4);
-                setProduct(limit);
-                setLoading(false);
-            })
-            .catch(function (error) {
-                setError(true);
-                setErrorMessage(error.message);
-                setLoading(false);
-            });
-    };
-
     const url = () => {
-        const url = "http://localhost:8000/pet";
+        const url = "http://localhost:8000/petupforadoption";
         axios
             .get(url)
             .then(function (response) {
-                const limit = response.data.result.slice(0, 4);
+                const data = response.data.result.filter(item => item.status === "Available" && item.idPet !== null && item.idPet.idBreed !== null);
+                const limit = data.slice(0, 4);
                 setPetCards(limit);
                 setLoading(false);
             })
@@ -114,7 +99,6 @@ const LandingPage = () => {
 
     useEffect(() => {
         fetchPet();
-        fetchProduct();
         url();
 
         // eslint-disable-next-line
@@ -144,13 +128,20 @@ const LandingPage = () => {
         window.location.href = "/all-breeds/category/cat";
     }
 
+    let dataPetNearby;
+    if (petCards.length === 0) {
+        dataPetNearby =  <p><Skeleton count={5} duration={2} /></p>
+    } else {
+        dataPetNearby = <CardPet petCards={petCards} />
+    }
+
     return (
         <div>
             <div css={wrapperCover}>
                 <h2 css={h2}>Provide For Those Who Needs It.</h2>
                 <p css={p}>Save A Live Today</p>
                 <Link to="/category-pet" css={linkTo}>
-                    <PrimaryButton type="submit">Start Searching</PrimaryButton>
+                    <PrimaryButton type="submit" onClick={() => {}}>Start Searching</PrimaryButton>
                 </Link>
             </div>
             <div css={underCoverSearch}>
@@ -268,7 +259,7 @@ const LandingPage = () => {
                 <h2 style={{fontSize:"40px", fontWeight:"500"}}>Pets Available for Adoption Near You</h2>
             </div>
             <div css={petsAvailable}>
-                <CardPet petCards={petCards} />
+                {dataPetNearby}
             </div>
             <div>
                 <div className="HowToAdopt">
@@ -341,9 +332,7 @@ const LandingPage = () => {
             </div>
             <div css={shop} className="shop">
                 {loading ? (
-                    <div className="lds-circle">
-                        <div></div>
-                    </div>
+                    <p><Skeleton count={5} duration={2} /></p>
                 ) : error ? (
                     <div>{errorMessage}</div>
                 ) : (
