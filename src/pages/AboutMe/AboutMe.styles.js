@@ -1,8 +1,9 @@
 import { css } from '@emotion/core';
 
-export const containerWrapper = css `
-width: 100%;
-justify-content: center;
+export const containerWrapper = css     `
+    a {
+        padding: 0.5% 0.9%!important;
+    }
 `
 
 export const marginSet = css `

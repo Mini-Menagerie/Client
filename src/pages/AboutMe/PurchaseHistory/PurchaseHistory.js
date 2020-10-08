@@ -38,9 +38,9 @@ const PurchaseHistory = () => {
 
     return (
         <Container>
-            <Row css={head}>
-                <h2>History Purchase</h2>
-            </Row>
+            <div css={head}>
+                <h3>History Purchase</h3>
+            </div>
 
             <Row>
                 {purchaseHistory.map((value) => (
