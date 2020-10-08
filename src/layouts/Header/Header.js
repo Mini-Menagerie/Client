@@ -301,7 +301,7 @@ const Header = () => {
                                     type="text"
                                     css={searchText}
 
-                                    placeholder="Search by category, location, breed or collection"
+                                    placeholder="Search by category, location or breed"
 
                                     style={{ backgroundColor: "#f5f5f5" }}
                                     onChange={handleSearch}
@@ -569,7 +569,7 @@ const Header = () => {
                                 <input
                                     type="text"
                                     css={searchText}
-                                    placeholder="Search by category, location, breed or collection"
+                                    placeholder="Search by category, location or breed"
                                     style={{
                                         maxWidth: "70%",
                                         backgroundColor: "#f5f5f5",

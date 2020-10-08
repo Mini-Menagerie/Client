@@ -25,13 +25,10 @@ const PurchaseHistory = () => {
 
         const url = `transactionDetails`
         const response = await axios.get(url)
-        console.log(response.data)
-        
+
         let filteredResponse = await response.data.result.map(item => item).filter(f => {
             return f.idTransaction.idUser._id === id
         })
-        console.log(filteredResponse)
-
         setPurchaseHistory(filteredResponse)
     }
     useEffect(() => {
@@ -68,11 +65,11 @@ const PurchaseHistory = () => {
                                             {format(
                                                 new Date(
                                                     value.idTransaction !==
-                                                        null &&
-                                                        value.idTransaction !==
-                                                            undefined &&
-                                                        value.idTransaction
-                                                            .createdAt
+                                                    null &&
+                                                    value.idTransaction !==
+                                                    undefined &&
+                                                    value.idTransaction
+                                                        .createdAt
                                                 ),
                                                 "HH:mm, dd MMMM yyyy"
                                             )}
@@ -83,7 +80,7 @@ const PurchaseHistory = () => {
                             <Accordion.Collapse eventKey="0">
                                 <Card.Body>
                                     {value.idProduct.map((value) => (
-                                        <Row>
+                                        <Row key={value._id}>
                                             <Col xs={10}>
                                                 <h6>{value.productName}</h6>
                                             </Col>
@@ -109,7 +106,7 @@ const PurchaseHistory = () => {
                                                 Rp.{" "}
                                                 {value.idTransaction !== null &&
                                                     value.idTransaction !==
-                                                        undefined &&
+                                                    undefined &&
                                                     value.idTransaction
                                                         .totalPrice}
                                             </h6>

@@ -36,6 +36,8 @@ const ShoppingCart = () => {
 
     useEffect(() => {
         getUser();
+
+        //eslint-disable-next-line
     }, []);
 
     const arrayAdoptData = []

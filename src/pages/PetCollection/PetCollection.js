@@ -1,25 +1,17 @@
 /** @jsx jsx */
 import { jsx } from "@emotion/core";
 import { useState, useEffect } from "react";
-import { Formik, Form } from "formik";
 import { useParams, Link } from "react-router-dom";
 
 import {
     Card,
-    Button,
     Row,
-    Col,
-    ToggleButton,
-    ToggleButtonGroup,
+    Col
 } from "react-bootstrap";
 
 import {
     wrapperCover,
-    widthButton,
     collections,
-    centertext,
-    filter,
-    buttonGroup,
     card,
     image,
     cards,
@@ -31,22 +23,22 @@ import {
 
 const PetCollection = () => {
     const [collection, setCollection] = useState([]);
-    const { category, breed, idCollection } = useParams();
+    const { idCollection } = useParams();
 
-    const size = [
-        { name: "Small", value: "Small" },
-        { name: "Medium", value: "Medium" },
-        { name: "Large", value: "Large" },
-        { name: "Extra Large", value: "ExtraLarge" },
-    ];
-    const gender = [
-        { name: "Female", value: "Female" },
-        { name: "Male", value: "Male" },
-    ];
-    const alphabet = [
-        { name: "Ascending Order", value: "asc" },
-        { name: "Descending Order", value: "desc" },
-    ];
+    // const size = [
+    //     { name: "Small", value: "Small" },
+    //     { name: "Medium", value: "Medium" },
+    //     { name: "Large", value: "Large" },
+    //     { name: "Extra Large", value: "ExtraLarge" },
+    // ];
+    // const gender = [
+    //     { name: "Female", value: "Female" },
+    //     { name: "Male", value: "Male" },
+    // ];
+    // const alphabet = [
+    //     { name: "Ascending Order", value: "asc" },
+    //     { name: "Descending Order", value: "desc" },
+    // ];
 
     const fetchCollection = async () => {
         const url = `${process.env.REACT_APP_API_URL}/petdata/collection/${idCollection}`;
@@ -61,8 +53,6 @@ const PetCollection = () => {
 
         //eslint-disable-next-line
     }, []);
-
-    console.log(collection);
 
     return (
         <div>

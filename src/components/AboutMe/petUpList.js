@@ -51,15 +51,12 @@ const ListPetUp = () => {
                 size="lg"
                 aria-labelledby="example-modal-sizes-title-lg"
             >
-                <Modal.Dialog size="lg" id="example-modal-sizes-title-lg">
-                    <Modal.Header closeButton>
-                        <Modal.Title>Add a Pet</Modal.Title>
-                    </Modal.Header>
-
-                    <Modal.Body className="modal-body modal-md">
-                        <AddAdoption handleClose={handleClose} />
-                    </Modal.Body>
-                </Modal.Dialog>
+                <Modal.Header closeButton>
+                    <Modal.Title>Add a Pet</Modal.Title>
+                </Modal.Header>
+                <Modal.Body className="modal-body modal-md">
+                    <AddAdoption handleClose={handleClose} />
+                </Modal.Body>
             </Modal>
             <Row css={row}>
                 {petUp.map((item) => {

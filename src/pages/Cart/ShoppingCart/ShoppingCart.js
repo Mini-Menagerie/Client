@@ -31,6 +31,8 @@ const ShoppingCart = () => {
 
   useEffect(() => {
     getUser();
+
+    //eslint-disable-next-line
   }, []);
 
   const [data, setData] = useState([]);
@@ -54,6 +56,8 @@ const ShoppingCart = () => {
 
   useEffect(() => {
     setFinalCart()
+
+    //eslint-disable-next-line
   }, [data]);
 
   const handleChange = (e, id) => {
@@ -177,6 +181,7 @@ const ShoppingCart = () => {
                 }
                 type="text"
                 placeholder="Address"
+                onChange={() => { }}
               />
             </Form.Group>
 
@@ -190,6 +195,7 @@ const ShoppingCart = () => {
                   }
                   type="text"
                   placeholder="City"
+                  onChange={() => { }}
                 />
               </Form.Group>
               <Form.Group as={Col} controlId="formGridProvince">
@@ -201,12 +207,13 @@ const ShoppingCart = () => {
                   }
                   type="text"
                   placeholder="Province"
+                  onChange={() => { }}
                 />
               </Form.Group>
             </Form.Row>
 
             <div css={buttonRemove}>
-              <Button>Use Address</Button>
+              <Button onClick={() => { }}>Use Address</Button>
             </div>
           </Form>
         </Col>
@@ -216,7 +223,7 @@ const ShoppingCart = () => {
         <Col xs={7} css={itemDetails}>
           <div>
             {data.map((item, index) => (
-              <Row style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+              <Row key={item._id} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                 <Col xs={2}>
                   <img src={item.image[0].image} alt="product" style={{ width: '100%' }} />
                 </Col>
@@ -240,14 +247,7 @@ const ShoppingCart = () => {
                     <h6 style={{ textAlign: 'right' }}>Rp. {item.price * item.quantity}</h6>
                   </div>
                   <div style={{ textAlign: 'right' }}>
-                    {/* <a
-                      href="/#"
-                      type="button"
-                      className="card-link-secondary small text-uppercase mr-3"
-                      
-                    > */}
-                    <i class="fas fa-trash-alt mr-1" style={{ color: '#ff6b6b' }} onClick={() => removeProduct(index)}></i>
-                    {/* </a> */}
+                    <i className="fas fa-trash-alt mr-1" style={{ color: '#ff6b6b' }} onClick={() => removeProduct(index)}></i>
                   </div>
                 </Col>
 
@@ -260,12 +260,12 @@ const ShoppingCart = () => {
           </div>
           <div>
             <p className="text-primary">
-              <i class="fas fa-info-circle mr-1"></i>
+              <i className="fas fa-info-circle mr-1"></i>
           Do not delay the purchase, adding items to your cart does not mean booking them.
           </p>
           </div>
           <div css={buttonRemove} onClick={removeCart}>
-            <Button>Empty Cart</Button>
+            <Button onClick={() => { }}>Empty Cart</Button>
           </div>
         </Col>
 
@@ -306,10 +306,10 @@ const ShoppingCart = () => {
           </Row>
           <Row style={{ display: 'flex', justifyContent: 'space-around' }}>
             <div css={buttonCheckoutLater} onClick={handleCheckoutLater} disabled={state.loading}>
-              <Button>Checkout Later</Button>
+              <Button onClick={() => { }}>Checkout Later</Button>
             </div>
             <div css={buttonCheckoutNow} onClick={handleCheckoutNow} disabled={state.loading}>
-              <Button>Checkout Now</Button>
+              <Button onClick={() => { }}>Checkout Now</Button>
             </div>
           </Row>
         </Col>
