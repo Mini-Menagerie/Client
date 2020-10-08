@@ -49,7 +49,7 @@ const PetByBreed = () => {
         const url = `${process.env.REACT_APP_API_URL}/petdetail/?category=${category}&search=${breed}`;
         const response = await fetch(url);
         const result = await response.json();
-        setCollection(result.data);
+        setCollection(result.result);
     };
 
     useEffect(() => {
