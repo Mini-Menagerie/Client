@@ -4,6 +4,7 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import NumberFormat from 'react-number-format';
+import Swal from "sweetalert2";
 
 import Skeleton from './Skeleton'
 import { addToCart } from "../../redux/actions/addToCart";
@@ -42,8 +43,38 @@ const ProductCard = ({ products, loading, ...props }) => {
                                 <p css={product_price}><NumberFormat value={value.price} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></p>
                                 <ActionButton
                                     onClick={() => {
-                                        props.addToCart(value._id);
-                                        window.scrollTo(0, 0);
+                                        const userLogin = JSON.parse(localStorage.getItem("user"));
+                                        let timerInterval
+                                        if (userLogin === null) {
+                                            Swal.fire({
+                                                title: 'You Are Not Logged In',
+                                                text: 'Please Login or Register',
+                                                timer: 3000,
+                                                timerProgressBar: true,
+                                                willOpen: () => {
+                                                    timerInterval = setInterval(() => {
+                                                        const content = Swal.getContent()
+                                                        if (content) {
+                                                            const b = content.querySelector('b')
+                                                            if (b) {
+                                                                b.textContent = Swal.getTimerLeft()
+                                                            }
+                                                        }
+                                                    }, 100)
+                                                },
+                                                onClose: () => {
+                                                    clearInterval(timerInterval)
+                                                    window.location.replace("/")
+                                                }
+                                            }).then((result) => {
+                                                if (result.dismiss === Swal.DismissReason.timer) {
+                                                    console.log('I was closed by the timer')
+                                                }
+                                            })
+                                        } else {
+                                            props.addToCart(value._id);
+                                            window.scrollTo(0, 0);
+                                        }
                                     }}
                                 />
                             </Card.Body>

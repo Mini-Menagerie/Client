@@ -74,11 +74,11 @@ const ListPetUp = () => {
                                     <Card.Text>
                                         <tr style={{ borderStyle: "hidden" }}>
                                             <td>Fee </td>
-                                            <td>: <NumberFormat value={item.idPet.fee} displayType={'text'} thousandSeparator={true} prefix={'Rp.'} /></td>
+                                            <td>: <NumberFormat value={item.idPet.fee} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} /></td>
                                         </tr>
                                         <tr style={{ borderStyle: "hidden" }}>
                                             <td>Age </td>
-                                            <td>: {item.idPet.age}</td>
+                                            <td>: {item.idPet.age} years old</td>
                                         </tr>
                                         <tr style={{ borderStyle: "hidden" }}>
                                             <td>Status </td>

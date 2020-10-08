@@ -23,6 +23,7 @@ const PetShop = () => {
     const [currentProduct, setCurrentPage] = useState(1);
     const [productsPerPage] = useState(9);
 
+
     useEffect(() => {
         const getProducts = async () => {
             setLoading(true);
@@ -37,6 +38,8 @@ const PetShop = () => {
 
         getProducts();
     }, []);
+
+
 
     //get current products
     const indexOfLastProduct = currentProduct * productsPerPage;

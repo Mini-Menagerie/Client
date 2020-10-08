@@ -1,7 +1,6 @@
 import { css } from "@emotion/core";
 
 export const container = css`
-    margin-bottom: 50px;
     display: flex;
     justify-content: space-between;
 `;
@@ -9,6 +8,8 @@ export const container = css`
 export const head_bg = css`
     width: 100%;
     background-repeat: no-repeat;
+    object-fit: cover;
+    height: 300px;
     margin-bottom: 50px;
 `;
 export const sortFilter = css`
@@ -18,10 +19,10 @@ export const sortFilter = css`
 
 export const shopText = css `
 position: absolute;
-top: 40%;
+top: 30%;
 left: 50%;
 color: #22891a;
-font-size: 70px;
+font-size: 20px;
 font-weight: bold;
 transform: translate(-50%, -50%);
 text-align: center;

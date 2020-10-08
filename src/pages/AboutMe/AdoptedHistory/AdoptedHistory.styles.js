@@ -2,11 +2,15 @@ import { css } from '@emotion/core';
 
 export const head = css`
     background-color: #209516;
-    padding: 13px;
-
-    h2 {
+    padding: 15px 0;
+    border-radius: 5px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    h3 {
         text-align: center;
         color: white;
+        font-weight: bold;
+
     }
 `
 export const listInfo = css`

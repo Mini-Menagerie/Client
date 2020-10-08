@@ -26,22 +26,20 @@ const ApproveRequest = () => {
             let filteredPets = await pets.data.result.filter((item) => {
                 return item.idPet !== null && item.idPet.idUser === idUser
             });
+            localStorage.setItem("petsB", JSON.stringify(filteredPets));
             setAdoption(filteredPets);
-            localStorage.setItem("pets", JSON.stringify(filteredPets));
-        } else {
-            setAdoption([]);
-        }
+        } 
     };
 
     const getAdopter = async () => {
-        const dataPet = await JSON.parse(localStorage.getItem("pets"));
+        const dataPet = await JSON.parse(localStorage.getItem("petsA"));
         let idPet =
             dataPet !== null &&
             dataPet.map((item) => {
                 return item.idPet._id;
             });
         if (idPet.length > 0) {
-            idPet = idPet[0];
+            idPet = idPet[idPet.length - 1];
         }
         return idPet; //5f729d64ecc1bc0dd6318de9
     };
@@ -50,6 +48,8 @@ const ApproveRequest = () => {
         let idPetAdopter = await getAdopter();
 
         const adopter = await axios.get("formRequest");
+        console.log(idPetAdopter)
+        console.log(adopter);
         if (adopter.status === 200) {
             let filteredAdopter = adopter.data.result.filter(
                 (item) => item.idPet !== null && item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "Completed"
@@ -93,19 +93,19 @@ const ApproveRequest = () => {
     // }
 
     useEffect(() => {
-        getUserLogin();
         getPetUpForAdopt();
         getAdopter();
+        getUserLogin();
         getDataAdopter();
         
         //eslint-disable-next-line
     }, []);
-    
+    console.log(adopter);
     return (
         <div>
             <div>
                 <div css={head}>
-                    <h2>Approve Request</h2>
+                    <h3>Approve Request</h3>
                 </div>
                 {adopter.map((e) => (
                     <div key={adopter}>
