@@ -6,11 +6,9 @@ import { jsx } from '@emotion/core'
 import { Card, Row, Col } from 'react-bootstrap';
 
 import {
-  wrapperCover, tagline, centerText, petImage, margin, category,
+  wrapperCover, centerText, petImage, margin, category,
   whitecolor, sortby, center, 
 } from './CategoryAllPets.style'
-
-
 
 const CategoryPet = () => {
 

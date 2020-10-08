@@ -96,6 +96,8 @@ const SearchPage = () => {
                 setErrorMessage(error.message);
                 setLoading(false);
             });
+            
+            //eslint-disable-next-line
     }, []);
     console.log(searchPet);
     return (
