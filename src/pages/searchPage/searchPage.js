@@ -61,7 +61,7 @@ const SearchPage = () => {
     };
 
     const getFilter = () => {
-        const url = `http://localhost:8000/petdetail/?search=${search}`;
+        const url = `http://localhost:8000/petdetails/?search=${search}`;
         axios
             .get(url)
             .then(function (response) {
@@ -80,7 +80,7 @@ const SearchPage = () => {
     };
 
     const getSearch = () => {
-        const url = `http://localhost:8000/petdetail/?search=${search}`;
+        const url = `http://localhost:8000/petdetails/?search=${search}`;
         axios
             .get(url)
             .then(function (response) {
@@ -101,7 +101,7 @@ const SearchPage = () => {
     useEffect(() => {
         const url =
             searchBar !== null
-                ? `${process.env.REACT_APP_API_URL}/petdetail/?search=${searchBar}`
+                ? `${process.env.REACT_APP_API_URL}/petdetails/?search=${searchBar}`
                 : `${process.env.REACT_APP_API_URL}/pet`;
 
         axios
