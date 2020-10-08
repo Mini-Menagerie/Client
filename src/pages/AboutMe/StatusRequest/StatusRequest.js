@@ -19,19 +19,26 @@ const StatusRequest = () => {
     const [adoption, setAdoption] = useState([]); // petUpforAdoption
     const [adopter, setAdopter] = useState([]); // formRequest
     const [idPetF, setIdPetF] = useState();
-    const [idUse, setIdUse] = useState()
+    const [idUse, setIdUse] = useState();
+    const [pet, setPet] = useState();
+    const [complete, setComplete] = useState();
 
     const getDataForm = async () => {
         const userData = await JSON.parse(localStorage.getItem("user"));
         const url = `formRequest/all/${userData.idUser._id}`;
         let datas = await axios.get(url)
-        let results = datas.data.filterReq
         let filtered = datas.data.filterReq.filter(e => e.status !== "COMPLETED")
-        let onlyData = datas.data.filterReq.filter(e => e.status !== "Completed")
-        setStatusRequest(results !== undefined && filtered)
-        let test = onlyData[0] !== undefined && onlyData[0].idPet._id;
+        let onlyData = datas.data.filterReq.filter(e => e.status === "Awaiting Approval")
+        let completee = datas.data.filterReq.filter(e => e.status === "Payment Fee is Complete")
+        let idComplete = completee[0] !== undefined && completee[0].idPet._id
+        setComplete(idComplete)
+        setStatusRequest(filtered) // array pet status Complete & Awaiting Approval
+        let test = onlyData[0] !== undefined && onlyData[0].idPet._id; // id pet dengan status Awaiting Approval
         console.log(test);
-        setIdPetF(test);
+        setIdPetF(test); // id pet
+        if(test === false){
+            return idComplete
+        } 
         return test
     };
 
@@ -93,8 +100,12 @@ const StatusRequest = () => {
 
     const findOne = async () => {
         let id = await getDataForm()
+        console.log(id);
         let result = await axios.get(`petUpForAdoption/pet/${id}`)
-        let idWeUse = await result.data.result._id
+        let pet = await result.data.result.filter(item => item.idPet._id === id)
+        setPet(pet)
+        let idWeUse = await pet[0] !== undefined && pet[0]._id
+        setIdUse(idWeUse)
         return idWeUse
     }
 
@@ -114,19 +125,16 @@ const StatusRequest = () => {
         );
         console.log(result);
             if(result.status === 200){
-                Swal.fire({
-                    title: "Transaction Success",
-                    icon: "success",
-                });
-                let updateP = await axios.put(`petUpForAdoption/${id}`, {
+                let updateP = await axios.put(`/petUpForAdoption/approve/${id}`, {
                     status: "Completed",
                 });
                 if(updateP.status === 200){
-                    let updateX = await axios.put(`formRequest/${adopter._id}`, {
-                    status: "Completed",
-                });
-                }
-                
+                    console.log(updateP);
+                    let updateX = await axios.put(`formRequest/${adopter._id}`, {status: "Completed"})
+                    if(updateX.status === 200){
+                        console.log(updateX)   
+                    }
+                };             
             } else {
                 Swal.fire({
                     title: "Something Wrong",
@@ -134,11 +142,13 @@ const StatusRequest = () => {
                 });
             }
     };
-
-
+   
     const handleSubmitTrans = (event) => {
         event.preventDefault();
         newAdoptionTransaction();
+        // setTimeout(() => {
+        //     window.location.reload()
+        // }, 5000)
     };
 
     // const getIdPetForAdoption = async () => {
@@ -155,14 +165,13 @@ const StatusRequest = () => {
     useEffect(() => {
         getDataForm();
         getUserLogin();
-        getPetUpForAdopt();
+        // getPetUpForAdopt();
         getAdopter();
         getDataAdopter();
         findOne()
 
         //eslint-disable-next-line
     }, []);
-    console.log(idPetF);
 
     if (statusRequest.length > 0) {
         return (

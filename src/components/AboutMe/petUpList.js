@@ -23,6 +23,7 @@ const ListPetUp = () => {
     const getPetUpForAdoption = async () => {
         let id = await getUser();
         let result = await axios.get("petUpForAdoption");
+        console.log(result);
         let datas = await result.data.result.filter(
             (item) => item.idPet !== null && item.idPet.idUser._id === id
         );
@@ -39,7 +40,7 @@ const ListPetUp = () => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
-
+    console.log(petUp);
     return (
         <Container css={container}>
             <PrimaryButton onClick={handleShow} css={button}>

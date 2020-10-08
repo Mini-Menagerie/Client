@@ -25,7 +25,7 @@ const DetailSection = ({ petDetails, user }) => {
     const handleClick = () => {
         history.push(`/adoption-form`);
     };
-
+    console.log(petDetails);
     return (
         <Row>
             <Col xs={12} md={7} css={detail_section_col} style={{borderRadius:"15px"}}>
