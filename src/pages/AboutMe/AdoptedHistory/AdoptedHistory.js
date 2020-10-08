@@ -49,7 +49,7 @@ const AdoptedHistory = () => {
                                 </div>
                                 <Row>
                                     <Col xs={6} css={mainOne}>
-                                        <img src={e.idPetUpForAdoption !== null && e.idPetUpForAdoption.idPet.image} alt="mberrrr" />
+                                        <img src={e.idPetUpForAdoption !== null && e.idPetUpForAdoption.idPet.image[0]} alt="mberrrr" />
                                     </Col>
                                     <Col css={desc}>
                                         <div>
