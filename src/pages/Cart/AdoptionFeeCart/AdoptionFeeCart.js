@@ -44,6 +44,8 @@ const ShoppingCart = () => {
     const adoptData = JSON.parse(localStorage.getItem("adoptform"));
     arrayAdoptData.push(adoptData)
 
+    console.log(arrayAdoptData)
+
     const adoptFee = parseInt(adoptData.idPet.fee)
 
     const handleFeePayment = async (event) => {
@@ -55,7 +57,7 @@ const ShoppingCart = () => {
             mode: 'payment',
             lineItems: arrayAdoptData.map(item => (
             {
-                price: adoptData.idPet.stripe,
+                price: item.idPet.stripe,
                 quantity: 1
             })),
             successUrl: `${window.location.origin}/adoptpayment?session_id={CHECKOUT_SESSION_ID}`,
@@ -179,7 +181,7 @@ const ShoppingCart = () => {
                         </Form.Row>
 
                         <div css={buttonRemove}>
-                            <Button>Use Address</Button>
+                            <Button onClick={()=>{}}>Use Address</Button>
                         </div>
                     </Form>
                 </Col>
@@ -211,7 +213,7 @@ const ShoppingCart = () => {
                     </div>
                     <div>
                         <p className="text-primary">
-                            <i class="fas fa-info-circle mr-1"></i>
+                            <i className="fas fa-info-circle mr-1"></i>
           Do not delay the purchase, adding items to your cart does not mean booking them.
           </p>
                     </div>
@@ -262,7 +264,7 @@ const ShoppingCart = () => {
               <Button>Checkout Later</Button>
             </div> */}
                         <div css={buttonCheckoutNow} onClick={handleFeePayment} disabled={state.loading}>
-                            <Button>Pay Now</Button>
+                            <Button onClick={()=>{}}>Pay Now</Button>
                         </div>
                     </Row>
                 </Col>
