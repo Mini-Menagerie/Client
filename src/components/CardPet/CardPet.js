@@ -16,20 +16,20 @@ const CardPet = ({ petCards }) => {
         <Row>
             {petCards.map((e) => (
                 <Col md={3} css={margin} key={e._id}>
-                    <Card css={petImage} onClick={() => handleClick(e._id)}>
-                        <Card.Img variant="top" src={e.image} />
+                    <Card css={petImage} onClick={() => handleClick(e.idPet._id)}>
+                        <Card.Img variant="top" src={e.idPet.image[0]} />
                         <Card.Body>
                             <Card.Title>
                                 <h4>
-                                    <b>{e.petName}</b>
+                                    <b>{e.idPet.petName}</b>
                                 </h4>
                             </Card.Title>
                             <Card.Text>
                                 {e.idPet.idBreed.breedName}
                                 <br />
-                                {e.gender}, {e.age} Years Old
+                                {e.idPet.gender}, {e.idPet.age} Years Old
                                 <br />
-                                {e.location}
+                                {e.idPet.location}
                             </Card.Text>
                         </Card.Body>
                     </Card>
