@@ -8,6 +8,7 @@ import {
     mainBody,
     buttonPayNow
 } from "./StatusRequest.styles";
+import Swal from "sweetalert2";
 
 const StatusRequest = () => {
     const [statusRequest, setStatusRequest] = useState([]);
@@ -17,6 +18,8 @@ const StatusRequest = () => {
     });
     const [adoption, setAdoption] = useState([]); // petUpforAdoption
     const [adopter, setAdopter] = useState([]); // formRequest
+    const [idPetF, setIdPetF] = useState();
+    const [idUse, setIdUse] = useState()
 
     const getDataForm = async () => {
         const userData = await JSON.parse(localStorage.getItem("user"));
@@ -24,8 +27,12 @@ const StatusRequest = () => {
         let datas = await axios.get(url)
         let results = datas.data.filterReq
         let filtered = datas.data.filterReq.filter(e => e.status !== "COMPLETED")
+        let onlyData = datas.data.filterReq.filter(e => e.status !== "Completed")
         setStatusRequest(results !== undefined && filtered)
-        return results
+        let test = onlyData[0] !== undefined && onlyData[0].idPet._id;
+        console.log(test);
+        setIdPetF(test);
+        return test
     };
 
     const handleCheckout = (item) => {
@@ -40,23 +47,20 @@ const StatusRequest = () => {
     };
 
     const getPetUpForAdopt = async () => {
-        let idUser = await getUserLogin();
         let pets = await axios.get("petUpForAdoption");
         console.log(pets);
         if (pets.status === 200) {
             let filteredPets = await pets.data.result.filter((item) => {
-                return item.idPet !== null && item.idPet.idUser === idUser
+                return item.idPet !== null && item.idPet._id === idPetF
             });
-            console.log(filteredPets)
+            let test = filteredPets[filteredPets.length - 1]
+            console.log(test);
             setAdoption(filteredPets);
-            localStorage.setItem("pets", JSON.stringify(filteredPets));
-        } else {
-            setAdoption([]);
         }
     };
 
     const getAdopter = async () => {
-        const dataPet = await JSON.parse(localStorage.getItem("pets"));
+        const dataPet = await JSON.parse(localStorage.getItem("petsA"));
         let idPet =
             dataPet !== null &&
             dataPet.map((item) => {
@@ -68,57 +72,73 @@ const StatusRequest = () => {
         return idPet; //5f729d64ecc1bc0dd6318de9
     };
 
+    const selectedPet = () => {
+        const data = localStorage.getItem('selectedPet')
+        return data
+    }
+
     const getDataAdopter = async () => {
-        let idPetAdopter = await getAdopter();
+        let idPetAdopter = await selectedPet();
 
         const adopter = await axios.get("formRequest");
         if (adopter.status === 200) {
             let filteredAdopter = adopter.data.result.filter(
-                (item) => item.idPet !== null && item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "Completed"
+                (item) => item.idPet !== null && item.idPet._id === idPetAdopter
             );
-            setAdopter(filteredAdopter);
+           let idPetForAdoption = filteredAdopter[filteredAdopter.length - 1] !== undefined && filteredAdopter[filteredAdopter.length - 1]._id
+           setAdopter(filteredAdopter[filteredAdopter.length - 1])
+           return idPetForAdoption
         }
     };
 
-    const newAdoptionTransaction = () => {
-        axios.post("listAdoptionTransaction/create", {
-            idPetUpForAdoption: adoption[0]._id,
-            idUser: adoption[0].idUser._id,
-            petName: adoption[0].idPet.petName,
-            petCategory: adoption[0].idPet.idCategoryPet,
-            breed: adopter[0].idPet.idBreed.breedName,
-            ownerPetName: adoption[0].idUser.fullName,
-            adopterPetName: adopter[0].idUser.fullName,
-            status: "Completed",
-        }
-        );
-        axios.post("listAdoptionTransaction/create", {
-            idPetUpForAdoption: adoption[0]._id,
-            idUser: adopter[0].idUser._id,
-            petName: adoption[0].idPet.petName,
-            petCategory: adoption[0].idPet.idCategoryPet,
-            breed: adopter[0].idPet.idBreed.breedName,
-            ownerPetName: adoption[0].idUser.fullName,
-            adopterPetName: adopter[0].idUser.fullName,
-            status: "Completed",
-        }
-        );
-    };
-
-    const multipleUpdate = () => {
-        axios.put(`petUpForAdoption/${adoption[0]._id}`, {
-            status: "Completed",
-        });
-        axios.put(`formRequest/${adopter[0]._id}`, {
-            status: "Completed",
-        });
+    const findOne = async () => {
+        let id = await getDataForm()
+        let result = await axios.get(`petUpForAdoption/pet/${id}`)
+        let idWeUse = await result.data.result._id
+        return idWeUse
     }
+
+
+    const newAdoptionTransaction = async () => {
+        let id = await findOne()
+        let result = await axios.post("listAdoptionTransaction/create", {
+            idPetUpForAdoption: id,
+            idUser: adopter.idUser._id,
+            petName: adopter.idPet.petName,
+            petCategory: adopter.idPet.idCategoryPet,
+            breed: adopter.idPet.idBreed.breedName,
+            ownerPetName: adopter.idPet.idUser.fullName,
+            adopterPetName: adopter.idUser.fullName,
+            status: "Completed",
+        }
+        );
+        console.log(result);
+            if(result.status === 200){
+                Swal.fire({
+                    title: "Transaction Success",
+                    icon: "success",
+                });
+                let updateP = await axios.put(`petUpForAdoption/${id}`, {
+                    status: "Completed",
+                });
+                if(updateP.status === 200){
+                    let updateX = await axios.put(`formRequest/${adopter._id}`, {
+                    status: "Completed",
+                });
+                }
+                
+            } else {
+                Swal.fire({
+                    title: "Something Wrong",
+                    icon: "warning",
+                });
+            }
+    };
+
 
     const handleSubmitTrans = (event) => {
         event.preventDefault();
         newAdoptionTransaction();
-        multipleUpdate();
-        window.location.reload();
     };
 
     // const getIdPetForAdoption = async () => {
@@ -138,10 +158,12 @@ const StatusRequest = () => {
         getPetUpForAdopt();
         getAdopter();
         getDataAdopter();
+        findOne()
 
         //eslint-disable-next-line
     }, []);
-console.log(statusRequest);
+    console.log(idPetF);
+
     if (statusRequest.length > 0) {
         return (
             <div>
