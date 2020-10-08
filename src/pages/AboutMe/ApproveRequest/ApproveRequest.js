@@ -52,7 +52,7 @@ const ApproveRequest = () => {
         const adopter = await axios.get("formRequest");
         if (adopter.status === 200) {
             let filteredAdopter = adopter.data.result.filter(
-                (item) => item.idPet !== null && item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "COMPLETED"
+                (item) => item.idPet !== null && item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "Completed"
             );
             setAdopter(filteredAdopter);
         }
@@ -178,7 +178,6 @@ const ApproveRequest = () => {
                                                     <h5>Status: {e.status}</h5>{" "}
                                                     <br />
                                                     <h5>Waiting for Complete Adoption</h5>
-                                                    {/* <PrimaryButton onClick={handleSubmitTrans}>Complete Adoption</PrimaryButton> */}
                                                 </div>
                                             ) : (
                                                     <div>

@@ -74,7 +74,7 @@ const StatusRequest = () => {
         const adopter = await axios.get("formRequest");
         if (adopter.status === 200) {
             let filteredAdopter = adopter.data.result.filter(
-                (item) => item.idPet !== null && item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "COMPLETED"
+                (item) => item.idPet !== null && item.idPet._id === idPetAdopter && item.status !== "Deny" && item.status !== "Completed"
             );
             setAdopter(filteredAdopter);
         }
