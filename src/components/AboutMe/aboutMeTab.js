@@ -11,7 +11,7 @@ import {
     avatar,
     editProfile,
     first,
-    welcomeText,
+    welcomeText,second,
 } from "./aboutMeTab.styles";
 import EditProfile from "./EditProfile";
 
@@ -101,7 +101,7 @@ const AboutMeTab = ({ profile }) => {
                 </Row>
             </div>
             <div>
-                <Row>
+                <Row css={second}>
                     <Col xs={6}>
                         <Table style={{ borderStyle: "hidden" }}>
                             <tbody>
@@ -135,7 +135,7 @@ const AboutMeTab = ({ profile }) => {
                             </tbody>
                         </Table>
                     </Col>
-                    <Col>
+                    <Col xs={6}>
                         <Table style={{ borderStyle: "hidden" }}>
                             <tbody>
                                 <tr style={{ borderStyle: "hidden" }}>
