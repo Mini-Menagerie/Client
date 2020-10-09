@@ -23,8 +23,8 @@ const AdoptionFeePayment = () => {
     const PaymentLoading = () => {
         let timerInterval
         Swal.fire({
-            title: 'Please wait a moment',
-            text: 'you will be redirected soon',
+            title: 'Please Wait a Moment',
+            text: 'You Will Be Redirected Soon',
             imageUrl: 'https://i.ibb.co/1GxhcgS/hiclipart-com.png',
             timer: 3000,
             timerProgressBar: true,
