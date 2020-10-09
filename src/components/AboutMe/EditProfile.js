@@ -17,7 +17,7 @@ const EditProfile = ({ edit, handleClose }) => {
         noHandphone: "",
         state: "",
         province: "",
-        zipcode: "",
+        zip_code: "",
         country: "",
         detailAddress: "",
         avatar: "",
@@ -180,7 +180,7 @@ const EditProfile = ({ edit, handleClose }) => {
                                 type="text"
                                 placeholder={edit.idUser.zip_code}
                                 value={form.zip_code}
-                                name="zipcode"
+                                name="zip_code"
                                 onChange={handleChange}
                             />
                         </Col>
