@@ -142,7 +142,7 @@ const PetShop = () => {
             {/* End of Head Background */}
 
             {/* Product List */}
-            <Container css={container} style={{alignItemsgi:"center"}}>
+            <Container css={container} style={{alignItems:"center"}}>
                     <div style={{marginLeft:"20px"}}>
                         <p>{products.length} results</p>
                     </div>
