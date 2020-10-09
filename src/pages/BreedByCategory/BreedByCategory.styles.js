@@ -74,12 +74,6 @@ export const buttonGroup = css`
     justify-content: center;
     margin-right: 200px;
     margin-left: 200px;
-`;
-
-export const cards = css`
-    padding: 10px 30px;
-    border-radius: 15px;
-    max-width: 87%;
 `
 
 export const cover = css `
@@ -109,4 +103,40 @@ padding-bottom: 20px;
 export const cardcss1 = css `
 padding-left: 20px;
 padding-top: 15px;
+`
+
+export const letUs = css `
+font-weight: 600;
+font-size: 50px;
+color: white;
+
+@media (max-width: 768px) {
+    font-size: 30px;
+    margin-left: -50px;
+}
+`
+
+export const buttonSearch = css `
+border: none;
+background-color: #FFF;
+color: #8E8B8B;
+outline: none;
+vertical-align: middle;
+
+@media (max-width: 768px) {
+    margin-right: 30px;
+    max-width: 70%
+}
+`
+
+export const cards = css`
+    padding: 10px 30px;
+    border-radius: 15px;
+    max-width: 87%;
+
+    @media (max-width: 768px) {
+        padding-left: 65px;
+        padding-right: 0px;
+        margin-left: -50px;
+    }
 `

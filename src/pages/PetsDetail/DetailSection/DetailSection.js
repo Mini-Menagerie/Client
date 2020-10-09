@@ -54,11 +54,7 @@ const DetailSection = ({ petDetails, user }) => {
                     </Carousel.Item>
                     <Carousel.Item>
                         {
-<<<<<<< HEAD
                             petDetails.image !== undefined && petDetails.image[1] && null ? (
-=======
-                            petDetails.image[1] === null ? (
->>>>>>> e45d8f006eacf2cd99e6a04257f3084b339850bf
                                 <img
                                 src={petDetails.image !==undefined && petDetails.image[0]}
                                 style={{
