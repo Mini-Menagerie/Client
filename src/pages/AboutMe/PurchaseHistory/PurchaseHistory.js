@@ -39,7 +39,7 @@ const PurchaseHistory = () => {
     return (
         <Container>
             <div css={head}>
-                <h3>History Purchase</h3>
+                <h3 style={{paddingTop:"5px"}}>History Purchase</h3>
             </div>
 
             <Row>
