@@ -165,7 +165,7 @@ const ApproveRequest = () => {
                                                 Breed :{" "}
                                                 {e.idPet.idBreed.breedName}
                                             </p>
-                                            <p>Age : {e.idPet.age}</p>
+                                            <p>Age : {e.idPet.age} Years Old</p>
                                             <p>Size : {e.idPet.size}</p>
                                         </Col>
                                         <Col>
