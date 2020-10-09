@@ -153,7 +153,7 @@ const ApproveRequest = () => {
                                     <Row>
                                         <Col>
                                             <img
-                                                src={e.idPet.image}
+                                                src={e.idPet.image[0]}
                                                 alt="mberrrr"
                                                 style={{
                                                     objectFit: "cover",

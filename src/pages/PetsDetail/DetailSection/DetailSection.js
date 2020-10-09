@@ -25,7 +25,13 @@ const DetailSection = ({ petDetails, user }) => {
     const handleClick = () => {
         history.push(`/adoption-form`);
     };
-
+    // Object.keys(object kita).length untuk cari tau object kita kosong apa ngga
+    console.log(Object.keys(petDetails).length)
+    // kalau object yg kita punya itu kosyong, kita kasih div loading, sebenernya ga 100 % dia bakal nampilin
+    // Loading... tapi dengan cara ini, kita memaksa page untuk dapetin isi Object nya sebelum di render
+    if(Object.keys(petDetails).length === 0){
+        return <div>Loading....</div>
+    } else {
     return (
         <Row>
             <Col xs={12} md={7} css={detail_section_col} style={{borderRadius:"15px"}}>
@@ -48,7 +54,11 @@ const DetailSection = ({ petDetails, user }) => {
                     </Carousel.Item>
                     <Carousel.Item>
                         {
+<<<<<<< HEAD
                             petDetails.image !== undefined && petDetails.image[1] && null ? (
+=======
+                            petDetails.image[1] === null ? (
+>>>>>>> e45d8f006eacf2cd99e6a04257f3084b339850bf
                                 <img
                                 src={petDetails.image !==undefined && petDetails.image[0]}
                                 style={{
@@ -186,6 +196,7 @@ const DetailSection = ({ petDetails, user }) => {
             </Col>
         </Row>
     );
+    }
 };
 
 export default DetailSection;

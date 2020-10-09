@@ -13,6 +13,7 @@ import StatusRequest from "./StatusRequest/StatusRequest";
 import AdoptedHistory from "./AdoptedHistory/AdoptedHistory";
 import ApproveRequest from "./ApproveRequest/ApproveRequest";
 import PurchaseHistory from "./PurchaseHistory/PurchaseHistory"
+import { containerWrapper } from "./AboutMe.styles";
 
 const AllProfile = () => {
     const [, setLoading] = useState(true);
@@ -55,8 +56,9 @@ const AllProfile = () => {
                     id="controlled-tab-example"
                     activeKey={key}
                     onSelect={(k) => setKey(k)}
+                    css={containerWrapper}
                 >
-                    <Tab eventKey="home" title="About Me">
+                    <Tab eventKey="home" title="About Me" >
                         <AboutMeTab profile={aboutMe} />
                     </Tab>
                     <Tab eventKey="profile" title="Account Settings">

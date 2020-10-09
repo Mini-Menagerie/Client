@@ -48,7 +48,7 @@ const BreedByCategory = () => {
     };
 
     const getSearch = () => {
-        const url = `http://localhost:8000/petdetail/?search=${search}`;
+        const url = `http://localhost:8000/petdetails/?search=${search}`;
         axios
             .get(url)
             .then(function (response) {
