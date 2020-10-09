@@ -138,7 +138,7 @@ const ApproveRequest = () => {
                                             Address : {e.idUser.detailAddress}
                                         </p>
                                         <br />
-                                        {e.status === "Waiting for Payment" ? <div></div> : e.status === "Payment Fee is Complete" ? <div></div> : <FormPopUp data={e} />}
+                                        {e.status === "Waiting For Payment" ? <div></div> : e.status === "Payment Process is Completed" ? <div></div> : <FormPopUp data={e} />}
                                     </Col>
                                 </Row>
                             </Card.Body>
@@ -172,11 +172,11 @@ const ApproveRequest = () => {
                                             <p>Weight : {e.idPet.weight}</p>
                                             <p>Gender : {e.idPet.gender}</p>
                                             <br />
-                                            {e.status === "Payment Fee is Complete" ? (
+                                            {e.status === "Payment Process is Completed" ? (
                                                 <div>
                                                     <h5>Status: {e.status}</h5>{" "}
                                                     <br />
-                                                    <h5>Waiting for Complete Adoption</h5>
+                                                    <h5>Waiting To Complete Adoption</h5>
                                                 </div>
                                             ) : (
                                                     <div>

@@ -60,8 +60,8 @@ const AdoptedHistory = () => {
                                               <b><NumberFormat value={e.idPetUpForAdoption !== null && e.idPetUpForAdoption.fee} displayType={'text'} thousandSeparator={true} prefix={'Rp. '} /></b> 
                                             {/* <b>{e.idPetUpForAdoption !== null && e.idPetUpForAdoption.fee}</b> */}
                                             </p>
-                                            <p>Owner Pet : {e.ownerPetName}</p>
-                                            <p>Adopter Pet : {e.adopterPetName}</p>
+                                            <p>Pet Owner : {e.ownerPetName}</p>
+                                            <p>Pet Adopter : {e.adopterPetName}</p>
                                         </div>
                                     </Col>
                                 </Row>

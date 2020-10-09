@@ -249,7 +249,7 @@ const StatusRequest = () => {
                                                 {/* {e.idPet !== undefined && e.idPet.fee} */}
                                             </p>
                                             <br />
-                                            {e.status === "Waiting for Payment" ? (
+                                            {e.status === "Waiting For Payment" ? (
                                                 <div>
                                                     <h5>Status: {e.status}</h5>{" "}
                                                     <br />
@@ -260,7 +260,7 @@ const StatusRequest = () => {
                                                     </div>
                                                 </div>
                                             ) :
-                                                e.status === "Payment Fee is Complete" ? (
+                                                e.status === "Payment Process is Completed" ? (
                                                     <div>
                                                         <h5>Status: {e.status}</h5>{" "}
                                                         <br />
