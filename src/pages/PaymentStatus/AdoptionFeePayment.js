@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import axios from "../../helpers/axios"
 
 const AdoptionFeePayment = () => {
-    const [payment] = useState({ status: "Payment Fee is Complete" });
+    const [payment] = useState({ status: "Payment Process is Completed" });
 
     const adoptData = JSON.parse(localStorage.getItem("adoptform"));
     const url = `formRequest/${adoptData._id}`;

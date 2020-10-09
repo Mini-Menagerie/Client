@@ -143,12 +143,12 @@ const PetShop = () => {
 
             {/* Product List */}
             <Container css={container} style={{alignItems:"center"}}>
-                    <div style={{marginLeft:"20px"}}>
+                    <div style={{marginLeft:"18px"}}>
                         <p>{products.length} results</p>
                     </div>
                     <div>
                     <Col css={sortFilter}>
-                        <p>Sort by</p>
+                        <p>Sort By</p>
                         <Form.Group as={Col} controlId="formGridSort">
                             <Form.Control as="select" defaultValue="Newest" onChange={handleChangeSort} onClick={getSort}>
                                 <option value="newest">Newest</option>
@@ -159,7 +159,7 @@ const PetShop = () => {
                         </Form.Group>
 
 
-                        <p>Filter by</p>
+                        <p>Filter By</p>
                         <Form.Group as={Col} controlId="formGridFilter">
 
                             <Form.Control as="select" defaultValue="Newest" onChange={handleChangeFilter} onClick={getSort}>
