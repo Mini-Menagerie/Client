@@ -107,6 +107,7 @@ const EditProfile = ({ edit, handleClose }) => {
                                 type="text"
                                 placeholder={edit.email}
                                 value={edit.email}
+                                disabled
                             />
                         </Col>
                     </Form.Group>

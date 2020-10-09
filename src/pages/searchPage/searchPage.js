@@ -111,6 +111,7 @@ const SearchPage = () => {
                     "Available" && item.idPet !== 
                     null && item.idPet.idBreed !== 
                     null);
+                    console.log(data);
                 setSearchPet(data);
                 setLoading(false);
             })

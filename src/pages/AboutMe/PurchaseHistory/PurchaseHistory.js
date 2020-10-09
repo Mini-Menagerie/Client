@@ -79,9 +79,24 @@ const PurchaseHistory = () => {
                             </OverlayTrigger>
                             <Accordion.Collapse eventKey="0">
                                 <Card.Body>
+                                    {
+                                        value.idProduct.map((value) => (
+                                            console.log(value.image)
+                                        ))
+                                    }
                                     {value.idProduct.map((value) => (
                                         <Row key={value._id}>
-                                            <Col xs={10}>
+                                            <Col xs={3}>
+                                                <img
+                                                    src={value.image[0].image}
+                                                    alt={value.productName}
+                                                    style={{
+                                                        objectFit: "cover",
+                                                        height: "200px",
+                                                    }}
+                                                />
+                                            </Col>
+                                            <Col xs={7}>
                                                 <h6>{value.productName}</h6>
                                             </Col>
                                             <Col xs={2}>

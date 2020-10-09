@@ -37,18 +37,15 @@ const AboutMeTab = ({ profile }) => {
                     size="lg"
                     aria-labelledby="example-modal-sizes-title-lg"
                 >
-                    <Modal.Dialog size="lg" id="example-modal-sizes-title-lg">
-                        <Modal.Header closeButton>
-                            <Modal.Title>Edit Profile</Modal.Title>
-                        </Modal.Header>
-
-                        <Modal.Body className="modal-body modal-md">
-                            <EditProfile
-                                edit={profile}
-                                handleClose={handleClose}
-                            />
-                        </Modal.Body>
-                    </Modal.Dialog>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Edit Profile</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body className="modal-body modal-md">
+                        <EditProfile
+                            edit={profile}
+                            handleClose={handleClose}
+                        />
+                    </Modal.Body>
                 </Modal>
 
                 <Row css={rowMargin}>

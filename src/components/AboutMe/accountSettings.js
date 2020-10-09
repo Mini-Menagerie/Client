@@ -115,6 +115,7 @@ const AccountSettings = ({ account }) => {
                         <Row>
                             <Form.Group controlId="formBasicPassword">
                                 <Form.Control
+                                    type="password"
                                     placeholder="Current Password"
                                     name="passwordLama"
                                     onChange={handleChangePassword}
@@ -124,6 +125,7 @@ const AccountSettings = ({ account }) => {
                         <Row>
                             <Form.Group controlId="formBasicPassword">
                                 <Form.Control
+                                    type="password"
                                     placeholder="New Password"
                                     name="passwordBaru"
                                     onChange={handleChangePassword}
