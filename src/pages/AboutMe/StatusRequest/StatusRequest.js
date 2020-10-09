@@ -175,7 +175,7 @@ const StatusRequest = () => {
 
         //eslint-disable-next-line
     }, []);
-
+    console.log(statusRequest);
     if (statusRequest.length > 0) {
         return (
             <div>
@@ -249,7 +249,7 @@ const StatusRequest = () => {
                                                 {/* {e.idPet !== undefined && e.idPet.fee} */}
                                             </p>
                                             <br />
-                                            {e.status === "Waiting For Payment" ? (
+                                            {e.status === "Waiting for Payment" ? (
                                                 <div>
                                                     <h5>Status: {e.status}</h5>{" "}
                                                     <br />
@@ -260,7 +260,7 @@ const StatusRequest = () => {
                                                     </div>
                                                 </div>
                                             ) :
-                                                e.status === "Payment Process is Completed" ? (
+                                                e.status === "Payment Fee is Complete" ? (
                                                     <div>
                                                         <h5>Status: {e.status}</h5>{" "}
                                                         <br />
