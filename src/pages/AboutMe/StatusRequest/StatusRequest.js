@@ -260,7 +260,7 @@ const StatusRequest = () => {
                                                     </div>
                                                 </div>
                                             ) :
-                                                e.status === "Payment Fee is Complete" ? (
+                                                e.status === "Payment Process is Completed" ? (
                                                     <div>
                                                         <h5>Status: {e.status}</h5>{" "}
                                                         <br />
