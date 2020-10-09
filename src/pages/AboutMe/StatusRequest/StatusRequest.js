@@ -19,12 +19,12 @@ const StatusRequest = () => {
         loading: false,
         error: null,
     });
-    const [adoption, setAdoption] = useState([]); // petUpforAdoption
+    // const [, setAdoption] = useState([]); // petUpforAdoption
     const [adopter, setAdopter] = useState([]); // formRequest
-    const [idPetF, setIdPetF] = useState();
-    const [idUse, setIdUse] = useState();
-    const [pet, setPet] = useState();
-    const [complete, setComplete] = useState();
+    const [, setIdPetF] = useState();
+    const [, setIdUse] = useState();
+    const [, setPet] = useState();
+    const [, setComplete] = useState();
 
     const getDataForm = async () => {
         const userData = await JSON.parse(localStorage.getItem("user"));
@@ -56,18 +56,18 @@ const StatusRequest = () => {
         return idUser;
     };
 
-    const getPetUpForAdopt = async () => {
-        let pets = await axios.get("petUpForAdoption");
-        console.log(pets);
-        if (pets.status === 200) {
-            let filteredPets = await pets.data.result.filter((item) => {
-                return item.idPet !== null && item.idPet._id === idPetF
-            });
-            let test = filteredPets[filteredPets.length - 1]
-            console.log(test);
-            setAdoption(filteredPets);
-        }
-    };
+    // const getPetUpForAdopt = async () => {
+    //     let pets = await axios.get("petUpForAdoption");
+    //     console.log(pets);
+    //     if (pets.status === 200) {
+    //         let filteredPets = await pets.data.result.filter((item) => {
+    //             return item.idPet !== null && item.idPet._id === idPetF
+    //         });
+    //         let test = filteredPets[filteredPets.length - 1]
+    //         console.log(test);
+    //         setAdoption(filteredPets);
+    //     }
+    // };
 
     const getAdopter = async () => {
         const dataPet = await JSON.parse(localStorage.getItem("petsA"));
