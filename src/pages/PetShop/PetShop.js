@@ -10,9 +10,9 @@ import {
     container,
     head_bg,
     sortFilter,
-    shopText,
+    // shopText,
 } from './PetShop.styles'
-import head_bg_img from '../../assets/bg-shop.jpg'
+import head_bg_img from '../../assets/bg_shop.png'
 
 const PetShop = () => {
     const [products, setProducts] = useState([]);
@@ -58,63 +58,63 @@ const PetShop = () => {
     }
 
     const getSort = async () => {
-        if(sort === "newest" && filter === "all") {
+        if (sort === "newest" && filter === "all") {
             let url = `http://localhost:8000/product`;
             const response = await axios.get(url)
             setProducts(response.data.result)
-        }else if(sort === "newest" && filter === "catfood") {
+        } else if (sort === "newest" && filter === "catfood") {
             let url = `http://localhost:8000/product/filter?search=${filter}`;
             const response = await axios.get(url)
             setProducts(response.data.result)
-        }else if(sort === "newest" && filter === "dogfood") {
+        } else if (sort === "newest" && filter === "dogfood") {
             let url = `http://localhost:8000/product/filter?search=${filter}`;
             const response = await axios.get(url)
             setProducts(response.data.result)
-        }else if(sort === "newest" && filter === "acc") {
+        } else if (sort === "newest" && filter === "acc") {
             let url = `http://localhost:8000/product/filter?search=${filter}`;
             const response = await axios.get(url)
             setProducts(response.data.result)
-        }else if(sort === "newest" && filter === "vitdrugs") {
+        } else if (sort === "newest" && filter === "vitdrugs") {
             let url = `http://localhost:8000/product/filter?search=${filter}`;
             const response = await axios.get(url)
             setProducts(response.data.result)
-        }else if(sort === "price-desc" && filter === "all") {
+        } else if (sort === "price-desc" && filter === "all") {
             let url = `http://localhost:8000/sortProductHighToLow`;
             const response = await axios.get(url)
             setProducts(response.data.sorted)
-        }else if(sort === "price-desc" && filter === "catfood") {
+        } else if (sort === "price-desc" && filter === "catfood") {
             let url = `http://localhost:8000/sortProductHighToLow?filter=${filter}`;
             const response = await axios.get(url)
             setProducts(response.data.sorted)
-        }else if(sort === "price-desc" && filter === "dogfood") {
+        } else if (sort === "price-desc" && filter === "dogfood") {
             let url = `http://localhost:8000/sortProductHighToLow?filter=${filter}`;
             const response = await axios.get(url)
             setProducts(response.data.sorted)
-        }else if(sort === "price-desc" && filter === "acc") {
+        } else if (sort === "price-desc" && filter === "acc") {
             let url = `http://localhost:8000/sortProductHighToLow?filter=${filter}`;
             const response = await axios.get(url)
             setProducts(response.data.sorted)
-        }else if(sort === "price-desc" && filter === "vitdrugs") {
+        } else if (sort === "price-desc" && filter === "vitdrugs") {
             let url = `http://localhost:8000/sortProductHighToLow?filter=${filter}`;
             const response = await axios.get(url)
             setProducts(response.data.sorted)
-        }else if(sort === "price-asc" && filter === "all") {
+        } else if (sort === "price-asc" && filter === "all") {
             let url = `http://localhost:8000/sortProductLowToHigh`;
             const response = await axios.get(url)
             setProducts(response.data.sorted)
-        }else if(sort === "price-asc" && filter === "catfood") {
+        } else if (sort === "price-asc" && filter === "catfood") {
             let url = `http://localhost:8000/sortProductLowToHigh?filter=${filter}`;
             const response = await axios.get(url)
             setProducts(response.data.sorted)
-        }else if(sort === "price-asc" && filter === "dogfood") {
+        } else if (sort === "price-asc" && filter === "dogfood") {
             let url = `http://localhost:8000/sortProductLowToHigh?filter=${filter}`;
             const response = await axios.get(url)
             setProducts(response.data.sorted)
-        }else if(sort === "price-asc" && filter === "acc") {
+        } else if (sort === "price-asc" && filter === "acc") {
             let url = `http://localhost:8000/sortProductLowToHigh?filter=${filter}`;
             const response = await axios.get(url)
             setProducts(response.data.sorted)
-        }else if(sort === "price-asc" && filter === "vitdrugs") {
+        } else if (sort === "price-asc" && filter === "vitdrugs") {
             let url = `http://localhost:8000/sortProductLowToHigh?filter=${filter}`;
             const response = await axios.get(url)
             setProducts(response.data.sorted)
@@ -131,11 +131,11 @@ const PetShop = () => {
             {/* Head Background */}
             <Container fluid css={container}>
                 <Row>
-                    <img style={{position:"relative", textAlign:"center"}} css={head_bg} src={head_bg_img} alt="banner" />
-                    <div css={shopText}>
+                    <img style={{ position: "relative", textAlign: "center" }} css={head_bg} src={head_bg_img} alt="banner" />
+                    {/* <div css={shopText}>
                         Buy Necessities For <br/> Your New Best Friend
                         <p style={{fontSize:"30px", fontWeight:"500"}}>at Mini Menagerie One Stop Shop!</p>
-                    </div>
+                    </div> */}
                 </Row>
             </Container>
             {/* End of Head Background */}
@@ -143,8 +143,10 @@ const PetShop = () => {
             {/* Product List */}
             <Container css={container}>
 
-                <Row style={{alignItems: 'center'}}>
-                    <p>{products.length} results</p>
+                <Row style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <Col xs={2} style={{display: 'flex', alignItems: 'center', marginLeft: '20px', marginRight: '490px'}}>
+                        <p>{products.length} results</p>
+                    </Col>
                     <Col css={sortFilter}>
                         <p>Sort by</p>
                         <Form.Group as={Col} controlId="formGridSort">
@@ -169,8 +171,8 @@ const PetShop = () => {
                                 <option value="vitdrugs">Vitamin</option>
                             </Form.Control>
                         </Form.Group>
-                        </Col>
-                    </Row>
+                    </Col>
+                </Row>
             </Container>
 
             <Container css={container}>
