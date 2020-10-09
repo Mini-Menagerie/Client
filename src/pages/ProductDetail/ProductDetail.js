@@ -73,7 +73,7 @@ const ProductDetail = (props) => {
                                         </p>
                                     </Row>
                                     <Row css={row_quantity}>
-                                        <Col xs={2} css={info_quantity}>
+                                        {/* <Col xs={2} css={info_quantity}>
                                             <input
                                                 type="number"
                                                 id="quantity"
@@ -82,7 +82,7 @@ const ProductDetail = (props) => {
                                                 min="1"
                                                 max="5"
                                             />
-                                        </Col>
+                                        </Col> */}
                                         <Col>
                                             <ActionButton
                                                 onClick={() => {
@@ -96,7 +96,7 @@ const ProductDetail = (props) => {
                                 </Col>
                             </Row>
                             <Row>
-                                <h4>Product Details</h4>
+                                <h4>Product Detailsx</h4>
                                 <Row>
                                     <Col>
                                         <h6>Description:</h6>
@@ -151,26 +151,14 @@ const ProductDetail = (props) => {
                                     <Row>
                                         <p css={priceAndStock}>In Stock</p>
                                     </Row>
-                                    <Row css={row_quantity}>
-                                        <Col xs={2} css={info_quantity}>
-                                            <input
-                                                type="number"
-                                                id="quantity"
-                                                placeholder="0"
-                                                name="quantity"
-                                                min="1"
-                                                max="5"
-                                            />
-                                        </Col>
-                                        <Col>
-                                            <ActionButton
-                                                onClick={() => {
-                                                    props.addToCart(
-                                                        product._id
-                                                    );
-                                                }}
-                                            />
-                                        </Col>
+                                    <Row>
+                                        <ActionButton
+                                            onClick={() => {
+                                                props.addToCart(
+                                                    product._id
+                                                );
+                                            }}
+                                        />
                                     </Row>
                                 </Col>
                             </Row>
