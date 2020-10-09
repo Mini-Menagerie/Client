@@ -32,7 +32,7 @@ const AdoptedHistory = () => {
     return (
         <div>
             <div css={head}>
-                <h3>Adopted Pet History</h3>
+                <h3 style={{paddingTop:"5px"}}>Adopted Pet History</h3>
             </div>
             <div css={listInfo}>
                 {adoptedHistory.map((e) => (

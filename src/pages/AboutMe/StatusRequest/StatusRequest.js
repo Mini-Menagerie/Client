@@ -180,7 +180,7 @@ const StatusRequest = () => {
         return (
             <div>
                 <div css={head}>
-                    <h3>Adoption Status Request</h3>
+                    <h3 style={{paddingTop:"5px"}}>Adoption Status Request</h3>
                 </div>
                 <br />
                 <div>
@@ -296,7 +296,7 @@ const StatusRequest = () => {
         return (
             <div>
                 <div css={head}>
-                    <h3>Adoption Status Request</h3>
+                    <h3 style={{paddingTop:"5px"}}>Adoption Status Request</h3>
                 </div>
                 <div style={{justifyContent:"center", display:"flex", flexDirection:"column", alignItems:"center", marginTop:"0px"}}>
                 <img
