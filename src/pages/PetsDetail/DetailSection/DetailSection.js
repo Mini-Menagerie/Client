@@ -13,7 +13,7 @@ import {
     rowMargin3,
     rowmargin,
     margin2,
-    detailUser, text
+    detailUser, text, margintop
 } from "./DetailSection.styles";
 import ColoredLine from "../../../components/ColoredLine";
 import PrimaryButton from "../../../components/Button/Button";
@@ -33,7 +33,7 @@ const DetailSection = ({ petDetails, user }) => {
         return <div>Loading....</div>
     } else {
     return (
-        <Row>
+        <Row css={margintop}>
             <Col xs={12} md={7} css={detail_section_col} style={{borderRadius:"15px"}}>
                 <Row css={rowmargin}>
                 <h2><b>{petDetails.petName}</b></h2>

@@ -38,6 +38,10 @@ export const detail_section_col_left_second_row = css`
     }
     margin-right: 20px;
     margin-left: 20px;
+
+    @media (max-width: 768px) {
+        font-size: 15px;
+    }
 `;
 
 export const row_line = css`
@@ -91,9 +95,24 @@ text-align: center;
 export const detailUser = css `
 text-align: center;
 justify-content: center;
+
+@media (max-width: 768px) {
+    font-size: 15px;
+}
 `
 
 export const text = css `
 margin-right: 20px;
 margin-left: 20px;
+
+@media (max-width: 768px) {
+    font-size: 15px;
+}
+`
+
+export const margintop = css `
+margin-top: -50px;
+@media (max-width: 768px) {
+    margin-top: -80px;
+}
 `
