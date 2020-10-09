@@ -177,25 +177,6 @@ const BreedByCategory = () => {
                     </Card>
                 </div>
             </div>
-            <div css={collections}>
-                <p css={textTitle}>Search Our Collection</p>
-                <Carousel responsive={responsive} infinite={true}>
-                    {collection.length > 0 &&
-                        collection.map((item) => {
-                            return (
-                                <Col key={item._id}>
-                                    <Link to={`/pet-collection/${item._id}`}>
-                                        <Card>
-                                            <Card.Title css={centertext}>
-                                                {item.collectionName}
-                                            </Card.Title>
-                                        </Card>
-                                    </Link>
-                                </Col>
-                            );
-                        })}
-                </Carousel>
-            </div>
             {/* <Formik
                 initialValues={{ size: "", gender: "", alphabet: "" }}
                 onSubmit={async (values) => {
