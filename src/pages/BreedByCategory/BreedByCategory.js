@@ -2,81 +2,32 @@
 import { jsx } from "@emotion/core";
 import { useState, useEffect } from "react";
 import Carousel from "react-multi-carousel";
-import { Formik, Form } from "formik";
 import { useParams, Link } from "react-router-dom";
 import "react-multi-carousel/lib/styles.css";
-import axios from "axios";
 
 import {
     Card,
-    Button,
     Row,
     Col,
-    ToggleButton,
-    ToggleButtonGroup,
     Container,
-    FormControl,
 } from "react-bootstrap";
 
 import {
     wrapperCover,
-    widthButton,
     collections,
     centertext,
-    filter,
-    buttonGroup,
     card,
     cards,
     cover,
     textTitle,
-    toggle,
-    wrapperCover1,
-    letUs, buttonSearch
+    wrapperCover1
 } from "./BreedByCategory.styles";
 
 const BreedByCategory = () => {
     const [collection, setCollection] = useState([]);
-    const [searchPet, setSearchPet] = useState([]);
     const [breed, setBreed] = useState([]);
     const { category } = useParams();
     const [search, setSearch] = useState("");
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState();
-    
-    const handleChange = (event) => {
-        setSearch(event.target.value);
-    };
-
-    const getSearch = () => {
-        const url = `http://localhost:8000/petdetails/?search=${search}`;
-        axios
-            .get(url)
-            .then(function (response) {
-                setSearchPet(response.data.result);
-                setLoading(false);
-            })
-            .catch(function (error) {
-                setError(true);
-                setErrorMessage(error.message);
-                setLoading(false);
-            });
-    };
-
-    const size = [
-        { name: "Small", value: "Small" },
-        { name: "Medium", value: "Medium" },
-        { name: "Large", value: "Large" },
-        { name: "Extra Large", value: "ExtraLarge" },
-    ];
-    const gender = [
-        { name: "Female", value: "Female" },
-        { name: "Male", value: "Male" },
-    ];
-    const alphabet = [
-        { name: "Ascending Order", value: "asc" },
-        { name: "Descending Order", value: "desc" },
-    ];
 
     const responsive = {
         superLargeDesktop: {
@@ -154,7 +105,7 @@ const BreedByCategory = () => {
             <div css={category === "dog" ? wrapperCover : wrapperCover1}>
                 <div css={cover}>
                 
-                    <p css={letUs}>Let Us Help You!</p>
+                    <p style={{fontWeight:"600", fontSize:"50px", color:"white"}}>Let Us Help You!</p>
                   
                     <Card css={cards}>
                         <Row style={{alignItems:"center"}}>
@@ -169,7 +120,7 @@ const BreedByCategory = () => {
                                 <button
                                     type="submit"
                                     onClick={searchBar}
-                                    css={buttonSearch}
+                                    style={{border:"none", backgroundColor:"#FFF", color:"#8E8B8B", outline:"none", verticalAlign:"middle"}}
                                 >
                                     <i className="fas fa-search fa-2x"></i>
                                 </button>
