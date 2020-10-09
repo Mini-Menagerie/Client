@@ -30,7 +30,8 @@ import {
     cover,
     textTitle,
     toggle,
-    wrapperCover1
+    wrapperCover1,
+    letUs, buttonSearch
 } from "./BreedByCategory.styles";
 
 const BreedByCategory = () => {
@@ -153,7 +154,7 @@ const BreedByCategory = () => {
             <div css={category === "dog" ? wrapperCover : wrapperCover1}>
                 <div css={cover}>
                 
-                    <p style={{fontWeight:"600", fontSize:"50px", color:"white"}}>Let Us Help You!</p>
+                    <p css={letUs}>Let Us Help You!</p>
                   
                     <Card css={cards}>
                         <Row style={{alignItems:"center"}}>
@@ -168,7 +169,7 @@ const BreedByCategory = () => {
                                 <button
                                     type="submit"
                                     onClick={searchBar}
-                                    style={{border:"none", backgroundColor:"#FFF", color:"#8E8B8B", outline:"none", verticalAlign:"middle"}}
+                                    css={buttonSearch}
                                 >
                                     <i className="fas fa-search fa-2x"></i>
                                 </button>

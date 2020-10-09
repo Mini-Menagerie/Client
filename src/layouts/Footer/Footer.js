@@ -13,7 +13,8 @@ import {
     subWrapper,
     imageLogo,
     subText,
-    rowFooter
+    rowFooter,
+    icon2
 } from "./Footer.styles";
 import subLogo from "../../assets/signUp.png";
 
@@ -100,7 +101,7 @@ const Footer = () => {
                                 Nestlé S.A., or used with permission.
                             </p>
                         </Col>
-                        <Col md={{ offset: 2 }} xs={{ offset: 3 }}>
+                        <Col md={{ offset: 2 }} xs={{ offset: 3 }} css={icon2}>
                             <i className="fab fa-facebook-square fa-2x"></i>
                             <i className="fab fa-twitter-square fa-2x"></i>
                             <i className="fab fa-instagram-square fa-2x"></i>
@@ -168,7 +169,7 @@ const Footer = () => {
                                 Nestlé S.A., or used with permission.
                             </p>
                         </Col>
-                        <Col md={{ offset: 2 }} xs={{ offset: 3 }}>
+                        <Col md={{ offset: 2 }} xs={{ offset: 3 }} css={icon2}>
                             <i className="fab fa-facebook-square fa-2x"></i>
                             <i className="fab fa-twitter-square fa-2x"></i>
                             <i className="fab fa-instagram-square fa-2x"></i>

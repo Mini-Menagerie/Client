@@ -37,7 +37,8 @@ import {
     colStyles,
     centerMenu,
     searchLoc,
-    breedsLogos
+    breedsLogos,
+    petsAvailableh2
 } from "./LandingPage.styles";
 
 import fish from "../../assets/fish.png";
@@ -272,7 +273,7 @@ const LandingPage = () => {
                 </form>
             </div>
             <div css={petsAvailableText}>
-                <h2 style={{fontSize:"40px", fontWeight:"500"}}>Pets Available for Adoption Near You</h2>
+                <h2 css={petsAvailableh2}>Pets Available for Adoption Near You</h2>
             </div>
             <div css={petsAvailable}>
                 {dataPetNearby}

@@ -14,6 +14,11 @@ export const imageLogo = css`
     filter: brightness(0) invert(1);
     margin-right: 160px;
     margin-left: 20px;
+
+    @media (max-width: 768px) {
+        margin-left: 0px;
+        margin-bottom: 20px;
+    }
 `;
 
 export const footer = css`
@@ -79,4 +84,10 @@ color: #fff;
 export const rowFooter = css `
     width: 100%;
     padding: 20px 20px;
+`
+
+export const icon2 = css `
+@media(max-width: 768px) {
+    margin-left: 0px;
+}
 `

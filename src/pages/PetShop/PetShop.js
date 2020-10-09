@@ -10,6 +10,7 @@ import {
     container,
     head_bg,
     sortFilter,
+    length
     // shopText,
 } from './PetShop.styles'
 import head_bg_img from '../../assets/bg_shop.png'
@@ -141,12 +142,11 @@ const PetShop = () => {
             {/* End of Head Background */}
 
             {/* Product List */}
-            <Container css={container}>
-
-                <Row style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <Col xs={2} style={{display: 'flex', alignItems: 'center', marginLeft: '20px', marginRight: '490px'}}>
+            <Container css={container} style={{alignItemsgi:"center"}}>
+                    <div style={{marginLeft:"20px"}}>
                         <p>{products.length} results</p>
-                    </Col>
+                    </div>
+                    <div>
                     <Col css={sortFilter}>
                         <p>Sort by</p>
                         <Form.Group as={Col} controlId="formGridSort">
@@ -172,7 +172,7 @@ const PetShop = () => {
                             </Form.Control>
                         </Form.Group>
                     </Col>
-                </Row>
+                    </div>
             </Container>
 
             <Container css={container}>

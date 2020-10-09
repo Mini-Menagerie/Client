@@ -57,6 +57,12 @@ export const searchLoc = css`
     ::placeholder {
         color: #fff;
     }
+
+    @media (max-width: 768px) {
+        border-radius: 0px;
+        border-left: 1 px solid white;
+        border-bottom: 2px solid white;
+    }
 `;
 
 export const underCoverSearch = css`
@@ -97,6 +103,11 @@ export const otherPets = css`
         background-color: #22891a;
         box-shadow: none;
     }
+
+    @media (max-width: 768px) {
+        border-right: 1 px solid white;
+        border-radius: 0px;
+    }
 `;
 
 export const dropdownMenu = css`
@@ -120,6 +131,10 @@ export const petsAvailableText = css`
     margin-top: 100px;
     margin-bottom: 50px;
     color: #464646;
+
+    @media (max-width: 768px) {
+        font-size: 10px;
+    }
 `;
 
 export const petsAvailable = css`
@@ -142,12 +157,18 @@ export const howToAdopt = css`
 
     @media (max-width: 768px) {
         margin: 0 20px;
+        font-size: 20px;
     }
+
+    
 `;
 
 export const letterIcon = css`
     width: 70px;
     filter: brightness(0) invert(1);
+    @media (max-width: 1140px) {
+        width: 30px;
+    }
 `;
 
 export const informationIcons = css`
@@ -233,8 +254,8 @@ export const dogfood1 = css`
     width: 80px;
     filter: brightness(0) invert(1);
 
-    @media (max-width: 768px) {
-        width: 18%;
+    @media (max-width: 1155px) {
+        width: 40px;
     }
 `;
 
@@ -243,8 +264,8 @@ export const dogfood2 = css`
     width: 80px;
     filter: brightness(0) invert(1);
 
-    @media (max-width: 768px) {
-        width: 18%;
+    @media (max-width: 1155px) {
+        width: 40px;
     }
 `;
 
@@ -255,11 +276,12 @@ export const buyNecessities = css`
     color: #fff;
     border-radius: 20px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1150px) {
         padding: 20px;
-        font-size: 1rem;
+        font-size: 30px;
         display: flex;
         align-items: center;
+        justify-content: center;
     }
 `;
 
@@ -291,8 +313,10 @@ export const colStyles = css`
         & > input,
         .dropdown > button {
             width: 100%;
-            border-radius: 10px 10px 10px 10px;
+            border-right: 1px solid white;
+            border-left: 1px solid white;
             font-size: 14px;
+            border-bottom: 2px solid white;
         }
     }
 `;
@@ -320,4 +344,16 @@ export const breedsLogos = css `
     color: white;
 }
 color: white;
+`
+
+export const petsAvailableh2 = css `
+font-size: 40px;
+font-weight: 500;
+color: #464646;
+
+@media (max-width: 768px) {
+    font-size: 30px;
+    font-weight: bold;
+
+}
 `

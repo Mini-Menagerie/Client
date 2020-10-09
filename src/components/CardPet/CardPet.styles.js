@@ -19,4 +19,10 @@ export const petImage = css`
         border-top-left-radius: 20px;
     }
     border-radius: 20px;
+    @media (max-width: 768px) {
+        & > img {
+           height: 600px;
+              }
+        }
+    }
 `;
