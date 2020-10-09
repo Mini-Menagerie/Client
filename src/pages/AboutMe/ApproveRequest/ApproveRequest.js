@@ -138,7 +138,7 @@ const ApproveRequest = () => {
                                             Address : {e.idUser.detailAddress}
                                         </p>
                                         <br />
-                                        {e.status === "Waiting For Payment" ? <div></div> : e.status === "Payment Process is Completed" ? <div></div> : <FormPopUp data={e} />}
+                                        {e.status === "Waiting for Payment" ? <div></div> : e.status === "Payment Process is Completed" ? <div></div> : <FormPopUp data={e} />}
                                     </Col>
                                 </Row>
                             </Card.Body>
