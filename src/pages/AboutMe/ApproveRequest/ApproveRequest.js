@@ -119,7 +119,7 @@ const ApproveRequest = () => {
                                     <Col>
                                         <img
                                             src={e.idUser.avatar}
-                                            alt="mberrrr"
+                                            alt="brokenImage"
                                             style={{
                                                 objectFit: "cover",
                                                 height: "200px",
@@ -128,13 +128,11 @@ const ApproveRequest = () => {
                                     </Col>
                                     <Col>
                                         <p>Full Name : {e.idUser.fullName}</p>
-                                        <p>Email : Email ngga ada di ID user</p>
-                                        <p>Gender : Gender ngga ada di user</p>
                                         <p>Country : Indonesia </p>
-                                    </Col>
-                                    <Col>
                                         <p>Province : {e.idUser.province}</p>
                                         <p>City : {e.idUser.state}</p>
+                                    </Col>
+                                    <Col>
                                         <p>Zip Code : {e.idUser.zip_code}</p>
                                         <p>
                                             Address : {e.idUser.detailAddress}
@@ -154,7 +152,7 @@ const ApproveRequest = () => {
                                         <Col>
                                             <img
                                                 src={e.idPet.image[0]}
-                                                alt="mberrrr"
+                                                alt="brokenImage"
                                                 style={{
                                                     objectFit: "cover",
                                                     height: "200px",
