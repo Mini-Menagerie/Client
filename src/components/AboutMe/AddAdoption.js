@@ -114,7 +114,7 @@ const AddAdoption = ({ edit }) => {
             [event.target.name]: event.target.value,
         });
     };
-    const [show, setShow] = useState(false);
+    const [, setShow] = useState(false);
     const handleClose = () => setShow(false);
 
     useEffect(() => {

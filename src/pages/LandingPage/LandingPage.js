@@ -64,7 +64,7 @@ const LandingPage = () => {
     const [errorMessage, setErrorMessage] = useState();
     const [petCards, setPetCards] = useState([]);
     const [search, setSearch] = useState("");
-    const [products, setProducts] = useState([]);
+    const [, setProducts] = useState([]);
 
     const getProducts = async () => {
         setLoading(true);

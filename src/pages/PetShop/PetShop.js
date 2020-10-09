@@ -10,7 +10,6 @@ import {
     container,
     head_bg,
     sortFilter,
-    length
     // shopText,
 } from './PetShop.styles'
 import head_bg_img from '../../assets/bg_shop.png'

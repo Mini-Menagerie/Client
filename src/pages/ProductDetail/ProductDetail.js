@@ -15,7 +15,6 @@ import {
     description_col,
     info_row,
     info_name,
-    info_quantity,
     priceAndStock,
 } from "./ProductDetail.styles";
 import RecommendedProducts from "../../components/RecommendedProducts/RecommendedProducts";
