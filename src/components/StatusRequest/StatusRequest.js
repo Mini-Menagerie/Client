@@ -10,7 +10,7 @@ const StatusRequest = () => {
     const [, setErrorMessage] = useState();
 
     useEffect(() => {
-        const url = "http://localhost:8000/petUpForAdoption";
+        const url = "https://mini-menagerie-api.herokuapp.com/petUpForAdoption";
         axios
             .get(url)
             .then(function (result) {

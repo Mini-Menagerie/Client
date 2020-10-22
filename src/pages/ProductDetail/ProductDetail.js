@@ -29,7 +29,7 @@ const ProductDetail = (props) => {
         const getProduct = async () => {
             // setLoading(true);
             const response = await axios.get(
-                `http://localhost:8000/product/${id}`
+                `https://mini-menagerie-api.herokuapp.com/product/${id}`
             );
             setProduct(response.data.result);
             setProductImage(response.data.result.image[0].image);

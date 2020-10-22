@@ -49,15 +49,15 @@ const AdoptionForm = () => {
     let id = userData.idUser._id;
 
     const fetchDataUser = async () => {
-        let result = await axios.get(`http://localhost:8000/users/${id}`); //endpoint
+        let result = await axios.get(`https://mini-menagerie-api.herokuapp.com/users/${id}`); //endpoint
         setUser(result.data.result);
     };
 
     const updateUser = () => {
-        return axios.put(`http://localhost:8000/users/${id}`, user);
+        return axios.put(`https://mini-menagerie-api.herokuapp.com/users/${id}`, user);
     };
     const createForm = () => {
-        return axios.post("http://localhost:8000/formRequest/create", {
+        return axios.post("https://mini-menagerie-api.herokuapp.com/formRequest/create", {
             idUser: user._id,
             idPet,
             reason,

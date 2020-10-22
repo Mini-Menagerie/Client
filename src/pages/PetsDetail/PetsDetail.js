@@ -19,7 +19,7 @@ const PetsDetail = () => {
     localStorage.setItem("selectedPet", id);
 
     const fetchDetails = async () => {
-        const url = `http://localhost:8000/pet/${id}`;
+        const url = `https://mini-menagerie-api.herokuapp.com/pet/${id}`;
         axios
             .get(url)
             .then(function (response) {
@@ -33,7 +33,7 @@ const PetsDetail = () => {
 
     const fetchUser = () => {
         const idUser = details.idUser !== undefined && details.idUser._id;
-        const url = `http://localhost:8000/users/${idUser}`;
+        const url = `https://mini-menagerie-api.herokuapp.com/users/${idUser}`;
         axios
             .get(url)
             .then(function (response) {

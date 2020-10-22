@@ -70,7 +70,7 @@ const Header = () => {
         event.preventDefault();
         try {
             const user = await axios.post(
-                "http://localhost:8000/userAccount/login",
+                "https://mini-menagerie-api.herokuapp.com/userAccount/login",
                 formLogin
             );
 
@@ -117,14 +117,10 @@ const Header = () => {
         event.preventDefault();
         try {
             const user = await axios.post(
-                "http://localhost:8000/userAccount/register",
+                "https://mini-menagerie-api.herokuapp.com/userAccount/register",
                 form
             );
             if (user.status === 200) {
-                // const verify = await axios.post(
-                //     "http://localhost:8000/verification/get-activation-email",
-                //     user.data.result._id
-                // );
                 console.log(user.data.result._id)
                 Swal.fire("Register success");
                 setShow(false);
@@ -160,12 +156,12 @@ const Header = () => {
     };
 
     const handleGoogleLogin = () => {
-        const urlGoogleLogin = "http://localhost:8000/auth/google";
+        const urlGoogleLogin = "https://mini-menagerie-api.herokuapp.com/auth/google";
         window.location.replace(urlGoogleLogin);
     };
 
     const handleFacebookLogin = () => {
-        const urlFacebookLogin = "http://localhost:8000/auth/facebook";
+        const urlFacebookLogin = "https://mini-menagerie-api.herokuapp.com/auth/facebook";
         window.location.replace(urlFacebookLogin);
     };
 

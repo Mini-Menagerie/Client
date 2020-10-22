@@ -27,7 +27,7 @@ const EditProfile = ({ edit, handleClose }) => {
 
     const fetchProfile = async () => {
         let response = await axios.get(
-            `http://localhost:8000/users/${userData.idUser._id}` //if let id=userData.id then ${id}
+            `https://mini-menagerie-api.herokuapp.com/users/${userData.idUser._id}` //if let id=userData.id then ${id}
         ); //endpoint
         setUser(response.data.result);
     };
@@ -42,7 +42,7 @@ const EditProfile = ({ edit, handleClose }) => {
     const handleEditProfile = async (event) => {
         event.preventDefault();
         return axios
-            .put(`http://localhost:8000/users/${userData.idUser._id}`, form)
+            .put(`https://mini-menagerie-api.herokuapp.com/users/${userData.idUser._id}`, form)
             .then(() => window.location.reload());
     };
 

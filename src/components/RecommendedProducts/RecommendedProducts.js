@@ -12,7 +12,7 @@ const RecommendedProducts = (props) => {
 
     useEffect(() => {
         const getProducts = async () => {
-            const response = await axios.get(`http://localhost:8000/product`);
+            const response = await axios.get(`https://mini-menagerie-api.herokuapp.com/product`);
             setProducts(response.data.result);
         };
         getProducts();

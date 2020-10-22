@@ -17,20 +17,6 @@ import CartProduct from "../../components/cartItem/cartItem";
 
 const ShoppingCart = () => {
 
-    // const [user, setUser] = useState({});
-    // const userLogin = JSON.parse(localStorage.getItem("user"));
-
-    // const getUser = async () => {
-    //     const response = await axios.get(
-    //         `http://localhost:8000/userAccount/${userLogin.id}`
-    //     );
-    //     setUser(response.data.result);
-    // };
-
-    // useEffect(() => {
-    //     getUser();
-    // }, []);
-
     const cart = JSON.parse(localStorage.getItem("cartProduct"));
 
     if (cart === null) {

@@ -68,7 +68,7 @@ const FindBreeds = () => {
     };
 
     const fetchCollection = async () => {
-        const url = "http://localhost:8000/pet";
+        const url = "https://mini-menagerie-api.herokuapp.com/pet";
         const response = await fetch(url);
         const result = await response.json();
 

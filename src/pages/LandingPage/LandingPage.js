@@ -78,7 +78,7 @@ const LandingPage = () => {
     };
 
     const fetchPet = () => {
-        const url = "http://localhost:8000/pet";
+        const url = "https://mini-menagerie-api.herokuapp.com/pet";
         axios
             .get(url)
             .then(function (response) {
@@ -94,7 +94,7 @@ const LandingPage = () => {
     };
 
     const url = () => {
-        const url = "http://localhost:8000/petupforadoption";
+        const url = "https://mini-menagerie-api.herokuapp.com/petupforadoption";
         axios
             .get(url)
             .then(function (response) {
